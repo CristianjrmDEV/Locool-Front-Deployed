@@ -1,10 +1,11 @@
 import './MainLayout.css'
 import { Outlet } from 'react-router-dom'
+import HeaderComponent from './../../components/Header/HeaderComponent'
 
 const MainLayout = () => {
   return (
     <div>
-        <div>Here goes the header</div>
+        <HeaderComponent />
         <div className='outlet-wrapper'>
             <Outlet />
         </div>

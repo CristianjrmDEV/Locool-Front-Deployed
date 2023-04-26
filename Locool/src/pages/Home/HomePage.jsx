@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import './HomePage.css'
 import { useTheme } from '@emotion/react'
 import { Button } from '@mui/material'
 
