@@ -8,6 +8,33 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [{ path: '/', element: <HomePage /> }],
   },
+
+/*
+  {
+    path: '/login',
+    element: <LoginPage />,
+    loader: () => {
+      if (!localStorage.getItem('token')) {
+        return redirect('/')
+      } else {
+        return null
+      }
+    },
+    children: [
+      {
+        path: '/home',
+        element: <Home />
+      },
+      {
+        path: '/home/about',
+        element: <About />
+      }
+    ]
+  }
+*/
+
 ])
 
 export default router
+
+
