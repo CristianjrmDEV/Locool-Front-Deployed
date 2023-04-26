@@ -1,15 +1,16 @@
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+import { ThemeProvider } from '@emotion/react'
+import {mainTheme} from './themes/mainTheme'
 import './App.css'
 
-function App() {
+const App = () => {
   return (
-    <>
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iusto
-        error tenetur voluptatibus nobis, recusandae minima fuga iure
-        dignissimos sapiente. Suscipit error voluptatem harum tempore cumque
-        atque! Placeat, suscipit inventore!
-      </div>
-    </>
+    <div className="App">
+      <ThemeProvider theme={mainTheme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </div>
   )
 }
 
