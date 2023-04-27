@@ -13,9 +13,9 @@ const login = async (body) => {
 
 const signup = async (body) => {
   try {
-    const { user } = await api.post('/auth/signup', body)
-    const loginStatus = await login(user) //perform login automatically
-    return loginStatus
+    const { data } = await api.post('/auth/signup', body)
+    console.log(data)
+    return 200
   } catch (error) {
     return error.message
   }
