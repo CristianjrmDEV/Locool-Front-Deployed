@@ -1,8 +1,28 @@
-import React from 'react'
 import './HomePage.css'
 import { Button } from '@mui/material'
+import getFarms from '../../services/farmService'
+import { useState, useEffect } from 'react'
 
 const Home = () => {
+  // (async()=> console.log(await getFarms()))()
+
+
+const [farms, setFarms] = useState([])
+
+async function farmList() {
+  const data = await getFarms()
+  console.log('aa')
+  setFarms(data)
+  console.log('bb')
+
+}
+
+useEffect(() => {
+  console.log('aaaaa')
+  farmList()
+  console.log('bbbb')
+}, [])
+
   return (
     <div>
       <h1>Home page</h1>

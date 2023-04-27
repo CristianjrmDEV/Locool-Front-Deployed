@@ -2,7 +2,7 @@ import api from './config'
 
 const getUserProfile = async () => {
   try {
-    const { data } = await api.get('/user/profile', {  // check with endpoint
+    const { data } = await api.get('/users:username', {  // check with endpoint
       headers: {
         token: localStorage.getItem('token'),
       },

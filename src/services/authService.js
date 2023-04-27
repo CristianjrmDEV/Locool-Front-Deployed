@@ -11,4 +11,25 @@ const login = async (body) => {
   }
 }
 
-export { login }
+const signup = async (body) => {
+  try {
+    const { user } = await api.post('/auth/signup', body)
+    const loginStatus = await login(user) //perform login automatically
+    return loginStatus
+  } catch (error) {
+    return error.message
+  }
+}
+
+const logout = () => {
+  try {
+    if (localStorage.getItem('token')) {
+      localStorage.removeItem('token')
+      return 200
+    }
+  } catch (error) {
+    return error.message
+  }
+}
+
+export { login, signup, logout }
