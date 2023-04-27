@@ -1,12 +1,14 @@
-/* wip to finish font installation *
 
 body {
-    font-size: calc(16px + 0.5vw);
     margin: 0;
+    font-size: calc(16px + 0.5vw);
     font-family: 'Quicksand';
+    color:#424142;
 
 }
 
 h1,h2,h3,h4,h5,h5 {
     font-family: 'Dosis';
+    font-weight: lighter;
+    color:#D95656;
 }

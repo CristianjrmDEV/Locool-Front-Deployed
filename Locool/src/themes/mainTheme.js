@@ -20,13 +20,7 @@ const mainTheme = createTheme({
     },
     black: {
       main: '#000',
-    },
-    error: {
-      main: '#D95656',
-    },
-    success: {
-      main: '#95CA59',
-    },
+    }
   },
 })
 
