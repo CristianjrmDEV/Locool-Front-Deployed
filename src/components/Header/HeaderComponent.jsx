@@ -18,6 +18,7 @@ const HeaderComponent = () => {
             <MenuIcon />
           </IconButton>
           <Button color="inherit">Logo</Button>
+          <Box component='img' src='./../../assets/logo/logo-white.svg'/>
         </Toolbar>
       </AppBar>
     </Box>
