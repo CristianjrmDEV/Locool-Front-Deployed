@@ -45,53 +45,29 @@ const router = createBrowserRouter([
           }
         },
       },
-      {
-        path: '/app',
-        element: <MainLayout />,
-        loader: () => {
-          if (!localStorage.getItem('token')) {
-            return redirect('/')
-          } else {
-            return null
-          }
-        },
-        children: [
-          {
-            path: '/app',
-            element: <AppPage />,
-          },
-          {
-            path: '/app/farms',
-            element: <FarmPage />,
-          },
-        ],
-      },
     ],
   },
-
-  /*
   {
     path: '/app',
-    element: <LoginPage />,
+    element: <MainLayout />,
     loader: () => {
       if (!localStorage.getItem('token')) {
-        return redirect('/login')
+        return redirect('/')
       } else {
         return null
       }
     },
     children: [
       {
-        path: '/home',
-        element: <Home />
+        path: '/app',
+        element: <AppPage />,
       },
       {
-        path: '/home/about',
-        element: <About />
-      }
-    ]
-  }
-*/
+        path: '/app/farms',
+        element: <FarmPage />,
+      },
+    ],
+  },
 ])
 
 export default router

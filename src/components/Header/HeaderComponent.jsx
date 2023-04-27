@@ -18,6 +18,8 @@ const HeaderComponent = () => {
             <MenuIcon />
           </IconButton>
           <Button color="inherit">Logo</Button>
+          <Button color="inherit" href={'/login'}>Log in</Button>
+          <Button color="inherit" href={'/signup'}>Sign up</Button>
           {/* <Box component='img' src='./../../assets/logo/logo-white.svg'/> */}
         </Toolbar>
       </AppBar>
