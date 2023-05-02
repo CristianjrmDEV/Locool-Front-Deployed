@@ -14,91 +14,61 @@ import MenuIcon from '@mui/icons-material/Menu'
 import LogoWhite from '../LogoWhite/LogoWhite'
 import LogoutButtonComponent from '../LogoutButton/LogoutButtonComponent'
 import MylocoolButtonComponent from '../mylocoolButton/MylocoolButtonComponent'
+import CartButtonComponent from '../CartButton/CartButtonComponent'
+import SignupButtonComponent from '../SignupButton/SignupButtonComponent'
+import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
+import DrawerComponent from '../Drawer/DrawerComponent'
 
 const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
-  const displayCartComponent = () =>
-    cart ? (
-      <Button
-        color="inherit"
-        href={'/signup'}
-      >
-        Cart
-      </Button>
-    ) : (
-      false
-    )
-  const displaySignUpComponent = () =>
-    signup ? (
-      <Button
-        color="inherit"
-        href={'/signup'}
-      >
-        Sign up
-      </Button>
-    ) : (
-      false
-    )
+  const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
 
-  const displayLogInComponent = () =>
-    login ? (
-      <Button
-        color="inherit"
-        href={'/login'}
-      >
-        Login
-      </Button>
-    ) : (
-      false
-    )
+  const displaySignUpComponent = () =>
+    signup ? <SignupButtonComponent /> : false
+
+  const displayLogInComponent = () => (login ? <LoginButtonComponent /> : false)
 
   const displayLogOutComponent = () =>
     logout ? <LogoutButtonComponent /> : false
 
   const displayMylocoolComponent = () =>
-    mylocool ? <MylocoolButtonComponent /> : false
-
-  const displayMenuComponent = () =>
-    menu ? (
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-      >
-        <MenuIcon />
-      </IconButton>
+    mylocool ? (
+      <DrawerComponent clickable={<MylocoolButtonComponent />} />
     ) : (
       false
     )
 
+  const displayMenuComponent = () =>
+    menu ? <DrawerComponent clickable={<MenuIcon />} /> : false
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <Grid
-            container
-            spacing={2}
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+            }}
           >
-            <Grid
-              item
-              xs={6}
-            >
-              {' '}
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
               {displayMenuComponent()}
-              <LogoWhite />
-            </Grid>
-            <Grid
-              item
-              xs={6}
-            >
-              {displayLogInComponent()}
-              {displaySignUpComponent()}
+            </Box>
+            <LogoWhite />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+            }}
+          >
+            {displayLogInComponent()}
+            {displaySignUpComponent()}
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {displayMylocoolComponent()}
-              {displayCartComponent()}
-              {displayLogOutComponent()}
-            </Grid>
-          </Grid>
+            </Box>
+            {displayCartComponent()}
+            {displayLogOutComponent()}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

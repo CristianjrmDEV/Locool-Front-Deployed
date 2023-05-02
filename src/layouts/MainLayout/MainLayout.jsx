@@ -2,10 +2,17 @@ import './MainLayout.css'
 import { Outlet } from 'react-router-dom'
 import HeaderComponent from './../../components/Header/HeaderComponent'
 import FooterComponent from './../../components/Footer/FooterComponent'
+import { Box } from '@mui/material'
 
 const MainLayout = () => {
   return (
-    <div>
+    <Box
+      className="layout"
+      display="grid"
+      gridTemplateRows="auto 1fr auto"
+      gap={2}
+      minHeight={'100vh'}
+    >
       <HeaderComponent
         menu={true}
         login={false}
@@ -14,11 +21,9 @@ const MainLayout = () => {
         logout={true}
         mylocool={true}
       />
-      <div className="outlet-wrapper">
-        <Outlet />
-      </div>
+      <Outlet />
       <FooterComponent />
-    </div>
+    </Box>
   )
 }
 

@@ -10,32 +10,27 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material'
-
+import FooterComponent from '../../components/Footer/FooterComponent'
 
 const BasicLayout = () => {
   return (
     <Box
+      className="layout"
       display="grid"
-      gridTemplateRows="repeat(3, 1fr)"
+      gridTemplateRows="auto 1fr auto"
       gap={2}
+      minHeight={'100vh'}
     >
-      <Box>
-        <HeaderComponent
-          menu={false}
-          login={true}
-          signup={true}
-          cart={false}
-          logout={false}
-          mylocool={false}
-        />
-      </Box>
-      <Box>
-        <div className="outlet-wrapper">
-          <Outlet />
-        </div>
-      </Box>
-
-      <Box>Footer</Box>
+      <HeaderComponent
+        menu={false}
+        login={true}
+        signup={true}
+        cart={false}
+        logout={false}
+        mylocool={false}
+      />
+      <Outlet />
+      <FooterComponent />
     </Box>
   )
 }
