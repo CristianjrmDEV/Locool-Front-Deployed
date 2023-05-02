@@ -6,6 +6,10 @@ import SignupPage from '../pages/Signup/SignupPage'
 import AppPage from '../pages/App/AppPage'
 import FarmPage from '../pages/Farm/FarmPage'
 import BasicPage from './../pages/Basic/BasicPage'
+import CartPage from '../pages/Cart/CartPage'
+import OrderPage from '../pages/Order/OrderPage'
+import ProfilePage from '../pages/Profile/ProfilePage'
+import RefundPage from '../pages/Refund/RefundPage'
 
 const router = createBrowserRouter([
   {
@@ -65,6 +69,22 @@ const router = createBrowserRouter([
       {
         path: '/app/farms',
         element: <FarmPage />,
+      },
+      {
+        path: '/app/cart',
+        element: <CartPage />,
+      },
+      {
+        path: '/app/orders',
+        element: <OrderPage />,
+      },
+      {
+        path: '/app/profile',
+        element: <ProfilePage />,
+      },
+      {
+        path: '/app/refunds',
+        element: <RefundPage />,
       },
     ],
   },

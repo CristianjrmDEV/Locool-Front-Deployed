@@ -9,15 +9,18 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { mainTheme } from '../../themes/mainTheme'
+import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 
 const drawerWidth = 240
 
-const DrawerComponent = ({clickable}) => {
+const DrawerComponent = ({ clickable }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
+
+  const listElements = ['Profile', 'Orders', 'Refunds', 'Farms']
 
   const drawer = (
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
@@ -28,21 +31,19 @@ const DrawerComponent = ({clickable}) => {
             backgroundColor: mainTheme.palette.primary.main,
             color: mainTheme.palette.white.main,
             fontSize: '1.2rem',
+            pt: 10,
           }}
         >
           my locool
         </ListItem>
         <Divider />
 
-        {['Profile', 'Orders', 'Farms'].map((text, index) => (
-          <ListItem
-            key={text}
-            // disablePadding
-          >
-            <ListItemButton key={index}>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {listElements.map((text, index) => (
+          <DrawerButtonComponent
+            key={index}
+            text={text}
+            route={listElements[index].toLowerCase()}
+          />
         ))}
       </List>
     </Box>
@@ -53,7 +54,6 @@ const DrawerComponent = ({clickable}) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Box
-
         sx={{ mr: 2 }}
         onClick={handleDrawerToggle}
       >
