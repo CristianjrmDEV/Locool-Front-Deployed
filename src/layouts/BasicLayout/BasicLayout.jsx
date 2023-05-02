@@ -28,6 +28,7 @@ const BasicLayout = () => {
         cart={false}
         logout={false}
         mylocool={false}
+        search={false}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Outlet />

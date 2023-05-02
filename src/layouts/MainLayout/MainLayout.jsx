@@ -20,6 +20,7 @@ const MainLayout = () => {
         cart={true}
         logout={true}
         mylocool={true}
+        search={true}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Outlet />

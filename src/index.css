@@ -1,6 +1,6 @@
 
 html, body {
-
+    
 }
 
 body {
@@ -8,14 +8,14 @@ body {
     font-size: calc(16px + 0.5vw);
     font-family: 'Quicksand';
     color:#424142;
-
 }
 
-h1,h2,h3,h4,h5,h5 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Dosis';
     font-weight: lighter;
     color:#D95656;
 }
+
 /* 
 .layout {
 	display: grid;
