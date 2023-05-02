@@ -52,16 +52,13 @@ const DrawerComponent = ({clickable}) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
+      <Box
+
         sx={{ mr: 2 }}
         onClick={handleDrawerToggle}
       >
         {clickable}
-      </IconButton>
+      </Box>
 
       <CssBaseline />
 

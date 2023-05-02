@@ -38,7 +38,22 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
     )
 
   const displayMenuComponent = () =>
-    menu ? <DrawerComponent clickable={<MenuIcon />} /> : false
+    menu ? (
+      <DrawerComponent
+        clickable={
+          <IconButton
+            color="inherit"
+            size="large"
+            edge="center"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+        }
+      />
+    ) : (
+      false
+    )
 
   return (
     <Box sx={{ flexGrow: 1 }}>
