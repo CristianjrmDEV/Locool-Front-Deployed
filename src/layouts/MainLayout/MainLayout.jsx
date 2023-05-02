@@ -21,7 +21,9 @@ const MainLayout = () => {
         logout={true}
         mylocool={true}
       />
-      <Outlet />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Outlet />
+      </Box>
       <FooterComponent />
     </Box>
   )
