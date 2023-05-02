@@ -8,4 +8,4 @@ const getFarms = async () => {
   return data
 }
 
-export default getFarms
+export {getFarms}

@@ -20,7 +20,13 @@ const mainTheme = createTheme({
     },
     black: {
       main: '#000',
-    }
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Quicksand',
+      'Roboto'
+    ].join(','),
   },
 })
 

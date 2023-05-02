@@ -18,8 +18,9 @@ import CartButtonComponent from '../CartButton/CartButtonComponent'
 import SignupButtonComponent from '../SignupButton/SignupButtonComponent'
 import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
 import DrawerComponent from '../Drawer/DrawerComponent'
+import SearchBarComponent from '../SearchBar/SearchBarComponent'
 
-const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
+const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }) => {
   const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
 
   const displaySignUpComponent = () =>
@@ -56,6 +57,8 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
       false
     )
 
+  const displaySearchComponent = () => search ? <SearchBarComponent/> : false
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -87,6 +90,7 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
           </Box>
         </Toolbar>
       </AppBar>
+      {displaySearchComponent()}
     </Box>
   )
 }

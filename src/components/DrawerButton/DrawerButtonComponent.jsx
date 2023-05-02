@@ -1,14 +1,27 @@
 import React from 'react'
 import './DrawerButtonComponent.css'
-import { ListItem, ListItemButton, ListItemText } from '@mui/material'
+import {
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from '@mui/material'
+import { mainTheme } from '../../themes/mainTheme'
 
 const DrawerButtonComponent = ({ text, route }) => {
   return (
-    <ListItem
-      disablePadding
-    >
+    <ListItem disablePadding>
       <ListItemButton href={`/app/${route}`}>
-        <ListItemText primary={text} />
+        <ListItemText>
+          <Typography
+            sx={{
+              color: mainTheme.palette.primary.main,
+              fontSize: '1.1rem',
+            }}
+          >
+            {text}
+          </Typography>
+        </ListItemText>
       </ListItemButton>
     </ListItem>
   )

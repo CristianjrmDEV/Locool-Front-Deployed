@@ -9,7 +9,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 import { getUserProfile } from '../../services/userService'
 import { useState, useEffect } from 'react'
-
+import { Typography } from '@mui/material'
 
 // (async () => console.log(await getUserProfile()))()
 
@@ -27,9 +27,13 @@ const DrawerComponent = ({ clickable }) => {
   useEffect(() => {
     getUser()
   }, [])
-  
+
   const displayUsername = () =>
-    user.username ? `Hello  ${user.username}` : 'user'
+    user.username
+      ? `Hello  ${
+          user.username.slice(0, 1).toUpperCase() + user.username.slice(1)
+        }`
+      : ''
 
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -43,28 +47,27 @@ const DrawerComponent = ({ clickable }) => {
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
         <ListItem
-          sx={{
-            fontWeight: 'bold',
-            backgroundColor: mainTheme.palette.primary.main,
-            color: mainTheme.palette.white.main,
-            fontSize: '1.2rem',
-            pt: 10,
-          }}
+          sx={{ backgroundColor: mainTheme.palette.primary.main, pt: 6 }}
         >
-          {displayUsername()}
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 'bold',
+            }}
+          >
+            {displayUsername()}
+          </Typography>
         </ListItem>
-        <ListItem
-          sx={{
-            fontWeight: 'bold',
-            backgroundColor: mainTheme.palette.primary.main,
-            color: mainTheme.palette.white.main,
-            fontSize: '1.2rem',
-            pt: 10,
-          }}
-        >
-          my locool
+        <ListItem sx={{backgroundColor: mainTheme.palette.primary.main,}}>
+          <Typography
+            sx={{
+              color: mainTheme.palette.white.main,
+              fontSize: '1.1rem',
+            }}
+          >
+            My locool
+          </Typography>
         </ListItem>
-        <Divider />
 
         {listElements.map((text, index) => (
           <DrawerButtonComponent

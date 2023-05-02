@@ -10,7 +10,7 @@ const LogoWhite = () => {
       href="/"
     >
       <img
-        width="120px"
+        width="100px"
         src={logo}
         alt="Locool"
       />
