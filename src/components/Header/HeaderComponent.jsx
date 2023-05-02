@@ -44,8 +44,9 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool }) => {
           <IconButton
             color="inherit"
             size="large"
-            edge="center"
+            edge="start"
             aria-label="menu"
+            sx={{m:0, p:0}}
           >
             <MenuIcon />
           </IconButton>
