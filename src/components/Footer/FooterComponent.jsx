@@ -1,10 +1,17 @@
 import React from 'react'
 import './FooterComponent.css'
-import { Box, Button, Divider, Typography } from '@mui/material'
+import { Box, Button, Divider, Drawer, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 
+const drawerWidth = 100 % ''
+
 const FooterComponent = () => {
-  return (
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+  const drawer = (
     <Box
       sx={{
         backgroundColor: mainTheme.palette.secondary.main,
@@ -21,7 +28,7 @@ const FooterComponent = () => {
           alignItems: 'center',
         }}
       >
-        <Button
+        {/* <Button
           sx={{
             textTransform: 'capitalize',
             fontWeight: 'bold',
@@ -33,11 +40,12 @@ const FooterComponent = () => {
           href="/"
         >
           Locool
-        </Button>
+        </Button> */}
         <Button
+          href="/app/about"
           sx={{
             textTransform: 'capitalize',
-            py: 0,
+            py: 1,
             px: 1,
             '&:hover': {
               backgroundColor: mainTheme.palette.secondary.main,
@@ -48,9 +56,10 @@ const FooterComponent = () => {
           About us
         </Button>
         <Button
+          href="/app/mission"
           sx={{
             textTransform: 'capitalize',
-            py: 0,
+            py: 1,
             px: 1,
             '&:hover': {
               backgroundColor: mainTheme.palette.secondary.main,
@@ -58,13 +67,14 @@ const FooterComponent = () => {
             },
           }}
         >
-          Proyect
+          Mission
         </Button>
         <Button
+          href="/app/contact"
           sx={{
             textTransform: 'capitalize',
             px: 1,
-            py: 0,
+            py: 1,
             '&:hover': {
               backgroundColor: mainTheme.palette.secondary.main,
               color: mainTheme.palette.green.main,
@@ -74,7 +84,51 @@ const FooterComponent = () => {
           Contact
         </Button>
       </Box>
-      <Divider sx={{ m: 1 }} />
+    </Box>
+  )
+  const container = window.document.body
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: mainTheme.palette.secondary.main,
+        color: mainTheme.palette.primary.main,
+      }}
+    >
+      <Button
+        sx={{
+          fontWeight: 'bold',
+          '&:hover': {
+            backgroundColor: mainTheme.palette.secondary.main,
+            color: mainTheme.palette.green.main,
+          },
+        }}
+        onClick={handleDrawerToggle}
+      >
+        Locool
+      </Button>
+      <Drawer
+        container={container}
+        variant="temporary"
+        open={mobileOpen}
+        anchor="bottom"
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: false, // Better open performance on mobile.
+        }}
+        sx={{
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
+          },
+        }}
+      >
+        {drawer}
+      </Drawer>
+
       <Box
         sx={{
           display: 'flex',
@@ -82,6 +136,7 @@ const FooterComponent = () => {
         }}
       >
         <Button
+          href="/app/legal-terms"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',
@@ -94,6 +149,7 @@ const FooterComponent = () => {
           Terms & Conditions
         </Button>
         <Button
+          href="/app/legal-privacy"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',
@@ -106,6 +162,7 @@ const FooterComponent = () => {
           Privacy notice
         </Button>
         <Button
+          href="/app/legal-cookies"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',

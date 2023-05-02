@@ -29,7 +29,9 @@ const BasicLayout = () => {
         logout={false}
         mylocool={false}
       />
-      <Outlet />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Outlet />
+      </Box>
       <FooterComponent />
     </Box>
   )
