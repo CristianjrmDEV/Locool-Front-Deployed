@@ -7,10 +7,30 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import { mainTheme } from '../../themes/mainTheme'
 import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
+import { getUserProfile } from '../../services/userService'
+import { useState, useEffect } from 'react'
 
-const drawerWidth = 240
+
+// (async () => console.log(await getUserProfile()))()
 
 const DrawerComponent = ({ clickable }) => {
+  const drawerWidth = 240
+
+  const [user, setUser] = useState({})
+
+  const getUser = async () => {
+    const result = await getUserProfile()
+    setUser(result.user)
+    // console.log(result.user)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+  
+  const displayUsername = () =>
+    user.username ? `Hello  ${user.username}` : 'user'
+
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -22,6 +42,17 @@ const DrawerComponent = ({ clickable }) => {
   const drawer = (
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
+        <ListItem
+          sx={{
+            fontWeight: 'bold',
+            backgroundColor: mainTheme.palette.primary.main,
+            color: mainTheme.palette.white.main,
+            fontSize: '1.2rem',
+            pt: 10,
+          }}
+        >
+          {displayUsername()}
+        </ListItem>
         <ListItem
           sx={{
             fontWeight: 'bold',
