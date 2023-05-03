@@ -4,12 +4,17 @@ import { Box, Button } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import { mainTheme } from '../../themes/mainTheme'
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
+import { useNavigate } from 'react-router-dom'
 
 const LoginButtonComponent = () => {
+      const goTo = useNavigate()
+      const handleClick = () => {
+        goTo('/login')
+      }
   return (
     <Button
+      onClick={handleClick}
       color="inherit"
-      href={'/login'}
       sx={{
         display: 'flex',
         flexDirection: 'column',

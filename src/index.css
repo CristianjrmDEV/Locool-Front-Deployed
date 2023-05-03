@@ -16,6 +16,10 @@ h1,h2,h3,h4,h5,h6 {
     color:#D95656;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* 
 .layout {
 	display: grid;
