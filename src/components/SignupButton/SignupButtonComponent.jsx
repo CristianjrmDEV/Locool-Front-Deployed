@@ -2,10 +2,16 @@ import React from 'react'
 import { Box, Button } from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { mainTheme } from '../../themes/mainTheme'
+import { useNavigate } from 'react-router-dom'
 
 const SignupButtonComponent = () => {
+        const goTo = useNavigate()
+        const handleClick = () => {
+          goTo('/signup')
+        }
   return (
     <Button
+      onClick={handleClick}
       color="inherit"
       href={'/signup'}
       sx={{

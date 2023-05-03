@@ -2,6 +2,7 @@ import React from 'react'
 import './FooterComponent.css'
 import { Box, Button, Divider, Drawer, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import { Link } from 'react-router-dom'
 
 const drawerWidth = 100 % ''
 
@@ -28,21 +29,7 @@ const FooterComponent = () => {
           alignItems: 'center',
         }}
       >
-        {/* <Button
-          sx={{
-            textTransform: 'capitalize',
-            fontWeight: 'bold',
-            '&:hover': {
-              backgroundColor: mainTheme.palette.secondary.main,
-              color: mainTheme.palette.green.main,
-            },
-          }}
-          href="/"
-        >
-          Locool
-        </Button> */}
         <Button
-          href="/app/about"
           sx={{
             textTransform: 'capitalize',
             py: 1,
@@ -52,11 +39,11 @@ const FooterComponent = () => {
               color: mainTheme.palette.green.main,
             },
           }}
+          onClick={handleDrawerToggle}
         >
-          About us
+          <Link to="/app/about">About us</Link>
         </Button>
         <Button
-          href="/app/mission"
           sx={{
             textTransform: 'capitalize',
             py: 1,
@@ -66,11 +53,11 @@ const FooterComponent = () => {
               color: mainTheme.palette.green.main,
             },
           }}
+          onClick={handleDrawerToggle}
         >
-          Mission
+          <Link to="/app/mission">Mission</Link>
         </Button>
         <Button
-          href="/app/contact"
           sx={{
             textTransform: 'capitalize',
             px: 1,
@@ -80,8 +67,9 @@ const FooterComponent = () => {
               color: mainTheme.palette.green.main,
             },
           }}
+          onClick={handleDrawerToggle}
         >
-          Contact
+          <Link to="/app/contact">Contact</Link>
         </Button>
       </Box>
     </Box>
@@ -136,7 +124,6 @@ const FooterComponent = () => {
         }}
       >
         <Button
-          href="/app/legal-terms"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',
@@ -146,10 +133,9 @@ const FooterComponent = () => {
             },
           }}
         >
-          Terms & Conditions
+          <Link to="/app/legal-terms">Terms & Conditions</Link>
         </Button>
         <Button
-          href="/app/legal-privacy"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',
@@ -159,10 +145,9 @@ const FooterComponent = () => {
             },
           }}
         >
-          Privacy notice
+          <Link to="/app/legal-privacy">Privacy notice</Link>
         </Button>
         <Button
-          href="/app/legal-cookies"
           sx={{
             textTransform: 'capitalize',
             fontSize: '.8rem',
@@ -172,7 +157,7 @@ const FooterComponent = () => {
             },
           }}
         >
-          Cookies policy
+          <Link to="/app/legal-cookies">Cookies Policy</Link>
         </Button>
       </Box>
 

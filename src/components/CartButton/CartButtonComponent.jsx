@@ -3,12 +3,17 @@ import './CartButtonComponent.css'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Box, Button } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CartButtonComponent = () => {
+    const goTo = useNavigate()
+    const handleClick = () => {
+      goTo('/app/cart')
+    }
   return (
     <Button
+      onClick={handleClick}
       color="inherit"
-      href={'/'}
       sx={{
         display: 'flex',
         flexDirection: 'column',

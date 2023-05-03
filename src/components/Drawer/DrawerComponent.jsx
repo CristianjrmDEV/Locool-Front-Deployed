@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
-import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -9,9 +8,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 import { getUserProfile } from '../../services/userService'
 import { useState, useEffect } from 'react'
-import { Typography } from '@mui/material'
-
-// (async () => console.log(await getUserProfile()))()
+import { ListItemButton, Typography } from '@mui/material'
 
 const DrawerComponent = ({ clickable }) => {
   const drawerWidth = 240
@@ -21,7 +18,6 @@ const DrawerComponent = ({ clickable }) => {
   const getUser = async () => {
     const result = await getUserProfile()
     setUser(result.user)
-    // console.log(result.user)
   }
 
   useEffect(() => {
@@ -58,7 +54,7 @@ const DrawerComponent = ({ clickable }) => {
             {displayUsername()}
           </Typography>
         </ListItem>
-        <ListItem sx={{backgroundColor: mainTheme.palette.primary.main,}}>
+        <ListItem sx={{ backgroundColor: mainTheme.palette.primary.main }}>
           <Typography
             sx={{
               color: mainTheme.palette.white.main,
@@ -70,11 +66,14 @@ const DrawerComponent = ({ clickable }) => {
         </ListItem>
 
         {listElements.map((text, index) => (
-          <DrawerButtonComponent
-            key={index}
-            text={text}
-            route={listElements[index].toLowerCase()}
-          />
+          <ListItem key={index} disablePadding>
+            <ListItemButton onClick={handleDrawerToggle}>
+              <DrawerButtonComponent
+                text={text}
+                route={listElements[index].toLowerCase()}
+              />
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Box>
