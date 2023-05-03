@@ -8,7 +8,8 @@ import { mainTheme } from '../../themes/mainTheme'
 import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 import { getUserProfile } from '../../services/userService'
 import { useState, useEffect } from 'react'
-import { ListItemButton, Typography } from '@mui/material'
+import { ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const DrawerComponent = ({ clickable }) => {
   const drawerWidth = 240
@@ -66,14 +67,16 @@ const DrawerComponent = ({ clickable }) => {
         </ListItem>
 
         {listElements.map((text, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton onClick={handleDrawerToggle}>
-              <DrawerButtonComponent
-                text={text}
-                route={listElements[index].toLowerCase()}
-              />
-            </ListItemButton>
-          </ListItem>
+          <Link
+            key={index}
+            to={`/app/${listElements[index].toLowerCase()}`}
+            sx={{ display: 'block', width: '100%' }}
+          >
+            <DrawerButtonComponent
+              text={text}
+              handleDrawerToggle={handleDrawerToggle}
+            />
+          </Link>
         ))}
       </List>
     </Box>

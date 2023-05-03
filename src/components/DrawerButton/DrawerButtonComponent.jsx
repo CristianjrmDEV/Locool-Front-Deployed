@@ -9,20 +9,22 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import { Link } from 'react-router-dom'
 
-const DrawerButtonComponent = ({ text, route }) => {
+const DrawerButtonComponent = ({ text, handleDrawerToggle }) => {
   return (
-        <Link to={`/app/${route}`}>
-          <ListItemText>
-            <Typography
-              sx={{
-                color: mainTheme.palette.primary.main,
-                fontSize: '1.1rem',
-              }}
-            >
-              {text}
-            </Typography>
-          </ListItemText>
-        </Link>
+    <ListItem disablePadding>
+      <ListItemButton onClick={handleDrawerToggle}>
+        <ListItemText>
+          <Typography
+            sx={{
+              color: mainTheme.palette.primary.main,
+              fontSize: '1.1rem',
+            }}
+          >
+            {text}
+          </Typography>
+        </ListItemText>
+      </ListItemButton>
+    </ListItem>
   )
 }
 
