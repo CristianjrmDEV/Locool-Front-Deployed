@@ -12,11 +12,12 @@ import { mainTheme } from '../../themes/mainTheme'
 import SearchIcon from '@mui/icons-material/Search'
 import WarehouseIcon from '@mui/icons-material/Warehouse'
 
-import { getProducts } from '../../services/productService'
-import { getFarms } from '../../services/farmService'
+import { getProducts, getPricedProducts } from '../../services/productService'
+import { getAllFarms } from '../../services/farmService'
+import ProductCardComponent from '../ProductCard/ProductCardComponent'
 
-// (async () => console.log(await getProducts()))()
-// (async () => console.log(await getFarms()))()
+// (async () => console.log('priced products: ',await getPricedProducts()))()
+// (async () => console.log(await getAllFarms()))()
 
 const SearchBarComponent = () => {
   const [products, setProducts] = useState([])
@@ -24,16 +25,19 @@ const SearchBarComponent = () => {
   const [query, setQuery] = useState('')
 
   const handleChange = (e) => {
-    setQuery(e.target.value)
+    setQuery(e.target.value.toLowerCase())
   }
 
   const handleProductSearch = async () => {
-    const result = await getProducts()
-    setProducts(result)
-    console.log('searched products: ', result)
+    const result = await getPricedProducts()
+    const search = result.filter((el) => el.name === query)
+    setProducts(search)
+    // console.log(search)
+    // console.log('searched products: ', products)
   }
+
   const handleFarmSearch = async () => {
-    const result = await getFarms()
+    const result = await getAllFarms()
     setFarms(result)
     console.log('searched farms: ', result)
   }
@@ -42,10 +46,18 @@ const SearchBarComponent = () => {
     if (products.length > 0) {
       return (
         <Box>
-          <Typography variant='h6'>Products</Typography>
+          <Typography variant="h6">Products</Typography>
           {products.map((product, idx) => {
-            return <Box key={idx}>{product.img_url}</Box>
+            return (
+               <ProductCardComponent key={idx} product={product}/>
+              )
           })}
+        </Box>
+      )
+    } else {
+      return (
+        <Box>
+          <Typography variant="span">Try a different search</Typography>
         </Box>
       )
     }
