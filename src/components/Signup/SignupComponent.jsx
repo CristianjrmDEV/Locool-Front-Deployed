@@ -35,7 +35,7 @@ const SignupComponent = () => {
 
   useEffect(() => {
     findUsers()
-  })
+  }, [])
 
   const findUsers = async () => {
     const users = await getAllUsers()
