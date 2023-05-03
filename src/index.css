@@ -1,14 +1,30 @@
 
+html, body {
+    
+}
+
 body {
-    margin: 0;
+    margin:0;
     font-size: calc(16px + 0.5vw);
     font-family: 'Quicksand';
     color:#424142;
-
 }
 
-h1,h2,h3,h4,h5,h5 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Dosis';
     font-weight: lighter;
     color:#D95656;
 }
+
+a {
+    text-decoration: none;
+}
+
+/* 
+.layout {
+	display: grid;
+    min-height: 100vh;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 100vw;
+} 
+*/

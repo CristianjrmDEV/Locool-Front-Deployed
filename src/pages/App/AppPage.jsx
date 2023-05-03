@@ -14,7 +14,6 @@ const AppPage = () => {
   return (
     <div>
       <h1>AppPage</h1>
-      <LogoutButtonComponent />
     </div>
   )
 }

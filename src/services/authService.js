@@ -2,9 +2,10 @@ import api from './config'
 
 const login = async (body) => {
   try {
-    console.log('connecting...')
+    console.log('Connecting...')
     const { data } = await api.post('/auth/login', body)
     localStorage.setItem('token', data.token)
+    console.log('Welcome to Locool')
     return 200
   } catch (error) {
     return error.message
