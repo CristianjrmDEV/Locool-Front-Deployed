@@ -13,4 +13,13 @@ const getUserProfile = async () => {
   }
 }
 
-export { getUserProfile }
+const getAllUsers = async () => {
+  try {
+    const { data } = await api.get('/users')
+    return data
+  } catch (error) {
+    return error.message
+  }
+}
+
+export { getUserProfile, getAllUsers }

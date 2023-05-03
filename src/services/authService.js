@@ -15,10 +15,18 @@ const login = async (body) => {
 const signup = async (body) => {
   try {
     const { data } = await api.post('/auth/signup', body)
-    console.log(data)
     return 200
   } catch (error) {
     return error.message
+  }
+}
+
+const findUserByUsername = async(username) => {
+  try {
+    const response = await api.get(`/users/${username}`)
+    return response.status === 200
+  } catch (error) {
+    return false
   }
 }
 
@@ -33,4 +41,4 @@ const logout = () => {
   }
 }
 
-export { login, signup, logout }
+export { login, signup, logout, findUserByUsername }
