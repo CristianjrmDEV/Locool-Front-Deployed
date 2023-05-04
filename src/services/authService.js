@@ -1,4 +1,5 @@
 import api from './config'
+import { getUserProfile } from './userService'
 
 const login = async (body) => {
   try {
@@ -6,6 +7,10 @@ const login = async (body) => {
     const { data } = await api.post('/auth/login', body)
     localStorage.setItem('token', data.token)
     console.log('Welcome to Locool')
+    const profile = await getUserProfile()
+    localStorage.setItem('username', profile.user.username)
+    console.log(`Hello ${localStorage.getItem('username')}`)
+
     return 200
   } catch (error) {
     return error.message

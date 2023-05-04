@@ -26,9 +26,9 @@ const DrawerComponent = ({ clickable }) => {
   }, [])
 
   const displayUsername = () =>
-    user.username
+    localStorage.getItem('username')
       ? `Hello  ${
-          user.username.slice(0, 1).toUpperCase() + user.username.slice(1)
+          localStorage.getItem('username').slice(0, 1).toUpperCase() + localStorage.getItem('username').slice(1)
         }`
       : ''
 
