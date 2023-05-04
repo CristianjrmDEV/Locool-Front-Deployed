@@ -1,20 +1,19 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
-import { logout } from '../../services/authService'
-import { useNavigate } from 'react-router-dom'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { mainTheme } from '../../themes/mainTheme'
-import LogoutIcon from '@mui/icons-material/Logout'
+import { useNavigate } from 'react-router-dom'
 
-const LogoutButtonComponent = () => {
-  const goTo = useNavigate()
-  const handleClick = () => {
-    logout()
-    goTo('/')
-  }
+const SignupButtonComponent = () => {
+        const goTo = useNavigate()
+        const handleClick = () => {
+          goTo('/signup')
+        }
   return (
     <Button
-      color="inherit"
       onClick={handleClick}
+      color="inherit"
+      href={'/signup'}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -24,10 +23,10 @@ const LogoutButtonComponent = () => {
         },
       }}
     >
-      <LogoutIcon />
-      <Box sx={{ fontSize: '0.5rem' }}>Log out</Box>
+      <PersonAddIcon />
+      <Box sx={{ fontSize: '0.5rem' }}>Sign up</Box>
     </Button>
   )
 }
 
-export default LogoutButtonComponent
+export default SignupButtonComponent
