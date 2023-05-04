@@ -7,6 +7,7 @@ const SignupPage = () => {
   return (
     <>
       <PageTitleComponent title={'Sign up'} />
+      <SignUpComponent />
     </>
   )
 }
