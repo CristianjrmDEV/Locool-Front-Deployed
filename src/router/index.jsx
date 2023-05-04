@@ -17,6 +17,7 @@ import LegalTermsPage from '../pages/LegalTerms/LegalTermsPage'
 import LegalPrivacyPage from '../pages/LegalPrivacy/LegalPrivacyPage'
 import LegalCookiesPage from '../pages/LegalCookies/LegalCookiesPage'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
