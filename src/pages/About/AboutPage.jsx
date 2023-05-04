@@ -1,9 +1,12 @@
 import React from 'react'
 import './AboutPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import './FarmPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const FarmPage = () => {
   return (
-    <div>FarmPage</div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 

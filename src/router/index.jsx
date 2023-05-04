@@ -16,6 +16,7 @@ import ContactPage from '../pages/Contact/ContactPage'
 import LegalTermsPage from '../pages/LegalTerms/LegalTermsPage'
 import LegalPrivacyPage from '../pages/LegalPrivacy/LegalPrivacyPage'
 import LegalCookiesPage from '../pages/LegalCookies/LegalCookiesPage'
+import SearchPage from '../pages/Search/SearchPage'
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: '/app/legal-cookies',
         element: <LegalCookiesPage />,
+      },
+      {
+        path: '/app/search',
+        element: <SearchPage />,
       },
     ],
   },

@@ -1,12 +1,13 @@
 import React from 'react'
 import './AppPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const AppPage = () => {
 
   return (
-    <div>
-      <h1>AppPage</h1>
-    </div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 

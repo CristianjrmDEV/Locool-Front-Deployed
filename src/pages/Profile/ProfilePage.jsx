@@ -1,9 +1,12 @@
 import React from 'react'
 import './ProfilePage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 

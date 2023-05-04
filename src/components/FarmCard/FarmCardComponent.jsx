@@ -1,18 +1,9 @@
 import React from 'react'
-import './ProductCardComponent.css'
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import './FarmCardComponent.css'
+import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 
-const ProductCardComponent = ({ product }) => {
+const FarmCardComponent = ({farm}) => {
   return (
     <Card
       sx={{
@@ -25,7 +16,7 @@ const ProductCardComponent = ({ product }) => {
         <CardMedia
           component="img"
           height="140"
-          image={product.img}
+          image={farm.img}
           alt=""
         />
         <CardContent>
@@ -34,32 +25,50 @@ const ProductCardComponent = ({ product }) => {
             variant="h5"
             component="div"
           >
-            {product.name.slice(0, 1).toUpperCase() +
-              product.name.slice(1).toLowerCase()}
+            {farm.name.slice(0, 1).toUpperCase() +
+              farm.name.slice(1).toLowerCase()}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Price: {product.price} €
+            Farm address: {farm.address}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Stock: {product.stock}
+            Municipality: {farm.municipalityId}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Farm: {product.farmName}
+            Collection point: {farm.collection_point}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Farm address: {product.farmAddress}
+            Collection schedule: {farm.collection_schedule}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.primary"
+          >
+            Owner: {farm.userId}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.primary"
+          >
+            Latitude: {farm.latitude}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.primary"
+          >
+            Longitude: {farm.longitude}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -70,11 +79,11 @@ const ProductCardComponent = ({ product }) => {
           color="primary"
           sx={{ backgroundColor: mainTheme.palette.green.main }}
         >
-          Add to Cart
+          See farm
         </Button>
       </CardActions>
     </Card>
   )
 }
 
-export default ProductCardComponent
+export default FarmCardComponent

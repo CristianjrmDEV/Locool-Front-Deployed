@@ -14,7 +14,7 @@ const getPricedProducts = async () => {
   const farmProducts = []
   let arrayOfFarmProducts = null
 
-  // console.log('farmsid: ', farmsId)
+  console.log('farmsid: ', farmsId)
   farmsId.map((farm) => {
     farmProducts.push(getAllProductsByFarmId(farm.id))
   })
@@ -35,6 +35,7 @@ const getPricedProducts = async () => {
       price: obj.price,
       stock: obj.stock,
       img: productIdentified[0].img_url,
+      farmName: farmIdentified[0].name,
       farmAddress: farmIdentified[0].address,
       latitude: farmIdentified[0].latitude,
       longitude: farmIdentified[0].longitude,

@@ -1,9 +1,12 @@
 import React from 'react'
 import './LegalTermsPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const LegalTermsPage = () => {
   return (
-    <div>LegalTermsPage</div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 

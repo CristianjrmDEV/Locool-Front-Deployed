@@ -10,13 +10,10 @@ const MainLayout = () => {
       className="layout"
       display="grid"
       gridTemplateRows="auto 1fr auto"
-      gap={2}
       minHeight={'100vh'}
     >
       <HeaderComponent
         menu={true}
-        login={false}
-        signup={false}
         cart={true}
         logout={true}
         mylocool={true}

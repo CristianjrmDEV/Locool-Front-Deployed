@@ -1,9 +1,12 @@
 import React from 'react'
 import './RefundPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const RefundPage = () => {
   return (
-    <div>RefundPage</div>
+    <>
+      <PageTitleComponent title={'About us'} />
+    </>
   )
 }
 
