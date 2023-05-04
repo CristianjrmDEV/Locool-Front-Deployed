@@ -5,7 +5,7 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const BasicPage = () => {
   return (
     <>
-      <PageTitleComponent title={'About us'} />
+      <PageTitleComponent title={'Basic page'} />
     </>
   )
 }

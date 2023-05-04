@@ -5,7 +5,7 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const CartPage = () => {
   return (
     <>
-      <PageTitleComponent title={'About us'} />
+      <PageTitleComponent title={'Shopping Cart'} />
     </>
   )
 }

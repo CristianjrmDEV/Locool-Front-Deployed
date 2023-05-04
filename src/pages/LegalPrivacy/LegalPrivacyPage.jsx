@@ -5,7 +5,7 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const LegalPrivacyPage = () => {
   return (
     <>
-      <PageTitleComponent title={'About us'} />
+      <PageTitleComponent title={'Privacy policy'} />
     </>
   )
 }

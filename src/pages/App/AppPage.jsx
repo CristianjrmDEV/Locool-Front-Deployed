@@ -6,7 +6,7 @@ const AppPage = () => {
 
   return (
     <>
-      <PageTitleComponent title={'About us'} />
+      <PageTitleComponent title={'App page'} />
     </>
   )
 }

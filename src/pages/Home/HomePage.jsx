@@ -7,28 +7,24 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const Home = () => {
   // (async()=> console.log(await getFarms()))()
 
+  const [farms, setFarms] = useState([])
 
-const [farms, setFarms] = useState([])
+  async function farmList() {
+    const data = await getFarms()
+    console.log('aa')
+    setFarms(data)
+    console.log('bb')
+  }
 
-async function farmList() {
-  const data = await getFarms()
-  console.log('aa')
-  setFarms(data)
-  console.log('bb')
-
-}
-
-useEffect(() => {
-  console.log('aaaaa')
-  farmList()
-  console.log('bbbb')
-}, [])
+  useEffect(() => {
+    console.log('aaaaa')
+    farmList()
+    console.log('bbbb')
+  }, [])
 
   return (
     <>
-      
-        <PageTitleComponent title={'About us'} />
-      
+      <PageTitleComponent title={'Home'} />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vitae sint
         aliquam debitis exercitationem aspernatur aperiam. Asperiores, sit

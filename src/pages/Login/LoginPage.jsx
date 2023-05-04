@@ -7,7 +7,7 @@ const LoginPage = () => {
   return (
     <div>
       <>
-        <PageTitleComponent title={'About us'} />
+        <PageTitleComponent title={'Login'} />
       </>
       <LoginComponent />
     </div>
