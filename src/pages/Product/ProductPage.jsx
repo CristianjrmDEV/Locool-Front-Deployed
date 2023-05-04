@@ -1,9 +1,12 @@
 import React from 'react'
 import './ProductPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const ProductPage = () => {
   return (
-    <div>ProductPage</div>
+    <>
+      <PageTitleComponent title={'Product'} />
+    </>
   )
 }
 

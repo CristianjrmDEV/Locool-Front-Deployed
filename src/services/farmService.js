@@ -1,11 +1,17 @@
 import api from './config/'
 
-const getFarms = async () => {
-  console.log('before retrieveing data')
+const getAllFarms = async () => {
+  // console.log('before retrieveing data')
   const { data } = await api.get('/farms')
-  console.log('request result:', data)
-
+  // console.log('request result:', data)
   return data
 }
 
-export {getFarms}
+const getAllProductsByFarmId = async (id) => {
+  // console.log('before retrieveing data')
+  const { data } = await api.get(`/farms/${id}/product`)
+  // console.log('request result:', data)
+  return data
+}
+
+export {getAllFarms, getAllProductsByFarmId}

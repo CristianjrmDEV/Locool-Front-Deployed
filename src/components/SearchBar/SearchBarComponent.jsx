@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './SearchBarComponent.css'
 import {
   Box,
@@ -6,63 +6,42 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import SearchIcon from '@mui/icons-material/Search'
 import WarehouseIcon from '@mui/icons-material/Warehouse'
-
-import { getProducts } from '../../services/productService'
-import { getFarms } from '../../services/farmService'
-
-// (async () => console.log(await getProducts()))()
-// (async () => console.log(await getFarms()))()
+import { getPricedProducts } from '../../services/productService'
+import { getAllFarms } from '../../services/farmService'
+import { FarmsContext } from '../../contexts/farm'
+import { ProductsContext } from '../../contexts/product'
+import { useNavigate } from 'react-router-dom'
 
 const SearchBarComponent = () => {
-  const [products, setProducts] = useState([])
-  const [farms, setFarms] = useState([])
+  const GLOBAL_Product = useContext(ProductsContext)
+  const GLOBAL_Farm = useContext(FarmsContext)
+
+  const goTo = useNavigate()
+
   const [query, setQuery] = useState('')
 
   const handleChange = (e) => {
-    setQuery(e.target.value)
+    setQuery(e.target.value.toLowerCase())
   }
 
   const handleProductSearch = async () => {
-    const result = await getProducts()
-    setProducts(result)
-    console.log('searched products: ', result)
+    const result = await getPricedProducts()
+    const productSearch = result.filter((el) => el.name.includes(query))
+    GLOBAL_Product.set(productSearch)
+    goTo('/app/search')
   }
+
   const handleFarmSearch = async () => {
-    const result = await getFarms()
-    setFarms(result)
-    console.log('searched farms: ', result)
+    const result = await getAllFarms()
+    const farmSearch = result.filter((el) => el.name.includes(query))
+    GLOBAL_Farm.set(farmSearch)
+    goTo('/app/search')
   }
 
-  const displayProducts = () => {
-    if (products.length > 0) {
-      return (
-        <Box>
-          <Typography variant='h6'>Products</Typography>
-          {products.map((product, idx) => {
-            return <Box key={idx}>{product.img_url}</Box>
-          })}
-        </Box>
-      )
-    }
-  }
-
-  const displayFarms = () => {
-    if (farms.length > 0) {
-      return (
-        <Box>
-          <Typography variant="h6">Farms</Typography>
-          {farms.map((farm, idx) => {
-            return <Box key={idx}>{farm.address}</Box>
-          })}
-        </Box>
-      )
-    }
-  }
 
   return (
     <>
@@ -86,7 +65,10 @@ const SearchBarComponent = () => {
                   sx={{ height: 28, m: 0.5 }}
                   orientation="vertical"
                 />
-                <IconButton onClick={handleFarmSearch}>
+                <IconButton
+                  sx={{ pr: 0 }}
+                  onClick={handleFarmSearch}
+                >
                   <WarehouseIcon fontSize="large" />
                 </IconButton>
               </InputAdornment>
@@ -100,10 +82,6 @@ const SearchBarComponent = () => {
           onChange={handleChange}
           sx={{}}
         />
-      </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-        {displayProducts()}
-        {displayFarms()}
       </Box>
     </>
   )

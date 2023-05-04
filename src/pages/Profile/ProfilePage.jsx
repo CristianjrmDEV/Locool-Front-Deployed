@@ -1,11 +1,11 @@
 import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, Icon, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-
-import './ProfilePage.css'
 import { mainTheme } from '../../themes/mainTheme'
 import { getUserProfile } from '../../services/userService'
 import { getAllUsers } from '../../services/userService'
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
+import './ProfilePage.css'
 
 const ProfilePage = () => {
 
@@ -78,6 +78,7 @@ const ProfilePage = () => {
 
   return (
     <>
+      <PageTitleComponent title={'Profile'}/>
       <Box>
         <Typography variant='h2' sx={{
           color: mainTheme.palette.red.main,

@@ -18,17 +18,11 @@ const BasicLayout = () => {
       className="layout"
       display="grid"
       gridTemplateRows="auto 1fr auto"
-      gap={2}
       minHeight={'100vh'}
     >
       <HeaderComponent
-        menu={false}
         login={true}
         signup={true}
-        cart={false}
-        logout={false}
-        mylocool={false}
-        search={false}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Outlet />
