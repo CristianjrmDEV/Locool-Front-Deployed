@@ -18,7 +18,6 @@ import {
 } from '@mui/material'
 
 const SignupComponent = () => {
-
   const navigate = useNavigate()
 
   const [users, setUsers] = useState([])
@@ -39,7 +38,6 @@ const SignupComponent = () => {
 
   const findUsers = async () => {
     const users = await getAllUsers()
-    console.log(users)
     setUsers(users)
   }
 
@@ -132,7 +130,6 @@ const SignupComponent = () => {
           label="Username"
           variant="outlined"
           fullWidth={true}
-          value={username}
           color='primary'
           sx={{ borderRadius:'6px', marginBottom: '30px', backgroundColor: 'secondary.main' }}
         />

@@ -13,13 +13,26 @@ const getUserProfile = async () => {
   }
 }
 
-const getAllUsers = async () => {
+const findUserByUsername = async (username) => {
   try {
-    const { data } = await api.get('/users')
+    const {data} = await api.get(`/users/${username}`)
     return data
   } catch (error) {
     return error.message
   }
 }
 
-export { getUserProfile, getAllUsers }
+const getAllUsers = async () => {
+  try {
+    const {data} = await api.get(`/users/`)
+    return data
+  } catch (error) {
+    return error.message
+  }
+}
+
+export { 
+  getUserProfile,
+  findUserByUsername,
+  getAllUsers
+}
