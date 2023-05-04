@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCcPaypal } from '@fortawesome/free-brands-svg-icons';
 import { faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 import { faCcVisa } from '@fortawesome/free-brands-svg-icons';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const PaymentSelectionComponent = () => {
   return (
@@ -21,7 +22,11 @@ const PaymentSelectionComponent = () => {
 
               Paypal
             </Typography>
+
           </Button>
+          <PayPalScriptProvider options={{'client-id': "sb-xryib25894968@business.example.com"}}>
+            <PayPalButtons/>
+          </PayPalScriptProvider>
           <Button sx={{backgroundColor: 'secondary.main', width: '100%', textTransform: 'capitalize', justifyContent: "flex-start"}}>
             <Typography sx={{color: 'primary.main', fontSize: 18, textAlign:'left'}} color="text.secondary" gutterBottom>
               <FontAwesomeIcon icon={faCcVisa} color='#192061' />
@@ -29,7 +34,15 @@ const PaymentSelectionComponent = () => {
               Debit or credit card
             </Typography>
           </Button>
-
+          <Button
+          color="white"
+          sx={{ height: '39.41px', margin:'0 auto', maxWidth: '100%', margin: '26px 0 0 0', borderRadius:'6px', backgroundColor: 'green.main', width: '100%', fontSize: '14px', textTransform: 'capitalize', fontWeight: 'bold',':hover': {
+            bgcolor: 'primary.main', // theme.palette.primary.main
+            color: 'white',
+          }, }}
+        >
+          Pay
+        </Button>
       </CardContent>
     </Card>
   );
