@@ -30,18 +30,21 @@ const SearchBarComponent = () => {
 
   const handleProductSearch = async () => {
     const result = await getPricedProducts()
-    const productSearch = result.filter((el) => el.name.toLowerCase().includes(query))
+    const productSearch = result.filter((el) =>
+      el.name.toLowerCase().includes(query)
+    )
     GLOBAL_Product.set(productSearch)
     goTo('/app/search')
   }
 
   const handleFarmSearch = async () => {
     const result = await getAllFarms()
-    const farmSearch = result.filter((el) => el.name.toLowerCase().includes(query))
+    const farmSearch = result.filter((el) =>
+      el.name.toLowerCase().includes(query)
+    )
     GLOBAL_Farm.set(farmSearch)
     goTo('/app/search')
   }
-
 
   return (
     <>
@@ -58,7 +61,10 @@ const SearchBarComponent = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton onClick={handleProductSearch}>
+                <IconButton
+                  onClick={handleProductSearch}
+                  sx={{ p: 1 }}
+                >
                   <SearchIcon fontSize="large" />
                 </IconButton>
                 <Divider
@@ -66,8 +72,8 @@ const SearchBarComponent = () => {
                   orientation="vertical"
                 />
                 <IconButton
-                  sx={{ pr: 0 }}
                   onClick={handleFarmSearch}
+                  sx={{ p: 1 }}
                 >
                   <WarehouseIcon fontSize="large" />
                 </IconButton>
@@ -77,10 +83,9 @@ const SearchBarComponent = () => {
           id="outlined-basic"
           label="products | farms"
           variant="outlined"
-          color="red"
+          color="green"
           value={query}
           onChange={handleChange}
-          sx={{}}
         />
       </Box>
     </>
