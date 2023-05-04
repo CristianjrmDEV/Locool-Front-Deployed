@@ -17,9 +17,6 @@ const FooterComponent = () => {
       sx={{
         backgroundColor: mainTheme.palette.secondary.main,
         color: mainTheme.palette.primary.main,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
       }}
     >
       <Box
@@ -29,48 +26,58 @@ const FooterComponent = () => {
           alignItems: 'center',
         }}
       >
-        <Button
-          sx={{
-            textTransform: 'capitalize',
-            py: 1,
-            px: 1,
-            '&:hover': {
-              backgroundColor: mainTheme.palette.secondary.main,
-              color: mainTheme.palette.green.main,
-            },
-          }}
-          onClick={handleDrawerToggle}
-        >
-          <Link to="/app/about">About us</Link>
-        </Button>
-        <Button
-          sx={{
-            textTransform: 'capitalize',
-            py: 1,
-            px: 1,
-            '&:hover': {
-              backgroundColor: mainTheme.palette.secondary.main,
-              color: mainTheme.palette.green.main,
-            },
-          }}
-          onClick={handleDrawerToggle}
-        >
-          <Link to="/app/mission">Mission</Link>
-        </Button>
-        <Button
-          sx={{
-            textTransform: 'capitalize',
-            px: 1,
-            py: 1,
-            '&:hover': {
-              backgroundColor: mainTheme.palette.secondary.main,
-              color: mainTheme.palette.green.main,
-            },
-          }}
-          onClick={handleDrawerToggle}
-        >
-          <Link to="/app/contact">Contact</Link>
-        </Button>
+        <Link to="/app/about">
+          <Button
+            sx={{
+              width: '100vw',
+              textTransform: 'capitalize',
+              py: 1,
+              px: 1,
+              '&:hover': {
+                backgroundColor: mainTheme.palette.green.main,
+                // color: mainTheme.palette.green.main,
+              },
+            }}
+            onClick={handleDrawerToggle}
+          >
+            About us
+          </Button>
+        </Link>
+
+        <Link to="/app/mission">
+          <Button
+            sx={{
+              width: '100vw',
+              textTransform: 'capitalize',
+              py: 1,
+              px: 1,
+              '&:hover': {
+                backgroundColor: mainTheme.palette.green.main,
+                // color: mainTheme.palette.green.main,
+              },
+            }}
+            onClick={handleDrawerToggle}
+          >
+            Mission
+          </Button>
+        </Link>
+        <Link to="/app/contact">
+          <Button
+            sx={{
+              width: '100vw',
+              textTransform: 'capitalize',
+              py: 1,
+              px: 1,
+              '&:hover': {
+                backgroundColor: mainTheme.palette.green.main,
+                // color: mainTheme.palette.green.main,
+              },
+            }}
+            onClick={handleDrawerToggle}
+          >
+            Contact
+          </Button>
+        </Link>
       </Box>
     </Box>
   )

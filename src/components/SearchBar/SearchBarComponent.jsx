@@ -5,6 +5,8 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  InputBase,
+  Paper,
   TextField,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
@@ -48,45 +50,61 @@ const SearchBarComponent = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          backgroundColor: mainTheme.palette.secondary.main,
-          p: 1,
-        }}
-      >
-        <TextField
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleProductSearch}
-                  sx={{ p: 1 }}
-                >
-                  <SearchIcon fontSize="large" />
-                </IconButton>
-                <Divider
-                  sx={{ height: 28, m: 0.5 }}
-                  orientation="vertical"
-                />
-                <IconButton
-                  onClick={handleFarmSearch}
-                  sx={{ p: 1 }}
-                >
-                  <WarehouseIcon fontSize="large" />
-                </IconButton>
-              </InputAdornment>
-            ),
+      <Box sx={{ backgroundColor: mainTheme.palette.secondary.main, p: 1 }}>
+        <Paper
+          component="form"
+          elevation={0}
+          sx={{
+            m: 'auto',
+            p: '2px 4px',
+            display: 'flex',
+            alignItems: 'center',
+            width: 400,
+            borderRadius: 10,
           }}
-          id="outlined-basic"
-          label="products | farms"
-          variant="outlined"
-          color="green"
-          value={query}
-          onChange={handleChange}
-        />
+        >
+          <InputBase
+            className="search-placeholder"
+            sx={{ ml: 1, flex: 1, color: mainTheme.palette.primary.main }}
+            placeholder="Products | Farms"
+            inputProps={{
+              'aria-label': 'Products | Farms',
+              color: mainTheme.palette.red.main,
+            }}
+            value={query}
+            onChange={handleChange}
+          />
+          <IconButton
+            onClick={handleProductSearch}
+            sx={{
+              p: 1,
+              '&:hover': {
+                color: mainTheme.palette.green.main,
+              },
+            }}
+          >
+            <SearchIcon fontSize="large" />
+          </IconButton>
+          <Divider
+            sx={{
+              height: 28,
+              m: 0.5,
+              backgroundColor: mainTheme.palette.secondary.main,
+            }}
+            orientation="vertical"
+          />
+          <IconButton
+            onClick={handleFarmSearch}
+            sx={{
+              p: 1,
+              '&:hover': {
+                color: mainTheme.palette.green.main,
+              },
+            }}
+          >
+            <WarehouseIcon fontSize="large" />
+          </IconButton>
+        </Paper>
       </Box>
     </>
   )
