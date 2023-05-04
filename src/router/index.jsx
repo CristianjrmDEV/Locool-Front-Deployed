@@ -6,6 +6,7 @@ import SignupPage from '../pages/Signup/SignupPage'
 import AppPage from '../pages/App/AppPage'
 import FarmPage from '../pages/Farm/FarmPage'
 import BasicPage from './../pages/Basic/BasicPage'
+import ProfilePage from '../pages/Profile/ProfilePage'
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         path: '/app/farms',
         element: <FarmPage />,
       },
+      {
+        path: '/app/profile',
+        element: <ProfilePage />,
+      }
     ],
   },
 ])
