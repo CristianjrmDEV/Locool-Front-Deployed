@@ -13,6 +13,19 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 
 const ProductCardComponent = ({ product }) => {
+  const addProductToCart = () => {
+    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('username')}`)))
+    console.log("Carrito" ,cartMap)
+    console.log("Item", product.id)
+    if(!cartMap.has(product.id)){
+      cartMap.set(product.id, 1)
+    } else {
+      cartMap.set(product.id, cartMap.get(product.id)+1)
+    }
+    console.log(cartMap)
+    localStorage.setItem(`cart-${localStorage.getItem('username')}`, JSON.stringify([...cartMap]))
+  }
+
   return (
     <Card
       sx={{
@@ -69,6 +82,7 @@ const ProductCardComponent = ({ product }) => {
           size="small"
           color="primary"
           sx={{ backgroundColor: mainTheme.palette.green.main }}
+          onClick={addProductToCart}
         >
           Add to Cart
         </Button>
