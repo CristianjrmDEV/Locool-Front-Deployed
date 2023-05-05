@@ -39,6 +39,7 @@ const logout = () => {
   try {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
+      localStorage.removeItem('username')
       return 200
     }
   } catch (error) {
