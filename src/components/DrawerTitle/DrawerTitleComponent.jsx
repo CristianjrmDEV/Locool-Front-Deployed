@@ -4,7 +4,7 @@ import './DrawerTitleComponent.css'
 import { Box } from '@mui/system'
 import { ListItem, Typography } from '@mui/material'
 
-const DrawerTitleComponent = ({title}) => {
+const DrawerTitleComponent = ({ title, titleTopPadding }) => {
   return (
     <Box>
       <ListItem sx={{ backgroundColor: mainTheme.palette.primary.main }}>
@@ -12,6 +12,7 @@ const DrawerTitleComponent = ({title}) => {
           sx={{
             color: mainTheme.palette.white.main,
             fontSize: '1.1rem',
+            pt: titleTopPadding,
           }}
         >
           {title}

@@ -29,7 +29,20 @@ const HeaderComponent = ({
   mylocool,
   search,
 }) => {
-  const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
+
+  const displayCartComponent = () =>
+    cart ? (
+      <DrawerComponent
+        clickable={<CartButtonComponent />}
+        openOption={'right'}
+        title={'Shopping Cart'}
+        titleTopPadding={5}
+        cartComponent={true}
+        cartBtn={true}
+      />
+    ) : (
+      false
+    )
 
   const displaySignUpComponent = () =>
     signup ? <SignupButtonComponent /> : false

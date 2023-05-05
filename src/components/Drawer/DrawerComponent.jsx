@@ -13,6 +13,7 @@ const DrawerComponent = ({
   clickable,
   openOption,
   title,
+  titleTopPadding,
   buttonList,
   greeting,
   cartBtn,
@@ -30,7 +31,10 @@ const DrawerComponent = ({
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
         <DrawerGreeting greeting={greeting} />
-        <DrawerTitleComponent title={title} />
+        <DrawerTitleComponent
+          title={title}
+          titleTopPadding={titleTopPadding}
+        />
         <DrawerButtonListComponent
           list={buttonList}
           handleDrawer={handleDrawerToggle}
