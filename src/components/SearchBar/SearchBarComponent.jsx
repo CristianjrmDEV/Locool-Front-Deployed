@@ -1,109 +1,110 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './SearchBarComponent.css'
 import {
   Box,
   Divider,
   IconButton,
   InputAdornment,
+  InputBase,
+  Paper,
   TextField,
-  Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import SearchIcon from '@mui/icons-material/Search'
 import WarehouseIcon from '@mui/icons-material/Warehouse'
-
-import { getProducts } from '../../services/productService'
-import { getFarms } from '../../services/farmService'
-
-// (async () => console.log(await getProducts()))()
-// (async () => console.log(await getFarms()))()
+import { getPricedProducts } from '../../services/productService'
+import { getAllFarms } from '../../services/farmService'
+import { FarmsContext } from '../../contexts/farm'
+import { ProductsContext } from '../../contexts/product'
+import { useNavigate } from 'react-router-dom'
 
 const SearchBarComponent = () => {
-  const [products, setProducts] = useState([])
-  const [farms, setFarms] = useState([])
+  const GLOBAL_Product = useContext(ProductsContext)
+  const GLOBAL_Farm = useContext(FarmsContext)
+
+  const goTo = useNavigate()
+
   const [query, setQuery] = useState('')
 
   const handleChange = (e) => {
-    setQuery(e.target.value)
+    setQuery(e.target.value.toLowerCase())
   }
 
   const handleProductSearch = async () => {
-    const result = await getProducts()
-    setProducts(result)
-    console.log('searched products: ', result)
+    const result = await getPricedProducts()
+    const productSearch = result.filter((el) =>
+      el.name.toLowerCase().includes(query)
+    )
+    GLOBAL_Product.set(productSearch)
+    goTo('/app/search')
   }
+
   const handleFarmSearch = async () => {
-    const result = await getFarms()
-    setFarms(result)
-    console.log('searched farms: ', result)
-  }
-
-  const displayProducts = () => {
-    if (products.length > 0) {
-      return (
-        <Box>
-          <Typography variant='h6'>Products</Typography>
-          {products.map((product, idx) => {
-            return <Box key={idx}>{product.img_url}</Box>
-          })}
-        </Box>
-      )
-    }
-  }
-
-  const displayFarms = () => {
-    if (farms.length > 0) {
-      return (
-        <Box>
-          <Typography variant="h6">Farms</Typography>
-          {farms.map((farm, idx) => {
-            return <Box key={idx}>{farm.address}</Box>
-          })}
-        </Box>
-      )
-    }
+    const result = await getAllFarms()
+    const farmSearch = result.filter((el) =>
+      el.name.toLowerCase().includes(query)
+    )
+    GLOBAL_Farm.set(farmSearch)
+    goTo('/app/search')
   }
 
   return (
     <>
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          backgroundColor: mainTheme.palette.secondary.main,
-          p: 1,
-        }}
-      >
-        <TextField
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleProductSearch}>
-                  <SearchIcon fontSize="large" />
-                </IconButton>
-                <Divider
-                  sx={{ height: 28, m: 0.5 }}
-                  orientation="vertical"
-                />
-                <IconButton onClick={handleFarmSearch}>
-                  <WarehouseIcon fontSize="large" />
-                </IconButton>
-              </InputAdornment>
-            ),
+      <Box sx={{ backgroundColor: mainTheme.palette.secondary.main, p: 1 }}>
+        <Paper
+          component="form"
+          elevation={0}
+          sx={{
+            m: 'auto',
+            p: '2px 4px',
+            display: 'flex',
+            alignItems: 'center',
+            width: 400,
+            borderRadius: 10,
           }}
-          id="outlined-basic"
-          label="products | farms"
-          variant="outlined"
-          color="red"
-          value={query}
-          onChange={handleChange}
-          sx={{}}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-        {displayProducts()}
-        {displayFarms()}
+        >
+          <InputBase
+            className="search-placeholder"
+            sx={{ ml: 1, flex: 1, color: mainTheme.palette.primary.main }}
+            placeholder="Products | Farms"
+            inputProps={{
+              'aria-label': 'Products | Farms',
+              color: mainTheme.palette.red.main,
+            }}
+            value={query}
+            onChange={handleChange}
+          />
+          <IconButton
+            onClick={handleProductSearch}
+            sx={{
+              p: 1,
+              '&:hover': {
+                color: mainTheme.palette.green.main,
+              },
+            }}
+          >
+            <SearchIcon fontSize="large" />
+          </IconButton>
+          <Divider
+            sx={{
+              height: 28,
+              m: 0.5,
+              backgroundColor: mainTheme.palette.secondary.main,
+            }}
+            orientation="vertical"
+          />
+          <IconButton
+            onClick={handleFarmSearch}
+            sx={{
+              p: 1,
+              '&:hover': {
+                color: mainTheme.palette.green.main,
+              },
+            }}
+          >
+            <WarehouseIcon fontSize="large" />
+          </IconButton>
+        </Paper>
       </Box>
     </>
   )

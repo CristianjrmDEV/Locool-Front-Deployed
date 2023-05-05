@@ -1,20 +1,13 @@
 import React from 'react'
 import './AppPage.css'
-import LogoutButtonComponent from '../../components/LogoutButton/LogoutButtonComponent'
-import { getUserProfile } from '../../services/userService'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const AppPage = () => {
 
-  const getProfile = async() => {
-    const data = await getUserProfile()
-    console.log("Datos", data)
-  }
-
-  console.log(getProfile())
   return (
-    <div>
-      <h1>AppPage</h1>
-    </div>
+    <>
+      <PageTitleComponent title={'App page'} />
+    </>
   )
 }
 

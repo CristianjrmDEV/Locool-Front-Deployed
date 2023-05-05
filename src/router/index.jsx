@@ -16,6 +16,10 @@ import ContactPage from '../pages/Contact/ContactPage'
 import LegalTermsPage from '../pages/LegalTerms/LegalTermsPage'
 import LegalPrivacyPage from '../pages/LegalPrivacy/LegalPrivacyPage'
 import LegalCookiesPage from '../pages/LegalCookies/LegalCookiesPage'
+import PaymentSuccessComponent from '../components/PaymentSuccess/PaymentSuccessComponent'
+import PaymentFailedComponent from '../components/PaymentFailed/PaymentFailedComponent'
+import PaymentSelectionComponent from '../components/PaymentSelection/PaymentSelectionComponent'
+import SearchPage from '../pages/Search/SearchPage'
 
 
 const router = createBrowserRouter([
@@ -56,6 +60,18 @@ const router = createBrowserRouter([
           }
         },
       },
+      {
+        path: '/success',
+        element: <PaymentSuccessComponent/>
+      },
+      {
+        path: '/fail',
+        element: <PaymentFailedComponent/>
+      },
+      {
+        path: '/payment-method',
+        element: <PaymentSelectionComponent/>
+      }
     ],
   },
   {
@@ -117,6 +133,11 @@ const router = createBrowserRouter([
         path: '/app/legal-cookies',
         element: <LegalCookiesPage />,
       },
+      {
+        path: '/app/search',
+        element: <SearchPage />,
+      },
+      
     ],
   },
 ])

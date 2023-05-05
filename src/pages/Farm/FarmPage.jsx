@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './FarmPage.css'
 import { Box, Button, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
-
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const FarmPage = () => {
 
   const[myFarms,setMyFarms] = useState()
@@ -20,6 +20,7 @@ const FarmPage = () => {
         <Button variant="contained" color="green" sx={{textTransform: 'none', width:'300px' ,marginRight:'100px', color: mainTheme.palette.white.main}}>
           <Typography>Add new farm</Typography>
         </Button>
+        <PageTitleComponent title={'Farm'} />
       </Box>
   )
 }

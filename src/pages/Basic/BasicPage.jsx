@@ -1,9 +1,12 @@
 import React from 'react'
 import './BasicPage.css'
+import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const BasicPage = () => {
   return (
-    <div>BasicPage</div>
+    <>
+      <PageTitleComponent title={'Basic page'} />
+    </>
   )
 }
 

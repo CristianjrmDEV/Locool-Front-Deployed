@@ -14,8 +14,6 @@ const MainLayout = () => {
     >
       <HeaderComponent
         menu={true}
-        login={false}
-        signup={false}
         cart={true}
         logout={true}
         mylocool={true}
