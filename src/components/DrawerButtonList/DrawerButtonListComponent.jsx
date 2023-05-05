@@ -6,13 +6,12 @@ import { Box } from '@mui/system'
 import { mainTheme } from '../../themes/mainTheme'
 import PropTypes from 'prop-types'
 
-const DrawerButtonListComponent = ({ list, handleDrawer }) => {
+const DrawerButtonListComponent = ({ list, handleDrawer, align }) => {
+  DrawerButtonListComponent.propTypes = {
+    list: PropTypes.array.isRequired,
+    handleDrawer: PropTypes.func.isRequired,
+  }
 
-    DrawerButtonListComponent.propTypes = {
-      list: PropTypes.array.isRequired,
-      handleDrawer: PropTypes.func.isRequired
-    }
-    
   return (
     <>
       {list?.map((text, index) => (
@@ -34,6 +33,7 @@ const DrawerButtonListComponent = ({ list, handleDrawer }) => {
             <DrawerButtonComponent
               text={text}
               handleDrawerToggle={handleDrawer}
+              align={align}
             />
           </Link>
         </Box>

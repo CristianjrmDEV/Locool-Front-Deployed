@@ -12,13 +12,16 @@ import CartComponent from '../Cart/CartComponent'
 const DrawerComponent = ({
   clickable,
   openOption,
+  width,
   title,
+  titleTopPadding,
   buttonList,
   greeting,
   cartBtn,
   cartComponent,
+  align,
 }) => {
-  const drawerWidth = 240
+  const drawerWidth = width ? width : 240
 
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -30,10 +33,15 @@ const DrawerComponent = ({
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
         <DrawerGreeting greeting={greeting} />
-        <DrawerTitleComponent title={title} />
+        <DrawerTitleComponent
+          title={title}
+          titleTopPadding={titleTopPadding}
+          align={align}
+        />
         <DrawerButtonListComponent
           list={buttonList}
           handleDrawer={handleDrawerToggle}
+          align={align}
         />
       </List>
       <CartComponent cartComponent={cartComponent} />
