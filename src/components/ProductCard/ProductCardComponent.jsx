@@ -16,11 +16,17 @@ const ProductCardComponent = ({ product }) => {
   const addProductToCart = () => {
     const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('username')}`)))
     console.log("Carrito" ,cartMap)
-    console.log("Item", product.id)
+    console.log("Item", product)
     if(!cartMap.has(product.id)){
-      cartMap.set(product.id, 1)
+      cartMap.set(product.id, {
+        "name": product.name,
+        "farmName": product.farmName,
+        "price": product.price,
+        "quantity": 1
+
+      })
     } else {
-      cartMap.set(product.id, cartMap.get(product.id)+1)
+      cartMap.get(product.id)["quantity"]++
     }
     console.log(cartMap)
     localStorage.setItem(`cart-${localStorage.getItem('username')}`, JSON.stringify([...cartMap]))
