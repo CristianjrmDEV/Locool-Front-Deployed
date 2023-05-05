@@ -7,9 +7,8 @@ import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 import ButtonComponent from '../Button/ButtonComponent'
 import { useNavigate } from 'react-router'
 
-const DrawerCartButton = ({ seeCartBtn }) => {
-
-  if (seeCartBtn)
+const DrawerCartButton = ({ cartBtn }) => {
+  if (cartBtn)
     return (
       <Link to="/app/cart">
         <ButtonComponent

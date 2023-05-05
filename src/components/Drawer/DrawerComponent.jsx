@@ -1,19 +1,13 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
 import { mainTheme } from '../../themes/mainTheme'
-import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
-import { getUserProfile } from '../../services/userService'
-import { useState, useEffect } from 'react'
-import { ListItemButton, ListItemText, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
 import DrawerTitleComponent from '../DrawerTitle/DrawerTitleComponent'
 import DrawerButtonListComponent from '../DrawerButtonList/DrawerButtonListComponent'
 import DrawerGreeting from '../DrawerGreeting/DrawerGreeting'
 import DrawerCartButton from '../DrawerCartButton/DrawerCartButton'
+import CartComponent from '../Cart/CartComponent'
 
 const DrawerComponent = ({
   clickable,
@@ -21,7 +15,7 @@ const DrawerComponent = ({
   title,
   buttonList,
   greeting,
-  seeCartBtn,
+  cartBtn,
   cartComponent,
 }) => {
   const drawerWidth = 240
@@ -36,17 +30,14 @@ const DrawerComponent = ({
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
         <DrawerGreeting greeting={greeting} />
-
         <DrawerTitleComponent title={title} />
-
         <DrawerButtonListComponent
           list={buttonList}
           handleDrawer={handleDrawerToggle}
         />
       </List>
-      {cartComponent ? <Box>Cart component goes here</Box> : false}
-      
-      <DrawerCartButton seeCartBtn={seeCartBtn} />
+      <CartComponent cartComponent={cartComponent} />
+      <DrawerCartButton cartBtn={cartBtn} />
     </Box>
   )
 
@@ -60,8 +51,6 @@ const DrawerComponent = ({
       >
         {clickable}
       </Box>
-
-      <CssBaseline />
 
       <Box>
         <Drawer

@@ -43,12 +43,12 @@ const HeaderComponent = ({
     mylocool ? (
       <DrawerComponent
         clickable={<MylocoolButtonComponent />}
-        openOption={'left'}
         title={'My locool'}
-        buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
+        openOption={'left'}
         greeting={true}
-        seeCartBtn={false}
+        buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
         cartComponent={false}
+        cartBtn={false}
       />
     ) : (
       false
