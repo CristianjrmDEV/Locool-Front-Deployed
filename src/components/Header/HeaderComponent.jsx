@@ -20,7 +20,15 @@ import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import SearchBarComponent from '../SearchBar/SearchBarComponent'
 
-const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }) => {
+const HeaderComponent = ({
+  menu,
+  login,
+  signup,
+  cart,
+  logout,
+  mylocool,
+  search,
+}) => {
   const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
 
   const displaySignUpComponent = () =>
@@ -33,7 +41,15 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
 
   const displayMylocoolComponent = () =>
     mylocool ? (
-      <DrawerComponent clickable={<MylocoolButtonComponent />} />
+      <DrawerComponent
+        clickable={<MylocoolButtonComponent />}
+        title={'My locool'}
+        openOption={'left'}
+        greeting={true}
+        buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
+        cartComponent={false}
+        cartBtn={false}
+      />
     ) : (
       false
     )
@@ -47,7 +63,7 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
             size="large"
             edge="start"
             aria-label="menu"
-            sx={{m:0, p:0}}
+            sx={{ m: 0, p: 0 }}
           >
             <MenuIcon />
           </IconButton>
@@ -57,7 +73,7 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
       false
     )
 
-  const displaySearchComponent = () => search ? <SearchBarComponent/> : false
+  const displaySearchComponent = () => (search ? <SearchBarComponent /> : false)
 
   return (
     <Box sx={{ flexGrow: 1 }}>

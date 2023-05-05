@@ -1,37 +1,24 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
 import { mainTheme } from '../../themes/mainTheme'
-import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
-import { getUserProfile } from '../../services/userService'
-import { useState, useEffect } from 'react'
-import { ListItemButton, ListItemText, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import DrawerTitleComponent from '../DrawerTitle/DrawerTitleComponent'
+import DrawerButtonListComponent from '../DrawerButtonList/DrawerButtonListComponent'
+import DrawerGreeting from '../DrawerGreeting/DrawerGreeting'
+import DrawerCartButton from '../DrawerCartButton/DrawerCartButton'
+import CartComponent from '../Cart/CartComponent'
 
-const DrawerComponent = ({ clickable }) => {
+const DrawerComponent = ({
+  clickable,
+  openOption,
+  title,
+  buttonList,
+  greeting,
+  cartBtn,
+  cartComponent,
+}) => {
   const drawerWidth = 240
-
-  const [user, setUser] = useState({})
-
-  const getUser = async () => {
-    const result = await getUserProfile()
-    setUser(result.user)
-  }
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
-  const displayUsername = () =>
-    localStorage.getItem('username')
-      ? `Hello  ${
-          localStorage.getItem('username').slice(0, 1).toUpperCase() +
-          localStorage.getItem('username').slice(1)
-        }`
-      : ''
 
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -39,58 +26,18 @@ const DrawerComponent = ({ clickable }) => {
     setMobileOpen(!mobileOpen)
   }
 
-  const listElements = ['Profile', 'Orders', 'Refunds', 'Farms']
-
   const drawer = (
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
-        <ListItem
-          sx={{ backgroundColor: mainTheme.palette.primary.main, pt: 6 }}
-        >
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 'bold',
-            }}
-          >
-            {displayUsername()}
-          </Typography>
-        </ListItem>
-        <ListItem sx={{ backgroundColor: mainTheme.palette.primary.main }}>
-          <Typography
-            sx={{
-              color: mainTheme.palette.white.main,
-              fontSize: '1.1rem',
-            }}
-          >
-            My locool
-          </Typography>
-        </ListItem>
-
-        {listElements.map((text, index) => (
-          <Box
-            key={index}
-            sx={{
-              '&:hover': {
-                backgroundColor: mainTheme.palette.green.main,
-              },
-            }}
-          >
-            <Link
-              to={`/app/${listElements[index].toLowerCase()}`}
-              sx={{
-                display: 'block',
-                width: '100%',
-              }}
-            >
-              <DrawerButtonComponent
-                text={text}
-                handleDrawerToggle={handleDrawerToggle}
-              />
-            </Link>
-          </Box>
-        ))}
+        <DrawerGreeting greeting={greeting} />
+        <DrawerTitleComponent title={title} />
+        <DrawerButtonListComponent
+          list={buttonList}
+          handleDrawer={handleDrawerToggle}
+        />
       </List>
+      <CartComponent cartComponent={cartComponent} />
+      <DrawerCartButton cartBtn={cartBtn} />
     </Box>
   )
 
@@ -105,14 +52,13 @@ const DrawerComponent = ({ clickable }) => {
         {clickable}
       </Box>
 
-      <CssBaseline />
-
       <Box>
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
+          anchor={openOption}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
