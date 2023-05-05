@@ -22,6 +22,7 @@ import PaymentSelectionComponent from '../components/PaymentSelection/PaymentSel
 import SearchPage from '../pages/Search/SearchPage'
 
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -60,18 +61,6 @@ const router = createBrowserRouter([
           }
         },
       },
-      {
-        path: '/success',
-        element: <PaymentSuccessComponent/>
-      },
-      {
-        path: '/fail',
-        element: <PaymentFailedComponent/>
-      },
-      {
-        path: '/payment-method',
-        element: <PaymentSelectionComponent/>
-      }
     ],
   },
   {
@@ -96,6 +85,18 @@ const router = createBrowserRouter([
       {
         path: '/app/cart',
         element: <CartPage />,
+      },
+      {
+        path: '/app/success',
+        element: <PaymentSuccessComponent/>
+      },
+      {
+        path: '/app/fail',
+        element: <PaymentFailedComponent/>
+      },
+      {
+        path: '/app/payment-method',
+        element: <PaymentSelectionComponent/>
       },
       {
         path: '/app/orders',
