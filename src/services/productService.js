@@ -31,6 +31,7 @@ const getPricedProducts = async () => {
     const farmIdentified = farmsId.filter((el) => el.id === obj.farmId)
     // console.log('this is obj: ',obj)
     const objMod = {
+      id: obj.id,
       name: productIdentified[0].name,
       price: obj.price,
       stock: obj.stock,

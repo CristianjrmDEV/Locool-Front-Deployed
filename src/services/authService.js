@@ -9,6 +9,10 @@ const login = async (body) => {
     console.log('Welcome to Locool')
     const profile = await getUserProfile()
     localStorage.setItem('username', profile.user.username)
+    if(!localStorage.getItem(`cart-${profile.user.username}`)){
+      localStorage.setItem(`cart-${profile.user.username}`, JSON.stringify([...new Map()]))
+    }
+
     console.log(`Hello ${localStorage.getItem('username')}`)
 
     return 200
