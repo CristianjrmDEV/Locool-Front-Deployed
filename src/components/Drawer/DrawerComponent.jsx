@@ -22,6 +22,7 @@ const DrawerComponent = ({
   buttonList,
   greeting,
   seeCartBtn,
+  cartComponent,
 }) => {
   const drawerWidth = 240
 
@@ -43,6 +44,8 @@ const DrawerComponent = ({
           handleDrawer={handleDrawerToggle}
         />
       </List>
+      {cartComponent ? <Box>Cart component goes here</Box> : false}
+      
       <DrawerCartButton seeCartBtn={seeCartBtn} />
     </Box>
   )

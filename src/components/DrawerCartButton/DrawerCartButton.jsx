@@ -5,9 +5,10 @@ import { mainTheme } from '../../themes/mainTheme'
 import { Link } from '@mui/material'
 import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
 import ButtonComponent from '../Button/ButtonComponent'
+import { useNavigate } from 'react-router'
 
 const DrawerCartButton = ({ seeCartBtn }) => {
-    const demo = () => console.log('dasfdsf')
+
   if (seeCartBtn)
     return (
       <Link to="/app/cart">
@@ -17,7 +18,6 @@ const DrawerCartButton = ({ seeCartBtn }) => {
           bgColour="green"
           padding={0}
           margin={0}
-        //   fx={demo}
         />
       </Link>
     )

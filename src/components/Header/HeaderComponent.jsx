@@ -47,7 +47,7 @@ const HeaderComponent = ({
         title={'My locool'}
         buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
         greeting={true}
-        seeCartBtn={true}
+        seeCartBtn={false}
         cartComponent={false}
       />
     ) : (

@@ -11,7 +11,7 @@ const ButtonComponent = ({ text, textColour, bgColour, padding, margin, fx }) =>
       fullWidth={true}
       variant="contained"
       color={`${bgColour}`}
-      onclick={fx}
+      onClick={fx}
       sx={{
         margin: margin,
         padding: padding,
