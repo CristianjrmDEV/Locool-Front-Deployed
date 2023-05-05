@@ -12,14 +12,16 @@ import CartComponent from '../Cart/CartComponent'
 const DrawerComponent = ({
   clickable,
   openOption,
+  width,
   title,
   titleTopPadding,
   buttonList,
   greeting,
   cartBtn,
   cartComponent,
+  align,
 }) => {
-  const drawerWidth = 240
+  const drawerWidth = width ? width : 240
 
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -34,10 +36,12 @@ const DrawerComponent = ({
         <DrawerTitleComponent
           title={title}
           titleTopPadding={titleTopPadding}
+          align={align}
         />
         <DrawerButtonListComponent
           list={buttonList}
           handleDrawer={handleDrawerToggle}
+          align={align}
         />
       </List>
       <CartComponent cartComponent={cartComponent} />
