@@ -8,4 +8,8 @@ const getFarms = async () => {
   return data
 }
 
-export {getFarms}
+
+
+export {
+  getFarms,
+}

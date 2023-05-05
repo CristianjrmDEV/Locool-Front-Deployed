@@ -31,8 +31,14 @@ const getAllUsers = async () => {
   }
 }
 
+const getMyFarms = async (username) => {
+  const {data} = await api.get(`/users/${username}/farms`)
+  return data
+}
+
 export { 
   getUserProfile,
   findUserByUsername,
-  getAllUsers
+  getAllUsers,
+  getMyFarms
 }

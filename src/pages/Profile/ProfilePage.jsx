@@ -34,9 +34,9 @@ const ProfilePage = () => {
 
   const getUserData = async ()=>{
     const response = await getUserProfile()
-    const result = await getAllUsers()
-    setAllUsers(result)  
-    console.log(allUsers[14])
+    // const result = await getAllUsers()
+    // setAllUsers(result)  
+    // console.log(allUsers[14])
     //Lo de abajo se tenía que hacer por el tema de inputs no controlables por no tener valor
     // a input controlable gracias a que tiene un valor de inicio
     setUserName(response.user.username)

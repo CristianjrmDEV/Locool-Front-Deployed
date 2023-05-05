@@ -19,7 +19,7 @@ const mainTheme = createTheme({
       main: '#fff',
     },
     black: {
-      main: '#000',
+      main: '#424142',
     },
   },
   typography: {
