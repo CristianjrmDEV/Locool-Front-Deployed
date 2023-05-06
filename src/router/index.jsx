@@ -100,9 +100,6 @@ const router = createBrowserRouter([
         element: <PaymentSelectionComponent/>
       },
       {
-        path: '/app/orders',
-        element: <OrderPage />,
-
         path: '/app/purchases',
         element: <PurchasePage />,
       },

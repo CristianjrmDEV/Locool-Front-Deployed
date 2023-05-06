@@ -5,5 +5,9 @@ const api = axios.create({
   baseURL: 'http://localhost:3000/api',
 })
 
+const geolocationApi = axios.create({
+  
+})
+
 export default api
 
