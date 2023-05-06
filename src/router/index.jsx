@@ -7,7 +7,6 @@ import AppPage from '../pages/App/AppPage'
 import FarmPage from '../pages/Farm/FarmPage'
 import BasicPage from './../pages/Basic/BasicPage'
 import CartPage from '../pages/Cart/CartPage'
-import OrderPage from '../pages/Order/OrderPage'
 import ProfilePage from '../pages/Profile/ProfilePage'
 import RefundPage from '../pages/Refund/RefundPage'
 import AboutPage from '../pages/About/AboutPage'
@@ -20,6 +19,7 @@ import PaymentSuccessComponent from '../components/PaymentSuccess/PaymentSuccess
 import PaymentFailedComponent from '../components/PaymentFailed/PaymentFailedComponent'
 import PaymentSelectionComponent from '../components/PaymentSelection/PaymentSelectionComponent'
 import SearchPage from '../pages/Search/SearchPage'
+import PurchasePage from '../pages/Purchase/PurchasePage'
 
 
 const router = createBrowserRouter([
@@ -62,16 +62,16 @@ const router = createBrowserRouter([
       },
       {
         path: '/success',
-        element: <PaymentSuccessComponent/>
+        element: <PaymentSuccessComponent />,
       },
       {
         path: '/fail',
-        element: <PaymentFailedComponent/>
+        element: <PaymentFailedComponent />,
       },
       {
         path: '/payment-method',
-        element: <PaymentSelectionComponent/>
-      }
+        element: <PaymentSelectionComponent />,
+      },
     ],
   },
   {
@@ -98,8 +98,8 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
-        path: '/app/orders',
-        element: <OrderPage />,
+        path: '/app/purchases',
+        element: <PurchasePage />,
       },
       {
         path: '/app/profile',
@@ -137,7 +137,6 @@ const router = createBrowserRouter([
         path: '/app/search',
         element: <SearchPage />,
       },
-      
     ],
   },
 ])
