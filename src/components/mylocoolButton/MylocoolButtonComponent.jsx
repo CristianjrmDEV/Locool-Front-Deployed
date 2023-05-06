@@ -2,21 +2,28 @@ import React from 'react'
 import './MylocoolButtonComponent.css'
 import { Button, Link, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import PropTypes from 'prop-types'
 
-const MylocoolButtonComponent = () => {
+
+const MylocoolButtonComponent = ({bgColor}) => {
+    MylocoolButtonComponent.propTypes = {
+      bgColor: PropTypes.string.isRequired
+    }
   return (
     <Button
       color="inherit"
       href={''}
       sx={{
-        textTransform:'lowercase',
-        fontSize:'1.2rem',
+        margin: 0,
+        textTransform: 'lowercase',
+        fontSize: '1.2rem',
         '&:hover': {
-          backgroundColor: mainTheme.palette.primary.main,
-          color: mainTheme.palette.green.main
+          backgroundColor: mainTheme.palette[bgColor ? bgColor : 'primary'].main,
+          color: mainTheme.palette.green.main,
         },
       }}
-    >my locool
+    >
+      my locool
     </Button>
   )
 }

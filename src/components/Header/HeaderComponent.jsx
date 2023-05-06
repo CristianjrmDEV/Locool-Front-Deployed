@@ -20,8 +20,29 @@ import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import SearchBarComponent from '../SearchBar/SearchBarComponent'
 
-const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }) => {
-  const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
+const HeaderComponent = ({
+  menu,
+  login,
+  signup,
+  cart,
+  logout,
+  mylocool,
+  search,
+}) => {
+
+  const displayCartComponent = () =>
+    cart ? (
+      <DrawerComponent
+        clickable={<CartButtonComponent />}
+        openOption={'right'}
+        title={'Shopping Cart'}
+        titleTopPadding={5}
+        cartComponent={true}
+        cartBtn={true}
+      />
+    ) : (
+      false
+    )
 
   const displaySignUpComponent = () =>
     signup ? <SignupButtonComponent /> : false
@@ -33,7 +54,15 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
 
   const displayMylocoolComponent = () =>
     mylocool ? (
-      <DrawerComponent clickable={<MylocoolButtonComponent />} />
+      <DrawerComponent
+        clickable={<MylocoolButtonComponent />}
+        title={'My locool'}
+        openOption={'left'}
+        greeting={true}
+        buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
+        cartComponent={false}
+        cartBtn={false}
+      />
     ) : (
       false
     )
@@ -47,7 +76,7 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
             size="large"
             edge="start"
             aria-label="menu"
-            sx={{m:0, p:0}}
+            sx={{ m: 0, p: 0 }}
           >
             <MenuIcon />
           </IconButton>
@@ -57,7 +86,7 @@ const HeaderComponent = ({ menu, login, signup, cart, logout, mylocool, search }
       false
     )
 
-  const displaySearchComponent = () => search ? <SearchBarComponent/> : false
+  const displaySearchComponent = () => (search ? <SearchBarComponent /> : false)
 
   return (
     <Box sx={{ flexGrow: 1 }}>
