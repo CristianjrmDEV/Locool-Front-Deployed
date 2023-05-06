@@ -19,12 +19,3 @@ h1,h2,h3,h4,h5,h6 {
 a {
     text-decoration: none;
 }
-
-/* 
-.layout {
-	display: grid;
-    min-height: 100vh;
-	grid-template-rows: auto 1fr auto;
-	grid-template-columns: 100vw;
-} 
-*/

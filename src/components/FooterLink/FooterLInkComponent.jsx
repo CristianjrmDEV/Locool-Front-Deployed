@@ -10,7 +10,7 @@ const FooterLInkComponent = ({ text, link, size }) => {
     <Link to={link ? `${link}` : '#'}>
       <Button
         sx={{
-          width:'250px',
+          // width:'250px',
           textTransform: 'capitalize',
           fontSize: size ? size : '.8rem',
           '&:hover': {
