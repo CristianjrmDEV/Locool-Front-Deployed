@@ -59,7 +59,7 @@ const HeaderComponent = ({
         title={'My locool'}
         openOption={'left'}
         greeting={true}
-        buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
+        buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
         cartComponent={false}
         cartBtn={false}
       />

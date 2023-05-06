@@ -7,6 +7,7 @@ import DrawerComponent from '../Drawer/DrawerComponent'
 import FooterLInkComponent from '../FooterLink/FooterLInkComponent'
 import { Copyright } from '@mui/icons-material'
 import CopyrightComponent from '../Copyright/CopyrightComponent'
+import MylocoolButtonComponent from '../mylocoolButton/MylocoolButtonComponent'
 
 const drawerWidth = 100 % ''
 
@@ -17,16 +18,17 @@ const FooterComponent = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <DrawerComponent
           clickable={
-            <FooterLInkComponent
-              text="Locool"
-              size="1.2rem"
-            />
+            // <FooterLInkComponent
+            //   text="Locool"
+            //   size="1.2rem"
+            // />
+            <MylocoolButtonComponent bgColor='secondary' />
           }
           title={'Locool'}
           openOption={'bottom'}
           buttonList={['About', 'Mission', 'Contact']}
           width="100%"
-          align='center'
+          align="center"
         />
       </Box>
       <Box
@@ -48,8 +50,7 @@ const FooterComponent = () => {
           link="/app/legal-cookies"
         />
       </Box>
-        <CopyrightComponent />
-
+      <CopyrightComponent />
     </Box>
   )
 }
