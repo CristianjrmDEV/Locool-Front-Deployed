@@ -11,7 +11,6 @@ const RefundPage = () => {
 
   const getUserRefunds = async () => {
     const result = await getRefundsByUsername(localStorage.getItem('username'))
-    console.log(result.purchases)
     setRefunds(result.purchases)
   }
 
