@@ -4,12 +4,13 @@ import LogoSymbolComponent from '../LogoSymbol/LogoSymbolComponent'
 import { Box, Divider } from '@mui/material'
 import PropTypes from 'prop-types'
 import { mainTheme } from '../../themes/mainTheme'
-import { fontSize } from '@mui/system'
 
 const PurchaseCardComponent = ({ purchase }) => {
   PurchaseCardComponent.propTypes = {
     purchase: PropTypes.object.isRequired,
   }
+  
+  console.log('purchase from purchase card: ', purchase)
   return (
     <>
       <Box
@@ -18,7 +19,7 @@ const PurchaseCardComponent = ({ purchase }) => {
         gridTemplateRows="100px 50px"
         height={'120px'}
         sx={{
-          width: '280px',
+          width: '300px',
           backgroundColor: mainTheme.palette.secondary.main,
           borderRadius: 3,
           boxShadow: 3,
@@ -29,7 +30,7 @@ const PurchaseCardComponent = ({ purchase }) => {
       >
         <Box
           display="grid"
-          gridTemplateColumns="auto auto auto"
+          gridTemplateColumns="30px 75px auto"
           gap={1}
           height={'70px'}
         >
@@ -40,15 +41,15 @@ const PurchaseCardComponent = ({ purchase }) => {
           </Box>
           <Box sx={{ fontWeight: 'bold', textAlign: 'right' }}>
             <Box>P. Ref</Box>
-            <Box>Farm</Box>
             <Box>Date</Box>
+            <Box>Farm</Box>
             <Box>Total</Box>
           </Box>
           <Box>
             <Box>{purchase.id}</Box>
-            <Box>{purchase.farm}</Box>
-            <Box>{purchase.date}</Box>
-            <Box>{purchase.total}</Box>
+            <Box>{purchase.updatedAt.slice(0,10)}</Box>
+            {/* <Box>{purchase.farm}</Box>
+            <Box>{purchase.total}</Box> */}
           </Box>
         </Box>
         <Box className="row">
