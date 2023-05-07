@@ -26,10 +26,24 @@ const PaymentSelectionComponent = () => {
            * contraseña: %5)9Uqmp
            */
         }
-        <PayPalScriptProvider options={{'client-id': "AWBz22U-IiFbvZ-YGLGI1r1jsPcL7Oc7zZ-rNwl8vlyP7q-goquqs-GjmIUYRBHZ_ZZM80_c6f_301hZ"}}>
+        <PayPalScriptProvider options={{'client-id': "AWBz22U-IiFbvZ-YGLGI1r1jsPcL7Oc7zZ-rNwl8vlyP7q-goquqs-GjmIUYRBHZ_ZZM80_c6f_301hZ", 'currency': 'EUR'}}>
           <PayPalButtons 
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: localStorage.getItem(`total-${localStorage.getItem('username')}`)
+                    }
+                  }
+                ]
+              })
+            }}
+
             onApprove={(data, actions) => {
-              navigate('/success');
+              localStorage.setItem(`total-${localStorage.getItem('username')}`, 0)
+              localStorage.setItem(`cart-${localStorage.getItem('username')}`, JSON.stringify([...new Map()]))
+              navigate('/app/success');
             }}
           />
         </PayPalScriptProvider>
