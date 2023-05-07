@@ -1,11 +1,9 @@
 import React from 'react'
 import './FooterComponent.css'
-import { Box, Button, Divider, Drawer, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
-import { Link } from 'react-router-dom'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import FooterLInkComponent from '../FooterLink/FooterLInkComponent'
-import { Copyright } from '@mui/icons-material'
 import CopyrightComponent from '../Copyright/CopyrightComponent'
 import MylocoolButtonComponent from '../mylocoolButton/MylocoolButtonComponent'
 
@@ -18,10 +16,6 @@ const FooterComponent = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <DrawerComponent
           clickable={
-            // <FooterLInkComponent
-            //   text="Locool"
-            //   size="1.2rem"
-            // />
             <MylocoolButtonComponent bgColor='secondary' />
           }
           title={'Locool'}
@@ -38,12 +32,12 @@ const FooterComponent = () => {
         }}
       >
         <FooterLInkComponent
-          text="Terms & Conditions"
-          link="/app/legal-terms"
-        />
-        <FooterLInkComponent
           text="Privacy notice"
           link="/app/legal-privacy"
+        />
+        <FooterLInkComponent
+          text="Terms & Conditions"
+          link="/app/legal-terms"
         />
         <FooterLInkComponent
           text="Cookies Policy"

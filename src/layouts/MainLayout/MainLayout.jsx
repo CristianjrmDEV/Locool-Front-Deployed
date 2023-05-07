@@ -19,7 +19,7 @@ const MainLayout = () => {
         mylocool={true}
         search={true}
       />
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box  sx={{ display: 'flex', justifyContent: 'center' }}>
         <Outlet />
       </Box>
       <FooterComponent />

@@ -1,34 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './PurchasePage.css'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import {
   getPurchasesByUsername,
-  getUserCart,
 } from '../../services/purchaseService'
-import PurchaseCardComponent from '../../components/PurchaseCard/PurchaseCardComponent'
+import PurchaseListComponent from '../../components/PurchaseList/PurchaseListComponent'
+import { Box } from '@mui/material'
 
 const PurchasePage = () => {
-  (async () =>
-    console.log(
-      await getPurchasesByUsername(localStorage.getItem('username')),
-      // await getUserCart(localStorage.getItem('username'),3)
-    ))()
-    
+  const [purchases, setPurchases] = useState([])
 
-const purchase = {
-  id: '10',
-  farm: 'The best farm ever',
-  date: '12/02/2021',
-  total: '2.01 €',
-}
+  const getUserPurchases = async () => {
+    const result = await getPurchasesByUsername(
+      localStorage.getItem('username')
+    )
+    setPurchases(result)
+    console.log(result)
+  }
+
+  useEffect(() => {
+    getUserPurchases()
+  }, [])
 
   return (
-    <>
+    <Box>
       <PageTitleComponent title={'Purchases'} />
-      <PurchaseCardComponent purchase={purchase} />
-    </>
+      <PurchaseListComponent purchases={purchases} />
+    </Box>
   )
 }
-
 
 export default PurchasePage
