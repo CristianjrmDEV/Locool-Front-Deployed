@@ -2,9 +2,8 @@ import api from './config/'
 import { getAllFarms, getAllProductsByFarmId } from './farmService'
 
 const getProducts = async () => {
-  // console.log('sending request..')
   const { data } = await api.get('/products')
-  // console.log('request result:', data)
+  console.log('get products from service: ', data)
   return data
 }
 
@@ -14,7 +13,6 @@ const getPricedProducts = async () => {
   const farmProducts = []
   let arrayOfFarmProducts = null
 
-  console.log('farmsid: ', farmsId)
   farmsId.map((farm) => {
     farmProducts.push(getAllProductsByFarmId(farm.id))
   })
@@ -29,7 +27,6 @@ const getPricedProducts = async () => {
   productPricedNamed.map((obj) => {
     const productIdentified = productsId.filter(el => el.id === obj.productId)
     const farmIdentified = farmsId.filter((el) => el.id === obj.farmId)
-    // console.log('this is obj: ',obj)
     const objMod = {
       id: obj.id,
       name: productIdentified[0].name,
