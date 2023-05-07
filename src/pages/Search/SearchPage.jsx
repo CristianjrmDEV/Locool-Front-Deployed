@@ -5,8 +5,8 @@ import { Box, Typography } from '@mui/material'
 import { FarmsContext } from '../../contexts/farm'
 import { ProductsContext } from '../../contexts/product'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
-import FarmListComponent from '../../components/FarmList/FarmListComponent'
 import ProductListComponent from '../../components/ProductList/ProductListComponent'
+import FarmSearchListComponent from '../../components/FarmSearchList/FarmSearchListComponent'
 
 const SearchPage = () => {
   const GLOBAL_Product = useContext(ProductsContext)
@@ -20,7 +20,7 @@ const SearchPage = () => {
 
   const displayFarms = () => {
     if (GLOBAL_Farm.get.length > 0) {
-      return <FarmListComponent farms={GLOBAL_Farm} />
+      return <FarmSearchListComponent farms={GLOBAL_Farm} />
     }
   }
 

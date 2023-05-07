@@ -14,4 +14,18 @@ const getAllProductsByFarmId = async (id) => {
   return data
 }
 
-export {getAllFarms, getAllProductsByFarmId}
+const getFarms = async () => {
+  console.log('before retrieveing data')
+  const { data } = await api.get('/farms')
+  console.log('request result:', data)
+
+  return data
+}
+
+
+
+export {
+  getFarms,
+  getAllFarms,
+  getAllProductsByFarmId
+}
