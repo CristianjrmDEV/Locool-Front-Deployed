@@ -2,8 +2,15 @@ import React from 'react'
 import './FarmCardComponent.css'
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import { capitalise } from '../../services/toolkit'
+import PropTypes from 'prop-types'
+
 
 const FarmCardComponent = ({farm}) => {
+    FarmCardComponent.propTypes = {
+      farm: PropTypes.object.isRequired,
+    }
+
   return (
     <Card
       sx={{
@@ -16,7 +23,7 @@ const FarmCardComponent = ({farm}) => {
         <CardMedia
           component="img"
           height="140"
-          image={farm.img}
+          image={farm.image_url}
           alt=""
         />
         <CardContent>
@@ -25,8 +32,7 @@ const FarmCardComponent = ({farm}) => {
             variant="h5"
             component="div"
           >
-            {farm.name.slice(0, 1).toUpperCase() +
-              farm.name.slice(1).toLowerCase()}
+            {capitalise(farm.name)}
           </Typography>
           <Typography
             variant="body2"

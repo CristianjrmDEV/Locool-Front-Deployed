@@ -14,16 +14,12 @@ const PurchaseCardComponent = ({ purchase, cart }) => {
     cart: PropTypes.array.isRequired,
   }
 
-  console.log('purchase from purchase card: ', purchase)
   return (
     <>
       <Box
         className="row"
-        // display="grid"
-        // gridTemplateRows="auto auto"
-        // height={'auto'}
         sx={{
-          // width: '100%',
+          width: '100%',
           backgroundColor: mainTheme.palette.secondary.main,
           borderRadius: 3,
           boxShadow: 3,
@@ -34,24 +30,29 @@ const PurchaseCardComponent = ({ purchase, cart }) => {
       >
         <Box
           display="grid"
-          gridTemplateColumns="30px 75px auto auto"
+          gridTemplateColumns="60px 50px auto"
           gap={1}
-          // height={'70px'}
         >
           <Box>
             <LogoSymbolComponent />
           </Box>
-          <Box sx={{ fontWeight: 'bold', textAlign: 'right' }}>
+          <Box sx={{ fontWeight: 'bold', textAlign: 'left' }}>
             <Box>P. Ref</Box>
             <Box>Date</Box>
-            <Box>Farm</Box>
+            <Box>Status</Box>
             <Box>Total</Box>
           </Box>
-          <Box>
+          <Box sx={{ textAlign: 'left'}}>
             <Box>{purchase.id}</Box>
             <Box>{purchase.updatedAt.slice(0, 10)}</Box>
-            <Box>{purchase.farm}</Box>
-            <Box>{purchase.total}</Box>
+            <Box>{purchase.status}</Box>
+            <Box>
+              {purchase.farm_products.reduce(
+                (acc, curr) => curr.price + acc,
+                0
+              )}{' '}
+              €
+            </Box>
           </Box>
         </Box>
         <Box className="row">

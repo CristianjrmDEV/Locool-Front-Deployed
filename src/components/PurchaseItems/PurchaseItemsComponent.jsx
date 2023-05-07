@@ -11,6 +11,7 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PropTypes from 'prop-types'
+import { capitalise } from '../../services/toolkit'
 
 const PurchaseItemsComponent = ({ cart }) => {
   PurchaseItemsComponent.propTypes = {
@@ -34,7 +35,7 @@ const PurchaseItemsComponent = ({ cart }) => {
       </AccordionSummary>
       <AccordionDetails>
         <Typography></Typography>
-        <Box>
+        <Box sx={{width: '100%'}}>
           {cart.map((item, idx) => {
             return (
               <Box
@@ -44,12 +45,12 @@ const PurchaseItemsComponent = ({ cart }) => {
                 key={idx}
                 sx={{}}
               >
-                <Box>{item.name}</Box>
+                <Box>{capitalise(item.product.name)}</Box>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  {item.qty}
+                  {item.purchase_detail.quantity}
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  {item.price}
+                  {item.price} €
                 </Box>
               </Box>
             )

@@ -1,6 +1,5 @@
 import React from 'react'
 import './RefundListComponent.css'
-import PurchaseCardComponent from '../PurchaseCard/PurchaseCardComponent'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
 import RefundCardComponent from '../RefundCard/RefundCardComponent'
