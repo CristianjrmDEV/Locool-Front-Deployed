@@ -36,9 +36,69 @@ const getMyFarms = async (username) => {
   return data
 }
 
+const createFarm = async (username,farmData) => {
+  const {data} = await api.post(`/users/${username}/farms`,farmData,{
+    headers: {
+      token: localStorage.getItem('token'),
+    },
+  })
+  return data
+}
+
+const updateFarm = async (username,farmId,farmData) => {
+  const {data} = await api.put(`/users/${username}/farms/${farmId}`,farmData,{
+    headers: {
+      token: localStorage.getItem('token'),
+    },
+  })
+  return data
+}
+
+const updateProductOfFarm = async (username,farmId,productId,productData) => {
+  const {data} = await api.put(`/${username}/farms/${farmId}/products/${productId}`,productData,{
+    headers: {
+      token: localStorage.getItem('token'),
+    },
+  })
+  return data
+}
+
+const deleteFarm = async (username,farmId) => {
+  const {data} = await api.delete(`/users/${username}/farms/${farmId}`,{
+    headers: {
+      token: localStorage.getItem('token'),
+    },
+  })
+  return data
+}
+
+const deleteProductOfFarm = async (username,farmId,productId) => {
+  const {data} = await api.delete(`/users/${username}/farms/${farmId}/products/${productId}`,{
+    headers: {
+      token: localStorage.getItem('token'),
+    },
+  })
+  return data
+}
+
+const addProductToFarm = async(username,farmId,productData) => {
+  const {data} = await api.post(`/users/${username}/farms/${farmId}/products`,productData,{
+    headers: {
+      token: localStorage.getItem('token'),
+    }
+  })
+  return data
+}
+
 export { 
   getUserProfile,
   findUserByUsername,
   getAllUsers,
-  getMyFarms
+  getMyFarms,
+  createFarm,
+  updateFarm,
+  deleteFarm,
+  addProductToFarm,
+  updateProductOfFarm,
+  deleteProductOfFarm
 }
