@@ -7,7 +7,7 @@ const mainTheme = createTheme({
       main: '#424142', // dark grey
     },
     secondary: {
-      main: '#DAD9D9', // light grey
+      main: '#D9D9D9', // light grey
     },
     green: {
       main: '#95CA59', // green from logo
@@ -19,7 +19,7 @@ const mainTheme = createTheme({
       main: '#fff',
     },
     black: {
-      main: '#000',
+      main: '#424142',
     },
   },
   typography: {
