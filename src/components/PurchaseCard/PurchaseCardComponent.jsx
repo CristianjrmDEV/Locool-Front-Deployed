@@ -1,25 +1,29 @@
 import React from 'react'
 import './PurchaseCardComponent.css'
 import LogoSymbolComponent from '../LogoSymbol/LogoSymbolComponent'
-import { Box, Divider } from '@mui/material'
+import {
+  Box,
+} from '@mui/material'
 import PropTypes from 'prop-types'
 import { mainTheme } from '../../themes/mainTheme'
+import PurchaseItemsComponent from '../PurchaseItems/PurchaseItemsComponent'
 
-const PurchaseCardComponent = ({ purchase }) => {
+const PurchaseCardComponent = ({ purchase, cart }) => {
   PurchaseCardComponent.propTypes = {
     purchase: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
   }
-  
+
   console.log('purchase from purchase card: ', purchase)
   return (
     <>
       <Box
         className="row"
-        display="grid"
-        gridTemplateRows="100px 50px"
-        height={'120px'}
+        // display="grid"
+        // gridTemplateRows="auto auto"
+        // height={'auto'}
         sx={{
-          width: '300px',
+          // width: '100%',
           backgroundColor: mainTheme.palette.secondary.main,
           borderRadius: 3,
           boxShadow: 3,
@@ -30,12 +34,10 @@ const PurchaseCardComponent = ({ purchase }) => {
       >
         <Box
           display="grid"
-          gridTemplateColumns="30px 75px auto"
+          gridTemplateColumns="30px 75px auto auto"
           gap={1}
-          height={'70px'}
+          // height={'70px'}
         >
-          {/* <Box></Box>
-        <Box></Box> */}
           <Box>
             <LogoSymbolComponent />
           </Box>
@@ -47,14 +49,13 @@ const PurchaseCardComponent = ({ purchase }) => {
           </Box>
           <Box>
             <Box>{purchase.id}</Box>
-            <Box>{purchase.updatedAt.slice(0,10)}</Box>
-            {/* <Box>{purchase.farm}</Box>
-            <Box>{purchase.total}</Box> */}
+            <Box>{purchase.updatedAt.slice(0, 10)}</Box>
+            <Box>{purchase.farm}</Box>
+            <Box>{purchase.total}</Box>
           </Box>
         </Box>
         <Box className="row">
-          <Divider />
-          <Box>Cart details ????</Box>
+          <PurchaseItemsComponent cart={cart} />
         </Box>
       </Box>
     </>

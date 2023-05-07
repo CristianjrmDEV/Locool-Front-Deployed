@@ -18,16 +18,17 @@ const PurchaseListComponent = ({ purchases }) => {
   return (
     <Box
       display="grid"
-      gridTemplateColumns="auto auto auto"
+      gridTemplateColumns="auto"
       sx={{
-        gridTemplateColumns: { sm: 'auto', md: 'auto auto', lg:'auto auto auto', xl:'auto auto auto' },
+        // gridTemplateColumns: { sm: 'auto', md: 'auto auto', lg:'auto auto auto', xl:'auto auto auto' },
       }}
     >
       {purchases.map((purchase, idx) => {
         return (
           <PurchaseCardComponent
             key={idx}
-            purchase={purchase}
+            purchase={purchase.detail}
+            cart={purchase.cart}
           />
         )
       })}
