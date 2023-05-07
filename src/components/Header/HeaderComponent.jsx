@@ -29,7 +29,20 @@ const HeaderComponent = ({
   mylocool,
   search,
 }) => {
-  const displayCartComponent = () => (cart ? <CartButtonComponent /> : false)
+
+  const displayCartComponent = () =>
+    cart ? (
+      <DrawerComponent
+        clickable={<CartButtonComponent />}
+        openOption={'right'}
+        title={'Shopping Cart'}
+        titleTopPadding={5}
+        cartComponent={true}
+        cartBtn={true}
+      />
+    ) : (
+      false
+    )
 
   const displaySignUpComponent = () =>
     signup ? <SignupButtonComponent /> : false
@@ -46,9 +59,7 @@ const HeaderComponent = ({
         title={'My locool'}
         openOption={'left'}
         greeting={true}
-        buttonList={['Profile', 'Orders', 'Refunds', 'Farms']}
-        cartComponent={false}
-        cartBtn={false}
+        buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
       />
     ) : (
       false
@@ -68,6 +79,10 @@ const HeaderComponent = ({
             <MenuIcon />
           </IconButton>
         }
+        title={'My locool'}
+        openOption={'left'}
+        greeting={true}
+        buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
       />
     ) : (
       false

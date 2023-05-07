@@ -1,24 +1,22 @@
 import React from 'react'
 import './DrawerCartButton.css'
-import { Button } from '@mui/base'
-import { mainTheme } from '../../themes/mainTheme'
-import { Link } from '@mui/material'
-import DrawerButtonComponent from '../DrawerButton/DrawerButtonComponent'
+import { Link } from 'react-router-dom'
 import ButtonComponent from '../Button/ButtonComponent'
-import { useNavigate } from 'react-router'
+import { Box } from '@mui/system'
 
 const DrawerCartButton = ({ cartBtn }) => {
   if (cartBtn)
     return (
-      <Link to="/app/cart">
-        <ButtonComponent
-          text={'Cart details'}
-          textColour='primary'
-          bgColour="green"
-          padding={0}
-          margin={0}
-        />
-      </Link>
+      <Box sx={{m:2}}>
+        <Link to="/app/cart">
+          <ButtonComponent
+            text={'Cart details'}
+            textColour="primary"
+            bgColour="green"
+            padding={0}
+          />
+        </Link>
+      </Box>
     )
 }
 

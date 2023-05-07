@@ -9,7 +9,7 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import { Link } from 'react-router-dom'
 
-const DrawerButtonComponent = ({ text, handleDrawerToggle }) => {
+const DrawerButtonComponent = ({ text, handleDrawerToggle, align }) => {
   return (
     <ListItem disablePadding>
       <ListItemButton onClick={handleDrawerToggle}>
@@ -18,6 +18,7 @@ const DrawerButtonComponent = ({ text, handleDrawerToggle }) => {
             sx={{
               color: mainTheme.palette.primary.main,
               fontSize: '1.1rem',
+              textAlign: align ? align : 'left'
             }}
           >
             {text}

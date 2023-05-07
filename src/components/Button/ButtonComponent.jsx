@@ -2,7 +2,7 @@ import React from 'react'
 import './ButtonComponent.css'
 
 import { mainTheme } from '../../themes/mainTheme'
-import { darken } from '@mui/system'
+import { Box, darken } from '@mui/system'
 import { Button, Typography } from '@mui/material'
 
 const ButtonComponent = ({ text, textColour, bgColour, padding, margin,width,minWidth, fx }) => {
@@ -24,6 +24,7 @@ const ButtonComponent = ({ text, textColour, bgColour, padding, margin,width,min
         },
       }}
     > {text}</Button>
+
   )
 }
 
