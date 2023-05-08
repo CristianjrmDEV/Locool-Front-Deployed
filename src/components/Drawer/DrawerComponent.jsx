@@ -8,6 +8,7 @@ import DrawerButtonListComponent from '../DrawerButtonList/DrawerButtonListCompo
 import DrawerGreeting from '../DrawerGreeting/DrawerGreeting'
 import DrawerCartButton from '../DrawerCartButton/DrawerCartButton'
 import CartComponent from '../Cart/CartComponent'
+import PropTypes from 'prop-types'
 
 const DrawerComponent = ({
   clickable,
@@ -21,6 +22,19 @@ const DrawerComponent = ({
   cartComponent,
   align,
 }) => {
+    DrawerComponent.propTypes = {
+      clickable: PropTypes.object,
+      openOption: PropTypes.string,
+      width: PropTypes.string,
+      title: PropTypes.string,
+      titleTopPadding: PropTypes.number,
+      buttonList: PropTypes.array,
+      greeting: PropTypes.bool,
+      cartBtn: PropTypes.bool,
+      cartComponent: PropTypes.bool,
+      align: PropTypes.string,
+    }
+    
   const drawerWidth = width ? width : 240
 
   const [mobileOpen, setMobileOpen] = React.useState(false)

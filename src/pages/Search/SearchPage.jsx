@@ -7,6 +7,7 @@ import { ProductsContext } from '../../contexts/product'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import FarmSearchListComponent from '../../components/FarmSearchList/FarmSearchListComponent'
+import SearchMapComponent from '../../components/SearchMap/SearchMapComponent'
 
 const SearchPage = () => {
   const GLOBAL_Product = useContext(ProductsContext)
@@ -25,8 +26,11 @@ const SearchPage = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{
+      width: '100%'
+    }}>
       <PageTitleComponent title={'Search results'} />
+      <SearchMapComponent />
       <Box>{displayProducts()}</Box>
       <Box>{displayFarms()}</Box>
     </Box>

@@ -85,7 +85,7 @@ export default function App() {
    <MapContainer center={[28.14144, -15.43001]} zoom={18}>
       {/* OPEN STREEN MAPS TILES */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstretmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LocationMarker/>
