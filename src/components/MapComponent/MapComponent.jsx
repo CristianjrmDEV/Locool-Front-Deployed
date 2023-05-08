@@ -3,7 +3,6 @@ import "./MapComponent.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import useGeoLocation from "../../hooks/useGeoLocation";
 import {getAllFarms} from "../../services/farmService"
 
 import { Icon, divIcon, point } from "leaflet";
