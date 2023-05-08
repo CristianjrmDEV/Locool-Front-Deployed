@@ -1,5 +1,4 @@
 import React from 'react'
-import './ProductCardComponent.css'
 import {
   Box,
   Button,
@@ -12,31 +11,16 @@ import {
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 
-const ProductCardComponent = ({ product }) => {
-  const addProductToCart = () => {
-    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)))
-    console.log("Carrito" ,cartMap)
-    console.log("Item", product)
-    if(!cartMap.has(product.id)){
-      cartMap.set(product.id, {
-        "id": product.id,
-        "name": product.name,
-        "farmName": product.farmName,
-        "price": product.price,
-        "quantity": 1
+const ProductCartComponent = ({ product, removeFromCart }) => {
 
-      })
-    } else {
-      cartMap.get(product.id)["quantity"]++
+    const handleRemoveFromCart = () => {
+        removeFromCart(product.id);
     }
-    console.log(cartMap)
-    localStorage.setItem(`cart-${localStorage.getItem('locoolUsername')}`, JSON.stringify([...cartMap]))
-  }
 
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 600,
         backgroundColor: mainTheme.palette.secondary.main,
         m: 2,
       }}
@@ -46,7 +30,7 @@ const ProductCardComponent = ({ product }) => {
           component="img"
           height="140"
           image={product.img}
-          alt=""
+          alt="Imagen de un producto"
         />
         <CardContent>
           <Typography
@@ -61,13 +45,13 @@ const ProductCardComponent = ({ product }) => {
             variant="body2"
             color="text.primary"
           >
-            Price: {product.price} €
+            {product.price} € / kg
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Stock: {product.stock}
+            Quantity: {product.quantity} kg<keygen />
           </Typography>
           <Typography
             variant="body2"
@@ -79,7 +63,7 @@ const ProductCardComponent = ({ product }) => {
             variant="body2"
             color="text.primary"
           >
-            Farm address: {product.farmAddress}
+            Total: {product.quantity * product.price} €
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -87,15 +71,15 @@ const ProductCardComponent = ({ product }) => {
         <Button
           fullWidth={true}
           size="small"
-          color="primary"
-          sx={{ backgroundColor: mainTheme.palette.green.main }}
-          onClick={addProductToCart}
+          color="red"
+          sx={{ backgroundColor: mainTheme.palette.secondary.main }}
+          onClick={handleRemoveFromCart}
         >
-          Add to Cart
+          Remove from cart
         </Button>
       </CardActions>
     </Card>
   )
 }
 
-export default ProductCardComponent
+export default ProductCartComponent
