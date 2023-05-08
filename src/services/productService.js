@@ -1,47 +1,32 @@
 import api from './config/'
 import { getAllFarms, getAllProductsByFarmId } from './farmService'
 
-const getProducts = async () => {
-  const { data } = await api.get('/products')
-  console.log('get products from service: ', data)
-  return data
-}
-
-const getPricedProducts = async () => {
-  const farmsId = await getAllFarms()
-  const productsId = await getProducts()
-  const farmProducts = []
-  let arrayOfFarmProducts = null
-
-  farmsId.map((farm) => {
-    farmProducts.push(getAllProductsByFarmId(farm.id))
-  })
-  arrayOfFarmProducts = Promise.all(farmProducts).then((arr) =>
-    arr.map((el) => el[0].farm_product)
-  )
-
-  const productPricedNamed = await arrayOfFarmProducts
+const getProducts = async (query) => {
+  const { data } = await api.get('/products', {params: {
+    name: query
+  }})
+  // console.log('get products from service: ', data)
 
   const mappedResult = []
 
-  productPricedNamed.map((obj) => {
-    const productIdentified = productsId.filter(el => el.id === obj.productId)
-    const farmIdentified = farmsId.filter((el) => el.id === obj.farmId)
-    const objMod = {
-      id: obj.id,
-      name: productIdentified[0].name,
-      price: obj.price,
-      stock: obj.stock,
-      img: productIdentified[0].img_url,
-      farmName: farmIdentified[0].name,
-      farmAddress: farmIdentified[0].address,
-      latitude: farmIdentified[0].latitude,
-      longitude: farmIdentified[0].longitude,
+  data.map((obj, idx) => {
+    console.log(obj.farms, idx)
+
+    for (let i = 0; i < obj.farms.length; i++) {
+      const objMod = {
+        id: obj.productId,
+        name: obj.productName,
+        img: obj.productImageUrl,
+        farm: obj.farms[i]
+      }
+      mappedResult.push(objMod)
     }
-    mappedResult.push(objMod)
   })
-  // console.log(mappedResult)
+
+  // console.log('mapped results: ', mappedResult)
+
   return mappedResult
 }
 
-export { getProducts, getPricedProducts }
+export { getProducts }
+

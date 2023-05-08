@@ -11,20 +11,22 @@ import {
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import { capitalise } from '../../services/toolkit'
 
 const ProductCardComponent = ({ product }) => {
+    // console.log('Item', product)
+
   const addProductToCart = () => {
     const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)))
     console.log("Carrito" ,cartMap)
     console.log("Item", product)
     if(!cartMap.has(product.id)){
       cartMap.set(product.id, {
-        "id": product.id,
-        "name": product.name,
-        "farmName": product.farmName,
-        "price": product.price,
-        "quantity": 1
-
+        id: product.id,
+        name: product.name,
+        farmName: product.farm.farmName,
+        price: product.farm.farm_product.price,
+        quantity: 1,
       })
     } else {
       cartMap.get(product.id)["quantity"]++
@@ -54,32 +56,37 @@ const ProductCardComponent = ({ product }) => {
             variant="h5"
             component="div"
           >
-            {product.name.slice(0, 1).toUpperCase() +
-              product.name.slice(1).toLowerCase()}
+            {capitalise(product.name)}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Price: {product.price} €
+            Price: {product.farm.farm_product.price} €
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Stock: {product.stock}
+            Stock: {product.farm.farm_product.stock}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Farm: {product.farmName}
+            Farm: {product.farm.farmName}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Farm address: {product.farmAddress}
+            Latitude: {product.farm.latitude}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.primary"
+          >
+            Longitude: {product.farm.longitude}
           </Typography>
         </CardContent>
       </CardActionArea>

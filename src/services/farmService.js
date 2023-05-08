@@ -1,8 +1,12 @@
 import api from './config/'
 
-const getAllFarms = async () => {
+const getAllFarms = async (query) => {
   // console.log('before retrieveing data')
-  const { data } = await api.get('/farms')
+  const { data } = await api.get('/farms', {
+    params: {
+      name: query
+    }
+  })
   console.log('request result:', data)
   return data
 }

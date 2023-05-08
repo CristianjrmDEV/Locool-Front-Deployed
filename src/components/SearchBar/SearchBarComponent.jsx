@@ -31,20 +31,14 @@ const SearchBarComponent = () => {
   }
 
   const handleProductSearch = async () => {
-    const result = await getProducts()
-    const productSearch = result.filter((el) =>
-      el.name.toLowerCase().includes(query)
-    )
-    GLOBAL_Product.set(productSearch)
+    const result = await getProducts(query)
+    GLOBAL_Product.set(result)
     goTo('/app/search')
   }
 
   const handleFarmSearch = async () => {
-    const result = await getAllFarms()
-    const farmSearch = result.filter((el) =>
-      el.name.toLowerCase().includes(query)
-    )
-    GLOBAL_Farm.set(farmSearch)
+    const result = await getAllFarms(query)
+    GLOBAL_Farm.set(result)
     goTo('/app/search')
   }
 

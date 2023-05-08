@@ -8,9 +8,10 @@ const ProductListComponent = ({products}) => {
       ProductListComponent.propTypes = {
         products: PropTypes.array.isRequired,
       }
+      console.log('from page search: ', products.get)
   return (
     <>
-      <Typography variant="h6">Farms</Typography>
+      <Typography variant="h6">Products</Typography>
       <Box
         sx={{
           display: 'grid',
@@ -22,11 +23,11 @@ const ProductListComponent = ({products}) => {
           },
         }}
       >
-        {products.get.map((farm, idx) => {
+        {products.get.map((product, idx) => {
           return (
             <ProductCardComponent
               key={idx}
-              farm={farm}
+              product={product}
             />
           )
         })}
