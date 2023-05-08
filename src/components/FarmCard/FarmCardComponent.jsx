@@ -2,13 +2,27 @@ import React from 'react'
 import './FarmCardComponent.css'
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
-import { capitalise } from '../../services/toolkit'
+import { capitalise, getFullMame } from '../../services/toolkit'
 import PropTypes from 'prop-types'
+import ButtonComponent from '../Button/ButtonComponent'
 
 
 const FarmCardComponent = ({farm}) => {
     FarmCardComponent.propTypes = {
       farm: PropTypes.object.isRequired,
+    }
+
+    const getOwner = (farm) => {
+      const name = farm.user.first_name
+      const surname = farm.user.last_name
+      const username = farm.user.username
+      if (name.length > 0 && username.length > 0) {
+        return getFullMame(name, surname)
+      } 
+      if (name.length > 0 || surname.length > 0) {
+        return name.length > 0 ? capitalise(name) : capitalise(surname)
+      }
+      return capitalise(username)
     }
 
   return (
@@ -62,7 +76,7 @@ const FarmCardComponent = ({farm}) => {
             variant="body2"
             color="text.primary"
           >
-            Owner: {farm.userId}
+            Owner: {getOwner(farm)}
           </Typography>
           <Typography
             variant="body2"
@@ -79,14 +93,7 @@ const FarmCardComponent = ({farm}) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          fullWidth={true}
-          size="small"
-          color="primary"
-          sx={{ backgroundColor: mainTheme.palette.green.main }}
-        >
-          See farm
-        </Button>
+        <ButtonComponent text='See farm'/>
       </CardActions>
     </Card>
   )

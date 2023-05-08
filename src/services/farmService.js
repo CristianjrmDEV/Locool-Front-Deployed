@@ -22,10 +22,4 @@ const getFarms = async () => {
   return data
 }
 
-
-
-export {
-  getFarms,
-  getAllFarms,
-  getAllProductsByFarmId
-}
+export { getFarms, getAllFarms, getAllProductsByFarmId }

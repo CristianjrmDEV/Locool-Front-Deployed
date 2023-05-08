@@ -5,15 +5,15 @@ const login = async (body) => {
   try {
     console.log('Connecting...')
     const { data } = await api.post('/auth/login', body)
-    localStorage.setItem('token', data.token)
+    localStorage.setItem('locoolToken', data.token)
     console.log('Welcome to Locool')
     const profile = await getUserProfile()
-    localStorage.setItem('username', profile.user.username)
+    localStorage.setItem('locoolUsername', profile.user.username)
     if(!localStorage.getItem(`cart-${profile.user.username}`)){
       localStorage.setItem(`cart-${profile.user.username}`, JSON.stringify([...new Map()]))
     }
 
-    console.log(`Hello ${localStorage.getItem('username')}`)
+    console.log(`Hello ${localStorage.getItem('locoolUsername')}`)
 
     return 200
   } catch (error) {
@@ -41,9 +41,9 @@ const findUserByUsername = async(username) => {
 
 const logout = () => {
   try {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token')
-      localStorage.removeItem('username')
+    if (localStorage.getItem('locoolToken')) {
+      localStorage.removeItem('locoolToken')
+      localStorage.removeItem('locoolUsername')
       return 200
     }
   } catch (error) {

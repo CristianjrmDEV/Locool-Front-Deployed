@@ -12,7 +12,7 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import SearchIcon from '@mui/icons-material/Search'
 import WarehouseIcon from '@mui/icons-material/Warehouse'
-import { getPricedProducts } from '../../services/productService'
+import { getProducts } from '../../services/productService'
 import { getAllFarms } from '../../services/farmService'
 import { FarmsContext } from '../../contexts/farm'
 import { ProductsContext } from '../../contexts/product'
@@ -31,7 +31,7 @@ const SearchBarComponent = () => {
   }
 
   const handleProductSearch = async () => {
-    const result = await getPricedProducts()
+    const result = await getProducts()
     const productSearch = result.filter((el) =>
       el.name.toLowerCase().includes(query)
     )

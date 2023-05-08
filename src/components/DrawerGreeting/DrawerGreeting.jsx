@@ -5,10 +5,10 @@ import { mainTheme } from '../../themes/mainTheme'
 
 const DrawerGreeting = ({ greeting }) => {
   const displayUsername = () =>
-    localStorage.getItem('username')
+    localStorage.getItem('locoolUsername')
       ? `Hello  ${
-          localStorage.getItem('username').slice(0, 1).toUpperCase() +
-          localStorage.getItem('username').slice(1)
+          localStorage.getItem('locoolUsername').slice(0, 1).toUpperCase() +
+          localStorage.getItem('locoolUsername').slice(1)
         }`
       : ''
   if (greeting) {

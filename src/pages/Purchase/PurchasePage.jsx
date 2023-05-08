@@ -12,7 +12,7 @@ const PurchasePage = () => {
 
   const getUserPurchases = async () => {
     const result = await getPurchasesByUsername(
-      localStorage.getItem('username')
+      localStorage.getItem('locoolUsername')
     )
     setPurchases(result)
     console.log(result)

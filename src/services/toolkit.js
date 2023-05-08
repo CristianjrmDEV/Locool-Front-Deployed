@@ -6,4 +6,7 @@ const capitalise = (sth) => {
     .replaceAll(',', ' ')
 }
 
-export { capitalise }
+const getFullMame = (name='', surname='') => {
+  return `${capitalise(name)} ${capitalise(surname)}`
+}
+export { capitalise, getFullMame }

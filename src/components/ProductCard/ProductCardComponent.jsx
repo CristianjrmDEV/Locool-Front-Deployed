@@ -14,7 +14,7 @@ import { mainTheme } from '../../themes/mainTheme'
 
 const ProductCardComponent = ({ product }) => {
   const addProductToCart = () => {
-    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('username')}`)))
+    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)))
     console.log("Carrito" ,cartMap)
     console.log("Item", product.id)
     if(!cartMap.has(product.id)){
@@ -23,7 +23,7 @@ const ProductCardComponent = ({ product }) => {
       cartMap.set(product.id, cartMap.get(product.id)+1)
     }
     console.log(cartMap)
-    localStorage.setItem(`cart-${localStorage.getItem('username')}`, JSON.stringify([...cartMap]))
+    localStorage.setItem(`cart-${localStorage.getItem('locoolUsername')}`, JSON.stringify([...cartMap]))
   }
 
   return (
