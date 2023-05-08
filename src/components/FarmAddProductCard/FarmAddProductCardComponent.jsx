@@ -6,6 +6,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import { addProductToFarm } from '../../services/userService'
 import { FarmsContext } from '../../contexts/farm'
 import { getAllProducts } from '../../services/userService'
+import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 
 const FarmAddProductCardComponent = (props) => {
 
@@ -70,14 +71,15 @@ const FarmAddProductCardComponent = (props) => {
             </MenuItem>
           ))}
         </Select>
-        <TextField 
+        {/* <TextField 
           onChange={(e) => setImgSelected(e.target.value)}
           label="Image" 
           variant="outlined" 
           fullWidth={true}
           InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
           sx={{ marginBottom: '20px' }}
-        />
+        /> */}
+        <UploadWidgetComponent/>
         <TextField 
           onChange={(e) => setProductStock(e.target.value)}
           label="Product stock" 
