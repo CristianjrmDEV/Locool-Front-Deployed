@@ -42,6 +42,7 @@ const FarmEditProductCardComponent = (props) => {
     return (
         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
             <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', maxHeight: '100%' }} image={`https://s1.1zoom.me/b4851/409/Carrots_Closeup_Wood_planks_527961_1920x1080.jpg`} title='FarmProduct' />
+            {/* <UploadWidgetComponent /> */}
             <CardContent>
                 <TextField
                     onChange={(e) => setProductName(e.target.value)}

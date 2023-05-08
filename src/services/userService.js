@@ -1,5 +1,14 @@
 import api from './config'
 
+const getAllProducts = async () => {
+  try {
+    const {data} = await api.get('/products')
+    return data
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const getUserProfile = async () => {
   try {
     const { data } = await api.get('/users/my-profile', {  // check with endpoint
@@ -100,5 +109,6 @@ export {
   deleteFarm,
   addProductToFarm,
   updateProductOfFarm,
-  deleteProductOfFarm
+  deleteProductOfFarm,
+  getAllProducts
 }

@@ -6,6 +6,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import { getAllProductsByFarmId } from '../../services/farmService'
 import { FarmsContext } from '../../contexts/farm'
 import { deleteProductOfFarm } from '../../services/userService'
+import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 
 const FarmSeeProductsCardComponent = (props) => {
 
@@ -53,6 +54,7 @@ const FarmSeeProductsCardComponent = (props) => {
                     alt="MyFarmImage"
                     sx={{ objectFit: "fill", height: "100%" }}
                 />
+                <UploadWidgetComponent/>
                 <Typography
                     variant="h3"
                     component="div"
