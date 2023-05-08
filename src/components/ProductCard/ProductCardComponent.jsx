@@ -12,27 +12,38 @@ import {
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import { capitalise } from '../../services/toolkit'
+import PropTypes from 'prop-types'
 
 const ProductCardComponent = ({ product }) => {
-    // console.log('Item', product)
+  // console.log('Item', product)
+  ProductCardComponent.propTypes = {
+    product: PropTypes.object.isRequired,
+  }
 
   const addProductToCart = () => {
-    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)))
-    console.log("Carrito" ,cartMap)
-    console.log("Item", product)
-    if(!cartMap.has(product.id)){
+    const cartMap = new Map(
+      JSON.parse(
+        localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
+      )
+    )
+    console.log('Carrito', cartMap)
+    console.log('Item', product)
+    if (!cartMap.has(product.id)) {
       cartMap.set(product.id, {
         id: product.id,
         name: product.name,
-        farmName: product.farm.farmName,
-        price: product.farm.farm_product.price,
+        farmName: product.farmName,
+        price: product.price,
         quantity: 1,
       })
     } else {
-      cartMap.get(product.id)["quantity"]++
+      cartMap.get(product.id)['quantity']++
     }
     console.log(cartMap)
-    localStorage.setItem(`cart-${localStorage.getItem('locoolUsername')}`, JSON.stringify([...cartMap]))
+    localStorage.setItem(
+      `cart-${localStorage.getItem('locoolUsername')}`,
+      JSON.stringify([...cartMap])
+    )
   }
 
   return (
@@ -62,31 +73,31 @@ const ProductCardComponent = ({ product }) => {
             variant="body2"
             color="text.primary"
           >
-            Price: {product.farm.farm_product.price} €
+            Price: {product.price} €
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Stock: {product.farm.farm_product.stock}
+            Stock: {product.stock}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Farm: {product.farm.farmName}
+            Farm: {product.farmName}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Latitude: {product.farm.latitude}
+            Latitude: {product.lat}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Longitude: {product.farm.longitude}
+            Longitude: {product.lon}
           </Typography>
         </CardContent>
       </CardActionArea>

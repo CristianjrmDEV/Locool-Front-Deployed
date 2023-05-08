@@ -8,8 +8,9 @@ import PropTypes from 'prop-types'
 
 const DrawerButtonListComponent = ({ list, handleDrawer, align }) => {
   DrawerButtonListComponent.propTypes = {
-    list: PropTypes.array.isRequired,
+    list: PropTypes.array,
     handleDrawer: PropTypes.func.isRequired,
+    align: PropTypes.string,
   }
 
   return (

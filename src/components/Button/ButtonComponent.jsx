@@ -18,13 +18,13 @@ const ButtonComponent = ({
 }) => {
   ButtonComponent.propTypes = {
     text: PropTypes.string.isRequired,
-    textColour: PropTypes.string.isRequired,
-    bgColour: PropTypes.string.isRequired,
-    padding: PropTypes.number.isRequired,
-    margin: PropTypes.number.isRequired,
-    width: PropTypes.string.isRequired,
-    minWidth: PropTypes.string.isRequired,
-    fx: PropTypes.func.isRequired,
+    textColour: PropTypes.string,
+    bgColour: PropTypes.string,
+    padding: PropTypes.number,
+    margin: PropTypes.number,
+    width: PropTypes.string,
+    minWidth: PropTypes.string,
+    fx: PropTypes.func,
   }
 
   return (
