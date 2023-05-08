@@ -13,16 +13,20 @@ const FarmCardComponent = ({farm}) => {
     }
 
     const getOwner = (farm) => {
-      const name = farm.user.first_name
-      const surname = farm.user.last_name
-      const username = farm.user.username
-      if (name.length > 0 && username.length > 0) {
-        return getFullMame(name, surname)
-      } 
-      if (name.length > 0 || surname.length > 0) {
-        return name.length > 0 ? capitalise(name) : capitalise(surname)
+      if (farm.user !== null) {
+        const name = farm.user.first_name === null ? '' : farm.user.first_name 
+        const surname = farm.user.last_name === null ? '' : farm.user.last_name 
+        const username = farm.user.username
+        if (name.length > 0 && username.length > 0) {
+          return getFullMame(name, surname)
+        } 
+        if (name.length > 0 || surname.length > 0) {
+          return name.length > 0 ? capitalise(name) : capitalise(surname)
+        }
+        return capitalise(username)
+      } else {
+        return 'Unknown'
       }
-      return capitalise(username)
     }
 
   return (
