@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Box,
   Button,
@@ -12,10 +12,13 @@ import {
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import ProductCartComponent from '../ProductCart/ProductCartComponent'
+import { CartContext } from '../../contexts/cart'
 
 const ShoppingCartComponent = () => {
   const [cart, setCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
+  const GLOBAL_Cart = useContext(CartContext)
+  // console.log('from shopping cart component: ', GLOBAL_Cart)
 
   useEffect(() => {
     const cartMap = new Map(
@@ -27,7 +30,7 @@ const ShoppingCartComponent = () => {
     const cartArray = [...cartMap.values()] // Convert iterator to array
     setCart(cartArray)
     calculateTotal(cartArray)
-  }, [])
+  }, [GLOBAL_Cart.get])
 
   const calculateTotal = (cartArray) => {
     const totalAmount = cartArray.reduce(

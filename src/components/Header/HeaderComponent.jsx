@@ -19,6 +19,7 @@ import SignupButtonComponent from '../SignupButton/SignupButtonComponent'
 import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import SearchBarComponent from '../SearchBar/SearchBarComponent'
+import PropTypes from 'prop-types'
 
 const HeaderComponent = ({
   menu,
@@ -29,6 +30,16 @@ const HeaderComponent = ({
   mylocool,
   search,
 }) => {
+
+  HeaderComponent.propTypes = {
+    menu: PropTypes.bool,
+    login: PropTypes.bool,
+    signup: PropTypes.bool,
+    cart: PropTypes.bool,
+    logout: PropTypes.bool,
+    mylocool: PropTypes.bool,
+    search: PropTypes.bool,
+  }
 
   const displayCartComponent = () =>
     cart ? (
