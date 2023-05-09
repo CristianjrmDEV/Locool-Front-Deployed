@@ -7,7 +7,7 @@ const lookForFarms = async (query) => {
       name: query
     }
   })
-  console.log('request result:', data)
+  console.log('lookForFarms result:', data)
   return data
 }
 
