@@ -11,20 +11,23 @@ const FarmEditProductCardComponent = (props) => {
 
     const {editProductData} = useContext(FarmPageContext)
     console.log(editProductData)
-    const [productName, setProductName] = useState('')
+    // const [productName, setProductName] = useState('')
+    const [productID, setProductID] = useState(0)
     const [productStock, setProductStock] = useState(0)
     const [productPrice, setProductPrice] = useState(0)
     const [image,setImage] = useState('')
 
     const productData = {
-        name: productName,
+        productId: productID,
+        // name: productName,
         stock: productStock,
         price: productPrice,
         image_url: image
     }
 
     const setDefaultValues = () => {
-        setProductName(editProductData.name)
+        setProductID(editProductData.productid)
+        // setProductName(editProductData.name)
         setProductStock(editProductData.stock)
         setProductPrice(editProductData.price)
         setImage(editProductData.img)
@@ -32,7 +35,8 @@ const FarmEditProductCardComponent = (props) => {
 
     const onSaveChangesClick = async() => {
         console.log('clicked')
-        const result = updateProductOfFarm(localStorage.username,farmId,productId,productData)
+        const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
+        console.log(result)
     }
 
     const onCancelClick = () => {
@@ -53,7 +57,7 @@ const FarmEditProductCardComponent = (props) => {
                     label="Name"
                     variant="outlined"
                     fullWidth={true}
-                    value={productName}
+                    // value={productName}
                     InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
                     InputLabelProps={{ shrink: true }}
                     sx={{ marginBottom: '20px' }}

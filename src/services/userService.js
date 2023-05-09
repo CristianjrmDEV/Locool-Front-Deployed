@@ -64,7 +64,7 @@ const updateFarm = async (username,farmId,farmData) => {
 }
 
 const updateProductOfFarm = async (username,farmId,productId,productData) => {
-  const {data} = await api.put(`/${username}/farms/${farmId}/products/${productId}`,productData,{
+  const {data} = await api.put(`/users/${username}/farms/${farmId}/products/${productId}`,productData,{
     headers: {
       token: localStorage.getItem('token'),
     },

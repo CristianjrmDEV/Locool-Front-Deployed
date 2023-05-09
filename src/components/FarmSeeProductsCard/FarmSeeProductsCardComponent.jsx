@@ -27,11 +27,13 @@ const FarmSeeProductsCardComponent = (props) => {
     const onEditClick = (data) => {
         setEditProductData(
             {
-            name: data.name,
-            stock: data.stock,
-            price: data.price,
-            img: data.img
-        }
+                farmId: data.farmId,
+                productid: data.productid,
+                name: data.name,
+                stock: data.stock,
+                price: data.price,
+                img: data.img
+            }
         )
         props.handleComponent('FarmEditProductCardComponent')
     }
@@ -98,7 +100,7 @@ const FarmSeeProductsCardComponent = (props) => {
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex' }}>
-                                            <ButtonComponent text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
+                                            <ButtonComponent text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({farmId: product.farm_product.farmId,productid: product.farm_product.productId,name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
                                             <ButtonComponent text='Remove' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={()=>onRemoveClick({productId: product.id, farmId: product.farm_product.farmId})} />
                                         </Box>
                                     </CardContent>
