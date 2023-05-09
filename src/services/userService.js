@@ -95,6 +95,15 @@ const addProductToFarm = async(username,farmId,productData) => {
   return data
 }
 
+const createPurchase = async(username, cart) => {
+  const {data} = await api.post(`/users/${username}/purchase`, cart, {
+    headers: {
+      token: localStorage.getItem('locoolToken')
+    }
+  } )
+  return data
+}
+
 export { 
   getUserProfile,
   findUserByUsername,
@@ -105,5 +114,6 @@ export {
   deleteFarm,
   addProductToFarm,
   updateProductOfFarm,
-  deleteProductOfFarm
+  deleteProductOfFarm,
+  createPurchase
 }

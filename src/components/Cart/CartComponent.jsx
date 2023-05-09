@@ -1,10 +1,10 @@
 import React from 'react'
 import './CartComponent.css'
+import ShoppingCartComponent from '../ShoppingCart/ShoppingCartComponent'
 
-const CartComponent = ({ cartComponent }) => {
-  if (cartComponent)
+const CartComponent = () => {
     return (
-        <>Cart Component goes here</>
+        <><ShoppingCartComponent/></>
     )
 }
 
