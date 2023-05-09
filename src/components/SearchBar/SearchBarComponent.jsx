@@ -33,13 +33,13 @@ const SearchBarComponent = () => {
   const handleProductSearch = async () => {
     const result = await lookForProducts(query)
     GLOBAL_Product.set(result)
-    goTo('/app/search')
+    goTo('/app')
   }
 
   const handleFarmSearch = async () => {
     const result = await lookForFarms(query)
     GLOBAL_Farm.set(result)
-    goTo('/app/search')
+    goTo('/app')
   }
 
   return (

@@ -1,15 +1,20 @@
 import React from 'react'
 import './AppPage.css'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
-import BasicMap from '../../components/MapComponent/MapComponent'
+import MapComponent from '../../components/Map/MapComponent'
+import { Box } from '@mui/material'
 
 const AppPage = () => {
 
   return (
-    <>
-      <BasicMap/>
-      <PageTitleComponent title={'App page'} />
-    </>
+    <Box
+      sx={{
+        width: '100%',
+      }}
+    >
+      {/* <PageTitleComponent title={'App page'} /> */}
+      <MapComponent />
+    </Box>
   )
 }
 

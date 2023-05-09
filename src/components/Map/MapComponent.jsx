@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import './SearchMapComponent.css'
+import './MapComponent.css'
 import 'leaflet/dist/leaflet.css'
 import {
   MapContainer,
@@ -20,7 +20,7 @@ import FarmCardComponent from '../FarmCard/FarmCardComponent'
 import symbol from './../../assets/logo/logo-symbol.svg'
 import farmSymbol from './../../assets/icons/farm-icon.svg'
 
-const SearchMapComponent = () => {
+const MapComponent = () => {
   const GLOBAL_Product = useContext(ProductsContext)
   const GLOBAL_Farm = useContext(FarmsContext)
 
@@ -102,23 +102,30 @@ const SearchMapComponent = () => {
   }
 
   return (
-    <MapContainer
-      center={[27.956918575017003, -15.6050452586645]}
-      zoom={10}
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%'
+      }}
     >
-      {/* OPEN STREEN MAPS TILES */}
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
-        // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
-        // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-      />
-      <LocationMarker />
-      {displayProducts()}
-      {displayFarms()}
-    </MapContainer>
+      <MapContainer
+        center={[27.956918575017003, -15.6050452586645]}
+        zoom={10}
+      >
+        {/* OPEN STREEN MAPS TILES */}
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          // url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+          url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
+          // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        />
+        <LocationMarker />
+        {displayProducts()}
+        {displayFarms()}
+      </MapContainer>
+    </Box>
   )
 }
 
-export default SearchMapComponent
+export default MapComponent
