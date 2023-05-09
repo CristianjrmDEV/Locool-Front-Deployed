@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import ButtonComponent from '../Button/ButtonComponent'
 
 const ProductCartComponent = ({ product, removeFromCart }) => {
 
@@ -51,7 +52,8 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             variant="body2"
             color="text.primary"
           >
-            Quantity: {product.quantity} kg<keygen />
+            Quantity: {product.quantity} kg
+            <keygen />
           </Typography>
           <Typography
             variant="body2"
@@ -68,7 +70,7 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
+        {/* <Button
           fullWidth={true}
           size="small"
           color="red"
@@ -76,7 +78,11 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
           onClick={handleRemoveFromCart}
         >
           Remove from cart
-        </Button>
+        </Button> */}
+        <ButtonComponent
+          text="Remove"
+          fx={handleRemoveFromCart}
+        />
       </CardActions>
     </Card>
   )

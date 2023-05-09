@@ -71,6 +71,7 @@ const HeaderComponent = ({
         openOption={'left'}
         greeting={true}
         buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
+        cartComponent={false}
       />
     ) : (
       false

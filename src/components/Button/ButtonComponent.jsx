@@ -16,6 +16,7 @@ const ButtonComponent = ({
   minWidth,
   fx,
 }) => {
+  
   ButtonComponent.propTypes = {
     text: PropTypes.string.isRequired,
     textColour: PropTypes.string,

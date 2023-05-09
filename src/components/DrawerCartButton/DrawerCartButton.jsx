@@ -13,7 +13,6 @@ const DrawerCartButton = ({ cartBtn }) => {
             text={'Cart details'}
             textColour="primary"
             bgColour="green"
-            padding={0}
           />
         </Link>
       </Box>

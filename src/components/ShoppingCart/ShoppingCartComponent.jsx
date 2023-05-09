@@ -13,12 +13,13 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import ProductCartComponent from '../ProductCart/ProductCartComponent'
 import { CartContext } from '../../contexts/cart'
+import ButtonComponent from '../Button/ButtonComponent'
+import { Link } from 'react-router-dom'
 
 const ShoppingCartComponent = () => {
   const [cart, setCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const GLOBAL_Cart = useContext(CartContext)
-  // console.log('from shopping cart component: ', GLOBAL_Cart)
 
   useEffect(() => {
     const cartMap = new Map(
@@ -88,21 +89,20 @@ const ShoppingCartComponent = () => {
   }
 
   return (
-    <div>
-      {printCart()}
+    <Box>
       <Card>
-        <Button
-          fullWidth={true}
-          size="small"
-          color="red"
-          sx={{ backgroundColor: mainTheme.palette.secondary.main }}
-          onClick={emptyCart}
-        >
-          Empty cart
-        </Button>
-        <Typography>Total: {totalPrice + ' €'}</Typography>
+        <ButtonComponent
+          text={'Empty cart'}
+          bgColour={'red'}
+          margin={2}
+          width={'85%'}
+          fx={emptyCart}
+        />
+        <Box sx={{p:2}}>
+          <Typography>Total: {totalPrice + ' €'}</Typography>
+        </Box>
         <Divider />
-        <Button
+        {/* <Button
           fullWidth={true}
           size="small"
           color="white"
@@ -110,9 +110,19 @@ const ShoppingCartComponent = () => {
           href="/app/payment-method"
         >
           Proceed to pay
-        </Button>
+        </Button> */}
+        <Link to="/app/payment-method">
+          <ButtonComponent
+            text={'Proceed to pay'}
+            bgColour={'green'}
+            margin={2}
+            width={'85%'}
+            fx={emptyCart}
+          />
+        </Link>
       </Card>
-    </div>
+      {printCart()}
+    </Box>
   )
 }
 

@@ -51,7 +51,7 @@ const SearchMapComponent = () => {
     iconRetinaUrl: symbol,
     iconSize: [50, 70], // size of the icon
     shadowSize: [50, 64], // size of the shadow
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    iconAnchor: [22, 60], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
     popupAnchor: [-3, -76],
   })
@@ -61,7 +61,7 @@ const SearchMapComponent = () => {
     iconRetinaUrl: farmSymbol,
     iconSize: [50, 95], // size of the icon
     shadowSize: [50, 64], // size of the shadow
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
     popupAnchor: [-3, -76],
   })
@@ -111,7 +111,7 @@ const SearchMapComponent = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
-        // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png",
+        // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
         // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
       />
       <LocationMarker />

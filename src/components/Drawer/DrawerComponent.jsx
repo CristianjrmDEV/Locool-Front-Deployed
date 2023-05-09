@@ -22,19 +22,19 @@ const DrawerComponent = ({
   cartComponent,
   align,
 }) => {
-    DrawerComponent.propTypes = {
-      clickable: PropTypes.object,
-      openOption: PropTypes.string,
-      width: PropTypes.string,
-      title: PropTypes.string,
-      titleTopPadding: PropTypes.number,
-      buttonList: PropTypes.array,
-      greeting: PropTypes.bool,
-      cartBtn: PropTypes.bool,
-      cartComponent: PropTypes.bool,
-      align: PropTypes.string,
-    }
-    
+  DrawerComponent.propTypes = {
+    clickable: PropTypes.object,
+    openOption: PropTypes.string,
+    width: PropTypes.string,
+    title: PropTypes.string,
+    titleTopPadding: PropTypes.number,
+    buttonList: PropTypes.array,
+    greeting: PropTypes.bool,
+    cartBtn: PropTypes.bool,
+    cartComponent: PropTypes.bool,
+    align: PropTypes.string,
+  }
+
   const drawerWidth = width ? width : 240
 
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -58,8 +58,8 @@ const DrawerComponent = ({
           align={align}
         />
       </List>
-      <CartComponent cartComponent={cartComponent} />
-      <DrawerCartButton cartBtn={cartBtn} />
+        <DrawerCartButton cartBtn={cartBtn} />
+        <CartComponent cartComponent={cartComponent} />
     </Box>
   )
 
