@@ -14,12 +14,20 @@
     Typography,
     FormGroup,
     FormControlLabel,
-    Checkbox
+    Checkbox,
+    InputAdornment,
+    IconButton, 
+    Icon,
   } from '@mui/material'
+  import { VisibilityOff, Visibility, Lock } from '@mui/icons-material'
 
   const SignupComponent = () => {
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
+    const [showPasswordRepeat, setShowPasswordRepeat] = useState(false)
 
+    const handleClickShowPassword = () => setShowPassword((show) => !show)
+  
     const [users, setUsers] = useState([])
 
     const [email, setEmail] = useState('')
@@ -233,6 +241,27 @@
           />
           <Typography sx={{ color: '#F00' }}>{emailError}</Typography>
           <TextField
+            type={showPassword ? 'text' : 'password'}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment>
+                  <Icon>
+                    <Lock />
+                  </Icon>
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton
+                    onClick={() => {
+                      setShowPassword((oldState) => !oldState)
+                    }}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             required
             className="field-inputs"
             onChange={(e) => handleChangePassword(e)}
@@ -249,6 +278,7 @@
           />
           <Typography sx={{ color: '#F00' }}>{passwordError}</Typography>
           <TextField
+            type={showPasswordRepeat ? 'text' : 'password'}
             required
             className="field-inputs"
             onChange={(e) => handleChangePasswordRepeat(e)}
@@ -257,6 +287,26 @@
             label="Repeat Password"
             variant="outlined"
             fullWidth={true}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment>
+                  <Icon>
+                    <Lock />
+                  </Icon>
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton
+                    onClick={() => {
+                      setShowPasswordRepeat((oldState) => !oldState)
+                    }}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             sx={{
               borderRadius: '6px',
               marginBottom: '30px',
@@ -324,7 +374,11 @@
           }}
         />
         <Typography
-          sx={{ fontSize: '20px', textAlign: 'center', fontFamily: 'Quicksand' }}
+          sx={{
+            fontSize: '20px',
+            textAlign: 'center',
+            fontFamily: 'Quicksand',
+          }}
         >
           I already have an account
         </Typography>
