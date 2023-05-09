@@ -72,6 +72,7 @@ const HeaderComponent = ({
         greeting={true}
         buttonList={['Profile', 'Purchases', 'Refunds', 'Farms']}
         cartComponent={false}
+        greetingMessage={'Hello'}
       />
     ) : (
       false

@@ -5,10 +5,11 @@ import List from '@mui/material/List'
 import { mainTheme } from '../../themes/mainTheme'
 import DrawerTitleComponent from '../DrawerTitle/DrawerTitleComponent'
 import DrawerButtonListComponent from '../DrawerButtonList/DrawerButtonListComponent'
-import DrawerGreeting from '../DrawerGreeting/DrawerGreeting'
+import Greeting from '../Greeting/Greeting'
 import DrawerCartButton from '../DrawerCartButton/DrawerCartButton'
 import CartComponent from '../Cart/CartComponent'
 import PropTypes from 'prop-types'
+import { ListItem } from '@mui/material'
 
 const DrawerComponent = ({
   clickable,
@@ -21,6 +22,7 @@ const DrawerComponent = ({
   cartBtn,
   cartComponent,
   align,
+  greetingMessage
 }) => {
   DrawerComponent.propTypes = {
     clickable: PropTypes.object,
@@ -30,6 +32,7 @@ const DrawerComponent = ({
     titleTopPadding: PropTypes.number,
     buttonList: PropTypes.array,
     greeting: PropTypes.bool,
+    greetingMessage: PropTypes.string,
     cartBtn: PropTypes.bool,
     cartComponent: PropTypes.bool,
     align: PropTypes.string,
@@ -46,7 +49,15 @@ const DrawerComponent = ({
   const drawer = (
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
-        <DrawerGreeting greeting={greeting} />
+        <ListItem
+          sx={{ backgroundColor: mainTheme.palette.primary.main, pt: 6 }}
+        >
+          <Greeting
+            greeting={greeting}
+            message={greetingMessage}
+          />
+        </ListItem>
+
         <DrawerTitleComponent
           title={title}
           titleTopPadding={titleTopPadding}

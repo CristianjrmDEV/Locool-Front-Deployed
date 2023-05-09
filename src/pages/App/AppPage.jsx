@@ -3,6 +3,7 @@ import './AppPage.css'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import MapComponent from '../../components/Map/MapComponent'
 import { Box } from '@mui/material'
+import { PopupComponent } from '../../components/Popup/PopupComponent'
 
 const AppPage = () => {
 
@@ -12,7 +13,7 @@ const AppPage = () => {
         width: '100%',
       }}
     >
-      {/* <PageTitleComponent title={'App page'} /> */}
+      <PopupComponent />
       <MapComponent />
     </Box>
   )

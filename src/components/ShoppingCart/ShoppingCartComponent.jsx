@@ -32,7 +32,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
         localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
       )
     )
-    console.log(cartMap)
+    // console.log(cartMap)
     const cartArray = [...cartMap.values()] // Convert iterator to array
     setCart(cartArray)
     calculateTotal(cartArray)
@@ -81,7 +81,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
     for (let value of cart) {
       result.push(value)
     }
-    console.log('end result', result)
+    // console.log('end result', result)
     return result.map((obj) => {
       return (
         <ProductCartComponent

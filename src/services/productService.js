@@ -5,7 +5,7 @@ const lookForProducts = async (query) => {
   const { data } = await api.get('/products', {params: {
     name: query
   }})
-  console.log('get products from service: ', data)
+  // console.log('get products from service: ', data)
 
   const mappedResult = []
 
@@ -28,7 +28,7 @@ const lookForProducts = async (query) => {
     }
   })
 
-  console.log('mapped results: ', mappedResult)
+  // console.log('mapped results: ', mappedResult)
 
   return mappedResult
 }

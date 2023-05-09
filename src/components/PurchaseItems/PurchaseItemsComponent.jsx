@@ -15,7 +15,7 @@ import { capitalise } from '../../services/toolkit'
 
 const PurchaseItemsComponent = ({ cart }) => {
   PurchaseItemsComponent.propTypes = {
-    cart: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
   }
   return (
     <Accordion

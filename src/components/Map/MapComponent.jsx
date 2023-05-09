@@ -17,38 +17,19 @@ import { ProductsContext } from '../../contexts/product'
 import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
 import FarmCardComponent from '../FarmCard/FarmCardComponent'
-import symbol from './../../assets/logo/logo-symbol.svg'
+import logoSymbol from './../../assets/logo/logo-symbol.svg'
 import farmSymbol from './../../assets/icons/farm-icon.svg'
+import personSymbol from './../../assets/icons/person-icon.svg'
+import markerSymbol from './../../assets/icons/marker-icon.svg'
+
 
 const MapComponent = () => {
   const GLOBAL_Product = useContext(ProductsContext)
   const GLOBAL_Farm = useContext(FarmsContext)
 
-  const MyLocation = () => <Box>My location</Box>
-
-  const LocationMarker = () => {
-    const [position, setPosition] = useState(null)
-    const map = useMapEvents({
-      click() {
-        map.locate()
-      },
-      locationfound(e) {
-        setPosition(e.latlng)
-        map.flyTo(e.latlng, map.getZoom())
-      },
-    })
-
-    return position === null ? null : (
-      <Marker position={position}>
-        <Popup>
-          <MyLocation />
-        </Popup>
-      </Marker>
-    )
-  }
   const locoolIcon = new L.Icon({
-    iconUrl: symbol,
-    iconRetinaUrl: symbol,
+    iconUrl: logoSymbol,
+    iconRetinaUrl: logoSymbol,
     iconSize: [50, 70], // size of the icon
     shadowSize: [50, 64], // size of the shadow
     iconAnchor: [22, 60], // point of the icon which will correspond to marker's location
@@ -66,25 +47,59 @@ const MapComponent = () => {
     popupAnchor: [-3, -76],
   })
 
+    const myLocationIcon = new L.Icon({
+      iconUrl: markerSymbol,
+      iconRetinaUrl: markerSymbol,
+      iconSize: [50, 75], // size of the icon
+      shadowSize: [50, 64], // size of the shadow
+      iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62], // the same for the shadow
+      popupAnchor: [-3, -76],
+    })
+
+  const MyLocationMarker = () => {
+    const [position, setPosition] = useState(null)
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom())
+      },
+    })
+
+    return position === null ? null : (
+      <Marker position={position} icon={myLocationIcon}>
+        <Popup>
+          <Box>My location</Box>
+        </Popup>
+      </Marker>
+    )
+  }
+
+
   const displayFarms = () => {
+    if (GLOBAL_Farm.get)
     return GLOBAL_Farm.get.map((farm, idx) => {
       if (farm.latitude !== null && farm.longitude !== null)
-        return (
-          <Marker
-            key={idx}
-            position={[farm.latitude, farm.longitude]}
-            icon={farmIcon}
-          >
-            <Popup>
-              <FarmCardComponent farm={farm} />
-            </Popup>
-          </Marker>
-        )
+      return (
+        <Marker
+          key={idx}
+          position={[farm.latitude, farm.longitude]}
+          icon={farmIcon}
+        >
+          <Popup>
+            <FarmCardComponent farm={farm} />
+          </Popup>
+        </Marker>
+      )
     })
   }
 
   const displayProducts = () => {
     // console.log(GLOBAL_Product.get)
+    if (GLOBAL_Product.get)
     return GLOBAL_Product.get.map((product, idx) => {
       if (product.latitude !== null && product.longitude !== null)
         return (
@@ -105,7 +120,7 @@ const MapComponent = () => {
     <Box
       sx={{
         width: '100%',
-        height: '100%'
+        height: '100%',
       }}
     >
       <MapContainer
@@ -115,12 +130,19 @@ const MapComponent = () => {
         {/* OPEN STREEN MAPS TILES */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          //best 
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+          // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+          // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
+          // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
           // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+          //not so good
           // url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
-          url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
           // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+          // url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
         />
-        <LocationMarker />
+        <MyLocationMarker />
         {displayProducts()}
         {displayFarms()}
       </MapContainer>

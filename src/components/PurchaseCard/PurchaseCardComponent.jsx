@@ -19,7 +19,6 @@ const PurchaseCardComponent = ({ purchase, cart }) => {
       <Box
         className="row"
         sx={{
-          width: '100%',
           backgroundColor: mainTheme.palette.secondary.main,
           borderRadius: 3,
           boxShadow: 3,

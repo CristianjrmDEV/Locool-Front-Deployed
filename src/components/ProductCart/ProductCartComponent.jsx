@@ -12,6 +12,7 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import ButtonComponent from '../Button/ButtonComponent'
 import PropTypes from 'prop-types'
+import { capitalise } from '../../services/toolkit'
 
 
 const ProductCartComponent = ({ product, removeFromCart }) => {
@@ -46,8 +47,7 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             variant="h5"
             component="div"
           >
-            {product.name.slice(0, 1).toUpperCase() +
-              product.name.slice(1).toLowerCase()}
+            {capitalise(product.name)}
           </Typography>
           <Typography
             variant="body2"
