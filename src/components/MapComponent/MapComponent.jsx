@@ -3,7 +3,7 @@ import "./MapComponent.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import {getAllFarms} from "../../services/farmService"
+import {lookForFarms} from "../../services/farmService"
 
 import { Icon, divIcon, point } from "leaflet";
 import { all } from "axios";
@@ -45,7 +45,7 @@ export default function App() {
   }, [])
 
   const getFarms = async() => {
-    const allFarms = await getAllFarms()
+    const allFarms = await lookForFarms()
     setFarms(allFarms)
     console.log(allFarms)
   }
