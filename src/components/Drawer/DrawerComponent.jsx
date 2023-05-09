@@ -58,8 +58,14 @@ const DrawerComponent = ({
           align={align}
         />
       </List>
-        <DrawerCartButton cartBtn={cartBtn} />
-        <CartComponent cartComponent={cartComponent} />
+      <DrawerCartButton
+        cartBtn={cartBtn}
+        toggleDrawer={handleDrawerToggle}
+      />
+      <CartComponent
+        cartComponent={cartComponent}
+        toggleDrawer={handleDrawerToggle}
+      />
     </Box>
   )
 

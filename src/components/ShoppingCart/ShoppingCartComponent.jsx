@@ -15,8 +15,13 @@ import ProductCartComponent from '../ProductCart/ProductCartComponent'
 import { CartContext } from '../../contexts/cart'
 import ButtonComponent from '../Button/ButtonComponent'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const ShoppingCartComponent = () => {
+const ShoppingCartComponent = ({ toggleDrawer }) => {
+  ShoppingCartComponent.propTypes = {
+    toggleDrawer: PropTypes.func,
+  }
+
   const [cart, setCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const GLOBAL_Cart = useContext(CartContext)
@@ -98,26 +103,17 @@ const ShoppingCartComponent = () => {
           width={'85%'}
           fx={emptyCart}
         />
-        <Box sx={{p:2}}>
+        <Box sx={{ p: 2 }}>
           <Typography>Total: {totalPrice + ' €'}</Typography>
         </Box>
         <Divider />
-        {/* <Button
-          fullWidth={true}
-          size="small"
-          color="white"
-          sx={{ backgroundColor: mainTheme.palette.green.main }}
-          href="/app/payment-method"
-        >
-          Proceed to pay
-        </Button> */}
         <Link to="/app/payment-method">
           <ButtonComponent
             text={'Proceed to pay'}
             bgColour={'green'}
             margin={2}
             width={'85%'}
-            fx={emptyCart}
+            fx={toggleDrawer}
           />
         </Link>
       </Card>
