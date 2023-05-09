@@ -1,20 +1,26 @@
-import { Avatar, Box, Card, CardContent, CardHeader, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { addProductToFarm } from '../../services/userService'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
 import { getAllProducts } from '../../services/userService'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
+import PropTypes from 'prop-types'
 
-const FarmAddProductCardComponent = (props) => {
 
-  const { editFarmData } = useContext(FarmsContext)
+const FarmAddProductCardComponent = ({handleComponent}) => {
+
+  FarmAddProductCardComponent.propTypes = {
+    handleComponent: PropTypes.string
+  }
+
+  const { editFarmData } = useContext(FarmPageContext)
 
   const [productsType,setProductsType] = useState([])
 
-  const [selectedOption, setSelectedOption] = useState('Select Option');
+  const [selectedOption, setSelectedOption] = useState('');
   const [imgSelected, setImgSelected] = useState('')
   const [productStock,setProductStock] = useState('')
   const [productPrice,setProductPrice] = useState(0)
@@ -22,7 +28,7 @@ const FarmAddProductCardComponent = (props) => {
 
   const newProduct = {
     productId: selectedOption,
-    img_url: imgSelected,
+    image_url: imgSelected,
     stock: productStock,
     price: productPrice,
     description: productDescription
@@ -31,16 +37,17 @@ const FarmAddProductCardComponent = (props) => {
 
   const onSelectedOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(selectedOption)
+    console.log(event.target.value)
   };
 
   const onAddProductClick = async() =>{
-    // const result = await addProductToFarm()
-    console.log(productsType)
+    const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    console.log(newProduct)
+    console.log(result)
   }
 
   const onCancelClick = () => {
-    props.handleComponent('FarmListComponent')
+    handleComponent('FarmListComponent')
   }
 
   const getProductsType = async() => {
@@ -48,6 +55,10 @@ const FarmAddProductCardComponent = (props) => {
     console.log(result)
     setProductsType(result)
 
+  }
+
+  const handleImageValue = (img) => {
+    setImgSelected(img)
   }
 
   useEffect(()=> {
@@ -64,22 +75,24 @@ const FarmAddProductCardComponent = (props) => {
       />
       <CardContent>
         <Typography>{editFarmData.name}</Typography>
-        <Select value={selectedOption} onChange={onSelectedOptionChange}>
-          {productsType.map((product) => (
-            <MenuItem key={product.farms.productId} value={product.farms.productId}>
-              {product.productName}
-            </MenuItem>
-          ))}
-        </Select>
-        {/* <TextField 
-          onChange={(e) => setImgSelected(e.target.value)}
-          label="Image" 
-          variant="outlined" 
-          fullWidth={true}
-          InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
-          sx={{ marginBottom: '20px' }}
-        /> */}
-        <UploadWidgetComponent/>
+        <UploadWidgetComponent handleImageValue={handleImageValue} />
+        <FormControl fullWidth>
+        <InputLabel id="top">Type of product</InputLabel>
+          <Select
+            label='Type of product'
+            labelId='top'
+            onChange={onSelectedOptionChange}
+            value={selectedOption}
+            sx={{backgroundColor: '#F5F5F5' , marginBottom: '20px'}}
+          >
+            {productsType.map((product) => (
+              <MenuItem key={product.productId} value={product.productId}>
+                {product.productName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        
         <TextField 
           onChange={(e) => setProductStock(e.target.value)}
           label="Product stock" 

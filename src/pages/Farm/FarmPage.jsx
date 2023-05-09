@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import FarmListComponent from '../../components/FarmList/FarmListComponent'
 import FarmAddCardComponent from '../../components/FarmAddCard/FarmAddCardComponent'
 import FarmEditCardComponent from '../../components/FarmEditCard/FarmEditCardComponent'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
 import FarmSeeProductsCardComponent from '../../components/FarmSeeProductsCard/FarmSeeProductsCardComponent'
 import FarmAddProductCardComponent from '../../components/FarmAddProductCard/FarmAddProductCardComponent'
 import FarmEditProductCardComponent from '../../components/FarmEditProductCard/FarmEditProductCardComponent'
@@ -20,11 +20,9 @@ const FarmPage = () => {
     setComponentView(data)
   }
 
-
-
   return (
     <Box>
-      <FarmsContext.Provider value={{setEditFarmData, editFarmData,setEditProductData,editProductData}}>
+      <FarmPageContext.Provider value={{setEditFarmData, editFarmData,setEditProductData,editProductData}}>
         {
         componentView === 'FarmListComponent' 
           ? <FarmListComponent handleComponent={handleComponentView}/>
@@ -38,7 +36,7 @@ const FarmPage = () => {
                           ? <FarmEditProductCardComponent handleComponent={handleComponentView}/>
                             : <FarmEditCardComponent handleComponent={handleComponentView}/>
         }
-      </FarmsContext.Provider>
+      </FarmPageContext.Provider>
     </Box>
   )
 }

@@ -3,13 +3,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import ButtonComponent from '../Button/ButtonComponent'
 import { House } from '@mui/icons-material'
 import { mainTheme } from '../../themes/mainTheme'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
 import { updateFarm } from '../../services/userService'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 
 const FarmEditCardComponent = (props) => {
 
-    const {editFarmData} = useContext(FarmsContext)
+    const {editFarmData} = useContext(FarmPageContext)
 
     const [farmName,setFarmName] = useState(editFarmData.name)
     const [farmAddress,setFarmAddress] = useState(editFarmData.address)

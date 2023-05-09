@@ -4,12 +4,12 @@ import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { getAllProductsByFarmId } from '../../services/farmService'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
 import { deleteProductOfFarm } from '../../services/userService'
 
 const FarmSeeProductsCardComponent = (props) => {
 
-    const { editFarmData,setEditProductData } = useContext(FarmsContext)
+    const { editFarmData,setEditProductData } = useContext(FarmPageContext)
 
     const [myProducts, setMyProducts] = useState([])
 
@@ -29,7 +29,8 @@ const FarmSeeProductsCardComponent = (props) => {
             {
             name: data.name,
             stock: data.stock,
-            price: data.price
+            price: data.price,
+            img: data.img
         }
         )
         props.handleComponent('FarmEditProductCardComponent')
@@ -82,10 +83,11 @@ const FarmSeeProductsCardComponent = (props) => {
             <Grid container spacing={1} sx={{ p: '10px' }} >
                 {
                     myProducts.map((product, idx) => {
+                        console.log(product)
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                 <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-                                    <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', maxHeight: '100%' }} image={`https://s1.1zoom.me/b4851/409/Carrots_Closeup_Wood_planks_527961_1920x1080.jpg`} title='FarmProduct' />
+                                    <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', maxHeight: '100%' }} image={product.farm_product.image_url} title='FarmProduct' />
                                     <CardContent>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography>
@@ -96,7 +98,7 @@ const FarmSeeProductsCardComponent = (props) => {
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex' }}>
-                                            <ButtonComponent text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({name: product.name, stock: product.farm_product.stock,price: product.farm_product.price})} />
+                                            <ButtonComponent text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
                                             <ButtonComponent text='Remove' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={()=>onRemoveClick({productId: product.id, farmId: product.farm_product.farmId})} />
                                         </Box>
                                     </CardContent>

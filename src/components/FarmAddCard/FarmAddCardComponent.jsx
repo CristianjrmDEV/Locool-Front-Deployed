@@ -8,7 +8,7 @@ import PageTitleComponent from '../PageTitle/PageTitleComponent'
 
 const FarmAddCardComponent = (props) => {
 
-  const [farmName,setFarmName] = useState('granjaPaco')
+  const [farmName,setFarmName] = useState('')
   const [farmAdress,setFarmAdress] = useState('')
   const [farmCollectionPoint,setFarmCollectionPoint] = useState('')
   const [farmCollectionSchedule,setFarmCollectionSchedule] = useState('')
