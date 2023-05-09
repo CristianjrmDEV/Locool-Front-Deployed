@@ -91,13 +91,13 @@ const ProductCardComponent = ({ product }) => {
             variant="body2"
             color="text.primary"
           >
-            Latitude: {product.lat}
+            Latitude: {product.latitude}
           </Typography>
           <Typography
             variant="body2"
             color="text.primary"
           >
-            Longitude: {product.lon}
+            Longitude: {product.longitude}
           </Typography>
         </CardContent>
       </CardActionArea>

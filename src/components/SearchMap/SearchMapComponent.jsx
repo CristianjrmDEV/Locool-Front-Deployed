@@ -56,46 +56,48 @@ const SearchMapComponent = () => {
     popupAnchor: [-3, -76],
   })
 
-    const farmIcon = new L.Icon({
-      iconUrl: farmSymbol,
-      iconRetinaUrl: farmSymbol,
-      iconSize: [50, 95], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62], // the same for the shadow
-      popupAnchor: [-3, -76],
-    })
+  const farmIcon = new L.Icon({
+    iconUrl: farmSymbol,
+    iconRetinaUrl: farmSymbol,
+    iconSize: [50, 95], // size of the icon
+    shadowSize: [50, 64], // size of the shadow
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62], // the same for the shadow
+    popupAnchor: [-3, -76],
+  })
 
   const displayFarms = () => {
     return GLOBAL_Farm.get.map((farm, idx) => {
-      return (
-        <Marker
-          key={idx}
-          position={[farm.latitude, farm.longitude]}
-          icon={farmIcon}
-        >
-          <Popup>
-            <FarmCardComponent farm={farm} />
-          </Popup>
-        </Marker>
-      )
+      if (farm.latitude !== null && farm.longitude !== null)
+        return (
+          <Marker
+            key={idx}
+            position={[farm.latitude, farm.longitude]}
+            icon={farmIcon}
+          >
+            <Popup>
+              <FarmCardComponent farm={farm} />
+            </Popup>
+          </Marker>
+        )
     })
   }
 
   const displayProducts = () => {
     // console.log(GLOBAL_Product.get)
     return GLOBAL_Product.get.map((product, idx) => {
-      return (
-        <Marker
-          key={idx}
-          position={[product.lat, product.lon]}
-          icon={locoolIcon}
-        >
-          <Popup>
-            <ProductCardComponent product={product} />
-          </Popup>
-        </Marker>
-      )
+      if (product.latitude !== null && product.longitude !== null)
+        return (
+          <Marker
+            key={idx}
+            position={[product.latitude, product.longitude]}
+            icon={locoolIcon}
+          >
+            <Popup>
+              <ProductCardComponent product={product} />
+            </Popup>
+          </Marker>
+        )
     })
   }
 
@@ -108,11 +110,11 @@ const SearchMapComponent = () => {
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        // url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+        url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
         // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png",
-        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
       />
-      {/* <LocationMarker /> */}
+      <LocationMarker />
       {displayProducts()}
       {displayFarms()}
     </MapContainer>
