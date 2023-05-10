@@ -14,7 +14,16 @@ import { Box } from '@mui/system'
 import { Divider, Typography } from '@mui/material'
 import ButtonComponent from '../Button/ButtonComponent'
 import Greeting from '../Greeting/Greeting'
-const PopupComponent = () => {
+import { FarmIcon, LocoolIcon, MyLocationIcon } from '../Icon/IconComponent'
+import HelpIcon from '@mui/icons-material/Help'
+import ButtonWithIconComponent from '../ButtonWithIcon/ButtonWithIconComponent'
+import PropTypes from 'prop-types'
+
+const PopupComponent = ({ greetingMessage }) => {
+  PopupComponent.propTypes = {
+    greetingMessage: PropTypes.string.isRequired,
+  }
+
   const [open, setOpen] = React.useState(true)
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -28,51 +37,105 @@ const PopupComponent = () => {
   }
 
   return (
-    <Dialog
-      fullScreen={fullScreen}
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="responsive-dialog-title"
-    >
-      <Box>
-        <DialogTitle id="responsive-dialog-title">
-          <Greeting
-            greeting={true}
-            message="Welcome"
-            textColor="green"
-          />
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Box>
-              <Typography sx={{ fontSize: '1.5rem' }}>
-                This app will help you find local products and farms.
-              </Typography>
-            </Box>
-            <Divider sx={{ margin: 1, border: 2 }} />
-
-            <Box sx={{ display: 'flex' }}>
-              <SearchIcon fontSize="medium" />
-              <Box sx={{ fontSize: '1.2rem', pb: 1, pl: 1 }}>
-                Type & click to see products on the map
+    <>
+      <ButtonWithIconComponent
+        text="Help"
+        icon={<HelpIcon />}
+        fx={handleClickOpen}
+        buttonBg={'white'}
+      />
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <Box>
+          <DialogTitle id="responsive-dialog-title">
+            <Greeting
+              greeting={true}
+              message={greetingMessage}
+              textColor="green"
+            />
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Box
+                sx={{
+                  mx: 1,
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <SearchIcon fontSize="large" />
+                <Box sx={{ pl: 2, alignSelf: 'center' }}>
+                  Click to look for a product
+                </Box>
               </Box>
-            </Box>
-            <Box sx={{ display: 'flex' }}>
-              <WarehouseIcon fontSize="medium" />
-              <Box sx={{ fontSize: '1.2rem', pb: 1, pl: 1 }}>
-                Type & click to see farms on the map
+              <Box
+                sx={{
+                  mx: 1,
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <WarehouseIcon fontSize="large" />{' '}
+                <Box sx={{ pl: 2, alignSelf: 'center' }}>
+                  Click to look for a farm
+                </Box>
               </Box>
-            </Box>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <ButtonComponent
-            text="OK"
-            fx={handleClose}
-          />
-        </DialogActions>
-      </Box>
-    </Dialog>
+              <Box
+                sx={{
+                  mx: 1,
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <MyLocationIcon size={40} />
+                <Box sx={{ pl: 2, alignSelf: 'center' }}>
+                  Click to see your location
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  mx: 1,
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <LocoolIcon size={25} />{' '}
+                <Box sx={{ pl: 2, alignSelf: 'center' }}>
+                  Click to see a product
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  mx: 1,
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <FarmIcon size={40} />
+                <Box sx={{ pl: 2, alignSelf: 'center' }}>
+                  Click on it to see a farm
+                </Box>
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <ButtonComponent
+              text="OK"
+              fx={handleClose}
+            />
+          </DialogActions>
+        </Box>
+      </Dialog>
+    </>
   )
 }
 

@@ -20,6 +20,7 @@ import PaymentFailedComponent from '../components/PaymentFailed/PaymentFailedCom
 import PaymentSelectionComponent from '../components/PaymentSelection/PaymentSelectionComponent'
 import SearchPage from '../pages/Search/SearchPage'
 import PurchasePage from '../pages/Purchase/PurchasePage'
+import NotFoundPage from '../pages/NotFound/NotFoundPage'
 
 
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
           }
         },
       },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
     ],
   },
   {
@@ -87,17 +92,16 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
-
         path: '/app/success',
-        element: <PaymentSuccessComponent/>
+        element: <PaymentSuccessComponent />,
       },
       {
         path: '/app/fail',
-        element: <PaymentFailedComponent/>
+        element: <PaymentFailedComponent />,
       },
       {
         path: '/app/payment-method',
-        element: <PaymentSelectionComponent/>
+        element: <PaymentSelectionComponent />,
       },
       {
         path: '/app/purchases',
@@ -136,8 +140,8 @@ const router = createBrowserRouter([
         element: <LegalCookiesPage />,
       },
       {
-        path: '/app/search',
-        element: <SearchPage />,
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },
