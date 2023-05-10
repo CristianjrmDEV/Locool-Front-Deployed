@@ -1,12 +1,13 @@
 import React from 'react'
 import './BasicPage.css'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
-import DemoCarousel from '../../components/DemoCarousel/DemoCarouselComponent'
+import BasicBodyComponent from '../../components/BasicPageBody/BasicPageBodyComponent'
+
 const BasicPage = () => {
   return (
     <>
       <PageTitleComponent title={'Basic page'} />
-      <DemoCarousel/>
+      <BasicBodyComponent/>
     </>
   )
 }
