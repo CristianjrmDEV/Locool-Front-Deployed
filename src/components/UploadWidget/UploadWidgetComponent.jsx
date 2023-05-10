@@ -7,7 +7,9 @@ import PropTypes from 'prop-types'
 function UploadWidgetComponent({handleImageValue, width, height}) {
 
   UploadWidgetComponent.propTypes = {
-    handleImageValue: PropTypes.func
+    handleImageValue: PropTypes.func,
+    width: PropTypes.string,
+    height: PropTypes.string
   }
 
   const uploadImage = async(imageUrl) => {

@@ -8,6 +8,7 @@ import { FarmPageContext } from '../../contexts/farm'
 import { getAllProducts } from '../../services/userService'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 import PropTypes from 'prop-types'
+import defaultPepinillo from '../../assets/images/product/defaultPepinillo.jpg'
 
 
 const FarmAddProductCardComponent = ({handleComponent}) => {
@@ -59,7 +60,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   }
 
   const handleImageValue = (img) => {
+    console.log(img)
+    console.log(imgSelected)
     setImgSelected(img)
+    console.log(imgSelected)
   }
 
   const handleMeasureChange = (e) =>{
@@ -95,6 +99,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
       <CardContent>
         <Typography>{editFarmData.name}</Typography>
         <Box>
+          <Avatar src={imgSelected === '' ? defaultPepinillo : imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"} />
           <UploadWidgetComponent handleImageValue={handleImageValue} width='100px' height='150px'/>
         </Box>
         <FormControl fullWidth>
