@@ -37,6 +37,11 @@ a {
   background-color: #424142;
 }
 
+.leaflet-popup-content-wrapper{
+  padding: 6px 0;
+}
+
 .leaflet-container a.leaflet-popup-close-button span {
   color: #fff;
+  font-size: 1.5rem;
 }
