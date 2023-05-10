@@ -21,7 +21,8 @@ const FooterComponent = () => {
           buttonList={['About', 'Mission', 'Contact']}
           width="100%"
           align="center"
-          cartComponent={false}
+          titleTopPadding={0}
+          greeting={false}
         />
       </Box>
       <Box

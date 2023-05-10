@@ -18,7 +18,7 @@ import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
 import FarmCardComponent from '../FarmCard/FarmCardComponent'
 import logoSymbol from './../../assets/logo/logo-symbol.svg'
-import farmSymbol from './../../assets/icons/farm-icon.svg'
+import farmSymbol from './../../assets/icons/tractor-icon.svg'
 import personSymbol from './../../assets/icons/person-icon.svg'
 import markerSymbol from './../../assets/icons/marker-icon.svg'
 import { mainTheme } from '../../themes/mainTheme'
@@ -128,15 +128,15 @@ const MapComponent = () => {
         center={[27.956918575017003, -15.6050452586645]}
         zoom={10}
       >
-        {/* OPEN STREEN MAPS TILES */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MyLocationMarker />
         {displayProducts()}
         {displayFarms()}
       </MapContainer>
+      <Box>dafsdf</Box>
     </Box>
   )
 }
