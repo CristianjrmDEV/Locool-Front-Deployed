@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -15,12 +16,13 @@ const PaymentSelectionComponent = () => {
       <CardHeader title="Choose payment method" sx={{ color: 'red.main', fontSize: '48px' }} titleTypographyProps={{ variant: 'h5', fontFamily: 'dosis', marginBottom: '14px' }} />
       <CardContent>
         {
-          /**Datos para probar el pago con paypal:
+          /** Data to try paypal payment
            * correo: sb-gyd0c25884475@personal.example.com
            * contraseña: %5)9Uqmp
            */
         }
-        <PayPalScriptProvider options={{'client-id': "AWBz22U-IiFbvZ-YGLGI1r1jsPcL7Oc7zZ-rNwl8vlyP7q-goquqs-GjmIUYRBHZ_ZZM80_c6f_301hZ", 'currency': 'EUR'}}>
+        <PayPalScriptProvider 
+          options={{'client-id': "AWBz22U-IiFbvZ-YGLGI1r1jsPcL7Oc7zZ-rNwl8vlyP7q-goquqs-GjmIUYRBHZ_ZZM80_c6f_301hZ", 'currency': 'EUR'}}>
           <PayPalButtons 
             createOrder={(data, actions) => {
               return actions.order.create({
@@ -42,8 +44,9 @@ const PaymentSelectionComponent = () => {
                   )
                 )
               )
-              const cartArray = [...cartMap.values()] // Convert iterator to array
+              const cartArray = [...cartMap.values()] 
               const cartObj = { "items": cartArray }
+              
               
               const purchase = await createPurchase(
                 localStorage.getItem('locoolUsername'),
@@ -61,7 +64,7 @@ const PaymentSelectionComponent = () => {
             }}
           />
         </PayPalScriptProvider>
-
+            
       </CardContent>
     </Card>
   );
