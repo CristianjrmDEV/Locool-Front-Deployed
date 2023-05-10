@@ -19,9 +19,11 @@ import HelpIcon from '@mui/icons-material/Help'
 import ButtonWithIconComponent from '../ButtonWithIcon/ButtonWithIconComponent'
 import PropTypes from 'prop-types'
 
-const PopupComponent = ({ greetingMessage }) => {
+const PopupComponent = ({ greetingMessage, greeting, openBtn }) => {
   PopupComponent.propTypes = {
     greetingMessage: PropTypes.string.isRequired,
+    greeting: PropTypes.string.isRequired,
+    openBtn: PropTypes.bool,
   }
 
   const [open, setOpen] = React.useState(true)
@@ -38,12 +40,17 @@ const PopupComponent = ({ greetingMessage }) => {
 
   return (
     <>
-      <ButtonWithIconComponent
-        text="Help"
-        icon={<HelpIcon />}
-        fx={handleClickOpen}
-        buttonBg={'white'}
-      />
+      {openBtn ? (
+        <ButtonWithIconComponent
+          text="Help"
+          icon={<HelpIcon />}
+          fx={handleClickOpen}
+          buttonBg={'green'}
+        />
+      ) : (
+        ''
+      )}
+
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -53,7 +60,7 @@ const PopupComponent = ({ greetingMessage }) => {
         <Box>
           <DialogTitle id="responsive-dialog-title">
             <Greeting
-              greeting={true}
+              greeting={greeting}
               message={greetingMessage}
               textColor="green"
             />
