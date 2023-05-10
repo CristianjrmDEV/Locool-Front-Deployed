@@ -12,8 +12,8 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import SearchIcon from '@mui/icons-material/Search'
 import WarehouseIcon from '@mui/icons-material/Warehouse'
-import { getProducts } from '../../services/productService'
-import { getAllFarms } from '../../services/farmService'
+import { lookForProducts } from '../../services/productService'
+import { lookForFarms } from '../../services/farmService'
 import { FarmsContext } from '../../contexts/farm'
 import { ProductsContext } from '../../contexts/product'
 import { useNavigate } from 'react-router-dom'
@@ -31,15 +31,15 @@ const SearchBarComponent = () => {
   }
 
   const handleProductSearch = async () => {
-    const result = await getProducts(query)
+    const result = await lookForProducts(query)
     GLOBAL_Product.set(result)
-    goTo('/app/search')
+    goTo('/app')
   }
 
   const handleFarmSearch = async () => {
-    const result = await getAllFarms(query)
+    const result = await lookForFarms(query)
     GLOBAL_Farm.set(result)
-    goTo('/app/search')
+    goTo('/app')
   }
 
   return (

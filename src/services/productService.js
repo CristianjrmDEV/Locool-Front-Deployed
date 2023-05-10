@@ -1,7 +1,7 @@
 import api from './config/'
-import { getAllFarms, getAllProductsByFarmId } from './farmService'
+import { lookForFarms, getAllProductsByFarmId } from './farmService'
 
-const getProducts = async (query) => {
+const lookForProducts = async (query) => {
   const { data } = await api.get('/products', {params: {
     name: query
   }})
@@ -20,18 +20,18 @@ const getProducts = async (query) => {
         farmName: obj.farms[i].farmName,
         price: obj.farms[i].farm_product.price,
         stock: obj.farms[i].farm_product.stock,
-        lat: obj.farms[i].latitude,
-        lon: obj.farms[i].longitude,
+        latitude: obj.farms[i].latitude,
+        longitude: obj.farms[i].longitude,
         // farm: obj.farms[i],
       }
       mappedResult.push(objMod)
     }
   })
 
-  console.log('mapped results: ', mappedResult)
+  // console.log('mapped results: ', mappedResult)
 
   return mappedResult
 }
 
-export { getProducts }
+export { lookForProducts }
 

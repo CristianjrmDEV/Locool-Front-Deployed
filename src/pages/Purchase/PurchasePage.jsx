@@ -15,7 +15,7 @@ const PurchasePage = () => {
       localStorage.getItem('locoolUsername')
     )
     setPurchases(result)
-    console.log(result)
+    // console.log(result)
   }
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const PurchasePage = () => {
   }, [])
 
   return (
-    <Box>
+    <Box sx={{width:'80%'}}>
       <PageTitleComponent title={'Purchases'} />
       <PurchaseListComponent purchases={purchases} />
     </Box>

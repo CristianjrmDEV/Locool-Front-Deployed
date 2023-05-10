@@ -51,54 +51,53 @@ const ProductCardComponent = ({ product }) => {
       sx={{
         maxWidth: 345,
         backgroundColor: mainTheme.palette.secondary.main,
-        m: 2,
       }}
     >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="100"
           image={product.img}
           alt=""
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            {capitalise(product.name)}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Price: {product.price} €
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Stock: {product.stock}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Farm: {product.farmName}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Latitude: {product.lat}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Longitude: {product.lon}
-          </Typography>
+          <Box>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="div"
+            >
+              {capitalise(product.name)}
+            </Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Price:{' '}
+            </Typography>
+            <Typography variant="span">{product.price} €</Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Stock:
+            </Typography>
+            <Typography variant="span"> {product.stock}</Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            {' '}
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Farm:
+            </Typography>
+            <Typography variant="span"> {product.farmName}</Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <CardActions>
