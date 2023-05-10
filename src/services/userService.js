@@ -1,5 +1,14 @@
 import api from './config'
 
+const getAllProducts = async () => {
+  try {
+    const {data} = await api.get('/products')
+    return data
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const getUserProfile = async () => {
   try {
     const { data } = await api.get('/users/my-profile', {
@@ -60,7 +69,7 @@ const updateFarm = async (username,farmId,farmData) => {
 }
 
 const updateProductOfFarm = async (username,farmId,productId,productData) => {
-  const {data} = await api.put(`/${username}/farms/${farmId}/products/${productId}`,productData,{
+  const {data} = await api.put(`/users/${username}/farms/${farmId}/products/${productId}`,productData,{
     headers: {
       token: localStorage.getItem('locoolToken'),
     },
@@ -115,5 +124,6 @@ export {
   addProductToFarm,
   updateProductOfFarm,
   deleteProductOfFarm,
+  getAllProducts,
   createPurchase
 }

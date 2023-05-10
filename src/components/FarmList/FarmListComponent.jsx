@@ -4,12 +4,12 @@ import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { getMyFarms } from '../../services/userService'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
 import { deleteFarm } from '../../services/userService'
 
 const FarmListComponent = (props) => {
 
-    const {setEditFarmData} = useContext(FarmsContext)
+    const {setEditFarmData} = useContext(FarmPageContext)
 
     const[myFarms,setMyFarms] = useState([])
 

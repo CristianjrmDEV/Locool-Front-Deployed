@@ -4,31 +4,39 @@ import { ProductsContext } from '../../contexts/product'
 import { updateProductOfFarm } from '../../services/userService'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
-import { FarmsContext } from '../../contexts/farm'
+import { FarmPageContext } from '../../contexts/farm'
+import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 
 const FarmEditProductCardComponent = (props) => {
 
-    const {editProductData} = useContext(FarmsContext)
-
-    const [productName, setProductName] = useState('')
+    const {editProductData} = useContext(FarmPageContext)
+    console.log(editProductData)
+    // const [productName, setProductName] = useState('')
+    const [productID, setProductID] = useState(0)
     const [productStock, setProductStock] = useState(0)
     const [productPrice, setProductPrice] = useState(0)
+    const [image,setImage] = useState('')
 
     const productData = {
-        name: productName,
+        productId: productID,
+        // name: productName,
         stock: productStock,
-        price: productPrice
+        price: productPrice,
+        image_url: image
     }
 
     const setDefaultValues = () => {
-        setProductName(editProductData.name)
+        setProductID(editProductData.productid)
+        // setProductName(editProductData.name)
         setProductStock(editProductData.stock)
         setProductPrice(editProductData.price)
+        setImage(editProductData.img)
     }
 
     const onSaveChangesClick = async() => {
         console.log('clicked')
-        //const result = updateProductOfFarm(localStorage.username,farmId,productId,productData)
+        const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
+        console.log(result)
     }
 
     const onCancelClick = () => {
@@ -41,14 +49,15 @@ const FarmEditProductCardComponent = (props) => {
 
     return (
         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-            <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', maxHeight: '100%' }} image={`https://s1.1zoom.me/b4851/409/Carrots_Closeup_Wood_planks_527961_1920x1080.jpg`} title='FarmProduct' />
+            <CardMedia component='img' sx={{ borderRadius: '10px', width: '200px', maxHeight: '200px' }} image={image} title='FarmProduct' />
+            <UploadWidgetComponent />
             <CardContent>
                 <TextField
                     onChange={(e) => setProductName(e.target.value)}
                     label="Name"
                     variant="outlined"
                     fullWidth={true}
-                    value={productName}
+                    // value={productName}
                     InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
                     InputLabelProps={{ shrink: true }}
                     sx={{ marginBottom: '20px' }}
