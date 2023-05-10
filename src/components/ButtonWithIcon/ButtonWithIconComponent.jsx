@@ -20,7 +20,7 @@ const ButtonWithIconComponent = ({icon, text, fx, buttonBg}) => {
         flexDirection: 'column',
         '&:hover': {
           backgroundColor: mainTheme.palette[buttonBg].main,
-          color: mainTheme.palette.green.main,
+          color: mainTheme.palette.white.main,
         },
       }}
       onClick={fx}

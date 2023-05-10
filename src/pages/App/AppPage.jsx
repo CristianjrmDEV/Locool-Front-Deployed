@@ -13,20 +13,7 @@ const AppPage = () => {
         width: '100%',
       }}
     >
-      <Box
-        sx={{
-          width: '100%',
-          backgroundColor: mainTheme.palette.green.main,
-          display: 'flex',
-          justifyContent: 'flex-end',
-          pr:2
-        }}
-      >
-        <PopupComponent
-          greetingMessage="Hi"
-          icon={true}
-        />
-      </Box>
+
       <MapComponent />
     </Box>
   )

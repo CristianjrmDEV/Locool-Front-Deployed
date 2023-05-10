@@ -20,6 +20,8 @@ import LoginButtonComponent from '../LoginButton/LoginButtonComponent'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import SearchBarComponent from '../SearchBar/SearchBarComponent'
 import PropTypes from 'prop-types'
+import { PopupComponent } from '../Popup/PopupComponent'
+import { mainTheme } from '../../themes/mainTheme'
 
 const HeaderComponent = ({
   menu,
@@ -30,7 +32,6 @@ const HeaderComponent = ({
   mylocool,
   search,
 }) => {
-
   HeaderComponent.propTypes = {
     menu: PropTypes.bool,
     login: PropTypes.bool,
@@ -50,6 +51,7 @@ const HeaderComponent = ({
         titleTopPadding={5}
         cartComponent={true}
         cartBtn={true}
+        greeting={false}
       />
     ) : (
       false

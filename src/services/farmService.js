@@ -1,14 +1,18 @@
 import api from './config/'
 
 const lookForFarms = async (query) => {
-  // console.log('before retrieveing data')
-  const { data } = await api.get('/farms', {
-    params: {
-      name: query
-    }
-  })
-  console.log('lookForFarms result:', data)
-  return data
+  try {
+    // console.log('before retrieveing data')
+    const { data } = await api.get('/farms', {
+      params: {
+        name: query,
+      },
+    })
+    // console.log('lookForFarms result:', data)
+    return data
+  } catch (err) {
+    return []
+  }
 }
 
 const getAllProductsByFarmId = async (id) => {
@@ -19,9 +23,9 @@ const getAllProductsByFarmId = async (id) => {
 }
 
 const getFarms = async () => {
-  console.log('before retrieveing data')
+  // console.log('before retrieveing data')
   const { data } = await api.get('/farms')
-  console.log('request result:', data)
+  // console.log('request result:', data)
 
   return data
 }
