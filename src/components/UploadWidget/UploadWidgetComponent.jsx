@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Box } from '@mui/material';
 import { Uploader } from "uploader";
 import { UploadDropzone } from "react-uploader";
 import uploadImageCloudinary from '../../services/cloudinary';
+import PropTypes from 'prop-types'
 
-function UploadWidgetComponent(props) {
+function UploadWidgetComponent({handleImageValue, width, height}) {
+
+  UploadWidgetComponent.propTypes = {
+    handleImageValue: PropTypes.func
+  }
 
   const uploadImage = async(imageUrl) => {
     const data = new FormData();
@@ -15,7 +18,7 @@ function UploadWidgetComponent(props) {
     data.append("cloud_name", "locool");
 
     const url = await uploadImageCloudinary(data)
-    props.handleImageValue(url)
+    handleImageValue(url)
   };
 
   // Get production API keys from Upload.io
@@ -31,8 +34,8 @@ function UploadWidgetComponent(props) {
       <UploadDropzone
         uploader={uploader} // Required.
         options={options} // Optional.
-        width="600px" // Optional.
-        height="375px" // Optional.
+        width={width} // Optional.
+        height={height} // Optional.
         onUpdate={(files) => {
           if (files.length === 0) {
             console.log("No files selected.");

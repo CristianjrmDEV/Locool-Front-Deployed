@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
@@ -23,8 +23,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   const [selectedOption, setSelectedOption] = useState('');
   const [imgSelected, setImgSelected] = useState('')
   const [productStock,setProductStock] = useState('')
-  const [productPrice,setProductPrice] = useState(0)
+  const [productPrice,setProductPrice] = useState('')
   const [productDescription,setProductDescription] = useState('')
+
+  const [productMeasurement, setProductMeasurement] = useState('');
 
   const newProduct = {
     productId: selectedOption,
@@ -33,7 +35,6 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     price: productPrice,
     description: productDescription
   }
-
 
   const onSelectedOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -61,6 +62,24 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     setImgSelected(img)
   }
 
+  const handleMeasureChange = (e) =>{
+    setProductMeasurement(e.target.value)
+  }
+
+  const handleStockChange = (e) => {
+    const stockRegex = /^\d{0,6}(\.\d{0,2})?$/
+    if (stockRegex.test(e.target.value)) {
+      setProductStock(e.target.value)
+    }
+  }
+
+  const handlePriceChange = (e) => {
+    const stockRegex = /^\d{0,6}(\.\d{0,2})?$/
+    if (stockRegex.test(e.target.value)) {
+      setProductPrice(e.target.value)
+    }
+  }
+
   useEffect(()=> {
     getProductsType()
   },[])
@@ -75,7 +94,9 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
       />
       <CardContent>
         <Typography>{editFarmData.name}</Typography>
-        <UploadWidgetComponent handleImageValue={handleImageValue} />
+        <Box>
+          <UploadWidgetComponent handleImageValue={handleImageValue} width='100px' height='150px'/>
+        </Box>
         <FormControl fullWidth>
         <InputLabel id="top">Type of product</InputLabel>
           <Select
@@ -93,30 +114,73 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
           </Select>
         </FormControl>
         
+        <Box sx={{display:'flex'}}>
+          <TextField 
+            onChange={handleStockChange}
+            label="Product stock" 
+            variant="outlined" 
+            value={productStock}
+            InputProps={{ style: { backgroundColor: '#F5F5F5'} }}
+            sx={{ marginBottom: '20px', flexGrow: '1', marginRight: '10px' }}
+          />
+          <FormControl sx={{flexGrow: '0', width: '25%'}}>
+            <InputLabel id="measure">Measure</InputLabel>
+            <Select
+              value={productMeasurement}
+              label='measurement'
+              labelId='measure'
+              variant="outlined"
+              onChange={handleMeasureChange}
+              sx={{backgroundColor: '#F5F5F5',marginBottom: '20px'}}
+            >
+              <MenuItem value="kg">kg</MenuItem>
+              <MenuItem value="litre">litre</MenuItem>
+              <MenuItem value="unit">unit</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{display:'flex'}}>
         <TextField 
-          onChange={(e) => setProductStock(e.target.value)}
-          label="Product stock" 
-          variant="outlined" 
-          fullWidth={true}
-          InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
-          sx={{ marginBottom: '20px' }}
-        />
-        <TextField 
-          onChange={(e) => setProductPrice(e.target.value)}
-          label="Product price" 
-          variant="outlined" 
-          fullWidth={true}
-          InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
-          sx={{ marginBottom: '20px' }}
-        />
-        <TextField 
-          onChange={(e) => setProductDescription(e.target.value)}
-          label="Product description" 
-          variant="outlined" 
-          fullWidth={true}
-          InputProps={{ style: { backgroundColor: '#F5F5F5' } }}
-          sx={{ marginBottom: '20px' }}
-        />
+            onChange={handlePriceChange}
+            label="Product price" 
+            variant="outlined" 
+            value={productPrice}
+            InputProps={{ style: { backgroundColor: '#F5F5F5'} }}
+            sx={{ marginBottom: '20px', flexGrow: '1', marginRight: '10px' }}
+          />
+          <FormControl sx={{flexGrow: '0',width: '25%'}}>
+            <InputLabel id="measure">Measure</InputLabel>
+            <Select
+              value={productMeasurement}
+              label='measurement'
+              labelId='measure'
+              variant="outlined"
+              onChange={handleMeasureChange}
+              sx={{backgroundColor: '#F5F5F5',marginBottom: '20px'}}
+            >
+              <MenuItem value="kg">€/kg</MenuItem>
+              <MenuItem value="litre">€/litre</MenuItem>
+              <MenuItem value="unit">€/unit</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{paddingRight:'10px'}}>
+        <TextareaAutosize
+        style={{
+          width: '100%',
+          height: '100px',
+          overflow: 'hidden',
+          overflowY: 'scroll',
+          resize: 'none',
+          marginBottom:'20px',
+        }}
+        placeholder={'Description'}
+        onChange={(e)=> {
+          setProductDescription(e.target.value)
+          console.log(productDescription)
+        }}
+      />
+        </Box>
         <Box sx={{display:'flex' }}>
           <ButtonComponent text='Add product to farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={onAddProductClick}/>
           <ButtonComponent text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={onCancelClick}/>
