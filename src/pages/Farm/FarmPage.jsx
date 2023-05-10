@@ -21,7 +21,7 @@ const FarmPage = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{width:'100%'}}>
       <FarmPageContext.Provider value={{setEditFarmData, editFarmData,setEditProductData,editProductData}}>
         {
         componentView === 'FarmListComponent' 
