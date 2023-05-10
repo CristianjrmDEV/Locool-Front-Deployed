@@ -11,26 +11,39 @@ import {
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import { capitalise } from '../../services/toolkit'
+import PropTypes from 'prop-types'
 
 const ProductCardComponent = ({ product }) => {
-  const addProductToCart = () => {
-    const cartMap = new Map(JSON.parse(localStorage.getItem(`cart-${localStorage.getItem('username')}`)))
-    console.log("Carrito" ,cartMap)
-    console.log("Item", product)
-    if(!cartMap.has(product.id)){
-      cartMap.set(product.id, {
-        "id": product.id,
-        "name": product.name,
-        "farmName": product.farmName,
-        "price": product.price,
-        "quantity": 1
+  // console.log('Item', product)
+  ProductCardComponent.propTypes = {
+    product: PropTypes.object.isRequired,
+  }
 
+  const addProductToCart = () => {
+    const cartMap = new Map(
+      JSON.parse(
+        localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
+      )
+    )
+    console.log('Carrito', cartMap)
+    console.log('Item', product)
+    if (!cartMap.has(product.id)) {
+      cartMap.set(product.id, {
+        id: product.id,
+        name: product.name,
+        farmName: product.farmName,
+        price: product.price,
+        quantity: 1,
       })
     } else {
-      cartMap.get(product.id)["quantity"]++
+      cartMap.get(product.id)['quantity']++
     }
     console.log(cartMap)
-    localStorage.setItem(`cart-${localStorage.getItem('username')}`, JSON.stringify([...cartMap]))
+    localStorage.setItem(
+      `cart-${localStorage.getItem('locoolUsername')}`,
+      JSON.stringify([...cartMap])
+    )
   }
 
   return (
@@ -38,49 +51,53 @@ const ProductCardComponent = ({ product }) => {
       sx={{
         maxWidth: 345,
         backgroundColor: mainTheme.palette.secondary.main,
-        m: 2,
       }}
     >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="100"
           image={product.img}
           alt=""
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            {product.name.slice(0, 1).toUpperCase() +
-              product.name.slice(1).toLowerCase()}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Price: {product.price} €
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Stock: {product.stock}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Farm: {product.farmName}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Farm address: {product.farmAddress}
-          </Typography>
+          <Box>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="div"
+            >
+              {capitalise(product.name)}
+            </Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Price:{' '}
+            </Typography>
+            <Typography variant="span">{product.price} €</Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Stock:
+            </Typography>
+            <Typography variant="span"> {product.stock}</Typography>
+          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
+            {' '}
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Farm:
+            </Typography>
+            <Typography variant="span"> {product.farmName}</Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <CardActions>

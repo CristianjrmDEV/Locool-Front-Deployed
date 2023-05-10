@@ -15,14 +15,13 @@ const FooterComponent = () => {
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <DrawerComponent
-          clickable={
-            <MylocoolButtonComponent bgColor='secondary' />
-          }
+          clickable={<MylocoolButtonComponent bgColor="secondary" />}
           title={'Locool'}
           openOption={'bottom'}
           buttonList={['About', 'Mission', 'Contact']}
           width="100%"
           align="center"
+          cartComponent={false}
         />
       </Box>
       <Box

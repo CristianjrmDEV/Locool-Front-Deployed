@@ -1,21 +1,42 @@
-
-html, body {
-    
+html,
+body {
 }
 
 body {
-    margin:0;
-    font-size: calc(16px + 0.5vw);
-    font-family: 'Quicksand';
-    color:#424142;
+  margin: 0;
+  font-size: calc(16px + 0.5vw);
+  font-family: 'Quicksand';
+  color: #424142;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-family: 'Dosis';
-    font-weight: lighter;
-    color:#D95656;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Dosis';
+  font-weight: lighter;
+  color: #d95656;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+/* Leaflet maps styles - Important! */
+
+/* height of the map container */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background-color: #424142;
+}
+
+.leaflet-container a.leaflet-popup-close-button span {
+  color: #fff;
 }

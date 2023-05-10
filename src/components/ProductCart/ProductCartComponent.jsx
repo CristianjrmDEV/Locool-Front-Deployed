@@ -10,8 +10,17 @@ import {
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
+import ButtonComponent from '../Button/ButtonComponent'
+import PropTypes from 'prop-types'
+import { capitalise } from '../../services/toolkit'
+
 
 const ProductCartComponent = ({ product, removeFromCart }) => {
+
+    ProductCartComponent.propTypes = {
+      product: PropTypes.object,
+      removeFromCart: PropTypes.func
+    }
 
     const handleRemoveFromCart = () => {
         removeFromCart(product.id);
@@ -38,8 +47,7 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             variant="h5"
             component="div"
           >
-            {product.name.slice(0, 1).toUpperCase() +
-              product.name.slice(1).toLowerCase()}
+            {capitalise(product.name)}
           </Typography>
           <Typography
             variant="body2"
@@ -51,7 +59,8 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             variant="body2"
             color="text.primary"
           >
-            Quantity: {product.quantity} kg<keygen />
+            Quantity: {product.quantity} kg
+            <keygen />
           </Typography>
           <Typography
             variant="body2"
@@ -68,15 +77,11 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          fullWidth={true}
-          size="small"
-          color="red"
-          sx={{ backgroundColor: mainTheme.palette.secondary.main }}
-          onClick={handleRemoveFromCart}
-        >
-          Remove from cart
-        </Button>
+        <ButtonComponent
+          text="Remove"
+          fx={handleRemoveFromCart}
+          bgColour={'red'}
+        />
       </CardActions>
     </Card>
   )

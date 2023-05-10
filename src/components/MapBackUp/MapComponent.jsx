@@ -3,7 +3,7 @@ import "./MapComponent.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import {getAllFarms} from "../../services/farmService"
+import {lookForFarms} from "../../services/farmService"
 
 import { Icon, divIcon, point } from "leaflet";
 import { all } from "axios";
@@ -45,7 +45,7 @@ export default function App() {
   }, [])
 
   const getFarms = async() => {
-    const allFarms = await getAllFarms()
+    const allFarms = await lookForFarms()
     setFarms(allFarms)
     console.log(allFarms)
   }
@@ -85,7 +85,7 @@ export default function App() {
    <MapContainer center={[28.14144, -15.43001]} zoom={18}>
       {/* OPEN STREEN MAPS TILES */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstretmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LocationMarker/>

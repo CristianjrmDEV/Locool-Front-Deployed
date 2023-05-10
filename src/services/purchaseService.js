@@ -3,7 +3,7 @@ import api from './config'
 const getPurchasesByUsername = async (username) => {
 //   console.log('sending request..')
   const { data } = await api.get(`/users/${username}/purchases`, {
-    headers: { token: localStorage.getItem('token') },
+    headers: { token: localStorage.getItem('locoolToken') },
   })
 //   console.log('request result:', data.purchases)
   return data.purchases
@@ -12,7 +12,7 @@ const getPurchasesByUsername = async (username) => {
 const getUserCart = async (username, purchaseId) => {
 //   console.log('sending request..')
   const { data } = await api.get(`/users/${username}/purchases/${purchaseId}/shoppingCart`, {
-    headers: { token: localStorage.getItem('token') },
+    headers: { token: localStorage.getItem('locoolToken') },
   })
 //   console.log('request result:', data)
   return data

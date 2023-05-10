@@ -9,31 +9,40 @@ import { ProductsContext } from './contexts/product'
 
 import { useState } from 'react'
 import { FarmsContext } from './contexts/farm'
+import { CartContext } from './contexts/cart'
 
 const App = () => {
   const [products, setProducts] = useState([])
   const [farms, setFarms] = useState([])
+  const [cartStatus, setCartStatus] = useState(false)
 
 
   const productObj = {
     get: products,
-    set: (x)=> setProducts(x)
+    set: (x) => setProducts(x),
   }
 
-    const farmObj = {
-      get: farms,
-      set: (x) => setFarms(x)
-    }
+  const farmObj = {
+    get: farms,
+    set: (x) => setFarms(x),
+  }
+
+  const cartObj = {
+    get: cartStatus,
+    set: (x) => setCartStatus(x),
+  }
 
   return (
     <div className="App">
-      <FarmsContext.Provider value={farmObj}>
-        <ProductsContext.Provider value={productObj}>
-          <ThemeProvider theme={mainTheme}>
-            <RouterProvider router={router} />
-          </ThemeProvider>
-        </ProductsContext.Provider>
-      </FarmsContext.Provider>
+      <CartContext.Provider value={cartObj}>
+        <FarmsContext.Provider value={farmObj}>
+          <ProductsContext.Provider value={productObj}>
+            <ThemeProvider theme={mainTheme}>
+              <RouterProvider router={router} />
+            </ThemeProvider>
+          </ProductsContext.Provider>
+        </FarmsContext.Provider>
+      </CartContext.Provider>
     </div>
   )
 }

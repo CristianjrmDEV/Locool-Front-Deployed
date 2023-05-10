@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <BasicPage />,
         loader: () => {
-          if (localStorage.getItem('token')) {
+          if (localStorage.getItem('locoolToken')) {
             return redirect('/app')
           } else {
             return null
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         path: '/login',
         element: <LoginPage />,
         loader: () => {
-          if (localStorage.getItem('token')) {
+          if (localStorage.getItem('locoolToken')) {
             return redirect('/app')
           } else {
             return null
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <SignupPage />,
         loader: () => {
-          if (localStorage.getItem('token')) {
+          if (localStorage.getItem('locoolToken')) {
             return redirect('/app')
           } else {
             return null
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
     path: '/app',
     element: <MainLayout />,
     loader: () => {
-      if (!localStorage.getItem('token')) {
+      if (!localStorage.getItem('locoolToken')) {
         return redirect('/')
       } else {
         return null

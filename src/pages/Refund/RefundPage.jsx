@@ -10,7 +10,7 @@ const RefundPage = () => {
   const [refunds, setRefunds] = useState([])
 
   const getUserRefunds = async () => {
-    const result = await getRefundsByUsername(localStorage.getItem('username'))
+    const result = await getRefundsByUsername(localStorage.getItem('locoolUsername'))
     setRefunds(result.purchases)
   }
 
