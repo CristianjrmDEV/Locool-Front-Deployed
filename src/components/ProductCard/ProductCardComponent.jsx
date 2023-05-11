@@ -14,10 +14,12 @@ import { mainTheme } from '../../themes/mainTheme'
 import { capitalise } from '../../services/toolkit'
 import PropTypes from 'prop-types'
 
-const ProductCardComponent = ({ product }) => {
+const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
   // console.log('Item', product)
   ProductCardComponent.propTypes = {
     product: PropTypes.object.isRequired,
+    showFarmName: PropTypes.bool,
+    showDescription: PropTypes.bool,
   }
 
   const addProductToCart = () => {
@@ -26,8 +28,8 @@ const ProductCardComponent = ({ product }) => {
         localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
       )
     )
-    console.log('Carrito', cartMap)
-    console.log('Item', product)
+    // console.log('Carrito', cartMap)
+    // console.log('Item', product)
     if (!cartMap.has(product.id)) {
       cartMap.set(product.id, {
         id: product.id,
@@ -45,6 +47,38 @@ const ProductCardComponent = ({ product }) => {
       JSON.stringify([...cartMap])
     )
   }
+
+  const displayFarmName = () => {
+    return (
+      showFarmName && (
+        <>
+          <Typography
+            variant="span"
+            sx={{ fontWeight: 'bold' }}
+          >
+            Farm:
+          </Typography>
+          <Typography variant="span"> {product.farmName}</Typography>
+        </>
+      )
+    )
+  }
+
+    const displayDescription = () => {
+      return (
+        showDescription && (
+          <>
+            <Typography
+              variant="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Description:
+            </Typography>
+            <Typography variant="span"> {product.description}</Typography>
+          </>
+        )
+      )
+    }
 
   return (
     <Card
@@ -88,16 +122,8 @@ const ProductCardComponent = ({ product }) => {
             </Typography>
             <Typography variant="span"> {product.stock}</Typography>
           </Box>
-          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
-            {' '}
-            <Typography
-              variant="span"
-              sx={{ fontWeight: 'bold' }}
-            >
-              Farm:
-            </Typography>
-            <Typography variant="span"> {product.farmName}</Typography>
-          </Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>{displayFarmName()}</Box>
+          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>{displayDescription()}</Box>
         </CardContent>
       </CardActionArea>
       <CardActions>

@@ -28,7 +28,7 @@ const FarmCardComponent = ({ farm }) => {
 
   const handleClick = () => {
     setOne(farm)
-    goTo('/app/farms/details')
+    goTo('/app/farms/details') 
   }
 
   const getOwner = (farm) => {

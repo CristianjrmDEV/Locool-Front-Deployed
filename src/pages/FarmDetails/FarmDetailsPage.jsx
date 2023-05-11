@@ -17,6 +17,8 @@ import { useContext, useEffect, useState } from 'react'
 import { getAllProductsByFarmId } from '../../services/farmService'
 import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import ProductCardComponent from '../../components/ProductCard/ProductCardComponent'
+import { capitalise } from '../../services/toolkit'
+import { getFullMame } from '../../services/toolkit'
 
 const FarmDetailsPage = () => {
   const { getOne } = useContext(FarmsContext)
@@ -30,11 +32,38 @@ const FarmDetailsPage = () => {
     console.log(result)
     setProducts(result)
     setIsLoading(false)
+    console.log(getOne)
   }
 
   useEffect(() => {
     getAllProducts()
   }, [])
+
+  const FarmDetail = ({ field, value }) => {
+    console.log(value)
+    return (
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              width: '300px',
+            }}
+          >
+            <Typography
+              fontWeight="bold"
+              sx={{ textAlign: 'center' }}
+            >
+              {field}
+            </Typography>
+            &nbsp;
+            <Typography>{value}</Typography>
+          </Box>
+        )
+  }
+
+  const validValue =  (value) => (value !== null || value !== '') ? true : false
+
+  const seeOnMap = () => {}
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -59,16 +88,45 @@ const FarmDetailsPage = () => {
           {getOne.name}
         </Typography>
       </Card>
-      <Box sx={{ backgroundColor: mainTheme.palette.green.main }}>
-        <Typography
-          fontWeight="bold"
-          sx={{ textAlign: 'center' }}
-        >
-          Collection point: {getOne.collection_point}
-        </Typography>
-        <Typography sx={{ textAlign: 'center' }}>
-          {getOne.collection_schedule}
-        </Typography>
+      <Box
+        sx={{
+          backgroundColor: mainTheme.palette.green.main,
+          p: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <FarmDetail
+          field="Collection point: "
+          value={getOne.collection_point}
+        />
+        <FarmDetail
+          field="Opening times: "
+          value={getOne.collection_schedule}
+        />
+        <FarmDetail
+          field="Contact: "
+          value={getOne.user.email}
+        />
+        <FarmDetail
+          field="Owner: "
+          value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
+        />
+        <FarmDetail
+          field="Municipality: "
+          value={getOne.municipality.name}
+        />
+        <FarmDetail
+          field="Address: "
+          value={getOne.address}
+        />
+        <ButtonComponent
+          text="See on map"
+          bgColour={'secondary'}
+          width="300px"
+          fx={seeOnMap}
+        />
       </Box>
 
       {isLoading ? (
@@ -110,10 +168,19 @@ const FarmDetailsPage = () => {
         </Box>
       ) : products.length > 0 ? (
         products.map((product, idx) => (
-          <Box key={idx} sx={{m:5, display:'flex', width:'100%', justifyContent:'center'}}>
+          <Box
+            key={idx}
+            sx={{
+              m: 5,
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'center',
+            }}
+          >
             <ProductCardComponent
-             
               product={product.farm_product}
+              showFarmName={false}
+              showDescription={product.farm_product.description}
             />
           </Box>
         ))
