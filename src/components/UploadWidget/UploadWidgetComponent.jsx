@@ -5,24 +5,13 @@ import uploadImageCloudinary from '../../services/cloudinary';
 import PropTypes from 'prop-types'
 import { mainTheme } from '../../themes/mainTheme';
 
-function UploadWidgetComponent({handleImageValue, width, height}) {
+function UploadWidgetComponent({handleImageValue,handleImageLoading, width, height}) {
 
   UploadWidgetComponent.propTypes = {
     handleImageValue: PropTypes.func,
     width: PropTypes.string,
     height: PropTypes.string
   }
-
-  const uploadImage = async(imageUrl) => {
-    const data = new FormData();
-    data.append("file", imageUrl);
-    data.append("upload_preset", "presetUnsignedLocool");
-    data.append("folder", "locool");
-    data.append("cloud_name", "locool");
-
-    const url = await uploadImageCloudinary(data)
-    handleImageValue(url)
-  };
 
   // Get production API keys from Upload.io
   const uploader = Uploader({
@@ -36,7 +25,7 @@ function UploadWidgetComponent({handleImageValue, width, height}) {
         primary: mainTheme.palette.green.main,     // Primary buttons & links
       }
     },
-    multi: true 
+    multi: false
   };
 
   return (
@@ -46,15 +35,19 @@ function UploadWidgetComponent({handleImageValue, width, height}) {
         options={options} // Optional.
         width={width} // Optional.
         height={height} // Optional.
-        onUpdate={(files) => {
-          if (files.length === 0) {
-            console.log("No files selected.");
-          } else {
-            console.log("Files uploaded:");
-            console.log(files.map((f) => f.fileUrl));
-            uploadImage(files[0].fileUrl);
+        onUpdate={files => {
+          console.log('olita')
+          if (files.length === 0){
+            handleImageLoading('')
           }
-        }}
+            files.map(x => {
+              console.log(x)
+              handleImageLoading(x.fileUrl)
+            })
+          }
+        }
+        onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
+        
         
       />
     </Box>
