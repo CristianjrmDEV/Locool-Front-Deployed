@@ -31,7 +31,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
   const [open, setOpen] = React.useState(false)
 
   const checkOpenSetup = () =>
-    localStorage.getItem('noMoreHelp') ? setOpen(false) : setOpen(true)
+    localStorage.getItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`) ? setOpen(false) : setOpen(true)
 
   React.useEffect(() => {
     checkOpenSetup()
@@ -46,7 +46,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
 
   const handleClose = () => {
     setOpen(false)
-    localStorage.setItem('noMoreHelp', true)
+    localStorage.setItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`, true)
   }
 
   const KeyRow = ({ icon, text }) => {
