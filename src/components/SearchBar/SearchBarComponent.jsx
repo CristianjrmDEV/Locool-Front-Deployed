@@ -35,19 +35,26 @@ const SearchBarComponent = () => {
     setQuery(e.target.value.toLowerCase())
   }
 
+  const timer = () => {
+    let timer = setTimeout(() => {
+      setSearchResult('')
+    }, 2000).then(clearTimeout(timer))
+  }
+
+  const showResults = (result) =>
+    result.length > 0
+      ? setSearchResult('see results on the map')
+      : setSearchResult('0 results, try something different')
+
   const handleProductSearch = async () => {
     setSearchResult('')
     setLoading(true)
     const result = await lookForProducts(query)
     GLOBAL_Product.set(result)
     setLoading(false)
-    result.length > 0
-      ? setSearchResult('see results on the map')
-      : setSearchResult('0 results, try something different')
+    showResults(result)
     goTo('/app')
-    setTimeout(() => {
-      setSearchResult('')
-    }, 2000)
+    timer()
   }
 
   const handleFarmSearch = async () => {
@@ -56,13 +63,9 @@ const SearchBarComponent = () => {
     const result = await lookForFarms(query)
     GLOBAL_Farm.set(result)
     setLoading(false)
-    result.length > 0
-      ? setSearchResult('see results on the map')
-      : setSearchResult('0 results, try something different')
+    showResults(result)
     goTo('/app')
-    let timer = setTimeout(() => {
-      setSearchResult('')
-    }, 2000).then(clearTimeout(timer))
+    timer()
   }
 
   const displayHelpBar = () => {
