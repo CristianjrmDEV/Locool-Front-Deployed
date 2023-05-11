@@ -3,25 +3,26 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent';
 import ButtonComponent from '../../components/Button/ButtonComponent';
 import { mainTheme } from '../../themes/mainTheme';
 import { FarmsContext } from '../../contexts/farm';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { getAllProductsByFarmId } from '../../services/farmService';
 
 const FarmDetailsPage = () => {
-    // const { editFarmData } = useContext(FarmsContext)
-
+    // const { getOne } = useContext(FarmsContext)
+    // console.log(getOne)
     // const [products, setProducts] = useState([])
 
     // const [isLoading, setIsLoading] = useState(true);
 
     // const getAllProducts = async () => {
-    //     console.log(editFarmData)
-    //     const result = await getAllProductsByFarmId(editFarmData.id)
+    //     const result = await getAllProductsByFarmId(getOne.id)
     //     console.log(result)
-    //     setMyProducts(result)
+    //     setProducts(result)
     //     setIsLoading(false)
     // }
 
     // const onAddNewProductClick = () => {
-    //     props.handleComponent('FarmAddProductCardComponent')
+    //     // props.handleComponent('FarmAddProductCardComponent')
+    //     //Añadir redireccion a añadir producto con los datos
     // }
 
     // const onEditClick = (data) => {

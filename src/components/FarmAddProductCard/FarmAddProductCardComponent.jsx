@@ -43,9 +43,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   };
 
   const onAddProductClick = async() =>{
-    const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
-    console.log(newProduct)
-    console.log(result)
+    // const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    // console.log(newProduct)
+    // console.log(result)
+    console.log(productStock)
   }
 
   const onCancelClick = () => {
