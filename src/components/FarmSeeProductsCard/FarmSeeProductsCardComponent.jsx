@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Container, Grid, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, CircularProgress, Container, Grid, Skeleton, Stack, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
@@ -13,11 +13,14 @@ const FarmSeeProductsCardComponent = (props) => {
 
     const [myProducts, setMyProducts] = useState([])
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const getAllProducts = async () => {
         console.log(editFarmData)
         const result = await getAllProductsByFarmId(editFarmData.id)
         console.log(result)
         setMyProducts(result)
+        setIsLoading(false)
     }
 
     const onAddNewProductClick = () => {
@@ -82,18 +85,31 @@ const FarmSeeProductsCardComponent = (props) => {
                 <PageTitleComponent title={'SeeProducts'} />
                 <ButtonComponent text='Add new product' bgColour='green' textColour='white' width='300px' fx={onAddNewProductClick} />
             </Box>
-            <Grid container spacing={1} sx={{ p: '10px' }} >
+            {
+                isLoading ? (
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", widht:'300px' }}>
+                        <Stack spacing={1} sx={{ width: 300, height: 300}}>
+                            {/* For variant="text", adjust the height via font-size */}
+                            <Skeleton variant="text" sx={{ fontSize: '5rem' }} />
+                            {/* For other variants, adjust the size with `width` and `height` */}
+                            <Skeleton variant="circular" width={60} height={60} />
+                            <Skeleton variant="rectangular" width={210} height={100} />
+                            <Skeleton variant="rounded" width={210} height={100} />
+                        </Stack>
+                    </Box>
+                ) : myProducts.length > 0 ? (
+                    <Grid container spacing={1} justifyContent="center" alignItems="center" sx={{ p: '10px' }}  >
                 {
                     myProducts.map((product, idx) => {
                         console.log(product)
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                 <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-                                    <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', maxHeight: '100%' }} image={product.farm_product.image_url} title='FarmProduct' />
+                                    <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />     
                                     <CardContent>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography>
-                                                Name: {product.name}
+                                                {product.name}
                                             </Typography>
                                             <Typography>
                                                 {product.farm_product.price}€/kg
@@ -110,6 +126,14 @@ const FarmSeeProductsCardComponent = (props) => {
                     })
                 }
             </Grid>
+                ) : (
+                    <Container sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", height:'400px'}}>
+                        <Typography align='center'>You dont have any products added to your farm</Typography>
+                        <ButtonComponent text='Add new product' bgColour='green' textColour='white' width='300px' fx={onAddNewProductClick} />
+                    </Container>
+                )
+            }
+                
         </Box>
 
     )

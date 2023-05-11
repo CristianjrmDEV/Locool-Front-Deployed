@@ -2,13 +2,14 @@ import { Avatar, Box, Card, CardContent, CardHeader, FormControl, InputLabel, Me
 import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
-import { mainTheme } from '../../themes/mainTheme'
 import { addProductToFarm } from '../../services/userService'
 import { FarmPageContext } from '../../contexts/farm'
 import { getAllProducts } from '../../services/userService'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 import PropTypes from 'prop-types'
-
+import defaultPepinillo from '../../assets/images/product/defaultPepinillo.jpg'
+import { Image } from '@mui/icons-material'
+import { mainTheme } from '../../themes/mainTheme'
 
 const FarmAddProductCardComponent = ({handleComponent}) => {
 
@@ -42,9 +43,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   };
 
   const onAddProductClick = async() =>{
-    const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
-    console.log(newProduct)
-    console.log(result)
+    // const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    // console.log(newProduct)
+    // console.log(result)
+    console.log(productStock)
   }
 
   const onCancelClick = () => {
@@ -59,7 +61,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   }
 
   const handleImageValue = (img) => {
+    console.log(img)
+    console.log(imgSelected)
     setImgSelected(img)
+    console.log(imgSelected)
   }
 
   const handleMeasureChange = (e) =>{
@@ -85,17 +90,16 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   },[])
 
   return (
-    <Card color='secondary' sx={{marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
-      <CardHeader
-        title={<PageTitleComponent title={'Add product'} />}
-        action={
-          <ButtonComponent text='Upload image' bgColour='green' textColour='white'/>
-        }
-      />
+    <Box >
+      <Box sx={{width:'600px', margin:'auto'}}>
+        <PageTitleComponent title={'Add new product to farm'} />
+      </Box>
+      <Card color='secondary' sx={{width: '600px', margin: 'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
       <CardContent>
-        <Typography>{editFarmData.name}</Typography>
-        <Box>
-          <UploadWidgetComponent handleImageValue={handleImageValue} width='100px' height='150px'/>
+        <Typography align="center">{editFarmData.name}</Typography>
+        <Box sx={{display: 'flex',height:'150px', marginY:'20px'}}>
+        <Image sx={{ width: '50%', height: '100%' }} src={imgSelected === '' ? defaultPepinillo : imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/>
+          <UploadWidgetComponent handleImageValue={handleImageValue} width='50%' height='150px'/>
         </Box>
         <FormControl fullWidth>
         <InputLabel id="top">Type of product</InputLabel>
@@ -187,6 +191,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         </Box>
       </CardContent>
     </Card>
+    </Box>
   )
 }
 

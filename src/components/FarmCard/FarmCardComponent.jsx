@@ -15,6 +15,7 @@ import { capitalise, getFullMame } from '../../services/toolkit'
 import PropTypes from 'prop-types'
 import ButtonComponent from '../Button/ButtonComponent'
 import { FarmsContext } from '../../contexts/farm'
+import { useNavigate } from 'react-router-dom'
 
 const FarmCardComponent = ({ farm }) => {
   FarmCardComponent.propTypes = {
@@ -23,8 +24,11 @@ const FarmCardComponent = ({ farm }) => {
 
   const { setOne } = useContext(FarmsContext)
 
+  const goTo = useNavigate()
+
   const handleClick = () => {
     setOne(farm)
+    goTo('/app/farms/details')
   }
 
   const getOwner = (farm) => {

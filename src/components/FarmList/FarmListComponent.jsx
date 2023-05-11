@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Container, Grid, Skeleton, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState,useContext } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
@@ -13,11 +13,14 @@ const FarmListComponent = (props) => {
 
     const[myFarms,setMyFarms] = useState([])
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const obtainMyFarms = async() => {
       const userName = localStorage.getItem('locoolUsername')
       const result = await getMyFarms(userName)
       console.log(result)
       setMyFarms(result)
+      setIsLoading(false)
     }
   
     const onAddNewFarmClick = () =>{
@@ -73,7 +76,20 @@ const FarmListComponent = (props) => {
                 <PageTitleComponent title={'Farm'} />
                 <ButtonComponent text='Add new farm' bgColour='green' textColour='white' width='300px' fx={onAddNewFarmClick}/>
             </Box>
-            <Grid container spacing={1} sx={{p:'10px'}}>
+            {
+                isLoading ? (
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", widht:'300px' }}>
+                        <Stack spacing={1} sx={{ width: 300, height: 300}}>
+                            {/* For variant="text", adjust the height via font-size */}
+                            <Skeleton variant="text" sx={{ fontSize: '5rem' }} />
+                            {/* For other variants, adjust the size with `width` and `height` */}
+                            <Skeleton variant="circular" width={60} height={60} />
+                            <Skeleton variant="rectangular" width={210} height={100} />
+                            <Skeleton variant="rounded" width={210} height={100} />
+                        </Stack>
+                    </Box>
+                ) : myFarms.length > 0 ? (
+                    <Grid container spacing={1} justifyContent="center" alignItems="center" sx={{p:'10px'}}>
             {
                 myFarms.map((farm,idx)=>{
                 return(
@@ -117,6 +133,13 @@ const FarmListComponent = (props) => {
                 })
             }
             </Grid>
+                ) : (
+                    <Container sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", height:'400px'}}>
+                        <Typography align='center'>You dont have any farms added</Typography>
+                        <ButtonComponent text='Add new farm' bgColour='green' textColour='white' width='300px' fx={onAddNewFarmClick}/>
+                    </Container>
+                )
+            }
         </Box>
     )
 }
