@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import defaultPepinillo from '../../assets/images/product/defaultPepinillo.jpg'
 import { Image } from '@mui/icons-material'
 import { mainTheme } from '../../themes/mainTheme'
+import uploadImageCloudinary from '../../services/cloudinary'
 
 const FarmAddProductCardComponent = ({handleComponent}) => {
 
@@ -20,13 +21,14 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   const { editFarmData } = useContext(FarmPageContext)
 
   const [productsType,setProductsType] = useState([])
+  
+  const [imageLoading,setImageLoading] = useState('')
 
   const [selectedOption, setSelectedOption] = useState('');
   const [imgSelected, setImgSelected] = useState('')
   const [productStock,setProductStock] = useState('')
   const [productPrice,setProductPrice] = useState('')
   const [productDescription,setProductDescription] = useState('')
-
   const [productMeasurement, setProductMeasurement] = useState('');
 
   const newProduct = {
@@ -34,6 +36,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     image_url: imgSelected,
     stock: productStock,
     price: productPrice,
+    unit_of_sale: productMeasurement,
     description: productDescription
   }
 
@@ -42,11 +45,34 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     console.log(event.target.value)
   };
 
+  const uploadImage = async(imageUrl) => {
+    const data = new FormData();
+    data.append("file", imageUrl);
+    data.append("upload_preset", "presetUnsignedLocool");
+    data.append("folder", "locool");
+    data.append("cloud_name", "locool");
+
+    const url = await uploadImageCloudinary(data)
+    setImgSelected(url)
+  };
+
   const onAddProductClick = async() =>{
-    // const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    
     // console.log(newProduct)
     // console.log(result)
-    console.log(productStock)
+    console.log(productStock)//''
+    console.log(selectedOption)//''
+    console.log(productPrice)
+    console.log(imgSelected)
+    console.log(productDescription)
+    console.log(productMeasurement)
+
+    
+    if(imgSelected !== ''){
+      await uploadImage(imgSelected)
+    }
+    const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    console.log(result)
   }
 
   const onCancelClick = () => {
@@ -58,6 +84,14 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     console.log(result)
     setProductsType(result)
 
+  }
+
+  const handleImageLoading = (imgLoading) =>{
+    console.log(imgLoading)
+    console.log(imageLoading)
+    setImageLoading(imgLoading)
+    console.log(imageLoading)
+    setImgSelected(imgLoading)
   }
 
   const handleImageValue = (img) => {
@@ -97,9 +131,16 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
       <Card color='secondary' sx={{width: '600px', margin: 'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
       <CardContent>
         <Typography align="center">{editFarmData.name}</Typography>
-        <Box sx={{display: 'flex',height:'150px', marginY:'20px'}}>
-        <Image sx={{ width: '50%', height: '100%' }} src={imgSelected === '' ? defaultPepinillo : imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/>
-          <UploadWidgetComponent handleImageValue={handleImageValue} width='50%' height='150px'/>
+        <Box sx={{display: 'flex',height:'200px', margin:'20px 0px 40px 0px'}}>
+          {/* <Image sx={{ width: '50%', height: '100%' }} src={imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/> */}
+          <CardMedia
+            component="img"
+            height="auto"
+            alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}
+            image={imgSelected === '' ? defaultPepinillo : imgSelected}
+            style={{ objectFit: 'fill'}}
+          />
+          <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading}  width='50%' height='250px'/>
         </Box>
         <FormControl fullWidth>
         <InputLabel id="top">Type of product</InputLabel>
@@ -138,7 +179,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
               sx={{backgroundColor: '#F5F5F5',marginBottom: '20px'}}
             >
               <MenuItem value="kg">kg</MenuItem>
-              <MenuItem value="litre">litre</MenuItem>
+              <MenuItem value="liter">litre</MenuItem>
               <MenuItem value="unit">unit</MenuItem>
             </Select>
           </FormControl>
