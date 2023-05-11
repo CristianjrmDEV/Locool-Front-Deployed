@@ -3,11 +3,14 @@ import { Uploader } from "uploader";
 import { UploadDropzone } from "react-uploader";
 import uploadImageCloudinary from '../../services/cloudinary';
 import PropTypes from 'prop-types'
+import { mainTheme } from '../../themes/mainTheme';
 
 function UploadWidgetComponent({handleImageValue, width, height}) {
 
   UploadWidgetComponent.propTypes = {
-    handleImageValue: PropTypes.func
+    handleImageValue: PropTypes.func,
+    width: PropTypes.string,
+    height: PropTypes.string
   }
 
   const uploadImage = async(imageUrl) => {
@@ -27,7 +30,14 @@ function UploadWidgetComponent({handleImageValue, width, height}) {
   });
 
   // Customize the dropzone UI (see "customization"):
-  const options = { multi: true };
+  const options = { 
+    styles: {
+      colors: {
+        primary: mainTheme.palette.green.main,     // Primary buttons & links
+      }
+    },
+    multi: true 
+  };
 
   return (
     <Box>
@@ -45,6 +55,7 @@ function UploadWidgetComponent({handleImageValue, width, height}) {
             uploadImage(files[0].fileUrl);
           }
         }}
+        
       />
     </Box>
   )

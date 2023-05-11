@@ -21,6 +21,7 @@ import PaymentSelectionComponent from '../components/PaymentSelection/PaymentSel
 import SearchPage from '../pages/Search/SearchPage'
 import PurchasePage from '../pages/Purchase/PurchasePage'
 import NotFoundPage from '../pages/NotFound/NotFoundPage'
+import FarmDetailsPage from '../pages/FarmDetails/FarmDetailsPage'
 
 
 
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: '/app/farms',
         element: <FarmPage />,
+      },
+      {
+        path: '/app/farms/details',
+        element: <FarmDetailsPage />
       },
       {
         path: '/app/cart',
