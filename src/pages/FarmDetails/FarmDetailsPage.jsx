@@ -14,13 +14,16 @@ import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
 import { useContext, useEffect, useState } from 'react'
-import { getAllProductsByFarmId } from '../../services/farmService'
+import { getAllProductsByFarmId, lookForFarms } from '../../services/farmService'
 import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import ProductCardComponent from '../../components/ProductCard/ProductCardComponent'
 import { capitalise } from '../../services/toolkit'
 import { getFullMame } from '../../services/toolkit'
+import { useNavigate } from 'react-router-dom'
 
 const FarmDetailsPage = () => {
+  const GLOBAL_Farm = useContext(FarmsContext)
+
   const { getOne } = useContext(FarmsContext)
   //   console.log(getOne)
   const [products, setProducts] = useState([])
@@ -42,28 +45,49 @@ const FarmDetailsPage = () => {
   const FarmDetail = ({ field, value }) => {
     console.log(value)
     return (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              width: '300px',
-            }}
-          >
-            <Typography
-              fontWeight="bold"
-              sx={{ textAlign: 'center' }}
-            >
-              {field}
-            </Typography>
-            &nbsp;
-            <Typography>{value}</Typography>
-          </Box>
-        )
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          width: '300px',
+          p: 0,
+          m: 0,
+        }}
+      >
+        <Typography
+          fontWeight="bold"
+          sx={{ textAlign: 'center' }}
+        >
+          {field}
+        </Typography>
+        &nbsp;
+        <Typography>{value}</Typography>
+      </Box>
+    )
   }
 
-  const validValue =  (value) => (value !== null || value !== '') ? true : false
+  // const validValue = (value) => (value !== null || value !== '' ? true : false)
 
-  const seeOnMap = () => {}
+  // const [searchResult, setSearchResult] = useState('')
+
+  // const handleFarmSearch = async () => {
+  //   setSearchResult('')
+  //   setLoading(true)
+  //   const result = await lookForFarms(query)
+  //   GLOBAL_Farm.set(result)
+  //   setLoading(false)
+  //   showResults(result)
+  //   goTo('/app')
+  //   timer()
+  // }
+
+  const goTo = useNavigate()
+
+  const seeOnMap = async () => {
+    const result = await lookForFarms(getOne.name)
+    GLOBAL_Farm.set(result)
+    goTo('/app')
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
