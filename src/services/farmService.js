@@ -16,10 +16,15 @@ const lookForFarms = async (query) => {
 }
 
 const getAllProductsByFarmId = async (id) => {
-  // console.log('before retrieveing data')
-  const { data } = await api.get(`/farms/${id}/product`)
-  // console.log('request result:', data)
-  return data
+  try {
+    
+    // console.log('before retrieveing data')
+    const { data } = await api.get(`/farms/${id}/product`)
+    console.log('getAllProductsByFarmId result:', data)
+    return data
+  } catch(err) {
+    return []
+  }
 }
 
 const getFarms = async () => {
