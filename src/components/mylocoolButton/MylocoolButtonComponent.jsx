@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 const MylocoolButtonComponent = ({bgColor}) => {
     MylocoolButtonComponent.propTypes = {
-      bgColor: PropTypes.string.isRequired
+      bgColor: PropTypes.string
     }
   return (
     <Button

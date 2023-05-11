@@ -27,16 +27,21 @@ a {
 /* Leaflet maps styles - Important! */
 
 /* height of the map container */
-.leaflet-container {
+/* .leaflet-container {
   height: 100%;
   width: 100%;
-}
+} */
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background-color: #424142;
 }
 
+.leaflet-popup-content-wrapper{
+  padding: 6px 0;
+}
+
 .leaflet-container a.leaflet-popup-close-button span {
   color: #fff;
+  font-size: 1.5rem;
 }

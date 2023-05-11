@@ -12,15 +12,16 @@ import { divIcon } from 'leaflet'
 import L from 'leaflet'
 import PropTypes from 'prop-types'
 
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { ProductsContext } from '../../contexts/product'
 import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
 import FarmCardComponent from '../FarmCard/FarmCardComponent'
 import logoSymbol from './../../assets/logo/logo-symbol.svg'
-import farmSymbol from './../../assets/icons/farm-icon.svg'
+import farmSymbol from './../../assets/icons/tractor-icon.svg'
 import personSymbol from './../../assets/icons/person-icon.svg'
 import markerSymbol from './../../assets/icons/marker-icon.svg'
+import { mainTheme } from '../../themes/mainTheme'
 
 
 const MapComponent = () => {
@@ -34,27 +35,27 @@ const MapComponent = () => {
     shadowSize: [50, 64], // size of the shadow
     iconAnchor: [22, 60], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [-3, -76],
+    popupAnchor: [3, -100],
   })
 
   const farmIcon = new L.Icon({
     iconUrl: farmSymbol,
     iconRetinaUrl: farmSymbol,
-    iconSize: [50, 95], // size of the icon
+    iconSize: [50, 50], // size of the icon
     shadowSize: [50, 64], // size of the shadow
-    iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
+    iconAnchor: [-20, 22], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [-3, -76],
+    popupAnchor: [40, -56],
   })
 
     const myLocationIcon = new L.Icon({
       iconUrl: markerSymbol,
       iconRetinaUrl: markerSymbol,
-      iconSize: [50, 75], // size of the icon
+      iconSize: [50, 50], // size of the icon
       shadowSize: [50, 64], // size of the shadow
       iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62], // the same for the shadow
-      popupAnchor: [-3, -76],
+      popupAnchor: [24, -50],
     })
 
   const MyLocationMarker = () => {
@@ -72,7 +73,7 @@ const MapComponent = () => {
     return position === null ? null : (
       <Marker position={position} icon={myLocationIcon}>
         <Popup>
-          <Box>My location</Box>
+          <Box sx={{color: mainTheme.palette.white.main, fontWeight: 'bold'}}>I am here!</Box>
         </Popup>
       </Marker>
     )
@@ -127,25 +128,15 @@ const MapComponent = () => {
         center={[27.956918575017003, -15.6050452586645]}
         zoom={10}
       >
-        {/* OPEN STREEN MAPS TILES */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          //best 
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-          // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
-          // url="https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png"
-          // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-          // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-
-          //not so good
-          // url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
-          // url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          // url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+          // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MyLocationMarker />
         {displayProducts()}
         {displayFarms()}
       </MapContainer>
+      <Box>dafsdf</Box>
     </Box>
   )
 }

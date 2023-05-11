@@ -7,15 +7,17 @@ import '@fontsource/quicksand'
 import './App.css'
 import { ProductsContext } from './contexts/product'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FarmsContext } from './contexts/farm'
 import { CartContext } from './contexts/cart'
+import { getFarms } from './services/farmService'
 
 const App = () => {
   const [products, setProducts] = useState([])
   const [farms, setFarms] = useState([])
-  const [cartStatus, setCartStatus] = useState(false)
+  const [oneFarm, setOneFarm] = useState({})
 
+  const [cartStatus, setCartStatus] = useState(false)
 
   const productObj = {
     get: products,
@@ -25,12 +27,23 @@ const App = () => {
   const farmObj = {
     get: farms,
     set: (x) => setFarms(x),
+    getOne: oneFarm,
+    setOne: (x) => setOneFarm(x)
   }
 
   const cartObj = {
     get: cartStatus,
     set: (x) => setCartStatus(x),
   }
+
+  const displayFarms = async () => {
+    const result = await getFarms()
+    setFarms(result)
+  }
+
+  useEffect(()=>{
+    displayFarms()
+  },[])
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './FarmCardComponent.css'
 import {
   Box,
@@ -14,10 +14,17 @@ import { mainTheme } from '../../themes/mainTheme'
 import { capitalise, getFullMame } from '../../services/toolkit'
 import PropTypes from 'prop-types'
 import ButtonComponent from '../Button/ButtonComponent'
+import { FarmsContext } from '../../contexts/farm'
 
 const FarmCardComponent = ({ farm }) => {
   FarmCardComponent.propTypes = {
     farm: PropTypes.object.isRequired,
+  }
+
+  const { setOne } = useContext(FarmsContext)
+
+  const handleClick = () => {
+    setOne(farm)
   }
 
   const getOwner = (farm) => {
@@ -79,14 +86,6 @@ const FarmCardComponent = ({ farm }) => {
             </Typography>
             <Typography variant="span"> {farm.municipality.name}</Typography>
           </Box>
-          {/* <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
-            <Typography variant="span"  sx={{ fontWeight: 'bold' }}>Collection:</Typography>
-            <Typography variant="span"> {farm.collection_point}</Typography>
-          </Box>
-          <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
-            <Typography variant="span"  sx={{ fontWeight: 'bold' }}>Schedule:</Typography>
-            <Typography variant="span"> {farm.collection_schedule}</Typography>
-          </Box> */}
           <Box sx={{ pb: 0.5, fontSize: '1rem' }}>
             <Typography
               variant="span"
@@ -108,7 +107,7 @@ const FarmCardComponent = ({ farm }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <ButtonComponent text="See farm" />
+        <ButtonComponent text="See farm" fx={handleClick} />
       </CardActions>
     </Card>
   )
