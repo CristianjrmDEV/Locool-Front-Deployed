@@ -90,15 +90,12 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   return (
     <Box >
+      <Box sx={{width:'600px', margin:'auto'}}>
+        <PageTitleComponent title={'Add new product to farm'} />
+      </Box>
       <Card color='secondary' sx={{width: '600px', margin: 'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
-      <CardHeader
-        title={<PageTitleComponent title={'Add product'} />}
-        action={
-          <ButtonComponent text='Upload image' bgColour='green' textColour='white'/>
-        }
-      />
       <CardContent>
-        <Typography>{editFarmData.name}</Typography>
+        <Typography align="center">{editFarmData.name}</Typography>
         <Box sx={{display: 'flex',height:'150px', marginY:'20px'}}>
         <Image sx={{ width: '50%', height: '100%' }} src={imgSelected === '' ? defaultPepinillo : imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/>
           <UploadWidgetComponent handleImageValue={handleImageValue} width='50%' height='150px'/>
