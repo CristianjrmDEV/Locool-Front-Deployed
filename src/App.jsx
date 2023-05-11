@@ -11,6 +11,8 @@ import { useState } from 'react'
 import { FarmsContext } from './contexts/farm'
 import { CartContext } from './contexts/cart'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const App = () => {
   const [products, setProducts] = useState([])
   const [farms, setFarms] = useState([])

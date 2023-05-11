@@ -5,7 +5,7 @@ import BasicPageBodyCardComponent from './BasicPageBodyCard/BasicPageBodyCardCom
 export default function BasicBodyComponent() {
 
   return (
-    <Grid container justifyContent="center" sx={{margin: 2}}>
+    <Grid container justifyContent="center" sx={{margin: "10px 0 10px 0"}}>
       <Grid item xs={12} md={6} >
         <Grid container spacing={6} justifyContent="center">
           <BasicPageBodyCardComponent />
