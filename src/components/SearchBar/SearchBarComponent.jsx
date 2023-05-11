@@ -45,6 +45,9 @@ const SearchBarComponent = () => {
       ? setSearchResult('see results on the map')
       : setSearchResult('0 results, try something different')
     goTo('/app')
+    setTimeout(() => {
+      setSearchResult('')
+    }, 2000)
   }
 
   const handleFarmSearch = async () => {
@@ -57,6 +60,9 @@ const SearchBarComponent = () => {
       ? setSearchResult('see results on the map')
       : setSearchResult('0 results, try something different')
     goTo('/app')
+    setTimeout(() => {
+      setSearchResult('')
+    }, 2000)
   }
 
   const displayHelpBar = () => {
@@ -68,7 +74,7 @@ const SearchBarComponent = () => {
           justifyContent: 'space-between',
           mt: 1,
           px: 2,
-          height: '50px'
+          height: '50px',
         }}
       >
         <Box
@@ -76,8 +82,8 @@ const SearchBarComponent = () => {
             display: 'flex',
             alignSelf: 'center',
             justifyContent: 'center',
-            width:'100%',
-            pl:2
+            width: '100%',
+            pl: 2,
           }}
         >
           <Box>{searchResult}</Box>
