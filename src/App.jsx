@@ -15,6 +15,8 @@ import { getFarms } from './services/farmService'
 const App = () => {
   const [products, setProducts] = useState([])
   const [farms, setFarms] = useState([])
+  const [oneFarm, setOneFarm] = useState({})
+
   const [cartStatus, setCartStatus] = useState(false)
 
   const productObj = {
@@ -25,6 +27,8 @@ const App = () => {
   const farmObj = {
     get: farms,
     set: (x) => setFarms(x),
+    getOne: oneFarm,
+    setOne: (x) => setOneFarm(x)
   }
 
   const cartObj = {
