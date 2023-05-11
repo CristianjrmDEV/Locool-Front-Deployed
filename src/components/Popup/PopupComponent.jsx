@@ -103,7 +103,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
               textColor="green"
             />
           </DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{ width:'350px', m:'auto'}}>
             <KeyRow
               icon={<MagnifierIcon size={40} />}
               text="Click to look for products"
@@ -130,6 +130,8 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
             <ButtonComponent
               text="OK"
               fx={handleCloseButton}
+              width={'300px'}
+              margin={'0 auto 10px auto'}
             />
           </DialogActions>
         </Box>
