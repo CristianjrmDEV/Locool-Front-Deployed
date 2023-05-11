@@ -22,7 +22,7 @@ const DrawerComponent = ({
   cartBtn,
   cartComponent,
   align,
-  greetingMessage
+  greetingMessage,
 }) => {
   DrawerComponent.propTypes = {
     clickable: PropTypes.object,
@@ -49,14 +49,18 @@ const DrawerComponent = ({
   const drawer = (
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <List sx={{ p: 0 }}>
-        <ListItem
-          sx={{ backgroundColor: mainTheme.palette.primary.main, pt: 6 }}
-        >
-          <Greeting
-            greeting={greeting}
-            message={greetingMessage}
-          />
-        </ListItem>
+        {greeting ? (
+          <ListItem
+            sx={{ backgroundColor: mainTheme.palette.primary.main, pt: 6 }}
+          >
+            <Greeting
+              greeting={greeting}
+              message={greetingMessage}
+            />
+          </ListItem>
+        ) : (
+          ''
+        )}
 
         <DrawerTitleComponent
           title={title}

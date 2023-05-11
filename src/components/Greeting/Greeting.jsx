@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 const Greeting = ({ greeting, message, textColor }) => {
   Greeting.propTypes = {
-    greeting: PropTypes.bool.isRequired,
+    greeting: PropTypes.bool,
     message: PropTypes.string,
     textColor: PropTypes.string,
   }
