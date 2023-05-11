@@ -60,9 +60,9 @@ const SearchBarComponent = () => {
       ? setSearchResult('see results on the map')
       : setSearchResult('0 results, try something different')
     goTo('/app')
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setSearchResult('')
-    }, 2000)
+    }, 2000).then(clearTimeout(timer))
   }
 
   const displayHelpBar = () => {
