@@ -7,6 +7,9 @@ import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 import farmDefault from '../../assets/images/farm/farmDefault.jpg'
 import PropTypes from 'prop-types'
+import uploadImageCloudinary from '../../services/cloudinary'
+import { PopupComponent } from '../Popup/PopupComponent'
+import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 
 const FarmAddCardComponent = ({handleComponent}) => {
   
@@ -20,6 +23,8 @@ const FarmAddCardComponent = ({handleComponent}) => {
   const [farmCollectionSchedule,setFarmCollectionSchedule] = useState('')
   const [farmLatitude,setFarmLatitude] = useState('')
   const [farmLongitude,setFarmLongitude] = useState('')
+
+  const [msgFinal,setMsgFinal] = useState(false)
 
   const [imageLoading,setImageLoading] = useState('')
   const [imgSelected, setImgSelected] = useState('')
@@ -37,8 +42,12 @@ const FarmAddCardComponent = ({handleComponent}) => {
 
   const handleAddFarmButton = async() =>{
     console.log(localStorage.username)
+    if(imgSelected !== ''){
+      await uploadImage(imgSelected)
+    }
     const response = await createFarm(localStorage.username,farmData)
     console.log(response)
+    setMsgFinal(true)
   }
 
   const handleImageLoading = (imgLoading) =>{
@@ -54,6 +63,10 @@ const FarmAddCardComponent = ({handleComponent}) => {
     handleComponent('FarmListComponent')
   }
 
+  const handleFinishButton = () =>{
+    handleComponent('FarmListComponent')
+  }
+
   const handleLatitudeChange = (e) =>{
     const latitudeRegex = /^\d{0,2}(?:\.\d{0,5})?$/
     if(latitudeRegex.test(e.target.value)){
@@ -61,6 +74,17 @@ const FarmAddCardComponent = ({handleComponent}) => {
     }
     
   }
+
+  const uploadImage = async(imageUrl) => {
+    const data = new FormData();
+    data.append("file", imageUrl);
+    data.append("upload_preset", "presetUnsignedLocool");
+    data.append("folder", "locool");
+    data.append("cloud_name", "locool");
+
+    const url = await uploadImageCloudinary(data)
+    setImgSelected(url)
+  };
 
   const handleLongitudeChange = (e) =>{
     const longitudeRegex = /^\d{0,3}(?:\.\d{0,5})?$/
@@ -145,6 +169,9 @@ const FarmAddCardComponent = ({handleComponent}) => {
           </Box>
         </CardContent>
       </Card>
+      {
+        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishButton}/> : false
+      }
     </Box>
 
   )

@@ -11,6 +11,8 @@ import defaultPepinillo from '../../assets/images/product/defaultPepinillo.jpg'
 import { Image } from '@mui/icons-material'
 import { mainTheme } from '../../themes/mainTheme'
 import uploadImageCloudinary from '../../services/cloudinary'
+import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
+import {PopupComponent} from '../Popup/PopupComponent'
 
 const FarmAddProductCardComponent = ({handleComponent}) => {
 
@@ -30,6 +32,8 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   const [productPrice,setProductPrice] = useState('')
   const [productDescription,setProductDescription] = useState('')
   const [productMeasurement, setProductMeasurement] = useState('');
+
+  const [msgFinal,setMsgFinal] = useState(true)
 
   const newProduct = {
     productId: selectedOption,
@@ -73,6 +77,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     }
     const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
     console.log(result)
+    setMsgFinal(true)
   }
 
   const onCancelClick = () => {
