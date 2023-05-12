@@ -115,6 +115,7 @@ const MapComponent = () => {
                 <ProductCardComponent
                   product={product}
                   showFarmName={true}
+                  seeFarmButton={true}
                 />
               </Popup>
             </Marker>

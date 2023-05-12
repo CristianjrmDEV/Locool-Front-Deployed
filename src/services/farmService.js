@@ -20,7 +20,7 @@ const getAllProductsByFarmId = async (id) => {
     
     // console.log('before retrieveing data')
     const { data } = await api.get(`/farms/${id}/product`)
-    console.log('getAllProductsByFarmId result:', data)
+    // console.log('getAllProductsByFarmId result:', data)
     return data
   } catch(err) {
     return []

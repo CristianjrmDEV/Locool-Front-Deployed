@@ -86,7 +86,7 @@ const SearchBarComponent = () => {
     return (
       <Box
         sx={{
-          backgroundColor: mainTheme.palette.green.main,
+          // backgroundColor: mainTheme.palette.green.main,
           display: 'flex',
           justifyContent: 'space-between',
           mt: 1,
@@ -106,17 +106,22 @@ const SearchBarComponent = () => {
           <Box>{searchResult}</Box>
           <Box>{loading ? <LoadingIcon size={50} /> : ''}</Box>
         </Box>
-        <PopupComponent />
       </Box>
     )
   }
 
   return (
     <>
-      <Box sx={{ backgroundColor: mainTheme.palette.secondary.main, pt: 1 }}>
-        <Paper
+      <Box
+        sx={{
+          backgroundColor: mainTheme.palette.secondary.main,
+          pt: 1,
+          display: 'flex',
+          justifyContent:'space-between'
+        }}
+      >
+        <Box
           component="form"
-          elevation={0}
           sx={{
             m: 'auto',
             p: '2px 4px',
@@ -124,6 +129,7 @@ const SearchBarComponent = () => {
             alignItems: 'center',
             width: 400,
             borderRadius: 10,
+            backgroundColor: mainTheme.palette.white.main,
           }}
         >
           <InputBase
@@ -169,8 +175,10 @@ const SearchBarComponent = () => {
           >
             <WarehouseIcon fontSize="large" />
           </IconButton>
-        </Paper>
+        </Box>
         {displayHelpBar()}
+
+        <PopupComponent />
       </Box>
     </>
   )

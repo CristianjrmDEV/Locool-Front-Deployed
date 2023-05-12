@@ -21,20 +21,45 @@ import { ProductsContext } from '../../contexts/product'
 import { getFarmById } from '../../services/farmService'
 import { useState } from 'react'
 
-const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
+const ProductCardComponent = ({
+  product,
+  showFarmName,
+  showDescription,
+  seeFarmButton,
+}) => {
   // console.log('Item', product)
   ProductCardComponent.propTypes = {
     product: PropTypes.object.isRequired,
     showFarmName: PropTypes.bool,
     showDescription: PropTypes.bool,
+    seeFarmButton: PropTypes.bool,
   }
 
   const handleGetFarm = async () => {
     const result = await getFarmById(product.farmId)
-    setOne(result)
+    const objResult = {
+      collection_point: result.collection_point,
+      collection_schedule: result.collection_schedule,
+      user: {
+        email: result.user.email,
+        first_name: result.user.first_name,
+        last_name: result.user.last_name,
+      },
+      municipality: { name: result.municipality.name },
+      image_url: result.image_url,
+      name: result.name,
+      address: result.address,
+      id: result.id,
+      latitude: result.latitude,
+      longitude: result.longitude
+    }
+    setOne(objResult)
+    // console.log('get on from product card: ',getOne)
   }
 
   const { setOne } = useContext(FarmsContext)
+  const { getOne } = useContext(FarmsContext)
+
 
   const goTo = useNavigate()
 
@@ -100,6 +125,19 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
     )
   }
 
+  const displaySeeFarmButton = () => {
+    return (
+      seeFarmButton && (
+        <ButtonComponent
+          text="See farm"
+          fx={handleClick}
+          bgColour={'primary'}
+          textColour={'white'}
+        />
+      )
+    )
+  }
+
   return (
     <Card
       sx={{
@@ -146,20 +184,15 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
           <Box sx={{ pb: 0.5, fontSize: '1rem' }}>{displayDescription()}</Box>
         </CardContent>
       </CardActionArea>
-      <CardActions sx={{display: 'flex', justifyContent:'space-between'}}>
-        <Box>
-          <ButtonComponent
-            text="See farm"
-            fx={handleClick}
-          />
-        </Box>
-        <Box>
+      <CardActions>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          {displaySeeFarmButton()}
           <ButtonComponent
             text="Add to Cart"
             fx={addProductToCart}
+            margin={'10px 0 2px 0'}
           />
         </Box>
-
       </CardActions>
     </Card>
   )

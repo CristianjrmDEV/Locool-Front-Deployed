@@ -141,7 +141,7 @@ const FarmInfosPage = () => {
     <Box
       sx={{
         backgroundColor: mainTheme.palette.secondary.main,
-        p: 1,
+        // p: 1,
         width: {
           xs: '60%',
           sm: '50%',
@@ -158,18 +158,18 @@ const FarmInfosPage = () => {
           field="Open: "
           value={getOne.collection_schedule}
         />
-        {/* <FarmInfo
+        <FarmInfo
           field="Contact: "
           value={getOne.user.email}
-        /> */}
-        {/* <FarmInfo
+        />
+        <FarmInfo
           field="Owner: "
           value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
-        /> */}
-        {/* <FarmInfo
+        />
+        <FarmInfo
           field="Municipality: "
           value={getOne.municipality.name}
-        />{' '} */}
+        />{' '}
         <FarmInfo
           field="Address: "
           value={getOne.address}
