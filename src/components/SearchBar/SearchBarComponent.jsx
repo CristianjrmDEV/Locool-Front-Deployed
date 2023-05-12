@@ -104,9 +104,7 @@ const SearchBarComponent = () => {
     <>
       <Box
         sx={{
-          display: {
-            xs: 'flex',
-          },
+          display: 'flex',
           gridTemplateColumns: {
             xs: '. 50% 25%',
           },

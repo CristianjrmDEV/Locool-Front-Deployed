@@ -50,21 +50,21 @@ const ProductCardComponent = ({
       name: result.name,
       address: result.address,
       id: result.id,
-      latitude: result.latitude,
-      longitude: result.longitude
+        // latitude: result.latitude,
+      // longitude: result.longitude
     }
     setOne(objResult)
-    // console.log('get on from product card: ',getOne)
   }
-
+  
   const { setOne } = useContext(FarmsContext)
   const { getOne } = useContext(FarmsContext)
-
-
+  
+  
   const goTo = useNavigate()
-
+  
   const handleClick = () => {
     handleGetFarm()
+    console.log('get on from product card: ',getOne)
     goTo('/app/farms/details')
   }
 

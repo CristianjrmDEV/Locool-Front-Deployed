@@ -50,22 +50,21 @@ const FarmInfosPage = () => {
       field: PropTypes.string,
       value: PropTypes.string,
     }
-    console.log(value)
+    console.log('value from FarmInfo: ', value)
+
     return (
-      <Box
-        sx={{
-          display: 'flex',
-        }}
-      >
-        <Typography
-          fontWeight="bold"
-          sx={{ textAlign: 'center' }}
-        >
-          {field}
-        </Typography>
-        &nbsp;
-        <Typography>{value}</Typography>
-      </Box>
+      typeof value === 'string' && (
+        <Box sx={{ display: 'flex' }}>
+          <Typography
+            fontWeight="bold"
+            sx={{ textAlign: 'center' }}
+          >
+            {field}
+          </Typography>
+          &nbsp;
+          <Typography>{value}</Typography>
+        </Box>
+      )
     )
   }
 
@@ -119,51 +118,43 @@ const FarmInfosPage = () => {
   }
 
   const PhotoTitle = () => (
-    <Card
-      sx={{
-        height: '300px',
-        position: 'relative',
-        width: {
-          xs: '40%',
-          sm: '50%',
-          md: '65%',
-        },
-      }}
-    >
-      <CardMedia
-        component="img"
-        image={getOne.image_url}
-        alt="MyFarmImage"
-        sx={{ height: '100%', borderRadius:'0px'}}
-      />
-      <Typography
-        variant="h3"
-        component="div"
+    <Box>
+      <Card
         sx={{
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-          padding: '10px',
-          color: mainTheme.palette.white.main,
+          height: '350px',
         }}
       >
-        {getOne.name}
-      </Typography>
-    </Card>
+        <CardMedia
+          component="img"
+          image={getOne.image_url}
+          alt="MyFarmImage"
+          sx={{ height: '100%', borderRadius: '0px' }}
+        />
+        <Typography
+          // variant="h3"
+          // component="div"
+          sx={{
+            // position: 'absolute',
+            // bottom: 10,
+            // left: 10,
+            // padding: '10px',
+            color: mainTheme.palette.primary.main,
+          }}
+        >
+          {getOne.name}
+        </Typography>
+      </Card>
+    </Box>
   )
 
   const Details = () => (
     <Box
       sx={{
-        backgroundColor: mainTheme.palette.secondary.main,
-        // p: 1,
-        width: {
-          xs: '60%',
-          sm: '50%',
-          md: '35%',
-        },
+        backgroundColor: mainTheme.palette.primary.main,
+        color: mainTheme.palette.white.main,
       }}
     >
+
       <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
         <FarmInfo
           field="Collection: "
@@ -203,7 +194,23 @@ const FarmInfosPage = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          display: {
+            xs: 'flex',
+            sm: 'grid',
+          },
+          flexDirection: {
+            xs: 'column',
+          },
+          gridTemplateColumns: {
+            sm: '40% 60%',
+            md: '50% 50%',
+            lg: '70% 30%',
+            xl: '80% 20%',
+          },
+        }}
+      >
         <PhotoTitle />
         <Details />
       </Box>
