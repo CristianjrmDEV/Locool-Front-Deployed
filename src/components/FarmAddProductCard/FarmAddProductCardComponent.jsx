@@ -33,7 +33,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   const [productDescription,setProductDescription] = useState('')
   const [productMeasurement, setProductMeasurement] = useState('');
 
-  const [msgFinal,setMsgFinal] = useState(true)
+  const [msgFinal,setMsgFinal] = useState(false)
 
   const newProduct = {
     productId: selectedOption,
@@ -84,6 +84,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     handleComponent('FarmListComponent')
   }
 
+  const handleFinishProduct = () =>{
+    handleComponent('FarmSeeProductsCardComponent')
+  }
+
   const getProductsType = async() => {
     const result = await getAllProducts()
     console.log(result)
@@ -129,15 +133,18 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   },[])
 
   return (
-    <Box >
-      <Box sx={{width:'600px', margin:'auto'}}>
+    <Box display="flex" alignItems="center" justifyContent="center" flexDirection={'column'} 
+    sx={{width:'100%'}}>
         <PageTitleComponent title={'Add new product to farm'} />
-      </Box>
-      <Card color='secondary' sx={{width: '600px', margin: 'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
+      <Card color='secondary' sx={{width: '600px',marginBottom:'50px',backgroundColor: mainTheme.palette.secondary.main}}>
+        <CardHeader
+          title={editFarmData.name}
+          component='h4'
+          sx={{color:mainTheme.palette.white.main ,backgroundColor:mainTheme.palette.primary.main}}
+        />
       <CardContent>
-        <Typography align="center">{editFarmData.name}</Typography>
+        
         <Box sx={{display: 'flex',height:'200px', margin:'20px 0px 40px 0px'}}>
-          {/* <Image sx={{ width: '50%', height: '100%' }} src={imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/> */}
           <CardMedia
             component="img"
             height="auto"
@@ -154,7 +161,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
             labelId='top'
             onChange={onSelectedOptionChange}
             value={selectedOption}
-            sx={{backgroundColor: '#F5F5F5' , marginBottom: '20px'}}
+            sx={{backgroundColor: mainTheme.palette.white.main , marginBottom: '20px'}}
           >
             {productsType.map((product) => (
               <MenuItem key={product.productId} value={product.productId}>
@@ -170,7 +177,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
             label="Product stock" 
             variant="outlined" 
             value={productStock}
-            InputProps={{ style: { backgroundColor: '#F5F5F5'} }}
+            InputProps={{ style: { backgroundColor: mainTheme.palette.white.main} }}
             sx={{ marginBottom: '20px', flexGrow: '1', marginRight: '10px' }}
           />
           <FormControl sx={{flexGrow: '0', width: '25%'}}>
@@ -181,7 +188,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
               labelId='measure'
               variant="outlined"
               onChange={handleMeasureChange}
-              sx={{backgroundColor: '#F5F5F5',marginBottom: '20px'}}
+              sx={{backgroundColor: mainTheme.palette.white.main,marginBottom: '20px'}}
             >
               <MenuItem value="kg">kg</MenuItem>
               <MenuItem value="liter">litre</MenuItem>
@@ -195,7 +202,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
             label="Product price" 
             variant="outlined" 
             value={productPrice}
-            InputProps={{ style: { backgroundColor: '#F5F5F5'} }}
+            InputProps={{ style: { backgroundColor: mainTheme.palette.white.main} }}
             sx={{ marginBottom: '20px', flexGrow: '1', marginRight: '10px' }}
           />
           <FormControl sx={{flexGrow: '0',width: '25%'}}>
@@ -206,7 +213,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
               labelId='measure'
               variant="outlined"
               onChange={handleMeasureChange}
-              sx={{backgroundColor: '#F5F5F5',marginBottom: '20px'}}
+              sx={{backgroundColor: mainTheme.palette.white.main,marginBottom: '20px'}}
             >
               <MenuItem value="kg">€/kg</MenuItem>
               <MenuItem value="litre">€/litre</MenuItem>
@@ -237,6 +244,9 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         </Box>
       </CardContent>
     </Card>
+    {
+        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishProduct} text='Added a new product to your farm'/> : false
+    }
     </Box>
   )
 }

@@ -5,12 +5,13 @@ import uploadImageCloudinary from '../../services/cloudinary';
 import PropTypes from 'prop-types'
 import { mainTheme } from '../../themes/mainTheme';
 
-function UploadWidgetComponent({handleImageValue,handleImageLoading, width, height}) {
+function UploadWidgetComponent({handleImageValue,handleImageLoading,imageBefore, width, height}) {
 
   UploadWidgetComponent.propTypes = {
     handleImageValue: PropTypes.func,
     width: PropTypes.string,
-    height: PropTypes.string
+    height: PropTypes.string,
+    imageBefore: PropTypes.string
   }
 
   // Get production API keys from Upload.io
@@ -36,12 +37,16 @@ function UploadWidgetComponent({handleImageValue,handleImageLoading, width, heig
         width={width} // Optional.
         height={height} // Optional.
         onUpdate={files => {
-          console.log('olita')
-          if (files.length === 0){
-            handleImageLoading('')
+          if (files.length === 0 && imageBefore !== undefined){
+            handleImageLoading(imageBefore)
+          }else if(files.length === 0){
+            console.log('vaciada')
+            handleImageLoading('123')
           }
             files.map(x => {
-              console.log(x)
+              console.log('urllll')
+              console.log(x.fileUrl)
+              console.log('urllll')
               handleImageLoading(x.fileUrl)
             })
           }

@@ -23,10 +23,11 @@ import ButtonWithIconComponent from '../ButtonWithIcon/ButtonWithIconComponent'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
-const PopupFarmComponent = ({ greetingMessage, greeting , handleComponent}) => {
+const PopupFarmComponent = ({ greetingMessage, greeting , handleComponent,text}) => {
   PopupFarmComponent.propTypes = {
     greetingMessage: PropTypes.string,
     greeting: PropTypes.bool,
+    text: PropTypes.string
   }
 
   const [open, setOpen] = React.useState(true)
@@ -68,7 +69,7 @@ const PopupFarmComponent = ({ greetingMessage, greeting , handleComponent}) => {
             />
           </DialogTitle>
           <DialogContent>
-            You added your farm.
+            {text}
           </DialogContent>
           <DialogActions>
             <ButtonComponent

@@ -55,7 +55,7 @@ const FarmSeeProductsCardComponent = (props) => {
             <Card sx={{ height: '400px', position: 'relative' }}>
                 <CardMedia
                     component="img"
-                    image="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    image={editFarmData.image_url}
                     alt="MyFarmImage"
                     sx={{ objectFit: "fill", height: "100%" }}
                 />
@@ -81,10 +81,10 @@ const FarmSeeProductsCardComponent = (props) => {
                     {editFarmData.collection_schedule}
                 </Typography>
             </Box>
-            <Box sx={{ backgroundColor: mainTheme.palette.black.main, padding: '10px 0', width: '100%', display: 'flex', justifyContent: 'flex-end', height: 'fit-content' }}>
-                <PageTitleComponent title={'SeeProducts'} />
-                <ButtonComponent text='Add new product' bgColour='green' textColour='white' width='300px' fx={onAddNewProductClick} />
+            <Box sx={{ backgroundColor:mainTheme.palette.black.main, padding: '10px 0',width:'100%' ,display:'flex', justifyContent: 'flex-end'}}>
+                <ButtonComponent text='Add new product' width='25%' bgColour='green' textColour='white' fx={onAddNewProductClick}/>
             </Box>
+            <PageTitleComponent title='My products' />
             {
                 isLoading ? (
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", widht:'300px' }}>

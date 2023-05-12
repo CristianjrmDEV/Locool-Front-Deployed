@@ -63,7 +63,7 @@ const FarmAddCardComponent = ({handleComponent}) => {
     handleComponent('FarmListComponent')
   }
 
-  const handleFinishButton = () =>{
+  const handleFinishFarm = () =>{
     handleComponent('FarmListComponent')
   }
 
@@ -72,7 +72,6 @@ const FarmAddCardComponent = ({handleComponent}) => {
     if(latitudeRegex.test(e.target.value)){
       setFarmLatitude(e.target.value)
     }
-    
   }
 
   const uploadImage = async(imageUrl) => {
@@ -91,7 +90,6 @@ const FarmAddCardComponent = ({handleComponent}) => {
     if(longitudeRegex.test(e.target.value)){
       setFarmLongitude(e.target.value)
     }
-    
   }
 
   return (
@@ -170,7 +168,7 @@ const FarmAddCardComponent = ({handleComponent}) => {
         </CardContent>
       </Card>
       {
-        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishButton}/> : false
+        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishFarm} text='Added a new farm'/> : false
       }
     </Box>
 

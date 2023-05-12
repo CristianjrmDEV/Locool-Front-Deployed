@@ -30,7 +30,7 @@ const ButtonComponent = ({
     textSize: PropTypes.number,
   }
 
-  const displaySize = () => textSize ? `${textSize}rem` : 'inherit'
+  const displaySize = () => textSize ? `${textSize}rem` : '0.8rem'
 
   return (
     <Button
