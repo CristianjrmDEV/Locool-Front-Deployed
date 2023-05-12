@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Popover,
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
@@ -19,6 +20,8 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getFarmById } from '../../services/farmService'
 import ModalComponent from '../Modal/ModalComponent'
+import Modal from '@mui/material/Modal'
+import PopoverComponent from '../Popover/PopoverComponent'
 
 const ProductCardComponent = ({
   product,
@@ -51,11 +54,11 @@ const ProductCardComponent = ({
     }
     setOne(objResult)
   }
-  
+
   const { setOne } = useContext(FarmsContext)
-  
+
   const goTo = useNavigate()
-  
+
   const handleClick = () => {
     handleGetFarm()
     goTo('/app/farms/details')
@@ -83,6 +86,7 @@ const ProductCardComponent = ({
       `cart-${localStorage.getItem('locoolUsername')}`,
       JSON.stringify([...cartMap])
     )
+
   }
 
   const displayFarmName = () => {
@@ -129,6 +133,24 @@ const ProductCardComponent = ({
       )
     )
   }
+
+  ///popover
+
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handlePopoverClick = (event) => {
+    setAnchorEl(event.currentTarget)
+    addProductToCart()
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
+  //
 
   return (
     <Card
@@ -179,12 +201,36 @@ const ProductCardComponent = ({
       <CardActions>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           {displaySeeFarmButton()}
-          
+
           <ButtonComponent
             text="Add to Cart"
-            fx={addProductToCart}
+            fx={handlePopoverClick}
             margin={'10px 0 2px 0'}
           />
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            <Box sx={{ p: 2 }}>
+              <Typography sx={{ pb: 2, fontWeight: 'bold' }}>
+                Item added to cart
+              </Typography>
+              <ButtonComponent
+                fx={handleClose}
+                text={'OK'}
+              />
+            </Box>
+          </Popover>
         </Box>
       </CardActions>
     </Card>
