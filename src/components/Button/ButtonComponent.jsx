@@ -15,6 +15,7 @@ const ButtonComponent = ({
   width,
   minWidth,
   fx,
+  textSize
 }) => {
   
   ButtonComponent.propTypes = {
@@ -26,7 +27,10 @@ const ButtonComponent = ({
     width: PropTypes.string,
     minWidth: PropTypes.string,
     fx: PropTypes.func,
+    textSize: PropTypes.number,
   }
+
+  const displaySize = () => textSize ? `${textSize}rem` : 'inherit'
 
   return (
     <Button
@@ -35,6 +39,7 @@ const ButtonComponent = ({
       color={bgColour ? `${bgColour}` : 'green'}
       onClick={fx}
       sx={{
+        fontSize: displaySize ,
         textTransform: 'none',
         margin: margin,
         padding: padding,

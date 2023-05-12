@@ -18,11 +18,9 @@ import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
 import FarmCardComponent from '../FarmCard/FarmCardComponent'
 import logoSymbol from './../../assets/logo/logo-symbol.svg'
-import farmSymbol from './../../assets/icons/tractor-icon.svg'
-import personSymbol from './../../assets/icons/person-icon.svg'
+import farmSymbol from './../../assets/icons/farm-icon.svg'
 import markerSymbol from './../../assets/icons/marker-icon.svg'
 import { mainTheme } from '../../themes/mainTheme'
-
 
 const MapComponent = () => {
   const GLOBAL_Product = useContext(ProductsContext)
@@ -48,15 +46,15 @@ const MapComponent = () => {
     popupAnchor: [40, -56],
   })
 
-    const myLocationIcon = new L.Icon({
-      iconUrl: markerSymbol,
-      iconRetinaUrl: markerSymbol,
-      iconSize: [50, 50], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62], // the same for the shadow
-      popupAnchor: [24, -50],
-    })
+  const myLocationIcon = new L.Icon({
+    iconUrl: markerSymbol,
+    iconRetinaUrl: markerSymbol,
+    iconSize: [50, 50], // size of the icon
+    shadowSize: [50, 64], // size of the shadow
+    iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62], // the same for the shadow
+    popupAnchor: [24, -50],
+  })
 
   const MyLocationMarker = () => {
     const [position, setPosition] = useState(null)
@@ -71,50 +69,57 @@ const MapComponent = () => {
     })
 
     return position === null ? null : (
-      <Marker position={position} icon={myLocationIcon}>
+      <Marker
+        position={position}
+        icon={myLocationIcon}
+      >
         <Popup>
-          <Box sx={{color: mainTheme.palette.white.main, fontWeight: 'bold'}}>I am here!</Box>
+          <Box sx={{ color: mainTheme.palette.white.main, fontWeight: 'bold' }}>
+            I am here!
+          </Box>
         </Popup>
       </Marker>
     )
   }
 
-
   const displayFarms = () => {
     if (GLOBAL_Farm.get)
-    return GLOBAL_Farm.get.map((farm, idx) => {
-      if (farm.latitude !== null && farm.longitude !== null)
-      return (
-        <Marker
-          key={idx}
-          position={[farm.latitude, farm.longitude]}
-          icon={farmIcon}
-        >
-          <Popup>
-            <FarmCardComponent farm={farm} />
-          </Popup>
-        </Marker>
-      )
-    })
+      return GLOBAL_Farm.get.map((farm, idx) => {
+        if (farm.latitude !== null && farm.longitude !== null)
+          return (
+            <Marker
+              key={idx}
+              position={[farm.latitude, farm.longitude]}
+              icon={farmIcon}
+            >
+              <Popup>
+                <FarmCardComponent farm={farm} />
+              </Popup>
+            </Marker>
+          )
+      })
   }
 
   const displayProducts = () => {
     // console.log(GLOBAL_Product.get)
     if (GLOBAL_Product.get)
-    return GLOBAL_Product.get.map((product, idx) => {
-      if (product.latitude !== null && product.longitude !== null)
-        return (
-          <Marker
-            key={idx}
-            position={[product.latitude, product.longitude]}
-            icon={locoolIcon}
-          >
-            <Popup>
-              <ProductCardComponent product={product} />
-            </Popup>
-          </Marker>
-        )
-    })
+      return GLOBAL_Product.get.map((product, idx) => {
+        if (product.latitude !== null && product.longitude !== null)
+          return (
+            <Marker
+              key={idx}
+              position={[product.latitude, product.longitude]}
+              icon={locoolIcon}
+            >
+              <Popup>
+                <ProductCardComponent
+                  product={product}
+                  showFarmName={true}
+                />
+              </Popup>
+            </Marker>
+          )
+      })
   }
 
   return (

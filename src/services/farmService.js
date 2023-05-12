@@ -27,6 +27,16 @@ const getAllProductsByFarmId = async (id) => {
   }
 }
 
+const getFarmById = async (id) => {
+  try {
+    const { data } = await api.get(`/farms/${id}`)
+    console.log('getFarmById result:', data)
+    return data
+  } catch(err) {
+    return []
+  }
+}
+
 const getFarms = async () => {
   // console.log('before retrieveing data')
   const { data } = await api.get('/farms')
@@ -35,4 +45,4 @@ const getFarms = async () => {
   return data
 }
 
-export { getFarms, lookForFarms, getAllProductsByFarmId }
+export { getFarms, lookForFarms, getAllProductsByFarmId, getFarmById }

@@ -23,8 +23,8 @@ const SignupButtonComponent = () => {
         },
       }}
     >
-      <PersonAddIcon />
-      <Box sx={{ fontSize: '0.5rem' }}>Sign up</Box>
+      <PersonAddIcon sx={{ fontSize: '30px' }} />
+      <Box sx={{ fontSize: '0.6rem' }}>Sign up</Box>
     </Button>
   )
 }

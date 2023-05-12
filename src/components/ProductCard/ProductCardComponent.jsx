@@ -13,6 +13,13 @@ import {
 import { mainTheme } from '../../themes/mainTheme'
 import { capitalise } from '../../services/toolkit'
 import PropTypes from 'prop-types'
+import ButtonComponent from '../Button/ButtonComponent'
+import { FarmsContext } from '../../contexts/farm'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ProductsContext } from '../../contexts/product'
+import { getFarmById } from '../../services/farmService'
+import { useState } from 'react'
 
 const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
   // console.log('Item', product)
@@ -22,14 +29,27 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
     showDescription: PropTypes.bool,
   }
 
+  const handleGetFarm = async () => {
+    const result = await getFarmById(product.farmId)
+    setOne(result)
+  }
+
+  const { setOne } = useContext(FarmsContext)
+
+  const goTo = useNavigate()
+
+  const handleClick = () => {
+    handleGetFarm()
+    goTo('/app/farms/details')
+  }
+
   const addProductToCart = () => {
     const cartMap = new Map(
       JSON.parse(
         localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
       )
     )
-    // console.log('Carrito', cartMap)
-    // console.log('Item', product)
+
     if (!cartMap.has(product.id)) {
       cartMap.set(product.id, {
         id: product.id,
@@ -64,21 +84,21 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
     )
   }
 
-    const displayDescription = () => {
-      return (
-        showDescription && (
-          <>
-            <Typography
-              variant="span"
-              sx={{ fontWeight: 'bold' }}
-            >
-              Description:
-            </Typography>
-            <Typography variant="span"> {product.description}</Typography>
-          </>
-        )
+  const displayDescription = () => {
+    return (
+      showDescription && (
+        <>
+          <Typography
+            variant="span"
+            sx={{ fontWeight: 'bold' }}
+          >
+            Description:
+          </Typography>
+          <Typography variant="span"> {product.description}</Typography>
+        </>
       )
-    }
+    )
+  }
 
   return (
     <Card
@@ -126,16 +146,20 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
           <Box sx={{ pb: 0.5, fontSize: '1rem' }}>{displayDescription()}</Box>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button
-          fullWidth={true}
-          size="small"
-          color="primary"
-          sx={{ backgroundColor: mainTheme.palette.green.main }}
-          onClick={addProductToCart}
-        >
-          Add to Cart
-        </Button>
+      <CardActions sx={{display: 'flex', justifyContent:'space-between'}}>
+        <Box>
+          <ButtonComponent
+            text="See farm"
+            fx={handleClick}
+          />
+        </Box>
+        <Box>
+          <ButtonComponent
+            text="Add to Cart"
+            fx={addProductToCart}
+          />
+        </Box>
+
       </CardActions>
     </Card>
   )

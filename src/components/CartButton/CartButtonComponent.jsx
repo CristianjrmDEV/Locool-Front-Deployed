@@ -27,8 +27,8 @@ const CartButtonComponent = () => {
       }}
       onClick={handleCartStatus}
     >
-      <ShoppingCartIcon />
-      <Box sx={{ fontSize: '0.5rem' }}>Cart</Box>
+      <ShoppingCartIcon sx={{ fontSize: '30px' }} />
+      <Box sx={{ fontSize: '0.6rem' }}>Cart</Box>
     </Button>
   )
 }

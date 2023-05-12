@@ -24,8 +24,8 @@ const LogoutButtonComponent = () => {
         },
       }}
     >
-      <LogoutIcon />
-      <Box sx={{ fontSize: '0.5rem' }}>Log out</Box>
+      <LogoutIcon sx={{ fontSize: '30px' }} />
+      <Box sx={{ fontSize: '0.6rem' }}>Log out</Box>
     </Button>
   )
 }

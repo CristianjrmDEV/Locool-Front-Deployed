@@ -91,7 +91,7 @@ const HeaderComponent = ({
             aria-label="menu"
             sx={{ m: 0, p: 0 }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: '30px' }} />
           </IconButton>
         }
         title={'My locool'}
@@ -128,7 +128,7 @@ const HeaderComponent = ({
           >
             {displayLogInComponent()}
             {displaySignUpComponent()}
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'block' }, alignSelf:'center' }}>
               {displayMylocoolComponent()}
             </Box>
             {displayCartComponent()}
