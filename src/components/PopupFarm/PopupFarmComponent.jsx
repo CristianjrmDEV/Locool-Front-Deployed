@@ -12,7 +12,6 @@ import { Box } from '@mui/system'
 import ButtonComponent from '../Button/ButtonComponent'
 import Greeting from '../Greeting/Greeting'
 import {
-  TractorIcon,
   LocoolIcon,
   MyLocationIcon,
   FarmIcon,

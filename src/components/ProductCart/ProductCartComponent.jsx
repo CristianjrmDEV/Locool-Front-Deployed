@@ -60,7 +60,6 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             color="text.primary"
           >
             Quantity: {product.quantity} kg
-            <keygen />
           </Typography>
           <Typography
             variant="body2"

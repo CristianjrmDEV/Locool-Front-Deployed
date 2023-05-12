@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import PropTypes from 'prop-types'
 
-const ButtonWithIconComponent = ({icon, text, fx, buttonBg}) => {
+const ButtonWithIconComponent = ({ icon, text, fx, buttonBg }) => {
   ButtonWithIconComponent.propTypes = {
     icon: PropTypes.object.isRequired,
     text: PropTypes.string.isRequired,
@@ -14,8 +14,10 @@ const ButtonWithIconComponent = ({icon, text, fx, buttonBg}) => {
 
   return (
     <Button
+      onClick={fx}
       color="inherit"
       sx={{
+        pr:5,
         display: 'flex',
         flexDirection: 'column',
         '&:hover': {
@@ -23,10 +25,9 @@ const ButtonWithIconComponent = ({icon, text, fx, buttonBg}) => {
           color: mainTheme.palette.white.main,
         },
       }}
-      onClick={fx}
     >
       {icon}
-      <Box sx={{ fontSize: '0.5rem' }}>{text}</Box>
+      <Box sx={{ fontSize: '0.7rem' }}>{text}</Box>
     </Button>
   )
 }
