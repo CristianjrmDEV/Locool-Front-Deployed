@@ -118,7 +118,7 @@ const LoginComponent = () => {
       <CardActions>
         <Button
           onClick={onLogin}
-          color="success"
+          color="white"
           sx={{
             height: '39.41px',
             margin: '0 auto',
@@ -128,7 +128,7 @@ const LoginComponent = () => {
             backgroundColor: 'green.main',
             width: '100%',
             fontSize: '14px',
-            textTransform: 'uppercase',
+            textTransform: 'capitalize',
             fontWeight: 'bold',
             ':hover': {
               bgcolor: 'white', // theme.palette.primary.main
