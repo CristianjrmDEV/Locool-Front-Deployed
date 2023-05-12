@@ -35,11 +35,19 @@ const SearchBarComponent = () => {
     setQuery(e.target.value.toLowerCase())
   }
 
-  const timer = () => {
-    let timer = setTimeout(() => {
-      setSearchResult('')
-    }, 2000).then(clearTimeout(timer))
-  }
+  // const timer = () => {
+  //   let timerId = setTimeout(() => {
+  //     setSearchResult('')
+  //   }, 2000).then(clearTimeout(timerId))
+  // }
+
+  const timer = (delay, value) =>
+    new Promise((resolve) => setTimeout(resolve, delay, value))
+
+  timer(2000, () => {
+    setSearchResult('')
+    clearTimeout(timer)
+  })
 
   const showResults = (result) =>
     result.length > 0
@@ -54,7 +62,10 @@ const SearchBarComponent = () => {
     setLoading(false)
     showResults(result)
     goTo('/app')
-    timer()
+    timer(2000, () => {
+      setSearchResult('')
+      clearTimeout(timer)
+    })
   }
 
   const handleFarmSearch = async () => {
@@ -65,7 +76,10 @@ const SearchBarComponent = () => {
     setLoading(false)
     showResults(result)
     goTo('/app')
-    timer()
+    timer(2000, () => {
+      setSearchResult('')
+      clearTimeout(timer)
+    })
   }
 
   const displayHelpBar = () => {

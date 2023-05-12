@@ -3,17 +3,17 @@ import { getUserProfile } from './userService'
 
 const login = async (body) => {
   try {
-    console.log('Connecting...')
+    // console.log('Connecting...')
     const { data } = await api.post('/auth/login', body)
     localStorage.setItem('locoolToken', data.token)
-    console.log('Welcome to Locool')
+    // console.log('Welcome to Locool')
     const profile = await getUserProfile()
     localStorage.setItem('locoolUsername', profile.user.username)
     if(!localStorage.getItem(`cart-${profile.user.username}`)){
       localStorage.setItem(`cart-${profile.user.username}`, JSON.stringify([...new Map()]))
     }
 
-    console.log(`Hello ${localStorage.getItem('locoolUsername')}`)
+    // console.log(`Hello ${localStorage.getItem('locoolUsername')}`)
 
     return 200
   } catch (error) {

@@ -16,7 +16,7 @@ const MyLocationIcon = ({ size }) => {
   }
   return (
     <img
-      width={size ? `${size} px` : '50px'}
+      width={size ? `${size}px` : '50px'}
       src={makerSymbol}
       alt="I am here"
     />
@@ -29,7 +29,7 @@ const TractorIcon = ({ size }) => {
   }
   return (
     <img
-      width={size ? `${size} px` : '50px'}
+      width={size ? `${size}px` : '50px'}
       src={tractorSymbol}
       alt="Tractor icon"
     />
@@ -43,7 +43,7 @@ const LocoolIcon = ({ size }) => {
   return (
     <Box>
       <img
-        width={size ? `${size} px` : '50px'}
+        width={size ? `${size}px` : '50px'}
         src={locoolSymbol}
         alt="Tractor icon"
       />
@@ -57,7 +57,7 @@ const FarmIcon = ({ size }) => {
   }
   return (
     <img
-      width={size ? `${size} px` : '50px'}
+      width={size ? `${size}px` : '50px'}
       src={farmSymbol}
       alt="Tractor icon"
     />
@@ -70,7 +70,7 @@ const MagnifierIcon = ({ size }) => {
   }
   return (
     <img
-      width={size ? `${size} px` : '50px'}
+      width={size ? `${size}px` : '50px'}
       src={searchSymbol}
       alt="Tractor icon"
     />
@@ -83,9 +83,9 @@ const LoadingIcon = ({ size }) => {
   }
   return (
       <img
-        width={size ? `${size} px` : '50px'}
+        width={size ? `${size}px` : '50px'}
         src={loadingSymbol}
-        alt="Tractor icon"
+        alt="Loading"
       />
   )
 }

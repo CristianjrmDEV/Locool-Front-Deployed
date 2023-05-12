@@ -18,7 +18,7 @@ const DrawerCartButton = ({ cartBtn, toggleDrawer }) => {
             text={'Cart details'}
             textColour="primary"
             bgColour="green"
-            padding={0}
+            padding={'0'}
             fx={toggleDrawer}
           />
         </Link>

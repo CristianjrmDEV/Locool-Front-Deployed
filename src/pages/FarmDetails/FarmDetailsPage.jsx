@@ -14,27 +14,30 @@ import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
 import { useContext, useEffect, useState } from 'react'
-import { getAllProductsByFarmId, lookForFarms } from '../../services/farmService'
+import {
+  getAllProductsByFarmId,
+  lookForFarms,
+} from '../../services/farmService'
 import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import ProductCardComponent from '../../components/ProductCard/ProductCardComponent'
 import { capitalise } from '../../services/toolkit'
 import { getFullMame } from '../../services/toolkit'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import LoadingComponent from '../../components/Loading/LoadingComponent'
+import NoDataComponent from '../../components/NoData/NoDataComponent'
 
-const FarmDetailsPage = () => {
+const FarmInfosPage = () => {
   const GLOBAL_Farm = useContext(FarmsContext)
-
   const { getOne } = useContext(FarmsContext)
-  //   console.log(getOne)
   const [products, setProducts] = useState([])
-
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const getAllProducts = async () => {
     const result = await getAllProductsByFarmId(getOne.id)
     console.log(result)
     setProducts(result)
-    setIsLoading(false)
+    setLoading(false)
     console.log(getOne)
   }
 
@@ -42,16 +45,16 @@ const FarmDetailsPage = () => {
     getAllProducts()
   }, [])
 
-  const FarmDetail = ({ field, value }) => {
+  const FarmInfo = ({ field, value }) => {
+    FarmInfo.propTypes = {
+      field: PropTypes.string,
+      value: PropTypes.string,
+    }
     console.log(value)
     return (
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'flex-start',
-          width: '300px',
-          p: 0,
-          m: 0,
         }}
       >
         <Typography
@@ -66,21 +69,6 @@ const FarmDetailsPage = () => {
     )
   }
 
-  // const validValue = (value) => (value !== null || value !== '' ? true : false)
-
-  // const [searchResult, setSearchResult] = useState('')
-
-  // const handleFarmSearch = async () => {
-  //   setSearchResult('')
-  //   setLoading(true)
-  //   const result = await lookForFarms(query)
-  //   GLOBAL_Farm.set(result)
-  //   setLoading(false)
-  //   showResults(result)
-  //   goTo('/app')
-  //   timer()
-  // }
-
   const goTo = useNavigate()
 
   const seeOnMap = async () => {
@@ -89,109 +77,10 @@ const FarmDetailsPage = () => {
     goTo('/app')
   }
 
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Card sx={{ height: '400px', position: 'relative' }}>
-        <CardMedia
-          component="img"
-          image="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="MyFarmImage"
-          sx={{ height: '100%' }}
-        />
-        <Typography
-          variant="h3"
-          component="div"
-          sx={{
-            position: 'absolute',
-            bottom: 10,
-            left: 10,
-            padding: '10px',
-            color: mainTheme.palette.white.main,
-          }}
-        >
-          {getOne.name}
-        </Typography>
-      </Card>
-      <Box
-        sx={{
-          backgroundColor: mainTheme.palette.green.main,
-          p: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <FarmDetail
-          field="Collection point: "
-          value={getOne.collection_point}
-        />
-        <FarmDetail
-          field="Opening times: "
-          value={getOne.collection_schedule}
-        />
-        <FarmDetail
-          field="Contact: "
-          value={getOne.user.email}
-        />
-        <FarmDetail
-          field="Owner: "
-          value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
-        />
-        <FarmDetail
-          field="Municipality: "
-          value={getOne.municipality.name}
-        />
-        <FarmDetail
-          field="Address: "
-          value={getOne.address}
-        />
-        <ButtonComponent
-          text="See on map"
-          bgColour={'secondary'}
-          width="300px"
-          fx={seeOnMap}
-        />
-      </Box>
-
-      {isLoading ? (
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '500px',
-            widht: '300px',
-          }}
-        >
-          <Stack
-            spacing={1}
-            sx={{ width: 300, height: 300 }}
-          >
-            {/* For variant="text", adjust the height via font-size */}
-            <Skeleton
-              variant="text"
-              sx={{ fontSize: '5rem' }}
-            />
-            {/* For other variants, adjust the size with `width` and `height` */}
-            <Skeleton
-              variant="circular"
-              width={60}
-              height={60}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={210}
-              height={100}
-            />
-            <Skeleton
-              variant="rounded"
-              width={210}
-              height={100}
-            />
-          </Stack>
-        </Box>
-      ) : products.length > 0 ? (
-        products.map((product, idx) => (
+  const displayProducts = () => {
+    if (products.length > 0){
+      return products.map((product, idx) => {
+        return (
           <Box
             key={idx}
             sx={{
@@ -200,31 +89,112 @@ const FarmDetailsPage = () => {
               width: '100%',
               justifyContent: 'center',
             }}
-          >
+            >
             <ProductCardComponent
               product={product.farm_product}
               showFarmName={false}
               showDescription={product.farm_product.description}
-            />
+              />
           </Box>
-        ))
-      ) : (
-        <Container
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            height: '400px',
-          }}
-        >
-          <Typography align="center">
-            There is no products in this farm
-          </Typography>
-        </Container>
-      )}
+        )
+      })
+    } else {
+      return <NoDataComponent text='There are not products available'/>
+    }
+  }
+
+  const PhotoTitle = () => (
+    <Card
+      sx={{
+        height: '300px',
+        position: 'relative',
+        width: {
+          xs: '40%',
+          sm: '50%',
+          md: '65%',
+        },
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={getOne.image_url}
+        alt="MyFarmImage"
+        sx={{ height: '100%'}}
+      />
+      <Typography
+        variant="h3"
+        component="div"
+        sx={{
+          position: 'absolute',
+          bottom: 10,
+          left: 10,
+          padding: '10px',
+          color: mainTheme.palette.white.main,
+        }}
+      >
+        {getOne.name}
+      </Typography>
+    </Card>
+  )
+
+  const Details = () => (
+    <Box
+      sx={{
+        backgroundColor: mainTheme.palette.secondary.main,
+        p: 1,
+        width: {
+          xs: '60%',
+          sm: '50%',
+          md: '35%',
+        },
+      }}
+    >
+      <Box sx={{ justifyContent: 'flex-start', p:2 }}>
+        <FarmInfo
+          field="Collection: "
+          value={getOne.collection_point}
+        />
+        <FarmInfo
+          field="Open: "
+          value={getOne.collection_schedule}
+        />
+        {/* <FarmInfo
+          field="Contact: "
+          value={getOne.user.email}
+        /> */}
+        {/* <FarmInfo
+          field="Owner: "
+          value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
+        /> */}
+        {/* <FarmInfo
+          field="Municipality: "
+          value={getOne.municipality.name}
+        />{' '} */}
+        <FarmInfo
+          field="Address: "
+          value={getOne.address}
+        />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <ButtonComponent
+            text="See on map"
+            bgColour={'green'}
+            fx={seeOnMap}
+            textSize={1.2}
+          />
+        </Box>
+      </Box>{' '}
+    </Box>
+  )
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ display: 'flex' }}>
+        <PhotoTitle />
+        <Details />
+      </Box>
+      {loading ? <LoadingComponent spinnerSize={200} /> : displayProducts()}
     </Box>
   )
 }
 
-export default FarmDetailsPage
+export default FarmInfosPage

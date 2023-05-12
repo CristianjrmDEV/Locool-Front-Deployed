@@ -18,7 +18,7 @@ const FarmListComponent = (props) => {
     const obtainMyFarms = async() => {
       const userName = localStorage.getItem('locoolUsername')
       const result = await getMyFarms(userName)
-      console.log(result)
+    //   console.log(result)
       setMyFarms(result)
       setIsLoading(false)
     }

@@ -24,8 +24,8 @@ const LoginButtonComponent = () => {
         },
       }}
     >
-      <VerifiedUserIcon />
-      <Box sx={{ fontSize: '0.5rem' }}>Log in</Box>
+      <VerifiedUserIcon sx={{ fontSize: '30px' }} />
+      <Box sx={{ fontSize: '0.6rem' }}>Log in</Box>
     </Button>
   )
 }

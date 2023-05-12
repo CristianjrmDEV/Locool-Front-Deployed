@@ -99,7 +99,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
         <ButtonComponent
           text={'Empty cart'}
           bgColour={'red'}
-          margin={2}
+          margin={'20px'}
           width={'85%'}
           fx={emptyCart}
         />
@@ -111,7 +111,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
           <ButtonComponent
             text={'Proceed to pay'}
             bgColour={'green'}
-            margin={2}
+            margin={'20px'}
             width={'85%'}
             fx={toggleDrawer}
           />

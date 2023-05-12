@@ -44,10 +44,13 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleCloseButton = () => {
     setOpen(false)
-    localStorage.setItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`, true)
+    localStorage.setItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`, 'OK')
   }
+
+  const handleClose = () => setOpen(false)
+
 
   const KeyRow = ({ icon, text }) => {
     KeyRow.propTypes = {
@@ -89,7 +92,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        onClose={open}
+        onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <Box>
@@ -100,7 +103,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
               textColor="green"
             />
           </DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{ width:'350px', m:'auto'}}>
             <KeyRow
               icon={<MagnifierIcon size={40} />}
               text="Click to look for products"
@@ -126,7 +129,9 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
           <DialogActions>
             <ButtonComponent
               text="OK"
-              fx={handleClose}
+              fx={handleCloseButton}
+              width={'300px'}
+              margin={'0 auto 10px auto'}
             />
           </DialogActions>
         </Box>
