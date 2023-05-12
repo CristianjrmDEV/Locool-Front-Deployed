@@ -78,28 +78,43 @@ const FarmInfosPage = () => {
   }
 
   const displayProducts = () => {
-    if (products.length > 0){
-      return products.map((product, idx) => {
-        return (
-          <Box
-            key={idx}
-            sx={{
-              m: 5,
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-            }}
-            >
-            <ProductCardComponent
-              product={product.farm_product}
-              showFarmName={false}
-              showDescription={product.farm_product.description}
-              />
-          </Box>
-        )
-      })
+    if (products.length > 0) {
+      return (
+        <Box
+          display="grid"
+          gridTemplateColumns="auto auto auto"
+          sx={{
+            gridTemplateColumns: {
+              sm: 'auto',
+              md: 'auto auto',
+              lg: 'auto auto auto',
+              xl: 'auto auto auto',
+            },
+          }}
+        >
+          {products.map((product, idx) => {
+            return (
+              <Box
+                key={idx}
+                sx={{
+                  m: 5,
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <ProductCardComponent
+                  product={product.farm_product}
+                  showFarmName={false}
+                  showDescription={product.farm_product.description}
+                />
+              </Box>
+            )
+          })}
+        </Box>
+      )
     } else {
-      return <NoDataComponent text='There are not products available'/>
+      return <NoDataComponent text="There are not products available" />
     }
   }
 
@@ -119,7 +134,7 @@ const FarmInfosPage = () => {
         component="img"
         image={getOne.image_url}
         alt="MyFarmImage"
-        sx={{ height: '100%'}}
+        sx={{ height: '100%', borderRadius:'0px'}}
       />
       <Typography
         variant="h3"
@@ -149,7 +164,7 @@ const FarmInfosPage = () => {
         },
       }}
     >
-      <Box sx={{ justifyContent: 'flex-start', p:2 }}>
+      <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
         <FarmInfo
           field="Collection: "
           value={getOne.collection_point}

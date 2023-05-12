@@ -31,7 +31,7 @@ const PurchasePage = () => {
     )
 
   return (
-    <Box>
+    <Box >
       <PageTitleComponent title={'Purchases'} />
       {loading ? <LoadingComponent spinnerSize={200} /> : displayPurchases()}
     </Box>

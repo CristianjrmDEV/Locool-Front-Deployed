@@ -31,7 +31,7 @@ const ProductCardComponent = ({
   ProductCardComponent.propTypes = {
     product: PropTypes.object.isRequired,
     showFarmName: PropTypes.bool,
-    showDescription: PropTypes.bool,
+    showDescription: PropTypes.string,
     seeFarmButton: PropTypes.bool,
   }
 

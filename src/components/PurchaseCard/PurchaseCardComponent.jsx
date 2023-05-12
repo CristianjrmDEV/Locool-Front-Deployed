@@ -54,7 +54,7 @@ const PurchaseCardComponent = ({ purchase, cart }) => {
             </Box>
           </Box>
         </Box>
-        <Box className="row">
+        <Box className="row" sx={{p:0, m:0}}>
           <PurchaseItemsComponent cart={cart} />
         </Box>
       </Box>

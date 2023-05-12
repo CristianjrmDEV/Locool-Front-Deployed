@@ -21,8 +21,10 @@ const PurchaseItemsComponent = ({ cart }) => {
     <Accordion
       sx={{
         borderRadius: 3,
+        p:0,
+        m:0,
       }}
-    >
+      >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"

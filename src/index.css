@@ -17,20 +17,12 @@ h5,
 h6 {
   font-family: 'Dosis';
   font-weight: lighter;
-  color: #d95656;
+  color: #424142;
 }
 
 a {
   text-decoration: none;
 }
-
-/* Leaflet maps styles - Important! */
-
-/* height of the map container */
-/* .leaflet-container {
-  height: 100%;
-  width: 100%;
-} */
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {

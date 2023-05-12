@@ -18,7 +18,7 @@ import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
 import FarmCardComponent from '../FarmCard/FarmCardComponent'
 import logoSymbol from './../../assets/logo/logo-symbol.svg'
-import farmSymbol from './../../assets/icons/farm-icon.svg'
+import farmSymbol from './../../assets/icons/home-icon.svg'
 import markerSymbol from './../../assets/icons/marker-icon.svg'
 import { mainTheme } from '../../themes/mainTheme'
 
@@ -31,7 +31,7 @@ const MapComponent = () => {
     iconRetinaUrl: logoSymbol,
     iconSize: [50, 70], // size of the icon
     shadowSize: [50, 64], // size of the shadow
-    iconAnchor: [22, 60], // point of the icon which will correspond to marker's location
+    iconAnchor: [22, 50], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
     popupAnchor: [3, -100],
   })
