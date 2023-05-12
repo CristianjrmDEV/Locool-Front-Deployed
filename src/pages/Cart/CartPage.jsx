@@ -6,7 +6,7 @@ import ShoppingCartComponent from '../../components/ShoppingCart/ShoppingCartCom
 const CartPage = () => {
   return (
     <>
-      <ShoppingCartComponent/>
+      <ShoppingCartComponent smallCart={false}/>
     </>
   )
 }

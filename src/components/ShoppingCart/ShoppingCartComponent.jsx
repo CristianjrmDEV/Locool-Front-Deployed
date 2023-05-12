@@ -18,9 +18,11 @@ import ButtonComponent from '../Button/ButtonComponent'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const ShoppingCartComponent = ({ toggleDrawer }) => {
+const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
+  console.log(smallCart? "Es pequeño": "No es pequeño")
   ShoppingCartComponent.propTypes = {
     toggleDrawer: PropTypes.func,
+    smallCart: PropTypes.bool
   }
 
   const [cart, setCart] = useState([])
@@ -89,6 +91,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
           key={obj.id}
           product={obj}
           removeFromCart={removeFromCart}
+          smallCart={smallCart}
         />
       )
     })
@@ -103,7 +106,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
       <Grid
         container
         xs={12}
-        lg={9}
+        lg={smallCart? 12:9}
         sx={{ gridAutoRows: '1fr' }}
       >
         {printCart()}
@@ -112,7 +115,7 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
       <Grid
         item
         xs={12}
-        lg={3}
+        lg={smallCart? 12:3}
       >
         <Card>
           <ButtonComponent

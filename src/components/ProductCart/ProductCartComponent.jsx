@@ -16,11 +16,12 @@ import PropTypes from 'prop-types'
 import { capitalise } from '../../services/toolkit'
 
 
-const ProductCartComponent = ({ product, removeFromCart }) => {
+const ProductCartComponent = ({ product, removeFromCart, smallCart }) => {
     console.log(product)
     ProductCartComponent.propTypes = {
       product: PropTypes.object,
-      removeFromCart: PropTypes.func
+      removeFromCart: PropTypes.func,
+      smallCart: PropTypes.bool
     }
 
     const handleRemoveFromCart = () => {
@@ -28,11 +29,11 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
     }
 
   return (
-    <Grid item xs={12} md={6} xl={4} >
+    <Grid item xs={12} md={smallCart? 12: 6} xl={smallCart? 12:4} >
       <Card
         sx={{
           backgroundColor: mainTheme.palette.white.main,
-          m: 3,
+          m: 2,
           padding: 2,
         }}
       >
@@ -43,13 +44,13 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
           >
             <Grid
               item
-              xs={4}
-              md={6}
+              xs={smallCart? 12:4}
+              md={smallCart? 12:6}
             >
               <CardMedia
                 component="img"
                 width="200"
-                height="200"
+                height= {smallCart? "": "200"}
                 image={product.img}
                 alt="Imagen de un producto"
                 sx={{ objectFit: 'contain' }}
@@ -57,8 +58,8 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
             </Grid>
             <Grid
               item
-              xs={6}
-              md={6}
+              xs={smallCart? 12:6}
+              md={smallCart? 12:6}
             >
               <CardContent>
                 <Typography
