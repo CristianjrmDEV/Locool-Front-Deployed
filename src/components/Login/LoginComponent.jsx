@@ -48,9 +48,10 @@ const LoginComponent = () => {
   }
 
   return (
-    <Card sx={{ maxWidth: '350px', margin: '0 auto' }}>
+    <Card sx={{ maxWidth: '500px', margin: '40% auto', p: 2 }}>
       <CardHeader
         sx={{ color: 'red.main' }}
+        title="Login"
         titleTypographyProps={{
           variant: 'h4',
           fontFamily: 'dosis',
@@ -75,14 +76,14 @@ const LoginComponent = () => {
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             startAdornment: (
-              <InputAdornment>
+              <InputAdornment position="start">
                 <Icon>
                   <Lock />
                 </Icon>
               </InputAdornment>
             ),
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <IconButton
                   onClick={() => {
                     setShowPassword((oldState) => !oldState)
@@ -107,11 +108,34 @@ const LoginComponent = () => {
         />
         <Typography sx={{ color: '#F00' }}>{formError}</Typography>
       </CardContent>
-      <Divider />
-      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Divider
+        sx={{
+          marginBottom: '38px',
+          color: 'secondary.main',
+          borderBottomWidth: '3px',
+        }}
+      />
+      <CardActions>
         <Button
           onClick={onLogin}
           color="success"
+          sx={{
+            height: '39.41px',
+            margin: '0 auto',
+            maxWidth: '500px',
+            marginBottom: '26px',
+            borderRadius: '6px',
+            backgroundColor: 'green.main',
+            width: '100%',
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+            ':hover': {
+              bgcolor: 'white', // theme.palette.primary.main
+              color: 'green.main',
+              border: '1px solid green',
+            },
+          }}
         >
           Login
         </Button>
