@@ -17,9 +17,8 @@ import ButtonComponent from '../Button/ButtonComponent'
 import { FarmsContext } from '../../contexts/farm'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ProductsContext } from '../../contexts/product'
 import { getFarmById } from '../../services/farmService'
-import { useState } from 'react'
+import ModalComponent from '../Modal/ModalComponent'
 
 const ProductCardComponent = ({
   product,
@@ -27,7 +26,6 @@ const ProductCardComponent = ({
   showDescription,
   seeFarmButton,
 }) => {
-  // console.log('Item', product)
   ProductCardComponent.propTypes = {
     product: PropTypes.object.isRequired,
     showFarmName: PropTypes.bool,
@@ -50,21 +48,16 @@ const ProductCardComponent = ({
       name: result.name,
       address: result.address,
       id: result.id,
-        // latitude: result.latitude,
-      // longitude: result.longitude
     }
     setOne(objResult)
   }
   
   const { setOne } = useContext(FarmsContext)
-  const { getOne } = useContext(FarmsContext)
-  
   
   const goTo = useNavigate()
   
   const handleClick = () => {
     handleGetFarm()
-    console.log('get on from product card: ',getOne)
     goTo('/app/farms/details')
   }
 
@@ -86,7 +79,6 @@ const ProductCardComponent = ({
     } else {
       cartMap.get(product.id)['quantity']++
     }
-    console.log(cartMap)
     localStorage.setItem(
       `cart-${localStorage.getItem('locoolUsername')}`,
       JSON.stringify([...cartMap])
@@ -187,6 +179,7 @@ const ProductCardComponent = ({
       <CardActions>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           {displaySeeFarmButton()}
+          
           <ButtonComponent
             text="Add to Cart"
             fx={addProductToCart}

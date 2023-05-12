@@ -8,11 +8,10 @@ import {
   Popup,
   useMapEvents,
 } from 'react-leaflet'
-import { divIcon } from 'leaflet'
 import L from 'leaflet'
 import PropTypes from 'prop-types'
 
-import { Box, CircularProgress } from '@mui/material'
+import { Box, } from '@mui/material'
 import { ProductsContext } from '../../contexts/product'
 import { FarmsContext } from '../../contexts/farm'
 import ProductCardComponent from '../ProductCard/ProductCardComponent'
@@ -83,8 +82,7 @@ const MapComponent = () => {
   }
 
   const displayFarms = () => {
-    if (GLOBAL_Farm.get)
-      return GLOBAL_Farm.get.map((farm, idx) => {
+      return GLOBAL_Farm.get && GLOBAL_Farm.get.map((farm, idx) => {
         if (farm.latitude !== null && farm.longitude !== null)
           return (
             <Marker
@@ -101,9 +99,7 @@ const MapComponent = () => {
   }
 
   const displayProducts = () => {
-    // console.log(GLOBAL_Product.get)
-    if (GLOBAL_Product.get)
-      return GLOBAL_Product.get.map((product, idx) => {
+      return GLOBAL_Product.get && GLOBAL_Product.get.map((product, idx) => {
         if (product.latitude !== null && product.longitude !== null)
           return (
             <Marker
@@ -134,15 +130,11 @@ const MapComponent = () => {
         center={[27.956918575017003, -15.6050452586645]}
         zoom={10}
       >
-        <TileLayer
-          // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MyLocationMarker />
         {displayProducts()}
         {displayFarms()}
       </MapContainer>
-      <Box>dafsdf</Box>
     </Box>
   )
 }

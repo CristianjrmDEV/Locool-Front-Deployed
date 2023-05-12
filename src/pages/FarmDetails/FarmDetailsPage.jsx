@@ -1,15 +1,9 @@
 import {
   Box,
   Card,
-  CardContent,
   CardMedia,
-  Container,
-  Grid,
-  Skeleton,
-  Stack,
   Typography,
 } from '@mui/material'
-import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
@@ -18,7 +12,6 @@ import {
   getAllProductsByFarmId,
   lookForFarms,
 } from '../../services/farmService'
-import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import ProductCardComponent from '../../components/ProductCard/ProductCardComponent'
 import { capitalise } from '../../services/toolkit'
 import { getFullMame } from '../../services/toolkit'
@@ -35,10 +28,8 @@ const FarmInfosPage = () => {
 
   const getAllProducts = async () => {
     const result = await getAllProductsByFarmId(getOne.id)
-    console.log(result)
     setProducts(result)
     setLoading(false)
-    console.log(getOne)
   }
 
   useEffect(() => {
@@ -50,7 +41,6 @@ const FarmInfosPage = () => {
       field: PropTypes.string,
       value: PropTypes.string,
     }
-    console.log('value from FarmInfo: ', value)
 
     return (
       typeof value === 'string' && (
@@ -118,33 +108,43 @@ const FarmInfosPage = () => {
   }
 
   const PhotoTitle = () => (
-    <Box>
-      <Card
+    <Card
+      sx={{
+        height: {
+          sm: 'auto',
+          md: '320px',
+          lg: '350px',
+          xl: '380px',
+        },
+        position: 'relative',
+        borderRadius: '0px',
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={getOne.image_url}
+        alt="MyFarmImage"
+        sx={{ height: '100%' }}
+      />
+      <Typography
+        // variant="h3"
+        // component="div"
         sx={{
-          height: '350px',
+          position: 'absolute',
+          bottom: 10,
+          left: 10,
+          padding: '10px',
+          color: mainTheme.palette.white.main,
+          zIndex: 1000,
+          fontWeight: 'bold',
+          fontSize: '2rem',
+          lineHeight: 1,
+          opacity: 0.8,
         }}
       >
-        <CardMedia
-          component="img"
-          image={getOne.image_url}
-          alt="MyFarmImage"
-          sx={{ height: '100%', borderRadius: '0px' }}
-        />
-        <Typography
-          // variant="h3"
-          // component="div"
-          sx={{
-            // position: 'absolute',
-            // bottom: 10,
-            // left: 10,
-            // padding: '10px',
-            color: mainTheme.palette.primary.main,
-          }}
-        >
-          {getOne.name}
-        </Typography>
-      </Card>
-    </Box>
+        {getOne.name}
+      </Typography>
+    </Card>
   )
 
   const Details = () => (
@@ -152,9 +152,12 @@ const FarmInfosPage = () => {
       sx={{
         backgroundColor: mainTheme.palette.primary.main,
         color: mainTheme.palette.white.main,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        p:2
       }}
     >
-
       <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
         <FarmInfo
           field="Collection: "
@@ -180,6 +183,7 @@ const FarmInfosPage = () => {
           field="Address: "
           value={getOne.address}
         />
+      </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ButtonComponent
             text="See on map"
@@ -188,7 +192,6 @@ const FarmInfosPage = () => {
             textSize={1.2}
           />
         </Box>
-      </Box>{' '}
     </Box>
   )
 
