@@ -51,17 +51,17 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
     )
 
     if (!cartMap.has(product.id)) {
-      console.log(product)
-      cartMap.set(product.id, {
+      console.log("Product", product)
+      cartMap.set(product.farmProductId, {
         img: product.img,
-        id: product.id,
+        id: product.farmProductId,
         name: product.name,
         farmName: product.farmName,
         price: product.price,
         quantity: 1,
       })
     } else {
-      cartMap.get(product.id)['quantity']++
+      cartMap.get(product.farmProductId)['quantity']++
     }
     console.log(cartMap)
     localStorage.setItem(

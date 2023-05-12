@@ -48,7 +48,7 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
     )
     localStorage.setItem(
       `total-${localStorage.getItem('locoolUsername')}`,
-      totalAmount
+      totalAmount.toFixed(2)
     )
     setTotalPrice(totalAmount.toFixed(2))
   }
