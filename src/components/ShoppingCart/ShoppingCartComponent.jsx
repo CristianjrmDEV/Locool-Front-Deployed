@@ -9,8 +9,9 @@ import {
   CardMedia,
   Typography,
   Divider,
+  Grid,
 } from '@mui/material'
-import { mainTheme } from '../../themes/mainTheme'
+
 import ProductCartComponent from '../ProductCart/ProductCartComponent'
 import { CartContext } from '../../contexts/cart'
 import ButtonComponent from '../Button/ButtonComponent'
@@ -94,31 +95,50 @@ const ShoppingCartComponent = ({ toggleDrawer }) => {
   }
 
   return (
-    <Box>
-      <Card>
-        <ButtonComponent
-          text={'Empty cart'}
-          bgColour={'red'}
-          margin={'20px'}
-          width={'85%'}
-          fx={emptyCart}
-        />
-        <Box sx={{ p: 2 }}>
-          <Typography>Total: {totalPrice + ' €'}</Typography>
-        </Box>
-        <Divider />
-        <Link to="/app/payment-method">
+    <Grid
+      container
+      spacing={1}
+      xs={12}
+    >
+      <Grid
+        container
+        xs={12}
+        lg={9}
+        sx={{ gridAutoRows: '1fr' }}
+      >
+        {printCart()}
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        lg={3}
+      >
+        <Card>
           <ButtonComponent
-            text={'Proceed to pay'}
-            bgColour={'green'}
+            text={'Empty cart'}
+            bgColour={'red'}
             margin={'20px'}
             width={'85%'}
-            fx={toggleDrawer}
+            fx={emptyCart}
+            sx={{boxSizing:'border-box'}}
           />
-        </Link>
-      </Card>
-      {printCart()}
-    </Box>
+          <Box sx={{ p: 2 }}>
+            <Typography>Total: {totalPrice + ' €'}</Typography>
+          </Box>
+          <Divider />
+          <Link to="/app/payment-method">
+            <ButtonComponent
+              text={'Proceed to pay'}
+              bgColour={'green'}
+              margin={'20px'}
+              width={'85%'}
+              fx={toggleDrawer}
+            />
+          </Link>
+        </Card>
+      </Grid>
+    </Grid>
   )
 }
 

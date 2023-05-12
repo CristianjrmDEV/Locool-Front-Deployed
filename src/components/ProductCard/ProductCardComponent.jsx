@@ -22,7 +22,7 @@ import { getFarmById } from '../../services/farmService'
 import { useState } from 'react'
 
 const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
-  // console.log('Item', product)
+   console.log('Item', product)
   ProductCardComponent.propTypes = {
     product: PropTypes.object.isRequired,
     showFarmName: PropTypes.bool,
@@ -51,7 +51,9 @@ const ProductCardComponent = ({ product, showFarmName, showDescription }) => {
     )
 
     if (!cartMap.has(product.id)) {
+      console.log(product)
       cartMap.set(product.id, {
+        img: product.img,
         id: product.id,
         name: product.name,
         farmName: product.farmName,
