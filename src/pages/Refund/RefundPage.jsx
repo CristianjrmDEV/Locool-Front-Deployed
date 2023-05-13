@@ -32,7 +32,7 @@ const RefundPage = () => {
 
   return (
     <Box>
-      <PageTitleComponent title={'Refund'} />
+      <PageTitleComponent title={'Refunds'} />
       {loading ? <LoadingComponent spinnerSize={200} /> : displayRefunds()}
     </Box>
   )
