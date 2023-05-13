@@ -12,6 +12,7 @@ const lookForProducts = async (query) => {
 
     data.map((obj, idx) => {
       for (let i = 0; i < obj.farms.length; i++) {
+        console.log("Farm product", obj.farms[i].farm_product)
         const objMod = {
           id: obj.productId,
           name: obj.productName,
@@ -19,6 +20,7 @@ const lookForProducts = async (query) => {
           farmName: obj.farms[i].farmName,
           price: obj.farms[i].farm_product.price,
           stock: obj.farms[i].farm_product.stock,
+          farmProductId: obj.farms[i].farm_product.id,
           latitude: obj.farms[i].latitude,
           longitude: obj.farms[i].longitude,
           farmId: obj.farms[i].farmId,

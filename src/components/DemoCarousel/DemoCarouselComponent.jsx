@@ -7,7 +7,7 @@ function DemoCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100 h-70"
-          src="./src/assets/images/product/scroller1.jpg"
+          src="https://res.cloudinary.com/locool/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1683880430/scroller1_oysxiw.jpg?_s=public-apps"
           alt="First slide"
           style={{
             maxHeight: 'calc(100vh - 65px)',
@@ -32,7 +32,7 @@ function DemoCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="./src/assets/images/product/scroller2.jpg"
+          src="https://res.cloudinary.com/locool/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1683880429/scroller2_sekioq.jpg?_s=public-apps"
           alt="Second slide"
           style={{
             maxHeight: 'calc(100vh - 65px)',
@@ -58,7 +58,7 @@ function DemoCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="./src/assets/images/product/scroller3.jpg"
+          src="https://res.cloudinary.com/locool/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1683880430/scroller3_lilto3.jpg?_s=public-apps"
           alt="Third slide"
           style={{
             maxHeight: 'calc(100vh - 65px)',

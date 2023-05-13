@@ -12,11 +12,11 @@ import { Box } from '@mui/system'
 import ButtonComponent from '../Button/ButtonComponent'
 import Greeting from '../Greeting/Greeting'
 import {
-  TractorIcon,
   LocoolIcon,
   MyLocationIcon,
   FarmIcon,
   MagnifierIcon,
+  SearchFarmIcon,
 } from '../Icon/IconComponent'
 import HelpIcon from '@mui/icons-material/Help'
 import ButtonWithIconComponent from '../ButtonWithIcon/ButtonWithIconComponent'
@@ -85,9 +85,9 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
     <>
       <ButtonWithIconComponent
         text="Help"
-        icon={<HelpIcon />}
+        icon={<HelpIcon sx={{fontSize:'30px'}} />}
         fx={handleClickOpen}
-        buttonBg={'green'}
+        buttonBg={'secondary'}
       />
       <Dialog
         fullScreen={fullScreen}
@@ -103,13 +103,13 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
               textColor="green"
             />
           </DialogTitle>
-          <DialogContent sx={{ width:'350px', m:'auto'}}>
+          <DialogContent sx={{ width: '350px', m: 'auto' }}>
             <KeyRow
               icon={<MagnifierIcon size={40} />}
               text="Click to look for products"
             />
             <KeyRow
-              icon={<FarmIcon size={40} />}
+              icon={<SearchFarmIcon size={40} />}
               text="Click to look for farms"
             />
             <KeyRow
@@ -122,7 +122,7 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
             />
 
             <KeyRow
-              icon={<TractorIcon size={40} />}
+              icon={<FarmIcon size={40} />}
               text="Click on it to see a farm"
             />
           </DialogContent>

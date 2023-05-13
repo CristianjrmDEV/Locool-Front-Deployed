@@ -6,7 +6,6 @@ import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 const SignupPage = () => {
   return (
     <>
-      <PageTitleComponent title={'Sign up'} />
       <SignUpComponent />
     </>
   )

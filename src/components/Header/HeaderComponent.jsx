@@ -45,7 +45,7 @@ const HeaderComponent = ({
   const displayCartComponent = () =>
     cart ? (
       <DrawerComponent
-        clickable={<CartButtonComponent />}
+        clickable={<CartButtonComponent smallCart={true}/>}
         openOption={'right'}
         title={'Shopping Cart'}
         titleTopPadding={5}

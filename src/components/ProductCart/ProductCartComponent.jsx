@@ -7,6 +7,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Grid,
   Typography,
 } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
@@ -15,11 +16,12 @@ import PropTypes from 'prop-types'
 import { capitalise } from '../../services/toolkit'
 
 
-const ProductCartComponent = ({ product, removeFromCart }) => {
-
+const ProductCartComponent = ({ product, removeFromCart, smallCart }) => {
+    console.log(product)
     ProductCartComponent.propTypes = {
       product: PropTypes.object,
-      removeFromCart: PropTypes.func
+      removeFromCart: PropTypes.func,
+      smallCart: PropTypes.bool
     }
 
     const handleRemoveFromCart = () => {
@@ -27,63 +29,84 @@ const ProductCartComponent = ({ product, removeFromCart }) => {
     }
 
   return (
-    <Card
-      sx={{
-        maxWidth: 600,
-        backgroundColor: mainTheme.palette.secondary.main,
-        m: 2,
-      }}
-    >
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={product.img}
-          alt="Imagen de un producto"
-        />
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
+    <Grid item xs={12} md={smallCart? 12: 6} xl={smallCart? 12:4} >
+      <Card
+        sx={{
+          backgroundColor: mainTheme.palette.white.main,
+          m: 2,
+          padding: 2,
+        }}
+      >
+        <CardActionArea>
+          <Grid
+            container
+            spacing={1}
           >
-            {capitalise(product.name)}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            {product.price} € / kg
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Quantity: {product.quantity} kg
-            <keygen />
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Farm: {product.farmName}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.primary"
-          >
-            Total: {product.quantity * product.price} €
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <ButtonComponent
-          text="Remove"
-          fx={handleRemoveFromCart}
-          bgColour={'red'}
-        />
-      </CardActions>
-    </Card>
+            <Grid
+              item
+              xs={smallCart? 12:4}
+              md={smallCart? 12:6}
+            >
+              <CardMedia
+                component="img"
+                width="200"
+                height= {smallCart? "": "200"}
+                image={product.img}
+                alt="Imagen de un producto"
+                sx={{ objectFit: 'contain' }}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={smallCart? 12:6}
+              md={smallCart? 12:6}
+            >
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  {capitalise(product.name)}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                >
+                  {product.price} € / kg
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                >
+                  Quantity: {product.quantity} kg
+                  <keygen />
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                >
+                  Farm: {product.farmName}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                >
+                  Total: {product.quantity * product.price} €
+                </Typography>
+              </CardContent>
+            </Grid>
+          </Grid>
+        </CardActionArea>
+        <CardActions>
+          <ButtonComponent
+            text="Remove"
+            fx={handleRemoveFromCart}
+            bgColour={'red'}
+          />
+        </CardActions>
+      </Card>
+    </Grid>
   )
 }
 

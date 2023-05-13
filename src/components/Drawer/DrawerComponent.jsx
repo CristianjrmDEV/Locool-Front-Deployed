@@ -80,6 +80,7 @@ const DrawerComponent = ({
       <CartComponent
         cartComponent={cartComponent}
         toggleDrawer={handleDrawerToggle}
+        smallCart={true}
       />
     </Box>
   )
