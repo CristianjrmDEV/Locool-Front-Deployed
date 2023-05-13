@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
-  console.log(smallCart? "Es pequeño": "No es pequeño")
+  // console.log(smallCart? "Es pequeño": "No es pequeño")
   ShoppingCartComponent.propTypes = {
     toggleDrawer: PropTypes.func,
     smallCart: PropTypes.bool
