@@ -16,4 +16,8 @@ const capitalise = (sth) => {
 const getFullMame = (name='', surname='') => {
   return `${capitalise(name)} ${capitalise(surname)}`
 }
-export { capitalise, getFullMame }
+
+const roundNumber = (number) =>
+  Math.round((number + Number.EPSILON) * 100) / 100
+
+export { capitalise, getFullMame, roundNumber }
