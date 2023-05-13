@@ -1,15 +1,9 @@
 import {
   Box,
   Card,
-  CardContent,
   CardMedia,
-  Container,
-  Grid,
-  Skeleton,
-  Stack,
   Typography,
 } from '@mui/material'
-import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
@@ -18,7 +12,6 @@ import {
   getAllProductsByFarmId,
   lookForFarms,
 } from '../../services/farmService'
-import ProductListComponent from '../../components/ProductList/ProductListComponent'
 import ProductCardComponent from '../../components/ProductCard/ProductCardComponent'
 import { capitalise } from '../../services/toolkit'
 import { getFullMame } from '../../services/toolkit'
@@ -35,10 +28,8 @@ const FarmInfosPage = () => {
 
   const getAllProducts = async () => {
     const result = await getAllProductsByFarmId(getOne.id)
-    console.log(result)
     setProducts(result)
     setLoading(false)
-    console.log(getOne)
   }
 
   useEffect(() => {
@@ -50,22 +41,20 @@ const FarmInfosPage = () => {
       field: PropTypes.string,
       value: PropTypes.string,
     }
-    console.log(value)
+
     return (
-      <Box
-        sx={{
-          display: 'flex',
-        }}
-      >
-        <Typography
-          fontWeight="bold"
-          sx={{ textAlign: 'center' }}
-        >
-          {field}
-        </Typography>
-        &nbsp;
-        <Typography>{value}</Typography>
-      </Box>
+      typeof value === 'string' && (
+        <Box sx={{ display: 'flex' }}>
+          <Typography
+            fontWeight="bold"
+            sx={{ textAlign: 'center' }}
+          >
+            {field}
+          </Typography>
+          &nbsp;
+          <Typography>{value}</Typography>
+        </Box>
+      )
     )
   }
 
@@ -78,58 +67,79 @@ const FarmInfosPage = () => {
   }
 
   const displayProducts = () => {
-    if (products.length > 0){
-      return products.map((product, idx) => {
-        return (
-          <Box
-            key={idx}
-            sx={{
-              m: 5,
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-            }}
-            >
-            <ProductCardComponent
-              product={product.farm_product}
-              showFarmName={false}
-              showDescription={product.farm_product.description}
-              />
-          </Box>
-        )
-      })
+    if (products.length > 0) {
+      return (
+        <Box
+          display="grid"
+          gridTemplateColumns="auto auto auto"
+          sx={{
+            gridTemplateColumns: {
+              sm: 'auto',
+              md: 'auto auto',
+              lg: 'auto auto auto',
+              xl: 'auto auto auto',
+            },
+          }}
+        >
+          {products.map((product, idx) => {
+            return (
+              <Box
+                key={idx}
+                sx={{
+                  m: 5,
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <ProductCardComponent
+                  product={product.farm_product}
+                  showFarmName={false}
+                  showDescription={product.farm_product.description}
+                />
+              </Box>
+            )
+          })}
+        </Box>
+      )
     } else {
-      return <NoDataComponent text='There are not products available'/>
+      return <NoDataComponent text="There are not products available" />
     }
   }
 
   const PhotoTitle = () => (
     <Card
       sx={{
-        height: '300px',
-        position: 'relative',
-        width: {
-          xs: '40%',
-          sm: '50%',
-          md: '65%',
+        height: {
+          sm: 'auto',
+          md: '320px',
+          lg: '350px',
+          xl: '380px',
         },
+        position: 'relative',
+        borderRadius: '0px',
       }}
     >
       <CardMedia
         component="img"
         image={getOne.image_url}
         alt="MyFarmImage"
-        sx={{ height: '100%'}}
+        sx={{ height: '100%' }}
       />
       <Typography
-        variant="h3"
-        component="div"
+        // variant="h3"
+        // component="div"
         sx={{
           position: 'absolute',
           bottom: 10,
           left: 10,
           padding: '10px',
           color: mainTheme.palette.white.main,
+          zIndex: 1000,
+          fontWeight: 'bold',
+          fontSize: '2rem',
+          lineHeight: 1,
+          opacity: 0.8,
         }}
       >
         {getOne.name}
@@ -140,16 +150,15 @@ const FarmInfosPage = () => {
   const Details = () => (
     <Box
       sx={{
-        backgroundColor: mainTheme.palette.secondary.main,
-        p: 1,
-        width: {
-          xs: '60%',
-          sm: '50%',
-          md: '35%',
-        },
+        backgroundColor: mainTheme.palette.primary.main,
+        color: mainTheme.palette.white.main,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        p:2
       }}
     >
-      <Box sx={{ justifyContent: 'flex-start', p:2 }}>
+      <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
         <FarmInfo
           field="Collection: "
           value={getOne.collection_point}
@@ -158,22 +167,23 @@ const FarmInfosPage = () => {
           field="Open: "
           value={getOne.collection_schedule}
         />
-        {/* <FarmInfo
+        <FarmInfo
           field="Contact: "
           value={getOne.user.email}
-        /> */}
-        {/* <FarmInfo
+        />
+        <FarmInfo
           field="Owner: "
           value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
-        /> */}
-        {/* <FarmInfo
+        />
+        <FarmInfo
           field="Municipality: "
           value={getOne.municipality.name}
-        />{' '} */}
+        />{' '}
         <FarmInfo
           field="Address: "
           value={getOne.address}
         />
+      </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ButtonComponent
             text="See on map"
@@ -182,13 +192,28 @@ const FarmInfosPage = () => {
             textSize={1.2}
           />
         </Box>
-      </Box>{' '}
     </Box>
   )
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          display: {
+            xs: 'flex',
+            sm: 'grid',
+          },
+          flexDirection: {
+            xs: 'column',
+          },
+          gridTemplateColumns: {
+            sm: '40% 60%',
+            md: '50% 50%',
+            lg: '70% 30%',
+            xl: '80% 20%',
+          },
+        }}
+      >
         <PhotoTitle />
         <Details />
       </Box>

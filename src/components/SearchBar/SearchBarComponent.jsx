@@ -19,7 +19,6 @@ import { ProductsContext } from '../../contexts/product'
 import { useNavigate } from 'react-router-dom'
 import { PopupComponent } from '../Popup/PopupComponent'
 import { LoadingIcon } from '../Icon/IconComponent'
-import { width } from '@mui/system'
 
 const SearchBarComponent = () => {
   const GLOBAL_Product = useContext(ProductsContext)
@@ -34,12 +33,6 @@ const SearchBarComponent = () => {
   const handleChange = (e) => {
     setQuery(e.target.value.toLowerCase())
   }
-
-  // const timer = () => {
-  //   let timerId = setTimeout(() => {
-  //     setSearchResult('')
-  //   }, 2000).then(clearTimeout(timerId))
-  // }
 
   const timer = (delay, value) =>
     new Promise((resolve) => setTimeout(resolve, delay, value))
@@ -82,50 +75,55 @@ const SearchBarComponent = () => {
     })
   }
 
-  const displayHelpBar = () => {
+  const displaySearchFeedback = () => {
     return (
       <Box
         sx={{
-          backgroundColor: mainTheme.palette.green.main,
-          display: 'flex',
-          justifyContent: 'space-between',
-          mt: 1,
-          px: 2,
-          height: '50px',
+          textAlign: 'right',
         }}
       >
+        <Box>{searchResult}</Box>
         <Box
           sx={{
             display: 'flex',
             alignSelf: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
             width: '100%',
             pl: 2,
           }}
-        >
-          <Box>{searchResult}</Box>
-          <Box>{loading ? <LoadingIcon size={50} /> : ''}</Box>
-        </Box>
-        <PopupComponent />
+        ></Box>
       </Box>
     )
   }
 
+  const displayLoadingIcon = () => {
+    return <Box>{loading ? <LoadingIcon size={50} /> : ''}</Box>
+  }
+
   return (
     <>
-      <Box sx={{ backgroundColor: mainTheme.palette.secondary.main, pt: 1 }}>
-        <Paper
+      <Box
+        sx={{
+          display: 'flex',
+          gridTemplateColumns: {
+            xs: '. 50% 25%',
+          },
+          backgroundColor: mainTheme.palette.secondary.main,
+        }}
+      >
+        <Box
           component="form"
-          elevation={0}
           sx={{
             m: 'auto',
-            p: '2px 4px',
+            p: '0px 4px',
             display: 'flex',
             alignItems: 'center',
             width: 400,
             borderRadius: 10,
+            backgroundColor: mainTheme.palette.white.main,
           }}
         >
+          {displayLoadingIcon()}
           <InputBase
             className="search-placeholder"
             sx={{ ml: 1, flex: 1, color: mainTheme.palette.primary.main }}
@@ -169,8 +167,10 @@ const SearchBarComponent = () => {
           >
             <WarehouseIcon fontSize="large" />
           </IconButton>
-        </Paper>
-        {displayHelpBar()}
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <PopupComponent />
+        </Box>
       </Box>
     </>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import './IconComponent.css'
 import { Box } from '@mui/material'
 import makerSymbol from '../../assets/icons/marker-icon.svg'
-import tractorSymbol from '../../assets/icons/tractor-icon.svg'
+import homeSymbol from '../../assets/icons/home-icon.svg'
 import locoolSymbol from '../../assets/logo/logo-symbol.svg'
 import farmSymbol from '../../assets/icons/farm-icon.svg'
 import searchSymbol from '../../assets/icons/search-icon.svg'
@@ -23,14 +23,14 @@ const MyLocationIcon = ({ size }) => {
   )
 }
 
-const TractorIcon = ({ size }) => {
-  TractorIcon.propTypes = {
+const FarmIcon = ({ size }) => {
+  FarmIcon.propTypes = {
     size: PropTypes.number,
   }
   return (
     <img
       width={size ? `${size}px` : '50px'}
-      src={tractorSymbol}
+      src={homeSymbol}
       alt="Tractor icon"
     />
   )
@@ -51,8 +51,8 @@ const LocoolIcon = ({ size }) => {
   )
 }
 
-const FarmIcon = ({ size }) => {
-  FarmIcon.propTypes = {
+const SearchFarmIcon = ({ size }) => {
+  SearchFarmIcon.propTypes = {
     size: PropTypes.number,
   }
   return (
@@ -92,9 +92,9 @@ const LoadingIcon = ({ size }) => {
 
 export {
   MyLocationIcon,
-  TractorIcon,
-  LocoolIcon,
   FarmIcon,
+  LocoolIcon,
+  SearchFarmIcon,
   MagnifierIcon,
   LoadingIcon,
 }
