@@ -27,7 +27,6 @@ const FarmListComponent = ({handleComponent}) => {
     const obtainMyFarms = async() => {
         const userName = localStorage.getItem('locoolUsername')
         const result = await getMyFarms(userName)
-        console.log(result)
         setMyFarms(result)
         setIsLoading(false)
     }
@@ -61,7 +60,7 @@ const FarmListComponent = ({handleComponent}) => {
     const onSeeProductsClick = (data) =>{
         setEditFarmData({
             id: data.farmId,
-            name: data.name,
+            farm_name: data.farm_name,
             address: data.address,
             collection_point: data.collection_point,
             collection_schedule: data.collection_schedule
@@ -128,7 +127,7 @@ const FarmListComponent = ({handleComponent}) => {
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <ButtonComponent isDisabled={disable} text='See products' bgColour='green' textColour='white' width='145px' minWidth='145px' fx={() => onSeeProductsClick({
-                                    farmId: farm.id,name: farm.name, address: farm.address, collection_point: farm.collection_point, collection_schedule: farm.collection_schedule
+                                    farmId: farm.id,farm_name: farm.name, address: farm.address, collection_point: farm.collection_point, collection_schedule: farm.collection_schedule
                                 })}/>
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

@@ -11,7 +11,7 @@ import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 const FarmSeeProductsCardComponent = (props) => {
 
     const { editFarmData,setEditProductData } = useContext(FarmPageContext)
-
+    console.log(editFarmData)
     const [myProducts, setMyProducts] = useState([])
 
     const [isLoading, setIsLoading] = useState(true);
@@ -21,9 +21,7 @@ const FarmSeeProductsCardComponent = (props) => {
     const [msgFinal,setMsgFinal] = useState(false)
 
     const getAllProducts = async () => {
-        console.log(editFarmData)
         const result = await getAllProductsByFarmId(editFarmData.id)
-        console.log(result)
         setMyProducts(result)
         setIsLoading(false)
     }
@@ -36,11 +34,13 @@ const FarmSeeProductsCardComponent = (props) => {
         setEditProductData(
             {
                 farmId: data.farmId,
+                farm_name: data.farm_name,
                 productid: data.productid,
-                name: data.name,
                 stock: data.stock,
                 price: data.price,
-                img: data.img
+                image_url: data.image_url,
+                unit_of_sale: data.measure,
+                description: data.description
             }
         )
         props.handleComponent('FarmEditProductCardComponent')
@@ -82,7 +82,7 @@ const FarmSeeProductsCardComponent = (props) => {
                         color: mainTheme.palette.white.main,
                     }}
                 >
-                    {editFarmData.name}
+                    {editFarmData.farm_name}
                 </Typography>
             </Card>
             <Box sx={{ backgroundColor: mainTheme.palette.green.main }}>
@@ -113,7 +113,9 @@ const FarmSeeProductsCardComponent = (props) => {
                     <Grid container spacing={1} justifyContent="center" alignItems="center" sx={{ p: '10px' }}  >
                 {
                     myProducts.map((product, idx) => {
+                        console.log('despacito')
                         console.log(product)
+                        console.log('despacito')
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                 <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
@@ -128,7 +130,7 @@ const FarmSeeProductsCardComponent = (props) => {
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex' }}>
-                                            <ButtonComponent isDisabled={disable} text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({farmId: product.farm_product.farmId,productid: product.farm_product.productId,name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
+                                            <ButtonComponent isDisabled={disable} text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({farmId: product.farm_product.farmId, farm_name: editFarmData.farm_name  ,productid: product.farm_product.productId, stock: product.farm_product.stock,price: product.farm_product.price,image_url: product.farm_product.image_url , measure: product.farm_product.unit_of_sale , description: product.farm_product.description })} />
                                             <ButtonComponent isDisabled={disable} text='Remove' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={()=>onRemoveClick({productId: product.id, farmId: product.farm_product.farmId})} />
                                         </Box>
                                     </CardContent>

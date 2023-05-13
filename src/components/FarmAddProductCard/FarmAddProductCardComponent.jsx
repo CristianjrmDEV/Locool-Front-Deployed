@@ -46,10 +46,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     setSelectedOption(event.target.value);
 
     const selectedProduct = productsType.find((product) => product.productId === event.target.value);
-    console.log(selectedProduct)
     setImgSelected(selectedProduct.productImageUrl);
-    console.log(imgSelected)
-
   };
 
   const uploadImage = async(imageUrl) => {
@@ -96,9 +93,6 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   const getProductsType = async() => {
     const result = await getAllProducts()
-    console.log('productsType')
-    console.log(result)
-    console.log('productsType')
     setProductsType(result)
   }
 
@@ -107,10 +101,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   }
 
   const handleImageValue = (img) => {
-    console.log(img)
-    console.log(imgSelected)
     setImgSelected(img)
-    console.log(imgSelected)
   }
 
   const handleMeasureChange = (e) =>{
