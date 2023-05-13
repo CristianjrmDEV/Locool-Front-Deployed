@@ -23,6 +23,7 @@ import ModalComponent from '../Modal/ModalComponent'
 import Modal from '@mui/material/Modal'
 import PopoverComponent from '../Popover/PopoverComponent'
 
+
 const ProductCardComponent = ({
   product,
   showFarmName,
@@ -72,15 +73,17 @@ const ProductCardComponent = ({
     )
 
     if (!cartMap.has(product.id)) {
-      cartMap.set(product.id, {
-        id: product.id,
+      console.log("Product", product)
+      cartMap.set(product.farmProductId, {
+        img: product.img,
+        id: product.farmProductId,
         name: product.name,
         farmName: product.farmName,
         price: product.price,
         quantity: 1,
       })
     } else {
-      cartMap.get(product.id)['quantity']++
+      cartMap.get(product.farmProductId)['quantity']++
     }
     localStorage.setItem(
       `cart-${localStorage.getItem('locoolUsername')}`,

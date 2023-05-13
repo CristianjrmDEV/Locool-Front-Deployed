@@ -94,7 +94,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/app/cart',
-        element: <CartPage />,
+        element: <CartPage smallCart={true}/>,
       },
       {
         path: '/app/success',

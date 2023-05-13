@@ -196,7 +196,7 @@
     }
 
     return (
-      <Card sx={{ maxWidth: '350px', margin: '0 auto' }}>
+      <Card sx={{ maxWidth: '350px', margin: '40px auto', p: 1 }}>
         <CardHeader
           title="Create account"
           sx={{ color: 'red.main' }}
@@ -244,14 +244,14 @@
             type={showPassword ? 'text' : 'password'}
             InputProps={{
               startAdornment: (
-                <InputAdornment>
+                <InputAdornment position='start'>
                   <Icon>
                     <Lock />
                   </Icon>
                 </InputAdornment>
               ),
               endAdornment: (
-                <InputAdornment>
+                <InputAdornment position='end'>
                   <IconButton
                     onClick={() => {
                       setShowPassword((oldState) => !oldState)
@@ -289,14 +289,14 @@
             fullWidth={true}
             InputProps={{
               startAdornment: (
-                <InputAdornment>
+                <InputAdornment position='start'>
                   <Icon>
                     <Lock />
                   </Icon>
                 </InputAdornment>
               ),
               endAdornment: (
-                <InputAdornment>
+                <InputAdornment position='end'>
                   <IconButton
                     onClick={() => {
                       setShowPasswordRepeat((oldState) => !oldState)
