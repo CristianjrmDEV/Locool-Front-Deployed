@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import uploadImageCloudinary from '../../services/cloudinary'
 import { PopupComponent } from '../Popup/PopupComponent'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
+import LoadingComponent from '../Loading/LoadingComponent'
 
 const FarmAddCardComponent = ({handleComponent}) => {
   
@@ -29,30 +30,50 @@ const FarmAddCardComponent = ({handleComponent}) => {
   const [imageLoading,setImageLoading] = useState('')
   const [imgSelected, setImgSelected] = useState('')
 
-  const farmData = {
-    name: farmName,
-    address: farmAdress,
-    image_url: imgSelected,
-    status: 'pending',
-    collection_point: farmCollectionPoint,
-    collection_schedule: farmCollectionSchedule,
-    latitude: farmLatitude,
-    longitude: farmLongitude
-  }
+  const [disable,setDisabled] = useState(false)
+
+  const [loading,setLoading] = useState(false)
+
+  
+  const uploadImage = async(imageUrl) => {
+    const data = new FormData();
+    data.append("file", imageUrl);
+    data.append("upload_preset", "presetUnsignedLocool");
+    data.append("folder", "locool");
+    data.append("cloud_name", "locool");
+
+    const url = await uploadImageCloudinary(data)
+    setImgSelected(url)
+  };
 
   const handleAddFarmButton = async() =>{
-    console.log(localStorage.username)
+    setDisabled(true)
+    let urlCloud = ''
+    setLoading(true)
+
+
     if(imgSelected !== ''){
       await uploadImage(imgSelected)
     }
+
+    const farmData = {
+      name: farmName,
+      address: farmAdress,
+      image_url: urlCloud !== '' ? urlCloud : imgSelected !== '' ? imgSelected : farmDefault,
+      status: 'pending',
+      collection_point: farmCollectionPoint,
+      collection_schedule: farmCollectionSchedule,
+      latitude: farmLatitude,
+      longitude: farmLongitude
+    }
+
     const response = await createFarm(localStorage.username,farmData)
-    console.log(response)
+    setLoading(false)
     setMsgFinal(true)
   }
 
   const handleImageLoading = (imgLoading) =>{
     setImageLoading(imgLoading)
-    setImgSelected(imgLoading)
   }
 
   const handleImageValue = (img) => {
@@ -74,16 +95,7 @@ const FarmAddCardComponent = ({handleComponent}) => {
     }
   }
 
-  const uploadImage = async(imageUrl) => {
-    const data = new FormData();
-    data.append("file", imageUrl);
-    data.append("upload_preset", "presetUnsignedLocool");
-    data.append("folder", "locool");
-    data.append("cloud_name", "locool");
 
-    const url = await uploadImageCloudinary(data)
-    setImgSelected(url)
-  };
 
   const handleLongitudeChange = (e) =>{
     const longitudeRegex = /^\d{0,3}(?:\.\d{0,5})?$/
@@ -100,15 +112,14 @@ const FarmAddCardComponent = ({handleComponent}) => {
       <Card color='secondary' sx={{width:'600px',margin:'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
         <CardContent>
           <Box sx={{display: 'flex',height:'200px', margin:'20px 0px 40px 0px'}}>
-            {/* <Image sx={{ width: '50%', height: '100%' }} src={imgSelected} alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}/> */}
             <CardMedia
               component="img"
               height="auto"
-              alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}
-              image={imgSelected === '' ? farmDefault : imgSelected}
+              alt={'Farm Image'}
+              image={imageLoading !== '' ? imageLoading : imgSelected !== '' ?  imgSelected : farmDefault}
               style={{ objectFit: 'fill'}}
             />
-            <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading}  width='50%' height='250px'/>
+            <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={imgSelected}  width='50%' height='250px'/>
           </Box>
           <TextField 
             onChange={(e) => setFarmName(e.target.value)}
@@ -160,10 +171,12 @@ const FarmAddCardComponent = ({handleComponent}) => {
             InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-
+          {
+            loading !==false ? <LoadingComponent /> : null
+          }
           <Box sx={{display:'flex' }}>
-            <ButtonComponent text='Add farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAddFarmButton}/>
-            <ButtonComponent text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton}/>
+            <ButtonComponent isDisabled={disable} text='Add farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAddFarmButton}/>
+            <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton}/>
           </Box>
         </CardContent>
       </Card>

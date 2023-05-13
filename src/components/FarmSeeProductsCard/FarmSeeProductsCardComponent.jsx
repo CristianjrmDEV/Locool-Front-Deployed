@@ -6,6 +6,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import { getAllProductsByFarmId } from '../../services/farmService'
 import { FarmPageContext } from '../../contexts/farm'
 import { deleteProductOfFarm } from '../../services/userService'
+import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 
 const FarmSeeProductsCardComponent = (props) => {
 
@@ -14,6 +15,10 @@ const FarmSeeProductsCardComponent = (props) => {
     const [myProducts, setMyProducts] = useState([])
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const [disable,setDisabled] = useState(false)
+
+    const [msgFinal,setMsgFinal] = useState(false)
 
     const getAllProducts = async () => {
         console.log(editFarmData)
@@ -42,8 +47,15 @@ const FarmSeeProductsCardComponent = (props) => {
     }
 
     const onRemoveClick = async(data) => {
+        setDisabled(true)
+        const productID = data.productId
+
         const result = await deleteProductOfFarm(localStorage.username,data.farmId,data.productId)
-        console.log(result)
+
+        setMyProducts(myProducts.filter((product) => product.id !== productID))
+
+        setMsgFinal(true)
+        setDisabled(false)
     }
 
     useEffect(() => {
@@ -116,8 +128,8 @@ const FarmSeeProductsCardComponent = (props) => {
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex' }}>
-                                            <ButtonComponent text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({farmId: product.farm_product.farmId,productid: product.farm_product.productId,name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
-                                            <ButtonComponent text='Remove' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={()=>onRemoveClick({productId: product.id, farmId: product.farm_product.farmId})} />
+                                            <ButtonComponent isDisabled={disable} text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={()=>onEditClick({farmId: product.farm_product.farmId,productid: product.farm_product.productId,name: product.name, stock: product.farm_product.stock,price: product.farm_product.price,img: product.farm_product.image_url})} />
+                                            <ButtonComponent isDisabled={disable} text='Remove' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={()=>onRemoveClick({productId: product.id, farmId: product.farm_product.farmId})} />
                                         </Box>
                                     </CardContent>
                                 </Card>
@@ -132,6 +144,9 @@ const FarmSeeProductsCardComponent = (props) => {
                         <ButtonComponent text='Add new product' bgColour='green' textColour='white' width='300px' fx={onAddNewProductClick} />
                     </Container>
                 )
+            }
+            {
+                msgFinal === true ? <PopupFarmComponent text='Deleted product from your farm'/> : false
             }
                 
         </Box>

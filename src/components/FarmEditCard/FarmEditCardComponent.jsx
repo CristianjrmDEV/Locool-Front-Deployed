@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Container, TextField } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Container, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import ButtonComponent from '../Button/ButtonComponent'
 import { House } from '@mui/icons-material'
@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 import uploadImageCloudinary from '../../services/cloudinary'
+import LoadingComponent from '../Loading/LoadingComponent'
 
 const FarmEditCardComponent = ({handleComponent}) => {
 
@@ -37,6 +38,10 @@ const FarmEditCardComponent = ({handleComponent}) => {
 
     const [imageLoading,setImageLoading] = useState('')
 
+    const [disable,setDisabled] = useState(false)
+
+    const [loading,setLoading] = useState(false)
+
 
 
     const setDefaultValues = () => {
@@ -61,7 +66,9 @@ const FarmEditCardComponent = ({handleComponent}) => {
       };
 
     const handleAcceptChangesButton = async() => {
+        setDisabled(true)
         let urlCloud = ''
+        setLoading(true)
         if(imageLoading !== '' && imageLoading !== farmImage){
             const result = await uploadImage(imageLoading)
             urlCloud = result
@@ -78,6 +85,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
         }
 
         const response = await updateFarm(localStorage.username,editFarmData.id,updatedFarm)
+        setLoading(false)
         setMsgFinal(true)
     }
 
@@ -133,6 +141,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
             <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={farmImage} width='50%' height='250px'/>
             </Box>
                 <TextField
+                    disabled={disable}
                     onChange={(e) => setFarmName(e.target.value)}
                     label="Farm name"
                     variant="outlined"
@@ -143,6 +152,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     sx={{ marginBottom: '20px' }}
                 />
                 <TextField
+                    disabled={disable}
                     onChange={(e) => setFarmAddress(e.target.value)}
                     label="Direction"
                     variant="outlined"
@@ -152,6 +162,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     sx={{ marginBottom: '20px' }}
                 />
                 <TextField
+                    disabled={disable}
                     onChange={(e) => setFarmCollectionPoint(e.target.value)}
                     label="Collection point"
                     variant="outlined"
@@ -161,6 +172,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     sx={{ marginBottom: '20px' }}
                 />
                 <TextField
+                    disabled={disable}
                     onChange={(e) => setFarmCollectionSchedule(e.target.value)}
                     label="Collection schedule"
                     variant="outlined"
@@ -170,6 +182,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     sx={{ marginBottom: '20px' }}
                 />
                 <TextField 
+                    disabled={disable}
                     onChange={handleLatitudeChange}
                     label="Latitude" 
                     variant="outlined" 
@@ -179,6 +192,7 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     sx={{ marginBottom: '20px' }}
                 />
                 <TextField 
+                    disabled={disable}
                     onChange={handleLongitudeChange}
                     label="Longitude" 
                     variant="outlined" 
@@ -187,9 +201,12 @@ const FarmEditCardComponent = ({handleComponent}) => {
                     InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
                     sx={{ marginBottom: '20px' }}
                 />
+                {
+                    loading !==false ? <LoadingComponent /> : null
+                }
                 <Box sx={{ display: 'flex' }}>
-                    <ButtonComponent text='Accept changes' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAcceptChangesButton} />
-                    <ButtonComponent text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton} />
+                    <ButtonComponent isDisabled={disable} text='Accept changes' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAcceptChangesButton} />
+                    <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton} />
                 </Box>
             </CardContent>
         </Card>

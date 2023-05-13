@@ -22,6 +22,7 @@ const FarmListComponent = ({handleComponent}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const [msgFinal,setMsgFinal] = useState(false)
+    const [disable,setDisabled] = useState(false)
 
     const obtainMyFarms = async() => {
         const userName = localStorage.getItem('locoolUsername')
@@ -70,15 +71,14 @@ const FarmListComponent = ({handleComponent}) => {
     
 
     const onDeleteFarmClick = async(farmId) => {
-        console.log(localStorage.username)
+        setDisabled(true)
         const response = await deleteFarm(localStorage.username,farmId)
-        console.log(response)
+        
         setMsgFinal(true)
+        setMyFarms(myFarms.filter((farm) => farm.id !== farmId))
+        setDisabled(false)
     }
 
-    const onDeleteClick = () => {
-        handleComponent('FarmListComponent')
-    }
   
     useEffect(()=>{ 
       obtainMyFarms() 
@@ -122,23 +122,23 @@ const FarmListComponent = ({handleComponent}) => {
                         </Box>
                         <Grid container  sx={{borderRadius:'10px',backgroundColor:mainTheme.palette.secondary.main, height:'140px'}}>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <ButtonComponent text='Add new product' bgColour='green' textColour='white' width='145px' minWidth='145px' fx={()=>onAddNewProductClick({
+                                <ButtonComponent isDisabled={disable} textSize={0.8} text='Add new product' bgColour='green' textColour='white' width='145px' minWidth='145px' fx={()=>onAddNewProductClick({
                                     farmId: farm.id,name: farm.name
                                 })}/>
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <ButtonComponent text='See products' bgColour='green' textColour='white' width='145px' minWidth='145px' fx={() => onSeeProductsClick({
+                                <ButtonComponent isDisabled={disable} text='See products' bgColour='green' textColour='white' width='145px' minWidth='145px' fx={() => onSeeProductsClick({
                                     farmId: farm.id,name: farm.name, address: farm.address, collection_point: farm.collection_point, collection_schedule: farm.collection_schedule
                                 })}/>
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <ButtonComponent text='Edit farm' bgColour='primary' textColour='white' width='145px' minWidth='145px' fx={() => onEditFarmClick({
+                                <ButtonComponent isDisabled={disable} text='Edit farm' bgColour='primary' textColour='white' width='145px' minWidth='145px' fx={() => onEditFarmClick({
                                     farmId: farm.id,name: farm.name, address: farm.address, collection_point: farm.collection_point, collection_schedule: farm.collection_schedule,
                                     latitude: farm.latitude, longitude: farm.longitude, image_url: farm.image_url
                                 })}/>
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <ButtonComponent text='Delete farm' bgColour='red' textColour='white' width='145px' minWidth='145px' fx={() => onDeleteFarmClick(farm.id)}/>
+                                <ButtonComponent isDisabled={disable} text='Delete farm' bgColour='red' textColour='white' width='145px' minWidth='145px' fx={() => onDeleteFarmClick(farm.id)}/>
                             </Grid>
                         </Grid>
                         </CardContent>
@@ -157,7 +157,7 @@ const FarmListComponent = ({handleComponent}) => {
             }
 
             {
-                msgFinal === true ? <PopupFarmComponent handleComponent={onDeleteClick} text='Your farm has been deleted'/> : false
+                msgFinal === true ? <PopupFarmComponent text='Your farm has been deleted'/> : false
             }
         </Box>
     )

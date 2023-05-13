@@ -13,6 +13,7 @@ import { mainTheme } from '../../themes/mainTheme'
 import uploadImageCloudinary from '../../services/cloudinary'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 import {PopupComponent} from '../Popup/PopupComponent'
+import LoadingComponent from '../Loading/LoadingComponent'
 
 const FarmAddProductCardComponent = ({handleComponent}) => {
 
@@ -35,18 +36,20 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   const [msgFinal,setMsgFinal] = useState(false)
 
-  const newProduct = {
-    productId: selectedOption,
-    image_url: imgSelected,
-    stock: productStock,
-    price: productPrice,
-    unit_of_sale: productMeasurement,
-    description: productDescription
-  }
+  const [disable,setDisabled] = useState(false)
+
+  const [loading,setLoading] = useState(false)
+
+
 
   const onSelectedOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(event.target.value)
+
+    const selectedProduct = productsType.find((product) => product.productId === event.target.value);
+    console.log(selectedProduct)
+    setImgSelected(selectedProduct.productImageUrl);
+    console.log(imgSelected)
+
   };
 
   const uploadImage = async(imageUrl) => {
@@ -61,27 +64,30 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   };
 
   const onAddProductClick = async() =>{
-    
-    // console.log(newProduct)
-    // console.log(result)
-    console.log(productStock)//''
-    console.log(selectedOption)//''
-    console.log(productPrice)
-    console.log(imgSelected)
-    console.log(productDescription)
-    console.log(productMeasurement)
+    setDisabled(true)
+    let urlCloud = ''
+    setLoading(true)
 
-    
     if(imgSelected !== ''){
       await uploadImage(imgSelected)
     }
+
+    const newProduct = {
+      productId: selectedOption,
+      image_url: urlCloud !== '' ? urlCloud : imgSelected,
+      stock: productStock,
+      price: productPrice,
+      unit_of_sale: productMeasurement,
+      description: productDescription
+    }
+
     const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
-    console.log(result)
+    setLoading(false)
     setMsgFinal(true)
   }
 
   const onCancelClick = () => {
-    handleComponent('FarmListComponent')
+    handleComponent('FarmSeeProductsCardComponent')
   }
 
   const handleFinishProduct = () =>{
@@ -90,17 +96,14 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   const getProductsType = async() => {
     const result = await getAllProducts()
+    console.log('productsType')
     console.log(result)
+    console.log('productsType')
     setProductsType(result)
-
   }
 
   const handleImageLoading = (imgLoading) =>{
-    console.log(imgLoading)
-    console.log(imageLoading)
     setImageLoading(imgLoading)
-    console.log(imageLoading)
-    setImgSelected(imgLoading)
   }
 
   const handleImageValue = (img) => {
@@ -148,15 +151,16 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
           <CardMedia
             component="img"
             height="auto"
-            alt={imgSelected !== '' ? "Product Image" : "Default Product Image"}
-            image={imgSelected === '' ? defaultPepinillo : imgSelected}
+            alt={'Product Image'}
+            image={imageLoading !== '' ? imageLoading : imgSelected !== '' ?  imgSelected : defaultPepinillo}
             style={{ objectFit: 'fill'}}
           />
-          <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading}  width='50%' height='250px'/>
+          <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={imgSelected}  width='50%' height='250px'/>
         </Box>
         <FormControl fullWidth>
         <InputLabel id="top">Type of product</InputLabel>
           <Select
+            disabled={disable}
             label='Type of product'
             labelId='top'
             onChange={onSelectedOptionChange}
@@ -173,6 +177,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         
         <Box sx={{display:'flex'}}>
           <TextField 
+            disabled={disable}
             onChange={handleStockChange}
             label="Product stock" 
             variant="outlined" 
@@ -183,6 +188,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
           <FormControl sx={{flexGrow: '0', width: '25%'}}>
             <InputLabel id="measure">Measure</InputLabel>
             <Select
+              disabled={disable}
               value={productMeasurement}
               label='measurement'
               labelId='measure'
@@ -198,6 +204,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         </Box>
         <Box sx={{display:'flex'}}>
         <TextField 
+            disabled={disable}
             onChange={handlePriceChange}
             label="Product price" 
             variant="outlined" 
@@ -208,6 +215,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
           <FormControl sx={{flexGrow: '0',width: '25%'}}>
             <InputLabel id="measure">Measure</InputLabel>
             <Select
+              disabled={disable}
               value={productMeasurement}
               label='measurement'
               labelId='measure'
@@ -223,6 +231,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         </Box>
         <Box sx={{paddingRight:'10px'}}>
         <TextareaAutosize
+          disabled={disable}
         style={{
           width: '100%',
           height: '100px',
@@ -238,9 +247,12 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         }}
       />
         </Box>
+        {
+          loading !==false ? <LoadingComponent /> : null
+        }
         <Box sx={{display:'flex' }}>
-          <ButtonComponent text='Add product to farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={onAddProductClick}/>
-          <ButtonComponent text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={onCancelClick}/>
+          <ButtonComponent isDisabled={disable} text='Add product to farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={onAddProductClick}/>
+          <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={onCancelClick}/>
         </Box>
       </CardContent>
     </Card>
