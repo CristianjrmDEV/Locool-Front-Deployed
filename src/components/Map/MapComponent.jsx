@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 
 import {
   Box,
+  Divider,
   FormControlLabel,
   Radio,
   RadioGroup,
@@ -26,9 +27,11 @@ import logoSymbol from './../../assets/logo/logo-symbol.svg'
 import farmSymbol from './../../assets/icons/home-icon.svg'
 import markerSymbol from './../../assets/icons/marker-icon.svg'
 import { mainTheme } from '../../themes/mainTheme'
-import { convertCoordsToKm } from '../../services/toolkit'
+import { capitalise, convertCoordsToKm } from '../../services/toolkit'
 import ButtonComponent from '../Button/ButtonComponent'
 import Slider from '@mui/material/Slider'
+import PersonIcon from '@mui/icons-material/Person'
+import TuneIcon from '@mui/icons-material/Tune'
 
 const MapComponent = () => {
   const GLOBAL_Product = useContext(ProductsContext)
@@ -41,7 +44,7 @@ const MapComponent = () => {
     shadowSize: [50, 64], // size of the shadow
     iconAnchor: [22, 50], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [3, -100],
+    popupAnchor: [3, -70],
   })
 
   const farmIcon = new L.Icon({
@@ -51,7 +54,7 @@ const MapComponent = () => {
     shadowSize: [50, 64], // size of the shadow
     iconAnchor: [-20, 22], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [40, -56],
+    popupAnchor: [45, -30],
   })
 
   const myLocationIcon = new L.Icon({
@@ -61,36 +64,20 @@ const MapComponent = () => {
     shadowSize: [50, 64], // size of the shadow
     iconAnchor: [0, 22], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [24, -50],
+    popupAnchor: [24, -30],
   })
 
   const [position, setPosition] = useState(null)
   const [distance, setDistance] = useState(100)
   const [price, setPrice] = useState(1000)
 
-
-  const findCloserThan = (distance) => {
-    if (position !== null) {
-      GLOBAL_Product.get.filter((el) => {
-        return (
-          convertCoordsToKm(
-            el.latitude,
-            position.lat,
-            el.longitude,
-            position.lng
-          ) < distance
-        )
-      })
-    }
-  }
-
   const handleDistance = (event) => {
     setDistance(event.target.value)
   }
 
-    const handlePrice = (event) => {
-      setPrice(event.target.value)
-    }
+  const handlePrice = (event) => {
+    setPrice(event.target.value)
+  }
 
   const MyLocationMarker = () => {
     const map = useMapEvents({
@@ -103,76 +90,152 @@ const MapComponent = () => {
       },
     })
 
+    const UserName = () => {
+      return (
+        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+          <PersonIcon
+            color="white"
+            sx={{ fontSize: '50px' }}
+          />
+          <Typography
+            variant="h6"
+            color={mainTheme.palette.white.main}
+          >
+            {capitalise(localStorage.getItem('locoolUsername'))} `s location
+          </Typography>
+        </Box>
+      )
+    }
+
+    const DistanceFilter = () => {
+      return (
+        <Box>
+          <Box>Distance</Box>
+          <RadioGroup
+            aria-labelledby="distance"
+            name="distance"
+            value={distance}
+            onChange={handleDistance}
+          >
+            <FormControlLabel
+              value={5}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="5 Km"
+            />
+            <FormControlLabel
+              value={10}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="10 Km"
+            />
+            <FormControlLabel
+              value={20}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="20 Km"
+            />
+            <FormControlLabel
+              value={100}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="100 Km"
+            />
+          </RadioGroup>
+        </Box>
+      )
+    }
+
+    const PriceFilter = () => {
+      return (
+        <Box>
+          <Box>Price</Box>
+
+          <RadioGroup
+            aria-labelledby="price"
+            name="price"
+            value={price}
+            onChange={handlePrice}
+            // sx={{border:mainTheme.palette.green.main }}
+          >
+            <FormControlLabel
+              value={1}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="1 €"
+            />
+            <FormControlLabel
+              value={2}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="2 €"
+            />
+            <FormControlLabel
+              value={3}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="3 €"
+            />
+            <FormControlLabel
+              value={1000}
+              control={
+                <Radio
+                  color="green"
+                  variant="plain"
+                />
+              }
+              label="All"
+            />
+          </RadioGroup>
+        </Box>
+      )
+    }
     return position === null ? null : (
       <Marker
         position={position}
         icon={myLocationIcon}
       >
         <Popup>
-          <Box sx={{ color: mainTheme.palette.white.main, fontWeight: 'bold' }}>
-            <Typography>I am here!</Typography>
-
-            <Box sx={{ display: 'flex', m:5 }}>
-              <Box>
-                <Typography>Filter by distance</Typography>
-                <RadioGroup
-                  aria-labelledby="distance"
-                  name="distance"
-                  value={distance}
-                  onChange={handleDistance}
-                >
-                  <FormControlLabel
-                    value={5}
-                    control={<Radio />}
-                    label="5 Km"
-                  />
-                  <FormControlLabel
-                    value={10}
-                    control={<Radio />}
-                    label="10 Km"
-                  />
-                  <FormControlLabel
-                    value={20}
-                    control={<Radio />}
-                    label="20 Km"
-                  />
-                  <FormControlLabel
-                    value={100}
-                    control={<Radio />}
-                    label="100 Km"
-                  />
-                </RadioGroup>
-              </Box>
-              <Box>
-                <Typography>Filter by Price</Typography>
-                <RadioGroup
-                  aria-labelledby="price"
-                  name="price"
-                  value={price}
-                  onChange={handlePrice}
-                >
-                  <FormControlLabel
-                    value={1}
-                    control={<Radio />}
-                    label="1 €"
-                  />
-                  <FormControlLabel
-                    value={2}
-                    control={<Radio />}
-                    label="2 €"
-                  />
-                  <FormControlLabel
-                    value={3}
-                    control={<Radio />}
-                    label="3 €"
-                  />
-                  <FormControlLabel
-                    value={1000}
-                    control={<Radio />}
-                    label="All"
-                  />
-                </RadioGroup>
-              </Box>
+          <Box
+            sx={{
+              color: mainTheme.palette.white.main,
+            }}
+          >
+            <UserName />
+            <Divider
+              sx={{ borderColor: mainTheme.palette.white.main, my: 1 }}
+            />
+            <Box sx={{ display: 'flex', m: 1 }}>
+              <DistanceFilter />
+              <PriceFilter />
             </Box>
           </Box>
         </Popup>
@@ -192,7 +255,7 @@ const MapComponent = () => {
                 position.lat,
                 el.longitude,
                 position.lng
-              ) < distance
+              ) <= distance
             )
           } else return true
         })
@@ -225,11 +288,11 @@ const MapComponent = () => {
                 position.lat,
                 el.longitude,
                 position.lng
-              ) < distance
+              ) <= distance
             )
           } else return true
         })
-        .filter((el) => el.price < price)
+        .filter((el) => el.price <= price)
         .map((product, idx) => {
           if (product.latitude !== null && product.longitude !== null)
             return (
