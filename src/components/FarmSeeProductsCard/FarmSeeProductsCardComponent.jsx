@@ -15,9 +15,9 @@ import { getFullMame } from '../../services/toolkit'
 const FarmSeeProductsCardComponent = (props) => {
 
     const { editFarmData, setEditProductData } = useContext(FarmPageContext)
-    console.log('datitos')
-    console.log(editFarmData)
-    console.log('datitos')
+    
+    
+    
 
     const GLOBAL_Farm = useContext(FarmsContext)
     const { getOne } = useContext(FarmsContext)
@@ -39,9 +39,9 @@ const FarmSeeProductsCardComponent = (props) => {
         const result = await getAllProductsByFarmId(editFarmData.id)
         setMyProducts(result)
         setIsLoading(false)
-        console.log('deseado')
-        console.log(editFarmData)
-        console.log('deseado')
+        
+        
+        
     }
 
     const seeOnMap = async () => {
@@ -247,12 +247,12 @@ const FarmSeeProductsCardComponent = (props) => {
                     <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ p: '30px', marginY: '40px' }}  >
                         {
                             myProducts.map((product, idx) => {
-                                console.log('despacito')
-                                console.log(product)
-                                console.log('despacito')
-                                console.log('imagencita')
-                                console.log(product.image_url)
-                                console.log('imagencita')
+                                
+                                
+                                
+                                
+                                
+                                
                                 return (
                                     <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>

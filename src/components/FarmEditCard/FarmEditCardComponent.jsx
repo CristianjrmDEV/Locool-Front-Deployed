@@ -21,8 +21,8 @@ const FarmEditCardComponent = ({ handleComponent }) => {
 
 
     const { editFarmData } = useContext(FarmPageContext)
-    console.log('holiiiita')
-    console.log(editFarmData)
+    
+    
 
 
     const [farmName, setFarmName] = useState('')
@@ -59,7 +59,7 @@ const FarmEditCardComponent = ({ handleComponent }) => {
         setFarmLongitude(editFarmData.longitude)
         const result = await getMunicipalities()
         setMunicipalities(result)
-        console.log(municipalities)
+        
     }
 
     const uploadImage = async (imageUrl) => {
@@ -107,7 +107,7 @@ const FarmEditCardComponent = ({ handleComponent }) => {
     }
 
     const handleLatitudeChange = (e) => {
-        console.log(municipalities)
+        
         const latitudeRegex = /^\d{0,2}(?:\.\d{0,5})?$/
         if (latitudeRegex.test(e.target.value)) {
             setFarmLatitude(e.target.value)
@@ -157,9 +157,9 @@ const FarmEditCardComponent = ({ handleComponent }) => {
                     <TextField
                         disabled={disable}
                         onChange={(e) => {
-                            console.log(farmName)
+                            
                             setFarmName(e.target.value)
-                            console.log(farmName)
+                            
                         }}
                         label="Farm name"
                         variant="outlined"
