@@ -109,11 +109,16 @@ const FarmListComponent = ({handleComponent}) => {
 
 
     return (
-        <Box>
-            <PageTitleComponent title='My Farms' />
+        <Box sx={{borderTop: 2,
+            borderColor: mainTheme.palette.secondary.main}}>
+            
             <Box sx={{ backgroundColor:mainTheme.palette.black.main, padding: '10px 0',width:'100%' ,display:'flex', justifyContent: 'flex-end'}}>
-                <ButtonComponent text='Add new farm' width='25%' bgColour='green' textColour='white' fx={onAddNewFarmClick}/>
+                <ButtonComponent margin='0px 20px 0px 0px' text='Add new farm' width='15%' bgColour='green' textColour='white' fx={onAddNewFarmClick}/>
             </Box>
+            <Box width={'90%'} sx={{ m: '10px auto 0px auto' }}>
+                <PageTitleComponent title='My farms' />
+            </Box>
+            
             {
                 isLoading ? (
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", widht:'300px' }}>
@@ -127,7 +132,7 @@ const FarmListComponent = ({handleComponent}) => {
                         </Stack>
                     </Box>
                 ) : myFarms.length > 0 ? (
-                    <Grid container spacing={5} justifyContent="center" alignItems="center" sx={{p:'100px'}}>
+                    <Grid container spacing={5} justifyContent="center" alignItems="center" sx={{p:'30px'}}>
             {
                 myFarms.map((farm,idx)=>{
                 return(

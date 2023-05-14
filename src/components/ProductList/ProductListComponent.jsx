@@ -8,7 +8,6 @@ const ProductListComponent = ({products}) => {
       ProductListComponent.propTypes = {
         products: PropTypes.array.isRequired,
       }
-      console.log('from page search: ', products.get)
   return (
     <>
       <Typography variant="h6">Products</Typography>

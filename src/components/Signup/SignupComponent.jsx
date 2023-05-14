@@ -193,10 +193,10 @@
     }
 
     return (
-      <Card sx={{ maxWidth: '350px', margin: '40px auto', p: 1 }}>
+      <Card variant='outlined' sx={{ maxWidth: '350px', margin: '40px auto', p: 1 }}>
         <CardHeader
           title="Create account"
-          sx={{ color: 'red.main' }}
+          sx={{ color: 'primary.main' }}
           titleTypographyProps={{
             variant: 'h4',
             fontFamily: 'dosis',
