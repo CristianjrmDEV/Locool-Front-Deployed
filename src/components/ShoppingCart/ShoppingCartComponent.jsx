@@ -96,17 +96,19 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
   }
 
   return (
-    <div>
+    <Box
+      width={'80%'}
+      sx={{ m: '10px auto 50px auto' }}
+    >
       {smallCart ? "" : <PageTitleComponent title={"Shopping Cart"} />}
       <Grid
         container
-        spacing={1}
+        spacing={7}
       >
         <Grid
           item
           xs={12}
           lg={smallCart ? 12 : 9}
-          sx={{ gridAutoRows: '1fr' }}
         >
           <Grid
             container
@@ -122,31 +124,33 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
           lg={smallCart ? 12 : 3}
         >
           <Card>
-            <ButtonComponent
-              text={'Empty cart'}
-              bgColour={'red'}
-              margin={'20px'}
-              width={'85%'}
-              fx={emptyCart}
-              sx={{ boxSizing: 'border-box' }}
-            />
+            <CardActions sx={{p: 2}}>
+              <ButtonComponent
+                text={'Empty cart'}
+                bgColour={'red'}
+                width={'100%'}
+                fx={emptyCart}
+                sx={{ boxSizing: 'border-box' }}
+              />
+            </CardActions>
+            
             <Box sx={{ p: 2 }}>
               <Typography>Total: {totalPrice + ' €'}</Typography>
             </Box>
-            <Divider />
-            <Link to="/app/payment-method">
-              <ButtonComponent
-                text={'Proceed to pay'}
-                bgColour={'green'}
-                margin={'20px'}
-                width={'85%'}
-                fx={toggleDrawer}
-              />
-            </Link>
+            <CardActions sx={{padding: 2}}>
+              <Link to="/app/payment-method">
+                <ButtonComponent
+                  text={'Proceed to pay'}
+                  bgColour={'green'}
+                  fx={toggleDrawer}
+                />
+              </Link>
+            </CardActions>
+           
           </Card>
         </Grid>
       </Grid>
-    </div>
+    </Box>
 
   )
 }
