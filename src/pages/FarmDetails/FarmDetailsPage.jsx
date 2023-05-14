@@ -70,19 +70,32 @@ const FarmInfosPage = () => {
             return (
               <Box
                 key={idx}
+                // sx={{
+                //   m: 5,
+                //   display: 'flex',
+                //   width: '100%',
+                //   justifyContent: 'center',
+                //   alignItems: 'center',
+                // }}
+                display="grid"
+                gridTemplateColumns="auto auto auto"
                 sx={{
                   m: 5,
-                  display: 'flex',
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  gridTemplateColumns: {
+                    sm: 'auto',
+                    md: 'auto auto',
+                    lg: 'auto auto auto',
+                    xl: 'auto auto auto auto',
+                  },
                 }}
               >
-                <ProductCardComponent
-                  product={product}
-                  showFarmName={true}
-                  showDescription={product.description}
-                />
+                <Box sx={{margin: '0 auto', width: '250px', display: 'flex', alignItems: 'flex-start'}}>
+                  <ProductCardComponent
+                    product={product}
+                    showFarmName={true}
+                    showDescription={product.description}
+                  />
+                </Box>
               </Box>
             )
           })}
