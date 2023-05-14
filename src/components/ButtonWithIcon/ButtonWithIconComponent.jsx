@@ -17,6 +17,7 @@ const ButtonWithIconComponent = ({ icon, text, fx, buttonBg }) => {
       onClick={fx}
       color="inherit"
       sx={{
+        pl:2,
         pr:5,
         display: 'flex',
         flexDirection: 'column',

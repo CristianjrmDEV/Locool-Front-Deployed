@@ -19,8 +19,13 @@ import { ProductsContext } from '../../contexts/product'
 import { useNavigate } from 'react-router-dom'
 import { PopupComponent } from '../Popup/PopupComponent'
 import { LoadingIcon } from '../Icon/IconComponent'
+import PropTypes from 'prop-types'
 
-const SearchBarComponent = () => {
+const SearchBarComponent = ({ bgColour }) => {
+  SearchBarComponent.propTypes = {
+    bgColour: PropTypes.string,
+  }
+
   const GLOBAL_Product = useContext(ProductsContext)
   const GLOBAL_Farm = useContext(FarmsContext)
   const [loading, setLoading] = useState(false)
@@ -75,37 +80,21 @@ const SearchBarComponent = () => {
     })
   }
 
-  const displaySearchFeedback = () => {
-    return (
-      <Box
-        sx={{
-          textAlign: 'right',
-        }}
-      >
-        <Box>{searchResult}</Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignSelf: 'center',
-            justifyContent: 'flex-end',
-            width: '100%',
-            pl: 2,
-          }}
-        ></Box>
-      </Box>
-    )
+  const displayLoadingIcon = () => {
+    return <Box>{loading ? <LoadingIcon size={35} /> : ''}</Box>
   }
 
-  const displayLoadingIcon = () => {
-    return <Box>{loading ? <LoadingIcon size={50} /> : ''}</Box>
-  }
+  const displayBackground = () =>
+    bgColour
+      ? mainTheme.palette[bgColour].main
+      : mainTheme.palette.secondary.main
 
   return (
     <>
       <Box
         sx={{
           display: 'flex',
-          backgroundColor: mainTheme.palette.secondary.main,
+          backgroundColor: displayBackground(),
         }}
       >
         <Box
@@ -114,9 +103,10 @@ const SearchBarComponent = () => {
             m: 'auto',
             p: '0px 4px',
             display: 'flex',
-            width: { xs: 280, sm: 400 },
+            width: { xs: 280, sm: 350 },
             borderRadius: 10,
             backgroundColor: mainTheme.palette.white.main,
+            height: '40px',
           }}
         >
           {displayLoadingIcon()}
@@ -165,7 +155,7 @@ const SearchBarComponent = () => {
           </IconButton>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <PopupComponent />
+          <PopupComponent bgColour={bgColour} />
         </Box>
       </Box>
     </>
