@@ -3,18 +3,21 @@ import React, { useContext, useEffect, useState } from 'react'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
-import { getAllProductsByFarmId } from '../../services/farmService'
+import { getAllProductsByFarmId, getFarmById } from '../../services/farmService'
 import { FarmPageContext, FarmsContext } from '../../contexts/farm'
 import { deleteProductOfFarm } from '../../services/userService'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { lookForFarms } from '../../services/farmService'
+import { getFullMame } from '../../services/toolkit'
 
 const FarmSeeProductsCardComponent = (props) => {
 
     const { editFarmData, setEditProductData } = useContext(FarmPageContext)
+    console.log('datitos')
     console.log(editFarmData)
+    console.log('datitos')
 
     const GLOBAL_Farm = useContext(FarmsContext)
     const { getOne } = useContext(FarmsContext)
@@ -27,6 +30,8 @@ const FarmSeeProductsCardComponent = (props) => {
 
     const [msgFinal, setMsgFinal] = useState(false)
 
+    const [userFarmData,setUserFarmData] = useState({})
+
 
     const goTo = useNavigate()
 
@@ -34,6 +39,9 @@ const FarmSeeProductsCardComponent = (props) => {
         const result = await getAllProductsByFarmId(editFarmData.id)
         setMyProducts(result)
         setIsLoading(false)
+        console.log('deseado')
+        console.log(editFarmData)
+        console.log('deseado')
     }
 
     const seeOnMap = async () => {
@@ -75,6 +83,8 @@ const FarmSeeProductsCardComponent = (props) => {
         setDisabled(false)
     }
 
+    
+
     const PhotoTitle = () => (
         <Card
             sx={{
@@ -90,7 +100,7 @@ const FarmSeeProductsCardComponent = (props) => {
         >
             <CardMedia
                 component="img"
-                image={editFarmData.image_url}
+                image={editFarmData.data.image_url}
                 alt="MyFarmImage"
                 sx={{ height: '100%' }}
             />
@@ -137,19 +147,19 @@ const FarmSeeProductsCardComponent = (props) => {
                 />
                 <FarmInfo
                     field="Contact: "
-                    // value={editFarmData.user.email}
+                    value={editFarmData.data.user.mail}
                 />
                 <FarmInfo
                     field="Owner: "
-                    // value={getFullMame(getOne.user.first_name, getOne.user.last_name)}
+                    value={getFullMame(editFarmData.data.user.first_name, editFarmData.data.user.last_name)}
                 />
                 <FarmInfo
                     field="Municipality: "
-                    // value={editFarmData.municipality.name}
-                />{' '}
+                    value={editFarmData.data.municipality.name}
+                />
                 <FarmInfo
                     field="Address: "
-                    value={editFarmData.address}
+                    value={editFarmData.data.address}
                 />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -161,32 +171,34 @@ const FarmSeeProductsCardComponent = (props) => {
                     width={'45%'}
                     textColour={'white'}
                 />
-                <ButtonComponent text='Add new product' width='45%' bgColour='green' textColour='white' fx={onAddNewProductClick}/>
+                <ButtonComponent text='Add new product' width='45%' bgColour='green' textColour='white' fx={onAddNewProductClick} />
             </Box>
         </Box>
     )
 
     const FarmInfo = ({ field, value }) => {
         FarmInfo.propTypes = {
-          field: PropTypes.string,
-          value: PropTypes.string,
+            field: PropTypes.string,
+            value: PropTypes.string,
         }
-    
+
         return (
-          typeof value === 'string' && (
-            <Box sx={{ display: 'flex' }}>
-              <Typography
-                fontWeight="bold"
-                sx={{ textAlign: 'center' }}
-              >
-                {field}
-              </Typography>
-              &nbsp;
-              <Typography>{value}</Typography>
-            </Box>
-          )
+            typeof value === 'string' && (
+                <Box sx={{ display: 'flex' }}>
+                    <Typography
+                        fontWeight="bold"
+                        sx={{ textAlign: 'center' }}
+                    >
+                        {field}
+                    </Typography>
+                    &nbsp;
+                    <Typography>{value}</Typography>
+                </Box>
+            )
         )
-      }
+    }
+
+    
 
     useEffect(() => {
         getAllProducts()
@@ -246,7 +258,10 @@ const FarmSeeProductsCardComponent = (props) => {
                 <PhotoTitle />
                 <Details />
             </Box>
-            <PageTitleComponent title='My products' />
+            <Box width={'80%'} sx={{ m: '10px auto 50px auto' }}>
+                <PageTitleComponent title='My products' />
+            </Box>
+
             {
                 isLoading ? (
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", widht: '300px' }}>
@@ -260,7 +275,7 @@ const FarmSeeProductsCardComponent = (props) => {
                         </Stack>
                     </Box>
                 ) : myProducts.length > 0 ? (
-                    <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ p: '30px', marginY:'40px' }}  >
+                    <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ p: '30px', marginY: '40px' }}  >
                         {
                             myProducts.map((product, idx) => {
                                 console.log('despacito')
@@ -269,32 +284,32 @@ const FarmSeeProductsCardComponent = (props) => {
                                 return (
                                     <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-                                            <CardMedia component='img' sx={{borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />
+                                            <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />
                                             <CardContent>
-                                                <Box sx={{ display: 'flex', flexDirection:'column', marginBottom:'30px'}}>
-                                                    <Box sx={{display:'flex'}}>
+                                                <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>
+                                                    <Box sx={{ display: 'flex' }}>
                                                         <Typography sx={{ fontWeight: 'bold' }}>
                                                             Name:
                                                         </Typography>
-                                                        <Typography sx={{marginLeft:'10px'}}>{product.name}</Typography>
+                                                        <Typography sx={{ marginLeft: '10px' }}>{product.name}</Typography>
                                                     </Box>
-                                                    <Box sx={{display:'flex'}}>
+                                                    <Box sx={{ display: 'flex' }}>
                                                         <Typography sx={{ fontWeight: 'bold' }}>
                                                             Price:
                                                         </Typography>
-                                                        <Typography sx={{marginLeft:'10px'}}> {product.farm_product.price} €/kg</Typography>
+                                                        <Typography sx={{ marginLeft: '10px' }}> {product.farm_product.price} €/kg</Typography>
                                                     </Box>
-                                                    <Box sx={{display:'flex'}}>
+                                                    <Box sx={{ display: 'flex' }}>
                                                         <Typography sx={{ fontWeight: 'bold' }}>
                                                             Stock:
                                                         </Typography>
-                                                        <Typography sx={{marginLeft:'10px'}}> {product.farm_product.price} {product.farm_product.unit_of_sale} </Typography>
+                                                        <Typography sx={{ marginLeft: '10px' }}> {product.farm_product.price} {product.farm_product.unit_of_sale} </Typography>
                                                     </Box>
-                                                    <Box sx={{display:'flex'}}>
+                                                    <Box sx={{ display: 'flex' }}>
                                                         <Typography sx={{ fontWeight: 'bold' }}>
                                                             Description:
                                                         </Typography>
-                                                        <Typography sx={{marginLeft:'10px'}}>{product.farm_product.description}</Typography>
+                                                        <Typography sx={{ marginLeft: '10px' }}>{product.farm_product.description}</Typography>
                                                     </Box>
                                                 </Box>
                                                 <Box sx={{ display: 'flex' }}>
