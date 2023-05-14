@@ -5,12 +5,14 @@ import uploadImageCloudinary from '../../services/cloudinary';
 import PropTypes from 'prop-types'
 import { mainTheme } from '../../themes/mainTheme';
 
-function UploadWidgetComponent({handleImageValue,handleImageLoading, width, height}) {
+function UploadWidgetComponent({handleImageValue,handleImageLoading,imageBefore, width, height}) {
 
   UploadWidgetComponent.propTypes = {
     handleImageValue: PropTypes.func,
     width: PropTypes.string,
-    height: PropTypes.string
+    height: PropTypes.string,
+    imageBefore: PropTypes.string,
+    isDisabled: PropTypes.bool
   }
 
   // Get production API keys from Upload.io
@@ -31,12 +33,14 @@ function UploadWidgetComponent({handleImageValue,handleImageLoading, width, heig
   return (
     <Box>
       <UploadDropzone
-        uploader={uploader} // Required.
-        options={options} // Optional.
-        width={width} // Optional.
-        height={height} // Optional.
+        uploader={uploader}
+        options={options}
+        width={width}
+        height={height}
         onUpdate={files => {
-          if (files.length === 0){
+          if (files.length === 0 && imageBefore !== undefined){
+            handleImageLoading(imageBefore)
+          }else if(files.length === 0){
             handleImageLoading('')
           }
             files.map(x => {
@@ -45,8 +49,6 @@ function UploadWidgetComponent({handleImageValue,handleImageLoading, width, heig
           }
         }
         onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
-        
-        
       />
     </Box>
   )

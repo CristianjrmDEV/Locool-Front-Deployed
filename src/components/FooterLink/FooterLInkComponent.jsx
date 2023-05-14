@@ -4,8 +4,15 @@ import { Box, darken } from '@mui/system'
 import { Link } from 'react-router-dom'
 import { mainTheme } from '../../themes/mainTheme'
 import { Button, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
 
 const FooterLInkComponent = ({ text, link, size }) => {
+  FooterLInkComponent.propTypes = {
+    text: PropTypes.string,
+    link: PropTypes.string,
+    size: PropTypes.string,
+  }
+
   return (
     <Link to={link ? `${link}` : '#'}>
       <Button

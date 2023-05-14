@@ -37,4 +37,9 @@ const getFarms = async () => {
   return data
 }
 
-export { getFarms, lookForFarms, getAllProductsByFarmId, getFarmById }
+const getMunicipalities = async() => {
+  const {data} = await api.get('/municipalities')
+  return data
+}
+
+export { getFarms, lookForFarms, getAllProductsByFarmId, getFarmById, getMunicipalities }

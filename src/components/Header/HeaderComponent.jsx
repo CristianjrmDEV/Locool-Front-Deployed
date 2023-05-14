@@ -45,7 +45,7 @@ const HeaderComponent = ({
   const displayCartComponent = () =>
     cart ? (
       <DrawerComponent
-        clickable={<CartButtonComponent smallCart={true}/>}
+        clickable={<CartButtonComponent smallCart={true} />}
         openOption={'right'}
         title={'Shopping Cart'}
         titleTopPadding={5}
@@ -103,7 +103,8 @@ const HeaderComponent = ({
       false
     )
 
-  const displaySearchComponent = () => (search ? <SearchBarComponent /> : false)
+  const displaySearchComponent = (bgColour) =>
+    search ? <SearchBarComponent bgColour={bgColour} /> : false
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -121,6 +122,9 @@ const HeaderComponent = ({
             </Box>
             <LogoWhite />
           </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+            {displaySearchComponent('primary')}
+          </Box>
           <Box
             sx={{
               display: 'flex',
@@ -128,7 +132,9 @@ const HeaderComponent = ({
           >
             {displayLogInComponent()}
             {displaySignUpComponent()}
-            <Box sx={{ display: { xs: 'none', sm: 'block' }, alignSelf:'center' }}>
+            <Box
+              sx={{ display: { xs: 'none', sm: 'block' }, alignSelf: 'center' }}
+            >
               {displayMylocoolComponent()}
             </Box>
             {displayCartComponent()}
@@ -136,7 +142,12 @@ const HeaderComponent = ({
           </Box>
         </Toolbar>
       </AppBar>
-      {displaySearchComponent()}
+      <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
+        {displaySearchComponent('secondary')}
+      </Box>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end', backgroundColor:'none' }}>
+        <PopupComponent bgColour={'red'} />
+      </Box> */}
     </Box>
   )
 }
