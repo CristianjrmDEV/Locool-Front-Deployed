@@ -48,7 +48,7 @@ const LoginComponent = () => {
   }
 
   return (
-    <Card sx={{ maxWidth: '500px', margin: '40% auto', p: 2 }}>
+    <Card sx={{ maxWidth: '500px', margin: '50% auto', p: 2 }}>
       <CardHeader
         sx={{ color: 'red.main' }}
         title="Login"

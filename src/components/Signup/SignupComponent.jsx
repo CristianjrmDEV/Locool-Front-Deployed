@@ -83,11 +83,8 @@
         const loginResult = await login({ email, password })
         if (signupResult === 200 && loginResult === 200) {
           navigate('/app')
-        } else {
-          console.log('No me registré')
         }
       } else {
-        console.log("There are errors to fix!")
         updateAllErrors()
       }
       
