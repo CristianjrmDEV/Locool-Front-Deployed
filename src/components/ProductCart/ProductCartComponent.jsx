@@ -17,7 +17,6 @@ import { capitalise } from '../../services/toolkit'
 
 
 const ProductCartComponent = ({ product, removeFromCart, smallCart }) => {
-    console.log(product)
     ProductCartComponent.propTypes = {
       product: PropTypes.object,
       removeFromCart: PropTypes.func,
@@ -80,7 +79,6 @@ const ProductCartComponent = ({ product, removeFromCart, smallCart }) => {
                   color="text.primary"
                 >
                   Quantity: {product.quantity} kg
-                  <keygen />
                 </Typography>
                 <Typography
                   variant="body2"
