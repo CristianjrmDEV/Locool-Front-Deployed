@@ -22,16 +22,19 @@ import HelpIcon from '@mui/icons-material/Help'
 import ButtonWithIconComponent from '../ButtonWithIcon/ButtonWithIconComponent'
 import PropTypes from 'prop-types'
 
-const PopupComponent = ({ greetingMessage, greeting }) => {
+const PopupComponent = ({ greetingMessage, greeting, bgColour }) => {
   PopupComponent.propTypes = {
     greetingMessage: PropTypes.string,
     greeting: PropTypes.bool,
+    bgColour: PropTypes.string,
   }
 
   const [open, setOpen] = React.useState(false)
 
   const checkOpenSetup = () =>
-    localStorage.getItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`) ? setOpen(false) : setOpen(true)
+    localStorage.getItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`)
+      ? setOpen(false)
+      : setOpen(true)
 
   React.useEffect(() => {
     checkOpenSetup()
@@ -46,11 +49,13 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
 
   const handleCloseButton = () => {
     setOpen(false)
-    localStorage.setItem(`noMoreHelp${localStorage.getItem('locoolUsername')}`, 'OK')
+    localStorage.setItem(
+      `noMoreHelp${localStorage.getItem('locoolUsername')}`,
+      'OK'
+    )
   }
 
   const handleClose = () => setOpen(false)
-
 
   const KeyRow = ({ icon, text }) => {
     KeyRow.propTypes = {
@@ -81,13 +86,15 @@ const PopupComponent = ({ greetingMessage, greeting }) => {
     )
   }
 
+  const displayBackground = () => bgColour ? bgColour : 'primary'
+
   return (
     <>
       <ButtonWithIconComponent
         text="Help"
-        icon={<HelpIcon sx={{fontSize:'30px'}} />}
+        icon={<HelpIcon sx={{ fontSize: '20px' }} />}
         fx={handleClickOpen}
-        buttonBg={'secondary'}
+        buttonBg={displayBackground()}
       />
       <Dialog
         fullScreen={fullScreen}

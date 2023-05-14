@@ -1,5 +1,4 @@
 const capitalise = (sth) => {
-  // console.log('from toolkit:',sth)
   if (sth) {
     return sth
       .split(' ')
@@ -23,7 +22,7 @@ const roundNumber = (number) =>
 const convertCoordsToKm = (latitude1, latitude2, longitude1, longitude2) => {
   // Pythagorean theorem as d=√((x_2-x_1)²+(y_2-y_1)²)
   //Arc Length = θ × (π/180) × r, where θ is in degrees.
-  const earthRadius = 6371 // Average radius of the Earth:  6371 km.
+  const earthRadius = 6371.1 // Average radius of the Earth:  6371.1 km.
 
   const angleInDegrees = Math.sqrt(
     Math.abs(
@@ -33,7 +32,7 @@ const convertCoordsToKm = (latitude1, latitude2, longitude1, longitude2) => {
   )
 
   const distance = angleInDegrees * (Math.PI / 180) * earthRadius
-  // console.log(distance)
+
   return roundNumber(distance)
 }
 

@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import LoadingComponent from '../../components/Loading/LoadingComponent'
 import NoDataComponent from '../../components/NoData/NoDataComponent'
+import { BorderTop } from '@mui/icons-material'
 
 const FarmInfosPage = () => {
   const GLOBAL_Farm = useContext(FarmsContext)
@@ -90,6 +91,7 @@ const FarmInfosPage = () => {
                   display: 'flex',
                   width: '100%',
                   justifyContent: 'center',
+                  alignItems:'center'
                 }}
               >
                 <ProductCardComponent
@@ -155,7 +157,8 @@ const FarmInfosPage = () => {
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: 'column',
-        p:2
+        p: 2,
+
       }}
     >
       <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
@@ -184,19 +187,25 @@ const FarmInfosPage = () => {
           value={getOne.address}
         />
       </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <ButtonComponent
-            text="See on map"
-            bgColour={'green'}
-            fx={seeOnMap}
-            textSize={1.2}
-          />
-        </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <ButtonComponent
+          text="See on map"
+          bgColour={'green'}
+          fx={seeOnMap}
+          textSize={1.2}
+        />
+      </Box>
     </Box>
   )
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box
+      sx={{
+        width: '100%',
+        borderTop: 2,
+        borderColor: mainTheme.palette.secondary.main,
+      }}
+    >
       <Box
         sx={{
           display: {
