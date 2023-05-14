@@ -36,12 +36,10 @@ function UploadWidgetComponent({handleImageValue,handleImageLoading, width, heig
         width={width} // Optional.
         height={height} // Optional.
         onUpdate={files => {
-          console.log('olita')
           if (files.length === 0){
             handleImageLoading('')
           }
             files.map(x => {
-              console.log(x)
               handleImageLoading(x.fileUrl)
             })
           }

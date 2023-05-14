@@ -41,12 +41,10 @@ const FarmAddCardComponent = ({handleComponent}) => {
   }
 
   const handleAddFarmButton = async() =>{
-    console.log(localStorage.username)
     if(imgSelected !== ''){
       await uploadImage(imgSelected)
     }
     const response = await createFarm(localStorage.username,farmData)
-    console.log(response)
     setMsgFinal(true)
   }
 

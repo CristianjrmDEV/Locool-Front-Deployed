@@ -46,7 +46,6 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   const onSelectedOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(event.target.value)
   };
 
   const uploadImage = async(imageUrl) => {
@@ -61,22 +60,10 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   };
 
   const onAddProductClick = async() =>{
-    
-    // console.log(newProduct)
-    // console.log(result)
-    console.log(productStock)//''
-    console.log(selectedOption)//''
-    console.log(productPrice)
-    console.log(imgSelected)
-    console.log(productDescription)
-    console.log(productMeasurement)
-
-    
     if(imgSelected !== ''){
       await uploadImage(imgSelected)
     }
     const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
-    console.log(result)
     setMsgFinal(true)
   }
 
@@ -86,24 +73,17 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
 
   const getProductsType = async() => {
     const result = await getAllProducts()
-    console.log(result)
     setProductsType(result)
 
   }
 
   const handleImageLoading = (imgLoading) =>{
-    console.log(imgLoading)
-    console.log(imageLoading)
     setImageLoading(imgLoading)
-    console.log(imageLoading)
     setImgSelected(imgLoading)
   }
 
   const handleImageValue = (img) => {
-    console.log(img)
-    console.log(imgSelected)
     setImgSelected(img)
-    console.log(imgSelected)
   }
 
   const handleMeasureChange = (e) =>{
@@ -227,7 +207,6 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         placeholder={'Description'}
         onChange={(e)=> {
           setProductDescription(e.target.value)
-          console.log(productDescription)
         }}
       />
         </Box>

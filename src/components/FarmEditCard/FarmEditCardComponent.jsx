@@ -31,10 +31,7 @@ const FarmEditCardComponent = (props) => {
     }
 
     const handleAcceptChangesButton = async() => {
-        console.log('clicked')
-        console.log(updatedFarm)
         const response = await updateFarm(localStorage.username,editFarmData.id,updatedFarm)
-        console.log(response)
     }
 
     const handleCancelButton = () => {

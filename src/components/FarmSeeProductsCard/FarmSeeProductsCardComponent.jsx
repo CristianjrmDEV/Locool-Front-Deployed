@@ -16,9 +16,7 @@ const FarmSeeProductsCardComponent = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getAllProducts = async () => {
-        console.log(editFarmData)
         const result = await getAllProductsByFarmId(editFarmData.id)
-        console.log(result)
         setMyProducts(result)
         setIsLoading(false)
     }
@@ -43,7 +41,6 @@ const FarmSeeProductsCardComponent = (props) => {
 
     const onRemoveClick = async(data) => {
         const result = await deleteProductOfFarm(localStorage.username,data.farmId,data.productId)
-        console.log(result)
     }
 
     useEffect(() => {
@@ -101,7 +98,6 @@ const FarmSeeProductsCardComponent = (props) => {
                     <Grid container spacing={1} justifyContent="center" alignItems="center" sx={{ p: '10px' }}  >
                 {
                     myProducts.map((product, idx) => {
-                        console.log(product)
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                 <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>

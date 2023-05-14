@@ -71,7 +71,6 @@ const ProductCardComponent = ({
     )
 
     if (!cartMap.has(product.id)) {
-      console.log("Product", product)
       cartMap.set(product.farmProductId, {
         img: product.img,
         id: product.farmProductId,

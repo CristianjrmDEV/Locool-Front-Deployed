@@ -10,7 +10,6 @@ import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 const FarmEditProductCardComponent = (props) => {
 
     const {editProductData} = useContext(FarmPageContext)
-    console.log(editProductData)
     // const [productName, setProductName] = useState('')
     const [productID, setProductID] = useState(0)
     const [productStock, setProductStock] = useState(0)
@@ -34,9 +33,7 @@ const FarmEditProductCardComponent = (props) => {
     }
 
     const onSaveChangesClick = async() => {
-        console.log('clicked')
         const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
-        console.log(result)
     }
 
     const onCancelClick = () => {

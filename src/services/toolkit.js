@@ -1,5 +1,4 @@
 const capitalise = (sth) => {
-  // console.log('from toolkit:',sth)
   if (sth) {
     return sth
       .split(' ')
@@ -33,7 +32,6 @@ const convertCoordsToKm = (latitude1, latitude2, longitude1, longitude2) => {
   )
 
   const distance = angleInDegrees * (Math.PI / 180) * earthRadius
-  // console.log(distance)
   return roundNumber(distance)
 }
 

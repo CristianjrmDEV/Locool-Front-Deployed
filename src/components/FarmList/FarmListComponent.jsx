@@ -18,7 +18,6 @@ const FarmListComponent = (props) => {
     const obtainMyFarms = async() => {
       const userName = localStorage.getItem('locoolUsername')
       const result = await getMyFarms(userName)
-    //   console.log(result)
       setMyFarms(result)
       setIsLoading(false)
     }
@@ -59,9 +58,7 @@ const FarmListComponent = (props) => {
     
 
     const onDeleteFarmClick = async(farmId) => {
-        console.log(localStorage.username)
         const response = await deleteFarm(localStorage.username,farmId)
-        console.log(response)
         return response
     }
   
