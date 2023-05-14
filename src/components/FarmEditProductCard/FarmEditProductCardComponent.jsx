@@ -8,8 +8,10 @@ import { FarmPageContext } from '../../contexts/farm'
 import UploadWidgetComponent from '../UploadWidget/UploadWidgetComponent'
 import PageTitleComponent from '../PageTitle/PageTitleComponent'
 import LoadingComponent from '../Loading/LoadingComponent'
+import uploadImageCloudinary from '../../services/cloudinary'
+import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 
-const FarmEditProductCardComponent = (props) => {
+const FarmEditProductCardComponent = ({handleComponent}) => {
 
     const {editProductData} = useContext(FarmPageContext)
     console.log(editProductData)
@@ -24,14 +26,6 @@ const FarmEditProductCardComponent = (props) => {
 
     const [selectedOption, setSelectedOption] = useState('');
 
-    // const productToEdit = productsType.find((product) => product.productId === editProductData.productid);
-        // setSelectedOption(productToEdit.name)
-    // const setNameProduct = () => {
-    //     if (selectedOption === ''){
-    //         const productToEdit = productsType.find((product) => product.productId === editProductData.productid);
-    //         setSelectedOption(productToEdit.name)
-    //     }
-    // }
 
     const [imgSelected, setImgSelected] = useState('')
 
@@ -48,6 +42,7 @@ const FarmEditProductCardComponent = (props) => {
         setProductID(editProductData.productid)
         setProductStock(editProductData.stock)
         setProductPrice(editProductData.price)
+        setSelectedOption(editProductData.productid)
         setImgSelected(editProductData.image_url)
         setProductMeasurement(editProductData.unit_of_sale)
         setProductDescription(editProductData.description)
@@ -58,6 +53,18 @@ const FarmEditProductCardComponent = (props) => {
         setSelectedOption(event.target.value);
     
         const selectedProduct = productsType.find((product) => product.productId === event.target.value);
+        console.log('productID before')
+        console.log(productID)
+        console.log('productID before')
+        console.log(selectedProduct)
+        
+        console.log('productoseleccionado')
+        console.log(selectedProduct.productId)
+        console.log('productoseleccionado')
+        setProductID(selectedProduct.productId)
+        console.log('productID after')
+        console.log(productID)
+        console.log('productID after')
         setImgSelected(selectedProduct.productImageUrl);
     };
 
@@ -90,13 +97,17 @@ const FarmEditProductCardComponent = (props) => {
             description: productDescription
         }
 
+        console.log('objeto enviado')
+        console.log(productData)
+        console.log('objeto enviado')
+
         const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
         setLoading(false)
         setMsgFinal(true)
     }
 
     const onCancelClick = () => {
-        props.handleComponent('FarmSeeProductsCardComponent')
+        handleComponent('FarmSeeProductsCardComponent')
     }
 
     const handleFinishProduct = () =>{
@@ -139,7 +150,6 @@ const FarmEditProductCardComponent = (props) => {
         if(selectedOption === ''){
             getProductsType()
             setDefaultValues()
-            setNameProduct()
         }
     }, [selectedOption])
 
@@ -259,7 +269,7 @@ const FarmEditProductCardComponent = (props) => {
           loading !==false ? <LoadingComponent /> : null
         }
         <Box sx={{display:'flex' }}>
-          <ButtonComponent isDisabled={disable} text='Add product to farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={onSaveChangesClick}/>
+          <ButtonComponent isDisabled={disable} text='Save changes' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={onSaveChangesClick}/>
           <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={onCancelClick}/>
         </Box>
       </CardContent>

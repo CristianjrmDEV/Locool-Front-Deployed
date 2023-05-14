@@ -142,7 +142,11 @@ const FarmEditCardComponent = ({handleComponent}) => {
             </Box>
                 <TextField
                     disabled={disable}
-                    onChange={(e) => setFarmName(e.target.value)}
+                    onChange={(e) => {
+                        console.log(farmName)
+                        setFarmName(e.target.value)
+                        console.log(farmName)
+                    }}
                     label="Farm name"
                     variant="outlined"
                     fullWidth={true}
