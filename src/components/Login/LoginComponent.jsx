@@ -18,6 +18,8 @@ import {
 } from '@mui/material'
 import { VisibilityOff, Visibility, Lock } from '@mui/icons-material'
 import './LoginComponent.css'
+import ButtonComponent from '../Button/ButtonComponent'
+import { mainTheme } from '../../themes/mainTheme'
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('')
@@ -116,29 +118,7 @@ const LoginComponent = () => {
         }}
       />
       <CardActions>
-        <Button
-          onClick={onLogin}
-          color="white"
-          sx={{
-            height: '39.41px',
-            margin: '0 auto',
-            maxWidth: '500px',
-            marginBottom: '26px',
-            borderRadius: '6px',
-            backgroundColor: 'green.main',
-            width: '100%',
-            fontSize: '14px',
-            textTransform: 'capitalize',
-            fontWeight: 'bold',
-            ':hover': {
-              bgcolor: 'white', // theme.palette.primary.main
-              color: 'green.main',
-              border: '1px solid green',
-            },
-          }}
-        >
-          Login
-        </Button>
+        <ButtonComponent text={'Login'} textColour={'white'} fx={onLogin} />
       </CardActions>
     </Card>
   )
