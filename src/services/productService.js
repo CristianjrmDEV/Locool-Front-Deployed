@@ -12,7 +12,6 @@ const lookForProducts = async (query) => {
 
     data.map((obj, idx) => {
       for (let i = 0; i < obj.farms.length; i++) {
-        console.log("Farm product", obj.farms[i].farm_product)
         const objMod = {
           id: obj.productId,
           name: obj.productName,

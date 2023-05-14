@@ -37,6 +37,11 @@ const ProductCardComponent = ({
     seeFarmButton: PropTypes.bool,
   }
 
+  const { setOne } = useContext(FarmsContext)
+
+  const goTo = useNavigate()
+
+  
   const handleGetFarm = async () => {
     const result = await getFarmById(product.farmId)
     const objResult = {
@@ -54,16 +59,9 @@ const ProductCardComponent = ({
       id: result.id,
     }
     setOne(objResult)
-  }
-
-  const { setOne } = useContext(FarmsContext)
-
-  const goTo = useNavigate()
-
-  const handleClick = () => {
-    handleGetFarm()
     goTo('/app/farms/details')
   }
+
 
   const addProductToCart = () => {
     const cartMap = new Map(
@@ -129,7 +127,7 @@ const ProductCardComponent = ({
       seeFarmButton && (
         <ButtonComponent
           text="See farm"
-          fx={handleClick}
+          fx={handleGetFarm}
           bgColour={'primary'}
           textColour={'white'}
         />

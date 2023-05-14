@@ -105,9 +105,6 @@ const SearchBarComponent = () => {
       <Box
         sx={{
           display: 'flex',
-          gridTemplateColumns: {
-            xs: '. 50% 25%',
-          },
           backgroundColor: mainTheme.palette.secondary.main,
         }}
       >
@@ -117,8 +114,7 @@ const SearchBarComponent = () => {
             m: 'auto',
             p: '0px 4px',
             display: 'flex',
-            alignItems: 'center',
-            width: 400,
+            width: { xs: 280, sm: 400 },
             borderRadius: 10,
             backgroundColor: mainTheme.palette.white.main,
           }}
