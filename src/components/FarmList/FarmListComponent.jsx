@@ -8,6 +8,7 @@ import { FarmPageContext } from '../../contexts/farm'
 import { deleteFarm } from '../../services/userService'
 import PropTypes from 'prop-types'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
+import { getFarmById } from '../../services/farmService'
 
 const FarmListComponent = ({handleComponent}) => {
 
@@ -57,7 +58,27 @@ const FarmListComponent = ({handleComponent}) => {
         handleComponent('FarmEditCardComponent')
     }
 
-    const onSeeProductsClick = (data) =>{
+    const getDetailsFarmUser = async(data) => {
+        const result = await getFarmById(data)
+        const objResult = {
+            collection_point: result.collection_point,
+            collection_schedule: result.collection_schedule,
+            user: {
+                email: result.user.email,
+                first_name: result.user.first_name,
+                last_name: result.user.last_name,
+            },
+            municipality: { name: result.municipality.name },
+            image_url: result.image_url,
+            name: result.name,
+            address: result.address,
+            id: result.id,
+        }
+        return objResult
+    }
+
+    const onSeeProductsClick = async(data) =>{
+        const result =  await getDetailsFarmUser(data.farmId)
         setEditFarmData({
             id: data.farmId,
             farm_name: data.farm_name,
@@ -65,7 +86,8 @@ const FarmListComponent = ({handleComponent}) => {
             image_url: data.image_url,
             address: data.address,
             collection_point: data.collection_point,
-            collection_schedule: data.collection_schedule
+            collection_schedule: data.collection_schedule,
+            data: result
         })
         handleComponent('FarmSeeProductsCardComponent')
     }
