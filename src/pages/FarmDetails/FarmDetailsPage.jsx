@@ -1,9 +1,4 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import { Box, Card, CardMedia, Typography } from '@mui/material'
 import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
@@ -24,18 +19,7 @@ import { BorderTop } from '@mui/icons-material'
 const FarmInfosPage = () => {
   const GLOBAL_Farm = useContext(FarmsContext)
   const { getOne } = useContext(FarmsContext)
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  const getAllProducts = async () => {
-    const result = await getAllProductsByFarmId(getOne.id)
-    setProducts(result)
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getAllProducts()
-  }, [])
+  const [loading, setLoading] = useState(false)
 
   const FarmInfo = ({ field, value }) => {
     FarmInfo.propTypes = {
@@ -68,7 +52,7 @@ const FarmInfosPage = () => {
   }
 
   const displayProducts = () => {
-    if (products.length > 0) {
+    if (getOne.products.length > 0) {
       return (
         <Box
           display="grid"
@@ -82,7 +66,7 @@ const FarmInfosPage = () => {
             },
           }}
         >
-          {products.map((product, idx) => {
+          {getOne.products.map((product, idx) => {
             return (
               <Box
                 key={idx}
@@ -91,13 +75,13 @@ const FarmInfosPage = () => {
                   display: 'flex',
                   width: '100%',
                   justifyContent: 'center',
-                  alignItems:'center'
+                  alignItems: 'center',
                 }}
               >
                 <ProductCardComponent
-                  product={product.farm_product}
-                  showFarmName={false}
-                  showDescription={product.farm_product.description}
+                  product={product}
+                  showFarmName={true}
+                  showDescription={product.description}
                 />
               </Box>
             )
@@ -158,7 +142,6 @@ const FarmInfosPage = () => {
         justifyContent: 'space-between',
         flexDirection: 'column',
         p: 2,
-
       }}
     >
       <Box sx={{ justifyContent: 'flex-start', p: 2 }}>
