@@ -18,11 +18,10 @@ import ButtonComponent from '../Button/ButtonComponent'
 import { FarmsContext } from '../../contexts/farm'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getFarmById } from '../../services/farmService'
+import { getAllProductsByFarmId, getFarmById } from '../../services/farmService'
 import ModalComponent from '../Modal/ModalComponent'
 import Modal from '@mui/material/Modal'
 import PopoverComponent from '../Popover/PopoverComponent'
-
 
 const ProductCardComponent = ({
   product,
@@ -41,9 +40,25 @@ const ProductCardComponent = ({
 
   const goTo = useNavigate()
 
-  
   const handleGetFarm = async () => {
     const result = await getFarmById(product.farmId)
+
+    ///products
+    const productByFarm = await getAllProductsByFarmId(product.farmId)
+    const mappedArray = []
+    productByFarm.forEach((el) => {
+      const objRes = {
+        name: el.name,
+        img: el.img_url,
+        price: el.farm_product.price,
+        stock: el.farm_product.stock,
+        farmName: result.name,
+        description: el.farm_product.description,
+      }
+      mappedArray.push(objRes)
+    })
+
+    /////
     const objResult = {
       collection_point: result.collection_point,
       collection_schedule: result.collection_schedule,
@@ -57,11 +72,13 @@ const ProductCardComponent = ({
       name: result.name,
       address: result.address,
       id: result.id,
+      products: mappedArray
     }
+    console.log('getOne from product cart', objResult)
+
     setOne(objResult)
     goTo('/app/farms/details')
   }
-
 
   const addProductToCart = () => {
     const cartMap = new Map(
@@ -71,7 +88,7 @@ const ProductCardComponent = ({
     )
 
     if (!cartMap.has(product.id)) {
-      console.log("Product", product)
+      console.log('Product', product)
       cartMap.set(product.farmProductId, {
         img: product.img,
         id: product.farmProductId,
@@ -87,7 +104,6 @@ const ProductCardComponent = ({
       `cart-${localStorage.getItem('locoolUsername')}`,
       JSON.stringify([...cartMap])
     )
-
   }
 
   const displayFarmName = () => {
