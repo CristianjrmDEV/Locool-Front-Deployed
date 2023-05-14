@@ -49,7 +49,11 @@ const ProductCardComponent = ({
     productByFarm.forEach((el) => {
       const objRes = {
         name: el.name,
-        img: el.img_url,
+        img:
+          el.farm_product.image_url !== null &&
+          el.farm_product.image_url !== ''
+            ? el.farm_product.image_url
+            : el.img_url,
         price: el.farm_product.price,
         stock: el.farm_product.stock,
         farmName: result.name,
@@ -57,6 +61,7 @@ const ProductCardComponent = ({
       }
       mappedArray.push(objRes)
     })
+    console.log('from product card ',productByFarm)
 
     /////
     const objResult = {
