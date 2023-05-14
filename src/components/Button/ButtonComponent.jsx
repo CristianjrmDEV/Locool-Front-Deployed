@@ -15,7 +15,8 @@ const ButtonComponent = ({
   width,
   minWidth,
   fx,
-  textSize
+  textSize,
+  isDisabled
 }) => {
   
   ButtonComponent.propTypes = {
@@ -28,6 +29,7 @@ const ButtonComponent = ({
     minWidth: PropTypes.string,
     fx: PropTypes.func,
     textSize: PropTypes.number,
+    isDisabled: PropTypes.bool
   }
 
   const displaySize = () => textSize ? `${textSize}rem` : '.9rem'
@@ -35,6 +37,7 @@ const ButtonComponent = ({
   return (
     <Button
       fullWidth={true}
+      disabled={isDisabled}
       variant="contained"
       color={bgColour ? `${bgColour}` : 'green'}
       onClick={fx}
