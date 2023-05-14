@@ -102,6 +102,9 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
         console.log('objeto enviado')
 
         const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
+        console.group('resultado')
+        console.log(result)
+        console.group('resultado')
         setLoading(false)
         setMsgFinal(true)
     }

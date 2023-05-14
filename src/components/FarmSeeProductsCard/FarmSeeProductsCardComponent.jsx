@@ -152,13 +152,16 @@ const FarmSeeProductsCardComponent = (props) => {
                     value={editFarmData.address}
                 />
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <ButtonComponent
                     text="See on map"
                     bgColour={'green'}
                     fx={seeOnMap}
                     textSize={1.2}
+                    width={'45%'}
+                    textColour={'white'}
                 />
+                <ButtonComponent text='Add new product' width='45%' bgColour='green' textColour='white' fx={onAddNewProductClick}/>
             </Box>
         </Box>
     )
@@ -257,7 +260,7 @@ const FarmSeeProductsCardComponent = (props) => {
                         </Stack>
                     </Box>
                 ) : myProducts.length > 0 ? (
-                    <Grid container spacing={1} justifyContent="center" alignItems="center" sx={{ p: '10px' }}  >
+                    <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ p: '30px', marginY:'40px' }}  >
                         {
                             myProducts.map((product, idx) => {
                                 console.log('despacito')
@@ -266,15 +269,33 @@ const FarmSeeProductsCardComponent = (props) => {
                                 return (
                                     <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-                                            <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />
+                                            <CardMedia component='img' sx={{borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />
                                             <CardContent>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <Typography>
-                                                        {product.name}
-                                                    </Typography>
-                                                    <Typography>
-                                                        {product.farm_product.price}€/kg
-                                                    </Typography>
+                                                <Box sx={{ display: 'flex', flexDirection:'column', marginBottom:'30px'}}>
+                                                    <Box sx={{display:'flex'}}>
+                                                        <Typography sx={{ fontWeight: 'bold' }}>
+                                                            Name:
+                                                        </Typography>
+                                                        <Typography sx={{marginLeft:'10px'}}>{product.name}</Typography>
+                                                    </Box>
+                                                    <Box sx={{display:'flex'}}>
+                                                        <Typography sx={{ fontWeight: 'bold' }}>
+                                                            Price:
+                                                        </Typography>
+                                                        <Typography sx={{marginLeft:'10px'}}> {product.farm_product.price} €/kg</Typography>
+                                                    </Box>
+                                                    <Box sx={{display:'flex'}}>
+                                                        <Typography sx={{ fontWeight: 'bold' }}>
+                                                            Stock:
+                                                        </Typography>
+                                                        <Typography sx={{marginLeft:'10px'}}> {product.farm_product.price} {product.farm_product.unit_of_sale} </Typography>
+                                                    </Box>
+                                                    <Box sx={{display:'flex'}}>
+                                                        <Typography sx={{ fontWeight: 'bold' }}>
+                                                            Description:
+                                                        </Typography>
+                                                        <Typography sx={{marginLeft:'10px'}}>{product.farm_product.description}</Typography>
+                                                    </Box>
                                                 </Box>
                                                 <Box sx={{ display: 'flex' }}>
                                                     <ButtonComponent isDisabled={disable} text='Edit' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={() => onEditClick({ farmId: product.farm_product.farmId, farm_name: editFarmData.farm_name, productid: product.farm_product.productId, product_name: product.name, stock: product.farm_product.stock, price: product.farm_product.price, image_url: product.farm_product.image_url, measure: product.farm_product.unit_of_sale, description: product.farm_product.description })} />
