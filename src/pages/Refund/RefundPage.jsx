@@ -31,7 +31,10 @@ const RefundPage = () => {
     )
 
   return (
-    <Box>
+    <Box
+      width={'80%'}
+      sx={{ m: '10px auto 50px auto' }}
+    >
       <PageTitleComponent title={'Refunds'} />
       {loading ? <LoadingComponent spinnerSize={200} /> : displayRefunds()}
     </Box>

@@ -31,7 +31,10 @@ const PurchasePage = () => {
     )
 
   return (
-    <Box >
+    <Box
+      width={'80%'}
+      sx={{ m: '10px auto 50px auto' }}
+    >
       <PageTitleComponent title={'Purchases'} />
       {loading ? <LoadingComponent spinnerSize={200} /> : displayPurchases()}
     </Box>
