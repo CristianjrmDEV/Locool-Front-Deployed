@@ -4,11 +4,6 @@ import { Box } from '@mui/material'
 import { mainTheme } from '../../themes/mainTheme'
 import DrawerComponent from '../Drawer/DrawerComponent'
 import FooterLInkComponent from '../FooterLink/FooterLInkComponent'
-import CopyrightComponent from '../Copyright/CopyrightComponent'
-import MylocoolButtonComponent from '../mylocoolButton/MylocoolButtonComponent'
-import ButtonComponent from '../Button/ButtonComponent'
-
-const drawerWidth = 100 % ''
 
 const FooterComponent = () => {
 
@@ -31,22 +26,6 @@ const FooterComponent = () => {
           greeting={false}
         />
       </Box>
-      {/* <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-        }}
-      >
-        <FooterLInkComponent
-          text="Privacy notice"
-          link="/app/legal-privacy"
-        />
-        <FooterLInkComponent
-          text="Cookies Policy"
-          link="/app/legal-cookies"
-        />
-      </Box> */}
-      {/* <CopyrightComponent /> */}
     </Box>
   )
 }
