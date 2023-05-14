@@ -65,7 +65,11 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
         console.log('productID after')
         console.log(productID)
         console.log('productID after')
+        console.log('imagenPredefinida')
+        console.log(selectedProduct.productImageUrl)
+        console.log('imagenPredefinida')
         setImgSelected(selectedProduct.productImageUrl);
+        
     };
 
     const uploadImage = async(imageUrl) => {
@@ -76,7 +80,7 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
         data.append("cloud_name", "locool");
     
         const url = await uploadImageCloudinary(data)
-        setImgSelected(url)
+        return url
     };
 
     const onSaveChangesClick = async() => {
@@ -84,9 +88,16 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
         let urlCloud = ''
         setLoading(true)
 
-        if(imgSelected !== ''){
-            await uploadImage(imgSelected)
+        if(imageLoading !== ''){
+            urlCloud = await uploadImage(imageLoading)
         }
+
+        console.log('urlCloud')
+        console.log(urlCloud)
+        console.log('urlCloud')
+        console.log('imgSelected')
+        console.log(imgSelected)
+        console.log('imgSelected')
 
         const productData = {
             productId: productID,

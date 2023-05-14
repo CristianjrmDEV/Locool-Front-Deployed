@@ -1,5 +1,5 @@
-import { Box, Card, CardContent, CardHeader, CardMedia, Container, IconButton, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+import { Box, Card, CardContent, CardHeader, CardMedia, Container,FormControl, InputLabel, MenuItem, Select, IconButton, TextField, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import ButtonComponent from '../Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { createFarm } from '../../services/userService'
@@ -11,31 +11,35 @@ import uploadImageCloudinary from '../../services/cloudinary'
 import { PopupComponent } from '../Popup/PopupComponent'
 import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 import LoadingComponent from '../Loading/LoadingComponent'
+import { getMunicipalities } from '../../services/farmService'
 
-const FarmAddCardComponent = ({handleComponent}) => {
-  
+const FarmAddCardComponent = ({ handleComponent }) => {
+
   FarmAddCardComponent.propTypes = {
     handleComponent: PropTypes.string
   }
 
-  const [farmName,setFarmName] = useState('')
-  const [farmAdress,setFarmAdress] = useState('')
-  const [farmCollectionPoint,setFarmCollectionPoint] = useState('')
-  const [farmCollectionSchedule,setFarmCollectionSchedule] = useState('')
-  const [farmLatitude,setFarmLatitude] = useState('')
-  const [farmLongitude,setFarmLongitude] = useState('')
+  const [farmName, setFarmName] = useState('')
+  const [farmAdress, setFarmAdress] = useState('')
+  const [farmCollectionPoint, setFarmCollectionPoint] = useState('')
+  const [farmCollectionSchedule, setFarmCollectionSchedule] = useState('')
+  const [farmLatitude, setFarmLatitude] = useState('')
+  const [farmLongitude, setFarmLongitude] = useState('')
 
-  const [msgFinal,setMsgFinal] = useState(false)
+  const [municipalities, setMunicipalities] = useState([])
+  const [selectedMunicipality, setSelectedMunicipality] = useState('')
 
-  const [imageLoading,setImageLoading] = useState('')
+  const [msgFinal, setMsgFinal] = useState(false)
+
+  const [imageLoading, setImageLoading] = useState('')
   const [imgSelected, setImgSelected] = useState('')
 
-  const [disable,setDisabled] = useState(false)
+  const [disable, setDisabled] = useState(false)
 
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   
-  const uploadImage = async(imageUrl) => {
+  const uploadImage = async (imageUrl) => {
     const data = new FormData();
     data.append("file", imageUrl);
     data.append("upload_preset", "presetUnsignedLocool");
@@ -43,23 +47,26 @@ const FarmAddCardComponent = ({handleComponent}) => {
     data.append("cloud_name", "locool");
 
     const url = await uploadImageCloudinary(data)
-    setImgSelected(url)
+    return url
   };
 
-  const handleAddFarmButton = async() =>{
+  const onSelectedMunicipalityChange = (e) => {
+    setSelectedMunicipality(e.target.value)
+}
+
+  const handleAddFarmButton = async () => {
     setDisabled(true)
-    let urlCloud = ''
     setLoading(true)
-
-
-    if(imgSelected !== ''){
-      await uploadImage(imgSelected)
+    let urlCloud= ''
+    if (imageLoading !== '') {
+      urlCloud =  await uploadImage(imageLoading)
     }
 
     const farmData = {
       name: farmName,
       address: farmAdress,
-      image_url: urlCloud !== '' ? urlCloud : imgSelected !== '' ? imgSelected : farmDefault,
+      municipalityId: selectedMunicipality,
+      image_url:  urlCloud !== '' ? urlCloud: imageLoading !== '' ? imageLoading : farmDefault,
       status: 'pending',
       collection_point: farmCollectionPoint,
       collection_schedule: farmCollectionSchedule,
@@ -67,12 +74,12 @@ const FarmAddCardComponent = ({handleComponent}) => {
       longitude: farmLongitude
     }
 
-    const response = await createFarm(localStorage.username,farmData)
+    const response = await createFarm(localStorage.username, farmData)
     setLoading(false)
     setMsgFinal(true)
   }
 
-  const handleImageLoading = (imgLoading) =>{
+  const handleImageLoading = (imgLoading) => {
     setImageLoading(imgLoading)
   }
 
@@ -84,104 +91,129 @@ const FarmAddCardComponent = ({handleComponent}) => {
     handleComponent('FarmListComponent')
   }
 
-  const handleFinishFarm = () =>{
+  const handleFinishFarm = () => {
     handleComponent('FarmListComponent')
   }
 
-  const handleLatitudeChange = (e) =>{
+  const handleLatitudeChange = (e) => {
     const latitudeRegex = /^\d{0,2}(?:\.\d{0,5})?$/
-    if(latitudeRegex.test(e.target.value)){
+    if (latitudeRegex.test(e.target.value)) {
       setFarmLatitude(e.target.value)
     }
   }
+  const getPosiblesMunicipalities = async() => {
+    const result = await getMunicipalities()
+    setMunicipalities(result)
+  }
 
+  
 
-
-  const handleLongitudeChange = (e) =>{
+  const handleLongitudeChange = (e) => {
     const longitudeRegex = /^\d{0,3}(?:\.\d{0,5})?$/
-    if(longitudeRegex.test(e.target.value)){
+    if (longitudeRegex.test(e.target.value)) {
       setFarmLongitude(e.target.value)
     }
   }
 
+  useEffect(() =>{
+    getPosiblesMunicipalities()
+  },[])
+
   return (
     <Box>
-      <Box sx={{width:'600px', margin:'auto'}}>
-          <PageTitleComponent title={'Add new farm'} />
+      <Box sx={{ width: '600px', margin: 'auto' }}>
+        <PageTitleComponent title={'Add new farm'} />
       </Box>
-      <Card color='secondary' sx={{width:'600px',margin:'auto',marginY:'10px', backgroundColor: mainTheme.palette.secondary.main}}>
+      <Card color='secondary' sx={{ width: '600px', margin: 'auto', marginY: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
         <CardContent>
-          <Box sx={{display: 'flex',height:'200px', margin:'20px 0px 40px 0px'}}>
+          <Box sx={{ display: 'flex', height: '200px', margin: '20px 0px 40px 0px' }}>
             <CardMedia
               component="img"
               height="auto"
               alt={'Farm Image'}
-              image={imageLoading !== '' ? imageLoading : imgSelected !== '' ?  imgSelected : farmDefault}
-              style={{ objectFit: 'fill'}}
+              image={imageLoading !== '' ? imageLoading : imgSelected !== '' ? imgSelected : farmDefault}
+              style={{ objectFit: 'fill' }}
             />
-            <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={imgSelected}  width='50%' height='250px'/>
+            <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={imgSelected} width='50%' height='250px' />
           </Box>
-          <TextField 
+          <TextField
             onChange={(e) => setFarmName(e.target.value)}
-            label="Farm name" 
-            variant="outlined" 
+            label="Farm name"
+            variant="outlined"
             fullWidth={true}
             InputProps={{ style: { maxLength: 50, backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-          <TextField 
+          <TextField
             onChange={(e) => setFarmAdress(e.target.value)}
-            label="Direction" 
-            variant="outlined" 
+            label="Direction"
+            variant="outlined"
             fullWidth={true}
             InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-          <TextField 
+          <FormControl fullWidth>
+            <InputLabel id="municipality">Municipality</InputLabel>
+            <Select
+              disabled={disable}
+              label='Municipality'
+              labelId='municipality'
+              onChange={onSelectedMunicipalityChange}
+              value={selectedMunicipality}
+              sx={{ backgroundColor: mainTheme.palette.white.main, marginBottom: '20px' }}
+            >
+              {municipalities.map((municipality) => (
+                <MenuItem key={municipality.id} value={municipality.id}>
+                  {municipality.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
             onChange={(e) => setFarmCollectionPoint(e.target.value)}
-            label="Collection point" 
-            variant="outlined" 
+            label="Collection point"
+            variant="outlined"
             fullWidth={true}
             InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-          <TextField 
+          <TextField
             onChange={(e) => setFarmCollectionSchedule(e.target.value)}
-            label="Collection schedule" 
-            variant="outlined" 
+            label="Collection schedule"
+            variant="outlined"
             fullWidth={true}
             InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-          <TextField 
+          <TextField
             onChange={handleLatitudeChange}
-            label="Latitude" 
-            variant="outlined" 
+            label="Latitude"
+            variant="outlined"
             fullWidth={true}
             value={farmLatitude}
             InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
-          <TextField 
+          <TextField
             onChange={handleLongitudeChange}
-            label="Longitude" 
-            variant="outlined" 
+            label="Longitude"
+            variant="outlined"
             fullWidth={true}
             value={farmLongitude}
             InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
             sx={{ marginBottom: '20px' }}
           />
           {
-            loading !==false ? <LoadingComponent /> : null
+            loading !== false ? <LoadingComponent /> : null
           }
-          <Box sx={{display:'flex' }}>
-            <ButtonComponent isDisabled={disable} text='Add farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAddFarmButton}/>
-            <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton}/>
+          <Box sx={{ display: 'flex' }}>
+            <ButtonComponent isDisabled={disable} text='Add farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAddFarmButton} />
+            <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton} />
           </Box>
         </CardContent>
       </Card>
       {
-        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishFarm} text='Added a new farm'/> : false
+        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishFarm} text='Added a new farm' /> : false
       }
     </Box>
 

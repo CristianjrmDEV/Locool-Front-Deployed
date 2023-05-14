@@ -61,6 +61,7 @@ const FarmListComponent = ({handleComponent}) => {
         setEditFarmData({
             id: data.farmId,
             farm_name: data.farm_name,
+            municipality: data.municipality,
             image_url: data.image_url,
             address: data.address,
             collection_point: data.collection_point,
@@ -133,7 +134,7 @@ const FarmListComponent = ({handleComponent}) => {
                             </Grid>
                             <Grid item xs={6} sm={6} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <ButtonComponent isDisabled={disable} text='Edit farm' bgColour='primary' textColour='white' width='145px' minWidth='145px' fx={() => onEditFarmClick({
-                                    farmId: farm.id,name: farm.name, address: farm.address, collection_point: farm.collection_point, collection_schedule: farm.collection_schedule,
+                                    farmId: farm.id,name: farm.name, address: farm.address, muncipality: farm.municipalityId , collection_point: farm.collection_point, collection_schedule: farm.collection_schedule,
                                     latitude: farm.latitude, longitude: farm.longitude, image_url: farm.image_url
                                 })}/>
                             </Grid>

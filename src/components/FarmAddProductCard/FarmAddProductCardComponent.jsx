@@ -57,7 +57,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     data.append("cloud_name", "locool");
 
     const url = await uploadImageCloudinary(data)
-    setImgSelected(url)
+    return url
   };
 
   const onAddProductClick = async() =>{
@@ -65,8 +65,8 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
     let urlCloud = ''
     setLoading(true)
 
-    if(imgSelected !== ''){
-      await uploadImage(imgSelected)
+    if(imageLoading !== ''){
+      urlCloud = await uploadImage(imageLoading)
     }
 
     const newProduct = {
