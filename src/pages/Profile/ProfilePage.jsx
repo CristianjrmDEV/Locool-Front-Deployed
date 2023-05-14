@@ -6,6 +6,7 @@ import { getAllUsers } from '../../services/userService'
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 import './ProfilePage.css'
+import ButtonComponent from '../../components/Button/ButtonComponent'
 
 const ProfilePage = () => {
 
@@ -75,18 +76,11 @@ const ProfilePage = () => {
   },[])
 
   return (
-    <>
-      <PageTitleComponent title={'Profile'}/>
-      <Box>
-        <Typography variant='h2' sx={{
-          color: mainTheme.palette.red.main,
-          marginTop: 7,
-          marginLeft: 3,
-          marginBottom: 7
-        }}>
-          My Profile
-        </Typography>
+    <Box width={'100%'}>
+      <Box width={'80%'} sx={{ m: '10px auto 50px auto' }}>
+                <PageTitleComponent title='My profile' />
       </Box>
+      <Box >
       <Container maxWidth='lg'>
         <Grid container>
           <Grid item xs={12} sm={6}>
@@ -98,7 +92,7 @@ const ProfilePage = () => {
               border: '1px solid',
               borderColor: mainTheme.palette.red.main,
             }}></Box>
-            <Card >
+            <Card sx={{height:'450px'}}>
               <CardContent>
                 <TextField 
                   onChange={(e) => setUserName(e.target.value)}
@@ -177,8 +171,8 @@ const ProfilePage = () => {
               border: '1px solid',
               borderColor: mainTheme.palette.red.main
             }}></Box>
-            <Card >
-              <CardContent>
+            <Card sx={{height:'450px'}} >
+              <CardContent sx={{height:'100%'}}>
                 <TextField 
                   onChange={(e) => setOldPassword(e.target.value)}
                   label="Old password"
@@ -263,27 +257,22 @@ const ProfilePage = () => {
                     )
                   }}
                 />
-                <Typography sx={{color:mainTheme.palette.red.main, marginBottom: '92px'}}>
+                <Typography sx={{color:mainTheme.palette.red.main}}>
                   Security: Use between 8 and 20 characters
                 </Typography>
-                <Button variant='contained' sx={{
-                  backgroundColor: mainTheme.palette.red.main,
-                  '&:hover': { backgroundColor: '#3E8E41'},
-                  width: '100%', 
-                  display: 'flex', 
-                  justifyContent: 'center', 
-                  alignItems: 'center'
-                  }}
-                  onClick={onSaveHandle}>
-                  Save Changes
-                </Button>
+                <Box sx={{marginTop:'140px'}}>
+                  <ButtonComponent text={'Save changes'} fx={onSaveHandle}/>
+                </Box>
+                
               </CardContent>
             </Card>
             </Box>
           </Grid>
         </Grid>
       </Container>
-    </>
+      </Box>
+      
+    </Box>
   )
 }
 
