@@ -70,7 +70,6 @@ const FarmSeeProductsCardComponent = (props) => {
         )
         props.handleComponent('FarmEditProductCardComponent')
     }
-
     const onRemoveClick = async (data) => {
         setDisabled(true)
         const productID = data.productId
@@ -275,6 +274,7 @@ const FarmSeeProductsCardComponent = (props) => {
                         </Stack>
                     </Box>
                 ) : myProducts.length > 0 ? (
+
                     <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ p: '30px', marginY: '40px' }}  >
                         {
                             myProducts.map((product, idx) => {

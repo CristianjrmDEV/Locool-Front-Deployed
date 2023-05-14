@@ -17,6 +17,7 @@ import { CartContext } from '../../contexts/cart'
 import ButtonComponent from '../Button/ButtonComponent'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import PageTitleComponent from '../PageTitle/PageTitleComponent'
 
 const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
   ShoppingCartComponent.propTypes = {
@@ -95,49 +96,62 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
   }
 
   return (
-    <Grid
-      container
-      spacing={1}
+    <Box
+      width={'80%'}
+      sx={{ m: '10px auto 50px auto' }}
     >
+      {smallCart ? "" : <PageTitleComponent title={"Shopping Cart"} />}
       <Grid
-        item
-        xs={12}
-        lg={smallCart? 12:9}
-        sx={{ gridAutoRows: '1fr' }}
+        container
+        spacing={7}
       >
-        {printCart()}
-      </Grid>
+        <Grid
+          item
+          xs={12}
+          lg={smallCart ? 12 : 9}
+        >
+          <Grid
+            container
+          >
 
-      <Grid
-        item
-        xs={12}
-        lg={smallCart? 12:3}
-      >
-        <Card>
-          <ButtonComponent
-            text={'Empty cart'}
-            bgColour={'red'}
-            margin={'20px'}
-            width={'85%'}
-            fx={emptyCart}
-            sx={{boxSizing:'border-box'}}
-          />
-          <Box sx={{ p: 2 }}>
-            <Typography>Total: {totalPrice + ' €'}</Typography>
-          </Box>
-          <Divider />
-          <Link to="/app/payment-method">
-            <ButtonComponent
-              text={'Proceed to pay'}
-              bgColour={'green'}
-              margin={'20px'}
-              width={'85%'}
-              fx={toggleDrawer}
-            />
-          </Link>
-        </Card>
+            {printCart()}
+          </Grid>
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          lg={smallCart ? 12 : 3}
+        >
+          <Card>
+            <CardActions sx={{p: 2}}>
+              <ButtonComponent
+                text={'Empty cart'}
+                bgColour={'red'}
+                width={'100%'}
+                fx={emptyCart}
+                sx={{ boxSizing: 'border-box' }}
+              />
+            </CardActions>
+            
+            <Box sx={{ p: 2 }}>
+              <Typography>Total: {totalPrice + ' €'}</Typography>
+            </Box>
+            <CardActions sx={{padding: 2}}>
+              <Link to="/app/payment-method">
+                <ButtonComponent
+                  text={'Proceed to pay'}
+                  bgColour={'green'}
+                  fx={toggleDrawer}
+                />
+              </Link>
+            </CardActions>
+           
+          </Card>
+        </Grid>
       </Grid>
-    </Grid>
+    </Box>
+
   )
 }
 

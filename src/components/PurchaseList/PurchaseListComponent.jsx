@@ -21,7 +21,6 @@ const PurchaseListComponent = ({ purchases }) => {
             new Date(a.updatedAt)
         )
         .map((purchase, idx) => {
-          console.log(purchase)
           return (
             <PurchaseCardComponent
               key={idx}
