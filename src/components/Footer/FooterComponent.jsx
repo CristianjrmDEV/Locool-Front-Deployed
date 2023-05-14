@@ -6,6 +6,7 @@ import DrawerComponent from '../Drawer/DrawerComponent'
 import FooterLInkComponent from '../FooterLink/FooterLInkComponent'
 import CopyrightComponent from '../Copyright/CopyrightComponent'
 import MylocoolButtonComponent from '../mylocoolButton/MylocoolButtonComponent'
+import ButtonComponent from '../Button/ButtonComponent'
 
 const drawerWidth = 100 % ''
 
@@ -15,17 +16,22 @@ const FooterComponent = () => {
     <Box sx={{ backgroundColor: mainTheme.palette.secondary.main }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <DrawerComponent
-          clickable={<MylocoolButtonComponent bgColor="secondary" />}
+          clickable={
+            <FooterLInkComponent
+              text="Locool"
+              size='1.2rem'
+            />
+          }
           title={'Locool'}
           openOption={'bottom'}
-          buttonList={['About', 'Mission', 'Contact']}
+          buttonList={['About', 'Mission', 'Contact', 'Legal']}
           width="100%"
           align="center"
           titleTopPadding={0}
           greeting={false}
         />
       </Box>
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-around',
@@ -36,15 +42,11 @@ const FooterComponent = () => {
           link="/app/legal-privacy"
         />
         <FooterLInkComponent
-          text="Terms & Conditions"
-          link="/app/legal-terms"
-        />
-        <FooterLInkComponent
           text="Cookies Policy"
           link="/app/legal-cookies"
         />
-      </Box>
-      <CopyrightComponent />
+      </Box> */}
+      {/* <CopyrightComponent /> */}
     </Box>
   )
 }

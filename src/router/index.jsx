@@ -133,7 +133,7 @@ const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: '/app/legal-terms',
+        path: '/app/legal',
         element: <LegalTermsPage />,
       },
       {
