@@ -5,21 +5,16 @@ import { useState, useEffect } from 'react'
 import PageTitleComponent from '../../components/PageTitle/PageTitleComponent'
 
 const Home = () => {
-  // (async()=> console.log(await getFarms()))()
 
   const [farms, setFarms] = useState([])
 
   async function farmList() {
     const data = await getFarms()
-    console.log('aa')
     setFarms(data)
-    console.log('bb')
   }
 
   useEffect(() => {
-    console.log('aaaaa')
     farmList()
-    console.log('bbbb')
   }, [])
 
   return (

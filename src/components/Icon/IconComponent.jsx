@@ -7,6 +7,8 @@ import locoolSymbol from '../../assets/logo/logo-symbol.svg'
 import farmSymbol from '../../assets/icons/farm-icon.svg'
 import searchSymbol from '../../assets/icons/search-icon.svg'
 import loadingSymbol from '../../assets/icons/loading-icon.svg'
+import personSymbol from '../../assets/icons/person-icon.svg'
+
 
 import PropTypes from 'prop-types'
 
@@ -90,6 +92,20 @@ const LoadingIcon = ({ size }) => {
   )
 }
 
+const PersonIcon = ({ size }) => {
+  PersonIcon.propTypes = {
+    size: PropTypes.number,
+  }
+  return (
+    <img
+      width={size ? `${size}px` : '50px'}
+      src={personSymbol}
+      alt="Person"
+    />
+  )
+}
+
+
 export {
   MyLocationIcon,
   FarmIcon,
@@ -97,4 +113,5 @@ export {
   SearchFarmIcon,
   MagnifierIcon,
   LoadingIcon,
+  PersonIcon,
 }

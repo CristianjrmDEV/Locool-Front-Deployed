@@ -13,15 +13,23 @@ const PurchaseListComponent = ({ purchases }) => {
 
   return (
     <Box>
-      {purchases.map((purchase, idx) => {
-        return (
-          <PurchaseCardComponent
-            key={idx}
-            purchase={purchase}
-            cart={purchase.farm_products}
-          />
+      {purchases
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.updatedAt) -
+            new Date(a.updatedAt)
         )
-      })}
+        .map((purchase, idx) => {
+          console.log(purchase)
+          return (
+            <PurchaseCardComponent
+              key={idx}
+              purchase={purchase}
+              cart={purchase.farm_products}
+            />
+          )
+        })}
     </Box>
   )
 }
