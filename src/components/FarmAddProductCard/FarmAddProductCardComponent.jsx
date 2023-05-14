@@ -61,6 +61,7 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
   };
 
   const onAddProductClick = async() =>{
+
     setDisabled(true)
     let urlCloud = ''
     setLoading(true)
@@ -234,7 +235,6 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
         placeholder={'Description'}
         onChange={(e)=> {
           setProductDescription(e.target.value)
-          console.log(productDescription)
         }}
       />
         </Box>
