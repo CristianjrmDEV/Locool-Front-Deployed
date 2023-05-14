@@ -14,7 +14,7 @@ import { PopupFarmComponent } from '../PopupFarm/PopupFarmComponent'
 const FarmEditProductCardComponent = ({handleComponent}) => {
 
     const {editProductData} = useContext(FarmPageContext)
-    console.log(editProductData)
+    
 
     const [productsType,setProductsType] = useState([])
 
@@ -53,21 +53,21 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
         setSelectedOption(event.target.value);
     
         const selectedProduct = productsType.find((product) => product.productId === event.target.value);
-        console.log('productID before')
-        console.log(productID)
-        console.log('productID before')
-        console.log(selectedProduct)
         
-        console.log('productoseleccionado')
-        console.log(selectedProduct.productId)
-        console.log('productoseleccionado')
+        
+        
+        
+        
+        
+        
+        
         setProductID(selectedProduct.productId)
-        console.log('productID after')
-        console.log(productID)
-        console.log('productID after')
-        console.log('imagenPredefinida')
-        console.log(selectedProduct.productImageUrl)
-        console.log('imagenPredefinida')
+        
+        
+        
+        
+        
+        
         setImgSelected(selectedProduct.productImageUrl);
         
     };
@@ -92,12 +92,12 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
             urlCloud = await uploadImage(imageLoading)
         }
 
-        console.log('urlCloud')
-        console.log(urlCloud)
-        console.log('urlCloud')
-        console.log('imgSelected')
-        console.log(imgSelected)
-        console.log('imgSelected')
+        
+        
+        
+        
+        
+        
 
         const productData = {
             productId: productID,
@@ -108,13 +108,13 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
             description: productDescription
         }
 
-        console.log('objeto enviado')
-        console.log(productData)
-        console.log('objeto enviado')
+        
+        
+        
 
         const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
         console.group('resultado')
-        console.log(result)
+        
         console.group('resultado')
         setLoading(false)
         setMsgFinal(true)
