@@ -61,7 +61,7 @@ const ProductCardComponent = ({
       }
       mappedArray.push(objRes)
     })
-    console.log('from product card ',productByFarm)
+    
 
     /////
     const objResult = {
@@ -79,7 +79,7 @@ const ProductCardComponent = ({
       id: result.id,
       products: mappedArray
     }
-    console.log('getOne from product cart', objResult)
+    
 
     setOne(objResult)
     goTo('/app/farms/details')
