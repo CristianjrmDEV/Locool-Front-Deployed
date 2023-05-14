@@ -1,9 +1,4 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import { Box, Card, CardMedia, Typography } from '@mui/material'
 import ButtonComponent from '../../components/Button/ButtonComponent'
 import { mainTheme } from '../../themes/mainTheme'
 import { FarmsContext } from '../../contexts/farm'
@@ -24,35 +19,7 @@ import { BorderTop } from '@mui/icons-material'
 const FarmInfosPage = () => {
   const GLOBAL_Farm = useContext(FarmsContext)
   const { getOne } = useContext(FarmsContext)
-  const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
-
-  // useEffect(() => {
-  //   getAllProducts()
-  // }, [])
-
-
-  // const getAllProducts = async () => {
-  //   const result = await getAllProductsByFarmId(getOne.id)
-  //   const mappedArray = []
-  //   result.forEach(el => {
-  //     const objRes = {
-  //       name: el.name,
-  //       img: el.img_url,
-  //       price: el.farm_product.price,
-  //       stock: el.farm_product.stock,
-  //       farmName: getOne.name,
-  //       description: el.farm_product.description
-  //     } 
-  //     mappedArray.push(objRes)
-  //   })
-  //   setProducts(mappedArray)
-  //   setLoading(false)
-  //   console.log('getOne from page details',getOne)
-  //   console.log('products from page details', mappedArray)
-
-  // }
-
 
   const FarmInfo = ({ field, value }) => {
     FarmInfo.propTypes = {
@@ -175,7 +142,6 @@ const FarmInfosPage = () => {
         justifyContent: 'space-between',
         flexDirection: 'column',
         p: 2,
-
       }}
     >
       <Box sx={{ justifyContent: 'flex-start', p: 2 }}>

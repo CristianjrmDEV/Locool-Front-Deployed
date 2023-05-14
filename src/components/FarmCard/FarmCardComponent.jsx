@@ -16,6 +16,7 @@ import PropTypes from 'prop-types'
 import ButtonComponent from '../Button/ButtonComponent'
 import { FarmsContext } from '../../contexts/farm'
 import { useNavigate } from 'react-router-dom'
+import { getAllProductsByFarmId, getFarmById } from '../../services/farmService'
 
 const FarmCardComponent = ({ farm }) => {
   FarmCardComponent.propTypes = {
@@ -23,12 +24,45 @@ const FarmCardComponent = ({ farm }) => {
   }
 
   const { setOne } = useContext(FarmsContext)
-  
+
   const goTo = useNavigate()
 
-  const handleClick = () => {
-    setOne(farm)
-    goTo('/app/farms/details') 
+  const handleClick = async () => {
+    const result = await getFarmById(farm.id)
+
+    ///products
+    const productByFarm = await getAllProductsByFarmId(farm.id)
+    const mappedArray = []
+    productByFarm.forEach((el) => {
+      const objRes = {
+        name: el.name,
+        img: el.img_url,
+        price: el.farm_product.price,
+        stock: el.farm_product.stock,
+        farmName: result.name,
+        description: el.farm_product.description,
+      }
+      mappedArray.push(objRes)
+    })
+
+    /////
+    const objResult = {
+      collection_point: result.collection_point,
+      collection_schedule: result.collection_schedule,
+      user: {
+        email: result.user.email,
+        first_name: result.user.first_name,
+        last_name: result.user.last_name,
+      },
+      municipality: { name: result.municipality.name },
+      image_url: result.image_url,
+      name: result.name,
+      address: result.address,
+      id: result.id,
+      products: mappedArray,
+    }
+    setOne(objResult)
+    goTo('/app/farms/details')
   }
 
   const getOwner = (farm) => {
@@ -111,7 +145,10 @@ const FarmCardComponent = ({ farm }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <ButtonComponent text="See farm" fx={handleClick} />
+        <ButtonComponent
+          text="See farm"
+          fx={handleClick}
+        />
       </CardActions>
     </Card>
   )
