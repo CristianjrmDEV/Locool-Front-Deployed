@@ -62,6 +62,10 @@ const PaymentSelectionComponent = () => {
               )
               navigate('/app/success')
             }}
+
+            onError={() => {
+              navigate('/app/fail')
+            }}
           />
         </PayPalScriptProvider>
             

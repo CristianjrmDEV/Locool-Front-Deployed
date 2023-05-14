@@ -19,7 +19,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
-  // console.log(smallCart? "Es pequeño": "No es pequeño")
   ShoppingCartComponent.propTypes = {
     toggleDrawer: PropTypes.func,
     smallCart: PropTypes.bool
@@ -35,7 +34,6 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
         localStorage.getItem(`cart-${localStorage.getItem('locoolUsername')}`)
       )
     )
-    // console.log(cartMap)
     const cartArray = [...cartMap.values()] // Convert iterator to array
     setCart(cartArray)
     calculateTotal(cartArray)
@@ -84,7 +82,6 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
     for (let value of cart) {
       result.push(value)
     }
-    // console.log('end result', result)
     return result.map((obj) => {
       return (
         <ProductCartComponent
@@ -101,10 +98,9 @@ const ShoppingCartComponent = ({ toggleDrawer, smallCart }) => {
     <Grid
       container
       spacing={1}
-      xs={12}
     >
       <Grid
-        container
+        item
         xs={12}
         lg={smallCart? 12:9}
         sx={{ gridAutoRows: '1fr' }}
