@@ -14,7 +14,7 @@ const MissionPage = () => {
       As we are driven and passionate about finding solutions to real problems,
       we created Locool.
       <PageHeadingComponent text="Locool" />
-      Locool is a made-up name that stands for cool + location. The reason
+      Locool is a made-up name that stands for location & location. The reason
       behind this project is to promote local commerce by making possible interaction between
       producers and buyers.
     </Box>
