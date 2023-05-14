@@ -167,11 +167,11 @@ const FarmSeeProductsCardComponent = (props) => {
                     text="See on map"
                     bgColour={'green'}
                     fx={seeOnMap}
-                    textSize={1.2}
+                    textSize={1}
                     width={'45%'}
                     textColour={'white'}
                 />
-                <ButtonComponent text='Add new product' width='45%' bgColour='green' textColour='white' fx={onAddNewProductClick} />
+                <ButtonComponent  text='Add new product' width='54%' bgColour='green' textColour='white' fx={onAddNewProductClick} />
             </Box>
         </Box>
     )
@@ -205,39 +205,8 @@ const FarmSeeProductsCardComponent = (props) => {
     }, [])
 
     return (
-        <Box>
-            {/* <Card sx={{ height: '400px', position: 'relative' }}>
-                <CardMedia
-                    component="img"
-                    image={editFarmData.image_url}
-                    alt="MyFarmImage"
-                    sx={{ objectFit: "fill", height: "100%" }}
-                />
-                <Typography
-                    variant="h3"
-                    component="div"
-                    sx={{
-                        position: 'absolute',
-                        bottom: 10,
-                        left: 10,
-                        padding: '10px',
-                        color: mainTheme.palette.white.main,
-                    }}
-                >
-                    {editFarmData.farm_name}
-                </Typography>
-            </Card>
-            <Box sx={{ backgroundColor: mainTheme.palette.green.main }}>
-                <Typography fontWeight="bold" sx={{ textAlign: 'center' }}>
-                    Collection point: {editFarmData.collection_point}
-                </Typography>
-                <Typography sx={{ textAlign: 'center' }}>
-                    {editFarmData.collection_schedule}
-                </Typography>
-            </Box>
-            <Box sx={{ backgroundColor:mainTheme.palette.black.main, padding: '10px 0',width:'100%' ,display:'flex', justifyContent: 'flex-end'}}>
-                <ButtonComponent text='Add new product' width='25%' bgColour='green' textColour='white' fx={onAddNewProductClick}/>
-            </Box> */}
+        <Box sx={{borderTop: 2,
+            borderColor: mainTheme.palette.secondary.main}}>
             <Box
                 sx={{
                     display: {
@@ -281,10 +250,13 @@ const FarmSeeProductsCardComponent = (props) => {
                                 console.log('despacito')
                                 console.log(product)
                                 console.log('despacito')
+                                console.log('imagencita')
+                                console.log(product.image_url)
+                                console.log('imagencita')
                                 return (
                                     <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                         <Card color='secondary' sx={{ marginY: '10px', p: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
-                                            <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url} title='FarmProduct' />
+                                            <CardMedia component='img' sx={{ borderRadius: '10px', width: '100%', height: '300px' }} image={product.farm_product.image_url !== '' && product.farm_product.image_url !== null ? product.farm_product.image_url : product.img_url} title='FarmProduct' />
                                             <CardContent>
                                                 <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>
                                                     <Box sx={{ display: 'flex' }}>
