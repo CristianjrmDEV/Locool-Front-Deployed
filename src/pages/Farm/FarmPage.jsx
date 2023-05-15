@@ -16,25 +16,25 @@ const FarmPage = () => {
   const [editFarmData,setEditFarmData] = useState({})
   const [editProductData, setEditProductData] = useState({})
 
-  const handleComponentView = (data) =>{
-    setComponentView(data)
-  }
+  // const handleComponentView = (data) =>{
+  //   setComponentView(data)
+  // }
 
   return (
     <Box sx={{width:'100%'}}>
       <FarmPageContext.Provider value={{setEditFarmData, editFarmData,setEditProductData,editProductData}}>
         {
         componentView === 'FarmListComponent' 
-          ? <FarmListComponent handleComponent={handleComponentView}/>
+          ? <FarmListComponent handleComponent={setComponentView}/>
             : componentView === 'FarmAddCardComponent' 
-              ? <FarmAddCardComponent handleComponent={handleComponentView} />
+              ? <FarmAddCardComponent handleComponent={setComponentView} />
                 : componentView === 'FarmSeeProductsCardComponent'
-                  ? <FarmSeeProductsCardComponent handleComponent={handleComponentView}/>
+                  ? <FarmSeeProductsCardComponent handleComponent={setComponentView}/>
                     : componentView === 'FarmAddProductCardComponent'
-                      ? <FarmAddProductCardComponent handleComponent={handleComponentView}/>
+                      ? <FarmAddProductCardComponent handleComponent={setComponentView}/>
                         : componentView === 'FarmEditProductCardComponent'
-                          ? <FarmEditProductCardComponent handleComponent={handleComponentView}/>
-                            : <FarmEditCardComponent handleComponent={handleComponentView}/>
+                          ? <FarmEditProductCardComponent handleComponent={setComponentView}/>
+                            : <FarmEditCardComponent handleComponent={setComponentView}/>
         }
       </FarmPageContext.Provider>
     </Box>

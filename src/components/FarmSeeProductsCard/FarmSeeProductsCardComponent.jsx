@@ -74,7 +74,11 @@ const FarmSeeProductsCardComponent = (props) => {
         setDisabled(true)
         const productID = data.productId
 
-        const result = await deleteProductOfFarm(localStorage.username, data.farmId, data.productId)
+        const result = await deleteProductOfFarm(
+          localStorage.getItem('locoolUsername'),
+          data.farmId,
+          data.productId
+        )
 
         setMyProducts(myProducts.filter((product) => product.id !== productID))
 

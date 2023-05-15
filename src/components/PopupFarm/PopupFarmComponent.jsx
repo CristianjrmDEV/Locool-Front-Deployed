@@ -26,7 +26,8 @@ const PopupFarmComponent = ({ greetingMessage, greeting , handleComponent,text})
   PopupFarmComponent.propTypes = {
     greetingMessage: PropTypes.string,
     greeting: PropTypes.bool,
-    text: PropTypes.string
+    text: PropTypes.string,
+    handleComponent: PropTypes.func
   }
 
   const [open, setOpen] = React.useState(true)
@@ -56,7 +57,7 @@ const PopupFarmComponent = ({ greetingMessage, greeting , handleComponent,text})
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        onClose={open}
+        onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <Box>

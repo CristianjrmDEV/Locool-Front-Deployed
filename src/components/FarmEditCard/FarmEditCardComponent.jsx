@@ -97,7 +97,11 @@ const FarmEditCardComponent = ({ handleComponent }) => {
             longitude: farmLongitude
         }
 
-        const response = await updateFarm(localStorage.username, editFarmData.id, updatedFarm)
+        const response = await updateFarm(
+          localStorage.getItem('locoolUsername'),
+          editFarmData.id,
+          updatedFarm
+        )
         setLoading(false)
         setMsgFinal(true)
     }

@@ -79,7 +79,11 @@ const FarmAddProductCardComponent = ({handleComponent}) => {
       description: productDescription
     }
 
-    const result = await addProductToFarm(localStorage.username,editFarmData.id,newProduct)
+    const result = await addProductToFarm(
+      localStorage.getItem('locoolUsername'),
+      editFarmData.id,
+      newProduct
+    )
     setLoading(false)
     setMsgFinal(true)
   }

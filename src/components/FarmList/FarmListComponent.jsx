@@ -13,7 +13,7 @@ import { getFarmById } from '../../services/farmService'
 const FarmListComponent = ({handleComponent}) => {
 
     FarmListComponent.propTypes = {
-        handleComponent: PropTypes.string
+        handleComponent: PropTypes.func
     }
 
     const {setEditFarmData} = useContext(FarmPageContext)
@@ -95,7 +95,10 @@ const FarmListComponent = ({handleComponent}) => {
 
     const onDeleteFarmClick = async(farmId) => {
         setDisabled(true)
-        const response = await deleteFarm(localStorage.username,farmId)
+        const response = await deleteFarm(
+          localStorage.getItem('locoolUsername'),
+          farmId
+        )
         
         setMsgFinal(true)
         setMyFarms(myFarms.filter((farm) => farm.id !== farmId))
@@ -185,7 +188,7 @@ const FarmListComponent = ({handleComponent}) => {
             }
 
             {
-                msgFinal === true ? <PopupFarmComponent text='Your farm has been deleted'/> : false
+                msgFinal === true ? <PopupFarmComponent handleComponent={handleComponent} text='Your farm has been deleted'/> : false
             }
         </Box>
     )

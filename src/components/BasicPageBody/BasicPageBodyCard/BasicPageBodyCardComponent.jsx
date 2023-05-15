@@ -18,8 +18,7 @@ function BasicPageBodyCardComponent() {
             xs={10}
             md={6}
           >
-            <Card
-              item
+            <Card q
               sx={{ minWidth: 250 }}
             >
               <CardActionArea>

@@ -16,15 +16,15 @@ import { getMunicipalities } from '../../services/farmService'
 const FarmAddCardComponent = ({ handleComponent }) => {
 
   FarmAddCardComponent.propTypes = {
-    handleComponent: PropTypes.string
+    handleComponent: PropTypes.func
   }
 
-  const [farmName, setFarmName] = useState('')
-  const [farmAdress, setFarmAdress] = useState('')
-  const [farmCollectionPoint, setFarmCollectionPoint] = useState('')
-  const [farmCollectionSchedule, setFarmCollectionSchedule] = useState('')
-  const [farmLatitude, setFarmLatitude] = useState('')
-  const [farmLongitude, setFarmLongitude] = useState('')
+  const [farmName, setFarmName] = useState('Reboot Academy Farm')
+  const [farmAdress, setFarmAdress] = useState('Parque Santa Catalina')
+  const [farmCollectionPoint, setFarmCollectionPoint] = useState('Academy')
+  const [farmCollectionSchedule, setFarmCollectionSchedule] = useState('Monday to Friday, 9-5')
+  const [farmLatitude, setFarmLatitude] = useState('22')
+  const [farmLongitude, setFarmLongitude] = useState('33')
 
   const [municipalities, setMunicipalities] = useState([])
   const [selectedMunicipality, setSelectedMunicipality] = useState('')
@@ -74,7 +74,10 @@ const FarmAddCardComponent = ({ handleComponent }) => {
       longitude: farmLongitude
     }
 
-    const response = await createFarm(localStorage.username, farmData)
+    const response = await createFarm(
+      localStorage.getItem('locoolUsername'),
+      farmData
+    )
     setLoading(false)
     setMsgFinal(true)
   }
@@ -124,24 +127,56 @@ const FarmAddCardComponent = ({ handleComponent }) => {
       <Box sx={{ width: '600px', margin: 'auto' }}>
         <PageTitleComponent title={'Add new farm'} />
       </Box>
-      <Card color='secondary' sx={{ width: '600px', margin: 'auto', marginY: '10px', backgroundColor: mainTheme.palette.secondary.main }}>
+      <Card
+        color="secondary"
+        sx={{
+          width: '600px',
+          margin: 'auto',
+          marginY: '10px',
+          backgroundColor: mainTheme.palette.secondary.main,
+        }}
+      >
         <CardContent>
-          <Box sx={{ display: 'flex', height: '200px', margin: '20px 0px 40px 0px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              height: '200px',
+              margin: '20px 0px 40px 0px',
+            }}
+          >
             <CardMedia
               component="img"
               height="auto"
               alt={'Farm Image'}
-              image={imageLoading !== '' ? imageLoading : imgSelected !== '' ? imgSelected : farmDefault}
+              image={
+                imageLoading !== ''
+                  ? imageLoading
+                  : imgSelected !== ''
+                  ? imgSelected
+                  : farmDefault
+              }
               style={{ objectFit: 'fill' }}
             />
-            <UploadWidgetComponent handleImageValue={handleImageValue} handleImageLoading={handleImageLoading} imageBefore={imgSelected} width='50%' height='250px' />
+            <UploadWidgetComponent
+              handleImageValue={handleImageValue}
+              handleImageLoading={handleImageLoading}
+              imageBefore={imgSelected}
+              width="50%"
+              height="250px"
+            />
           </Box>
           <TextField
             onChange={(e) => setFarmName(e.target.value)}
             label="Farm name"
             variant="outlined"
             fullWidth={true}
-            InputProps={{ style: { maxLength: 50, backgroundColor: mainTheme.palette.white.main } }}
+            value={farmName}
+            InputProps={{
+              style: {
+                maxLength: 50,
+                backgroundColor: mainTheme.palette.white.main,
+              },
+            }}
             sx={{ marginBottom: '20px' }}
           />
           <TextField
@@ -149,21 +184,33 @@ const FarmAddCardComponent = ({ handleComponent }) => {
             label="Direction"
             variant="outlined"
             fullWidth={true}
-            InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
+            value={farmAdress}
+            InputProps={{
+              style: {
+                maxLength: 255,
+                backgroundColor: mainTheme.palette.white.main,
+              },
+            }}
             sx={{ marginBottom: '20px' }}
           />
           <FormControl fullWidth>
             <InputLabel id="municipality">Municipality</InputLabel>
             <Select
               disabled={disable}
-              label='Municipality'
-              labelId='municipality'
+              label="Municipality"
+              labelId="municipality"
               onChange={onSelectedMunicipalityChange}
               value={selectedMunicipality}
-              sx={{ backgroundColor: mainTheme.palette.white.main, marginBottom: '20px' }}
+              sx={{
+                backgroundColor: mainTheme.palette.white.main,
+                marginBottom: '20px',
+              }}
             >
               {municipalities.map((municipality) => (
-                <MenuItem key={municipality.id} value={municipality.id}>
+                <MenuItem
+                  key={municipality.id}
+                  value={municipality.id}
+                >
                   {municipality.name}
                 </MenuItem>
               ))}
@@ -174,7 +221,13 @@ const FarmAddCardComponent = ({ handleComponent }) => {
             label="Collection point"
             variant="outlined"
             fullWidth={true}
-            InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
+            value={farmCollectionPoint}
+            InputProps={{
+              style: {
+                maxLength: 255,
+                backgroundColor: mainTheme.palette.white.main,
+              },
+            }}
             sx={{ marginBottom: '20px' }}
           />
           <TextField
@@ -182,7 +235,13 @@ const FarmAddCardComponent = ({ handleComponent }) => {
             label="Collection schedule"
             variant="outlined"
             fullWidth={true}
-            InputProps={{ style: { maxLength: 255, backgroundColor: mainTheme.palette.white.main } }}
+            value={farmCollectionSchedule}
+            InputProps={{
+              style: {
+                maxLength: 255,
+                backgroundColor: mainTheme.palette.white.main,
+              },
+            }}
             sx={{ marginBottom: '20px' }}
           />
           <TextField
@@ -191,7 +250,9 @@ const FarmAddCardComponent = ({ handleComponent }) => {
             variant="outlined"
             fullWidth={true}
             value={farmLatitude}
-            InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
+            InputProps={{
+              style: { backgroundColor: mainTheme.palette.white.main },
+            }}
             sx={{ marginBottom: '20px' }}
           />
           <TextField
@@ -200,23 +261,43 @@ const FarmAddCardComponent = ({ handleComponent }) => {
             variant="outlined"
             fullWidth={true}
             value={farmLongitude}
-            InputProps={{ style: { backgroundColor: mainTheme.palette.white.main } }}
+            InputProps={{
+              style: { backgroundColor: mainTheme.palette.white.main },
+            }}
             sx={{ marginBottom: '20px' }}
           />
-          {
-            loading !== false ? <LoadingComponent /> : null
-          }
+          {loading !== false ? <LoadingComponent /> : null}
           <Box sx={{ display: 'flex' }}>
-            <ButtonComponent isDisabled={disable} text='Add farm' bgColour='green' textColour='white' width='50%' margin='0px 5px 0px 0px' fx={handleAddFarmButton} />
-            <ButtonComponent isDisabled={disable} text='Cancel' bgColour='red' textColour='white' width='50%' margin='0px 5px 0px 5px' fx={handleCancelButton} />
+            <ButtonComponent
+              isDisabled={disable}
+              text="Add farm"
+              bgColour="green"
+              textColour="white"
+              width="50%"
+              margin="0px 5px 0px 0px"
+              fx={handleAddFarmButton}
+            />
+            <ButtonComponent
+              isDisabled={disable}
+              text="Cancel"
+              bgColour="red"
+              textColour="white"
+              width="50%"
+              margin="0px 5px 0px 5px"
+              fx={handleCancelButton}
+            />
           </Box>
         </CardContent>
       </Card>
-      {
-        msgFinal === true ? <PopupFarmComponent handleComponent={handleFinishFarm} text='Added a new farm' /> : false
-      }
+      {msgFinal === true ? (
+        <PopupFarmComponent
+          handleComponent={handleFinishFarm}
+          text="Added a new farm"
+        />
+      ) : (
+        false
+      )}
     </Box>
-
   )
 }
 
