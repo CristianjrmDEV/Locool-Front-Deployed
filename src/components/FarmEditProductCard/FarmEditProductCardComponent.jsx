@@ -110,9 +110,10 @@ const FarmEditProductCardComponent = ({handleComponent}) => {
 
         
         
-        
-
-        const result = await updateProductOfFarm(localStorage.username,editProductData.farmId,productID,productData)
+        console.log('olitaaaaaaaaa')
+        console.log(localStorage.getItem('locoolUsername'))
+        console.log('olitaaaaaaaaa')
+        const result = await updateProductOfFarm(localStorage.getItem('locoolUsername'),editProductData.farmId,productID,productData)
         console.group('resultado')
         
         console.group('resultado')
